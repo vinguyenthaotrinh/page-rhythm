@@ -1,1 +1,1 @@
-# page-rhythm--cs300
+# CS300 Project -  PageRhythm
