@@ -13,4 +13,7 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://root:cs300@localhost:5432/page_rhythm?sslmode=disable" -verbose down
 
-.PHONY: createdb dropdb postgres migrateup migratedown
+sqlc:
+	sqlc generate
+
+.PHONY: createdb dropdb postgres migrateup migratedown sqlc
