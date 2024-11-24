@@ -13,7 +13,7 @@ CREATE TABLE "Account" (
 );
 
 CREATE TABLE "Book" (
-  "book_id" binary(256) PRIMARY KEY,
+  "book_id" varchar(256) PRIMARY KEY,
   "title" varchar(255),
   "author" varchar(255),
   "summary" text,
@@ -24,7 +24,7 @@ CREATE TABLE "Book" (
 
 CREATE TABLE "BookRating" (
   "user_id" bigserial NOT NULL,
-  "book_id" binary(256) NOT NULL,
+  "book_id" varchar(256) NOT NULL,
   "rating" smallint,
   "date" timestamp,
   PRIMARY KEY ("user_id", "book_id")
@@ -32,14 +32,14 @@ CREATE TABLE "BookRating" (
 
 CREATE TABLE "TrackedProgress" (
   "user_id" bigserial NOT NULL,
-  "book_id" binary(256) NOT NULL,
+  "book_id" varchar(256) NOT NULL,
   "page_number" int,
   "status" varchar(50),
   PRIMARY KEY ("user_id", "book_id")
 );
 
 CREATE TABLE "SampleAudioFile" (
-  "sample_audio_file_id" binary(256) PRIMARY KEY,
+  "sample_audio_file_id" varchar(256) PRIMARY KEY,
   "file_name" varchar(255),
   "description" text,
   "owner_id" bigserial NOT NULL,
@@ -47,10 +47,10 @@ CREATE TABLE "SampleAudioFile" (
 );
 
 CREATE TABLE "Comment" (
-  "comment_id" binary(256) PRIMARY KEY,
-  "book_id" binary(256) NOT NULL,
+  "comment_id" varchar(256) PRIMARY KEY,
+  "book_id" varchar(256) NOT NULL,
   "comment_author_id" bigserial NOT NULL,
-  "replied_comment_id" binary(256),
+  "replied_comment_id" varchar(256),
   "content" text
 );
 
