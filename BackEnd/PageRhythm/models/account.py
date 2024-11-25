@@ -1,0 +1,100 @@
+import datetime
+
+class Account:
+
+    def __init__(self, 
+                 account_id: int, 
+                 email: str, 
+                 full_name: str, 
+                 first_name: str, 
+                 last_name: str, 
+                 birthday: datetime.date,
+                 bio: str,
+                 salt: str,
+                 hashed_password: str,
+                 account_type: str,
+                 profile_picture: bytes):
+        self.account_id = account_id
+        self.email = email
+        self.full_name = full_name
+        self.first_name = first_name
+        self.last_name = last_name
+        self.birthday = birthday
+        self.bio = bio
+        self.salt = salt
+        self.hashed_password = hashed_password
+        self.account_type = account_type
+        self.profile_picture = profile_picture
+
+    def __str__(self):
+        return f"Account(account_id={self.account_id}, email={self.email}, full_name={self.full_name}, first_name={self.first_name}, last_name={self.last_name}, birthday={self.birthday}, bio={self.bio}, salt={self.salt}, hashed_password={self.hashed_password}, account_type={self.account_type}, profile_picture={self.profile_picture})"
+    
+    def get_account_id(self) -> int:
+        return self.account_id
+    
+    def get_email(self) -> str:
+        return self.email
+    
+    def get_full_name(self) -> str:
+        return self.full_name
+    
+    def get_first_name(self) -> str:
+        return self.first_name
+    
+    def get_last_name(self) -> str:
+        return self.last_name
+    
+    def get_birthday(self) -> datetime.date:
+        return self.birthday
+    
+    def get_bio(self) -> str:
+        return self.bio
+    
+    def get_salt(self) -> str:
+        return self.salt
+    
+    def get_hashed_password(self) -> str:
+        return self.hashed_password
+    
+    def get_account_type(self) -> str:
+        return self.account_type
+    
+    def get_profile_picture(self) -> bytes:
+        return self.profile_picture
+    
+    def set_account_id(self, account_id: int):
+        self.account_id = account_id
+
+    def set_email(self, email: str):
+        self.email = email
+
+    def set_full_name(self, full_name: str):
+        self.full_name = full_name
+
+    def set_first_name(self, first_name: str):
+        self.first_name = first_name
+
+    def set_last_name(self, last_name: str):
+        self.last_name = last_name
+
+    def set_birthday(self, birthday: datetime.date):
+        self.birthday = birthday
+
+    def set_bio(self, bio: str):
+        self.bio = bio
+
+    def set_salt(self, salt: str):
+        self.salt = salt
+
+    def set_hashed_password(self, hashed_password: str):
+        self.hashed_password = hashed_password
+
+    def set_account_type(self, account_type: str):
+        self.account_type = account_type
+
+    def set_profile_picture(self, profile_picture: bytes):
+        self.profile_picture = profile_picture
+
+    def get_ages(self) -> int:
+        today = datetime.date.today()
+        return today.year - self.birthday.year - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
