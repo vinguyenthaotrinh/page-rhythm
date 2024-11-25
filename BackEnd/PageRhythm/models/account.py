@@ -1,4 +1,5 @@
 import datetime
+import base64
 
 class Account:
 
@@ -98,3 +99,18 @@ class Account:
     def get_ages(self) -> int:
         today = datetime.date.today()
         return today.year - self.birthday.year - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
+    
+    def to_serializable_JSON(self) -> dict:
+        return {
+            "account_id": self.account_id,
+            "email": self.email,
+            "full_name": self.full_name,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "birthday": self.birthday.strftime('%Y-%m-%d') if isinstance(self.birthday, datetime.date) else None,
+            "bio": self.bio,
+            "salt": self.salt,
+            "hashed_password": self.hashed_password,
+            "account_type": self.account_type,
+            "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
+        }
