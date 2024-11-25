@@ -1,22 +1,30 @@
-import os
-from dotenv import load_dotenv
 from routes.home import home_blueprint
 from flask import Flask, request, jsonify
-from supabase import create_client, Client
 
-app = Flask(__name__)   
+app = Flask(__name__)
 
 app.register_blueprint(home_blueprint)
 
-def createSupabaseClient() -> Client:
-    load_dotenv()
+#Test account registration
 
-    url: str = os.environ.get("SUPABASE_URL")
-    key: str = os.environ.get("SUPABASE_KEY")
-    supabase: Client = create_client(url, key)
-    return supabase
+from services.authentication.authentication_service import AuthenticationService
+import datetime
 
 if __name__ == "__main__":
 
-    supabase = createSupabaseClient()
+    AuthenticationService().register_account(
+        "mrbean@gmail.com",
+        "Mr. Bean",
+        "Rowan",
+        "Atkinson",
+        datetime.date(1955, 1, 6),
+        "I am Mr. Bean",
+        "password",
+        "user",
+        None
+    )
+
     app.run(debug = True)
+
+
+
