@@ -35,7 +35,7 @@ class TrackedProgress(BaseEntity):
         return self.most_recent_update
     
     def set_user_id(self, user_id: int) -> bool:
-        if user_id < 0:
+        if user_id <= 0:
             return False
         self.user_id = user_id
         return True

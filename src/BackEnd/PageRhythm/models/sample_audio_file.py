@@ -43,7 +43,7 @@ class SampleAudioFile(BaseEntity):
         self.description = description
 
     def set_owner_id(self, owner_id: int) -> bool:
-        if owner_id < 0:
+        if owner_id <= 0:
             return False
         self.owner_id = owner_id
         return True

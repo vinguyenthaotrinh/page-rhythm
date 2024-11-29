@@ -30,7 +30,7 @@ class BookRating(BaseEntity):
         return self.date
     
     def set_user_id(self, user_id: int) -> bool:
-        if user_id < 0:
+        if user_id <= 0:
             return False
         self.user_id = user_id
         return True

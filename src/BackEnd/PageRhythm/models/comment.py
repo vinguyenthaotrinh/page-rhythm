@@ -41,7 +41,7 @@ class Comment(BaseEntity):
         self.book_id = book_id
 
     def set_comment_author_id(self, comment_author_id: int) -> bool:
-        if comment_author_id < 0:
+        if comment_author_id <= 0:
             return False
         self.comment_author_id = comment_author_id
         return True

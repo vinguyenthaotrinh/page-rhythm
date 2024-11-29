@@ -65,8 +65,11 @@ class Account(BaseEntity):
     def get_profile_picture(self) -> bytes:
         return self.profile_picture
     
-    def set_account_id(self, account_id: int):
+    def set_account_id(self, account_id: int) -> bool:
+        if account_id <= 0:
+            return False
         self.account_id = account_id
+        return True
 
     def set_email(self, email: str):
         self.email = email

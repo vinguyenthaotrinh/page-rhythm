@@ -18,6 +18,10 @@ class AuthenticationService:
     @staticmethod   
     def generate_hashed_password(password: str, salt: str) -> str:
         return bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8')).decode('utf-8')
+    
+    @staticmethod
+    def check_user_id_valid(user_id: int) -> bool:
+        return 0 < user_id <= AccountService().get_number_of_accounts()
 
     def register_account(self,
                         email: str,

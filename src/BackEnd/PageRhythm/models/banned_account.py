@@ -35,13 +35,13 @@ class BannedAccount(BaseEntity):
         return self.end_time
     
     def set_banned_account_id(self, banned_account_id: int) -> bool:
-        if banned_account_id < 0:
+        if banned_account_id <= 0:
             return False
         self.banned_account_id = banned_account_id
         return True
     
     def set_banning_account_id(self, banning_account_id: int) -> bool:
-        if banning_account_id < 0:
+        if banning_account_id <= 0:
             return False
         self.banning_account_id = banning_account_id
         return True
