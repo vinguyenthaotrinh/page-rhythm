@@ -1,9 +1,7 @@
 from services.authentication.supabase_authentication_api_service import SupabaseAuthenticationAPIService
 from services.account.account_service import AccountService
-from werkzeug.security import generate_password_hash
 from models.account import Account
 import datetime
-import secrets
 import bcrypt
 
 class AuthenticationService:
@@ -20,8 +18,8 @@ class AuthenticationService:
         return bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8')).decode('utf-8')
     
     @staticmethod
-    def check_user_id_valid(user_id: int) -> bool:
-        return 0 < user_id <= AccountService().get_number_of_accounts()
+    def check_account_id_valid(account_id: int) -> bool:
+        return 0 < account_id <= AccountService().get_number_of_accounts()
 
     def register_account(self,
                         email: str,
