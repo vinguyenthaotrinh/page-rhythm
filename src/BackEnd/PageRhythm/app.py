@@ -1,4 +1,4 @@
-from routes.home import home_blueprint
+from routes.home_route import home_blueprint
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
