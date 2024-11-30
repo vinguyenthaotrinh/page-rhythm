@@ -36,3 +36,11 @@ class AuthenticationService:
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
         account = Account(account_id, email, full_name, first_name, last_name, birthday, bio, salt, hashed_password, account_type, profile_picture)
         return self.supabase.register_account(account)
+    
+    @staticmethod
+    def check_password_correct(email: str, password: str) -> bool:
+        account = AccountService().get_account_by_email(email)
+        if account is None:
+            return False
+        hashed_password = AuthenticationService.generate_hashed_password(password, account.salt)
+        return account.hashed_password == hashed_password
