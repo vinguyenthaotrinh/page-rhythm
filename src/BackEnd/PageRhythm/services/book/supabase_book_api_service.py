@@ -17,7 +17,7 @@ class SupabaseBookAPIService:
     def search_book(self, keyword: str, genre: str = None) -> list:
         query = self.client.table('Book').select('*').ilike('title', f'%{keyword}%')
         if genre:
-            query = query.eq('genre', genre)
+            query = query.ilike('genre', genre)
         response = query.execute()
         return response.data if response.data else []
 
