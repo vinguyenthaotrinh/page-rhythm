@@ -11,5 +11,5 @@ class BaseEntity(ABC):
     def to_serializable_JSON(self) -> dict:
         return {}
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         pass

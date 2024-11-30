@@ -78,7 +78,7 @@ class Book(BaseEntity):
             "owner_id": self.owner_id
         }
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         self.set_book_id(dictionary["book_id"])
         self.set_title(dictionary["title"])
         self.set_author(dictionary["author"])

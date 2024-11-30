@@ -61,7 +61,7 @@ class Comment(BaseEntity):
             "replied_comment_id": self.replied_comment_id
         }
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         self.set_comment_id(dictionary["comment_id"])
         self.set_book_id(dictionary["book_id"])
         self.set_comment_author_id(dictionary["comment_author_id"])

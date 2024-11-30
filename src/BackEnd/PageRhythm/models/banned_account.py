@@ -64,7 +64,7 @@ class BannedAccount(BaseEntity):
             "end_time": self.end_time.strftime("%Y-%m-%d %H:%M:%S")
         }
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         self.set_banned_account_id(dictionary["banned_account_id"])
         self.set_banning_account_id(dictionary["banning_account_id"])
         self.set_ban_type(dictionary["ban_type"])

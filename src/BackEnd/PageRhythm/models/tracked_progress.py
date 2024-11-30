@@ -64,7 +64,7 @@ class TrackedProgress(BaseEntity):
             "most_recent_update": self.most_recent_update.strftime("%Y-%m-%d %H:%M:%S")
         }
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         self.user_id = dictionary["user_id"]
         self.book_id = dictionary["book_id"]
         self.page_number = dictionary["page_number"]

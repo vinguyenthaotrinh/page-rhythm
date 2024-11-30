@@ -60,7 +60,7 @@ class SampleAudioFile(BaseEntity):
             "content": self.content.decode("utf-8")
         }
     
-    def get_data_from_serializable_JSON(self, dictionary: dict):
+    def from_serializable_JSON(self, dictionary: dict):
         self.set_sample_audio_file_id(dictionary["sample_audio_file_id"])
         self.set_file_name(dictionary["file_name"])
         self.set_description(dictionary["description"])

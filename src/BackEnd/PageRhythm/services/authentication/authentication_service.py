@@ -30,7 +30,7 @@ class AuthenticationService:
                         bio: str,
                         password: str,
                         account_type: str,
-                        profile_picture: bytes):
+                        profile_picture: bytes) -> bool:
         account_id = AccountService().get_number_of_accounts() + 1
         salt = AuthenticationService.generate_salt()
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
