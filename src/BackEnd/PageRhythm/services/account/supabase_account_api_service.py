@@ -18,7 +18,7 @@ class SupabaseAccountAPIService:
     def get_account_by_email(self, email: str) -> Optional[Account]:
         try:
             response = self.client.table('Account').select('*').eq('email', email).execute()
-            return Account.from_serializable_JSON(response.data[0])
+            return Account.deserialize_JSON(response.data[0])
         except Exception as e:
             return None
         return None
