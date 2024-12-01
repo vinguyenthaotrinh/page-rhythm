@@ -11,5 +11,6 @@ class SupabaseAuthenticationAPIService:
             response = self.client.table("Account").insert(account.to_serializable_JSON()).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
