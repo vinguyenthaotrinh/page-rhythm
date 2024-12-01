@@ -1,9 +1,7 @@
 from services.authentication.supabase_authentication_api_service import SupabaseAuthenticationAPIService
 from services.account.account_service import AccountService
-from werkzeug.security import generate_password_hash
 from models.account import Account
 import datetime
-import secrets
 import bcrypt
 
 class AuthenticationService:
@@ -18,6 +16,10 @@ class AuthenticationService:
     @staticmethod   
     def generate_hashed_password(password: str, salt: str) -> str:
         return bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8')).decode('utf-8')
+    
+    @staticmethod
+    def check_account_id_valid(account_id: int) -> bool:
+        return 0 < account_id <= AccountService().get_number_of_accounts()
 
     def register_account(self,
                         email: str,
@@ -28,9 +30,17 @@ class AuthenticationService:
                         bio: str,
                         password: str,
                         account_type: str,
-                        profile_picture: bytes):
+                        profile_picture: bytes) -> bool:
         account_id = AccountService().get_number_of_accounts() + 1
         salt = AuthenticationService.generate_salt()
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
         account = Account(account_id, email, full_name, first_name, last_name, birthday, bio, salt, hashed_password, account_type, profile_picture)
         return self.supabase.register_account(account)
+    
+    @staticmethod
+    def check_password_correct(email: str, password: str) -> bool:
+        account = AccountService().get_account_by_email(email)
+        if account is None:
+            return False
+        hashed_password = AuthenticationService.generate_hashed_password(password, account.salt)
+        return account.hashed_password == hashed_password

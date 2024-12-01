@@ -1,7 +1,8 @@
-import datetime
 import base64
+import datetime
+from models.base_entity import BaseEntity
 
-class Account:
+class Account(BaseEntity):
 
     def __init__(self, 
                  account_id: int, 
@@ -15,6 +16,7 @@ class Account:
                  hashed_password: str,
                  account_type: str,
                  profile_picture: bytes):
+        super().__init__()
         self.account_id = account_id
         self.email = email
         self.full_name = full_name
@@ -27,7 +29,7 @@ class Account:
         self.account_type = account_type
         self.profile_picture = profile_picture
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Account(account_id={self.account_id}, email={self.email}, full_name={self.full_name}, first_name={self.first_name}, last_name={self.last_name}, birthday={self.birthday}, bio={self.bio}, salt={self.salt}, hashed_password={self.hashed_password}, account_type={self.account_type}, profile_picture={self.profile_picture})"
     
     def get_account_id(self) -> int:
@@ -63,8 +65,11 @@ class Account:
     def get_profile_picture(self) -> bytes:
         return self.profile_picture
     
-    def set_account_id(self, account_id: int):
+    def set_account_id(self, account_id: int) -> bool:
+        if account_id <= 0:
+            return False
         self.account_id = account_id
+        return True
 
     def set_email(self, email: str):
         self.email = email
@@ -114,3 +119,16 @@ class Account:
             "account_type": self.account_type,
             "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
+    
+    def from_serializable_JSON(self, dictionary: dict):
+        self.account_id = dictionary["account_id"]
+        self.email = dictionary["email"]
+        self.full_name = dictionary["full_name"]
+        self.first_name = dictionary["first_name"]
+        self.last_name = dictionary["last_name"]
+        self.birthday = datetime.datetime.strptime(dictionary["birthday"], '%Y-%m-%d').date() if dictionary["birthday"] else None
+        self.bio = dictionary["bio"]
+        self.salt = dictionary["salt"]
+        self.hashed_password = dictionary["hashed_password"]
+        self.account_type = dictionary["account_type"]
+        self.profile_picture = base64.b64decode(dictionary["profile_picture"].encode('utf-8')) if dictionary["profile_picture"] else None
