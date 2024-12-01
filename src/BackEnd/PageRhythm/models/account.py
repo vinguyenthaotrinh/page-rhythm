@@ -1,5 +1,6 @@
 import base64
 import datetime
+from typing import Optional
 from models.base_entity import BaseEntity
 
 class Account(BaseEntity):
@@ -105,6 +106,14 @@ class Account(BaseEntity):
         today = datetime.date.today()
         return today.year - self.birthday.year - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
     
+    @staticmethod
+    def get_serializable_date(date) -> Optional[str]:
+        return date.strftime('%Y-%m-%d') if isinstance(date, datetime.date) else None
+    
+    @staticmethod
+    def deserialize_date(date: Optional[str]) -> Optional[datetime.date]:
+        return datetime.datetime.strptime(date, '%Y-%m-%d').date() if date else None
+
     def to_serializable_JSON(self) -> dict:
         return {
             "account_id": self.account_id,
@@ -112,7 +121,7 @@ class Account(BaseEntity):
             "full_name": self.full_name,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "birthday": self.birthday.strftime('%Y-%m-%d') if isinstance(self.birthday, datetime.date) else None,
+            "birthday": self.get_serializable_date(self.birthday),
             "bio": self.bio,
             "salt": self.salt,
             "hashed_password": self.hashed_password,
@@ -126,7 +135,7 @@ class Account(BaseEntity):
         self.full_name = dictionary["full_name"]
         self.first_name = dictionary["first_name"]
         self.last_name = dictionary["last_name"]
-        self.birthday = datetime.datetime.strptime(dictionary["birthday"], '%Y-%m-%d').date() if dictionary["birthday"] else None
+        self.birthday = self.deserialize_date(dictionary["birthday"])
         self.bio = dictionary["bio"]
         self.salt = dictionary["salt"]
         self.hashed_password = dictionary["hashed_password"]
