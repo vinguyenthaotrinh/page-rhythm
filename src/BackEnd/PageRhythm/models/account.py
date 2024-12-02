@@ -148,7 +148,7 @@ class Account(BaseEntity):
         self.profile_picture = base64.b64decode(dictionary["profile_picture"].encode('utf-8')) if dictionary["profile_picture"] else None
 
     @staticmethod
-    def deserialize_JSON(dictionary: dict) -> 'Account':
+    def deserialize_JSON(dictionary: dict) -> "Account":
         account = Account(0, "", "", "", "", datetime.date.today(), "", "", "", AccountType.USER, bytes())
         account.from_serializable_JSON(dictionary)
         return account

@@ -1,12 +1,17 @@
+from enum import Enum
 from datetime import datetime
 from models.base_entity import BaseEntity
+
+class BanType(Enum):
+    PERMANENTLY_BANNED = "permanently_banned"
+    TEMPORARILY_BANNED = "temporarily_banned"
 
 class BannedAccount(BaseEntity):
 
     def __init__(self, 
                  banned_account_id: int,
                  banning_account_id: int,
-                 ban_type: str,
+                 ban_type: BanType,
                  start_time: datetime.datetime,
                  end_time: datetime.datetime):
         super().__init__()
@@ -25,7 +30,7 @@ class BannedAccount(BaseEntity):
     def get_banning_account_id(self) -> int:
         return self.banning_account_id
     
-    def get_ban_type(self) -> str:
+    def get_ban_type(self) -> BanType:
         return self.ban_type
     
     def get_start_time(self) -> datetime.datetime:
@@ -46,7 +51,7 @@ class BannedAccount(BaseEntity):
         self.banning_account_id = banning_account_id
         return True
     
-    def set_ban_type(self, ban_type: str):
+    def set_ban_type(self, ban_type: BanType):
         self.ban_type = ban_type
 
     def set_start_time(self, start_time: datetime.datetime):
@@ -59,7 +64,7 @@ class BannedAccount(BaseEntity):
         return {
             "banned_account_id": self.banned_account_id,
             "banning_account_id": self.banning_account_id,
-            "ban_type": self.ban_type,
+            "ban_type": self.ban_type.value,
             "start_time": self.start_time.strftime("%Y-%m-%d %H:%M:%S"),
             "end_time": self.end_time.strftime("%Y-%m-%d %H:%M:%S")
         }
@@ -67,6 +72,12 @@ class BannedAccount(BaseEntity):
     def from_serializable_JSON(self, dictionary: dict):
         self.set_banned_account_id(dictionary["banned_account_id"])
         self.set_banning_account_id(dictionary["banning_account_id"])
-        self.set_ban_type(dictionary["ban_type"])
+        self.set_ban_type(BanType(dictionary["ban_type"]))
         self.set_start_time(datetime.datetime.strptime(dictionary["start_time"], "%Y-%m-%d %H:%M:%S"))
         self.set_end_time(datetime.datetime.strptime(dictionary["end_time"], "%Y-%m-%d %H:%M:%S"))
+
+    @staticmethod
+    def deserialize_JSON(dictionary: dict) -> "BannedAccount":
+        banned_account = BannedAccount(0, 0, BanType.PERMANENTLY_BANNED, datetime.datetime.now(), datetime.datetime.now())
+        banned_account.from_serializable_JSON(dictionary)
+        return banned_account
