@@ -25,7 +25,7 @@ def search_book():
 # 3. Create a new book
 @book_blueprint.route('/create', methods=['POST'])
 def create_book():
-    # Parse JSON từ request body
+    # Parse JSON from request body
     data = request.json
     if not data:
         return jsonify({"error": "Invalid input", "message": "No JSON data found"}), 400

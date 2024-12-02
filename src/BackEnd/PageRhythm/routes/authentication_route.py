@@ -22,7 +22,7 @@ def register():
         profile_picture = data["profile_picture"]
     ):
         account = AccountService().get_account_by_email(data["email"])
-        access_token = create_access_token(identity={"account_id": account.id})
+        access_token = create_access_token(identity={"account_id": account.account_id})
         return jsonify({"access_token": access_token}), 200
     return jsonify({"message": "Invalid registered information"}), 401
 
@@ -32,7 +32,7 @@ def login():
 
     if AuthenticationService().check_password_correct(data["email"], data["password"]):
         account = AccountService().get_account_by_email(data["email"])
-        access_token = create_access_token(identity={"account_id": account.id})
+        access_token = create_access_token(identity={"account_id": account.account_id})
         return jsonify({"access_token": access_token}), 200
     
     return jsonify({"message": "Invalid login information"}), 401

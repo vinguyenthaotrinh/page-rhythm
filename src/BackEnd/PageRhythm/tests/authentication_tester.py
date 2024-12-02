@@ -16,7 +16,7 @@ class AuthenticationTester(unittest.TestCase):
                 return response.content  
             return None
 
-        email = f"{random.randint(100000000000, 999999999999)}@test.com"
+        email = f"user{random.randint(100000000000, 999999999999)}@gmail.com"
         first_name = "Joel"
         last_name = "Borden"
         full_name = f"{first_name} {last_name}"
@@ -44,7 +44,7 @@ class AuthenticationTester(unittest.TestCase):
             "password": password
         }
 
-        response = requests.post(f"{self.url}/register", json=data)
+        response = requests.post(f"{self.url}/authentication/register", json=data)
         self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':

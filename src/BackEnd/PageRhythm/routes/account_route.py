@@ -1,11 +1,10 @@
-from datetime import date
 from flask import Blueprint, jsonify, request
 from services.account.account_service import AccountService
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 account_blueprint = Blueprint("account", __name__)
 
-@account_blueprint.route("/account/retrieval_with_email", methods=["GET"])
+@account_blueprint.route("/retrieval_with_email", methods=["GET"])
 def get_account_with_email():
     email = request.args.get('email')
 
