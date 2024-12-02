@@ -38,9 +38,24 @@ class AuthenticationService:
         account = Account(account_id, email, full_name, first_name, last_name, birthday, bio, salt, hashed_password, account_type, profile_picture)
         return self.supabase.register_account(account)
     
+    def change_password(self,
+                        account_id: int,
+                        new_password: str) -> bool:
+        account = AccountService().get_account_by_id(account_id)
+        hashed_new_password = AuthenticationService.generate_hashed_password(new_password, account.get_salt())
+        return self.supabase.change_password(account_id, hashed_new_password)
+    
     @staticmethod
     def check_password_correct(email: str, password: str) -> bool:
         account = AccountService().get_account_by_email(email)
+        if account is None:
+            return False
+        hashed_password = AuthenticationService.generate_hashed_password(password, account.salt)
+        return account.hashed_password == hashed_password
+    
+    @staticmethod
+    def verify_password(account_id: int, password: str) -> bool:
+        account = AccountService().get_account_by_id(account_id)
         if account is None:
             return False
         hashed_password = AuthenticationService.generate_hashed_password(password, account.salt)

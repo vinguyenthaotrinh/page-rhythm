@@ -14,3 +14,12 @@ class SupabaseAuthenticationAPIService:
             print(e)
             return False
         return False
+    
+    def change_password(self, account_id: int, hashed_new_password: str) -> bool:
+        try:
+            response = self.client.table("Account").update({"hashed_password": hashed_new_password}).eq("account_id", account_id).execute()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        return False

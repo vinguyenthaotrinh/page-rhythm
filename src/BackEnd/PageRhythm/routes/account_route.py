@@ -2,7 +2,7 @@ import json
 from datetime import date
 from flask import Blueprint, jsonify, request
 from services.account.account_service import AccountService
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 account_blueprint = Blueprint("account", __name__)
 

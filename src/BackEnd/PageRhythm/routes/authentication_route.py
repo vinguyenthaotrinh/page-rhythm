@@ -3,7 +3,7 @@ from datetime import date
 from flask import Blueprint, jsonify, request
 from services.account.account_service import AccountService
 from services.authentication.authentication_service import AuthenticationService
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 authentication_blueprint = Blueprint("authentication", __name__)
 
@@ -42,3 +42,30 @@ def login():
         return jsonify({"access_token": access_token}), 200
     
     return jsonify({"message": "Invalid login information"}), 401
+
+@authentication_blueprint.route("/change_password", methods=["PUT"])
+@jwt_required()
+def change_password():
+    data = request.get_json()
+
+    old_password = data["old_password"]
+    new_password = data["new_password"]
+    confirmed_new_password = data["confirmed_new_password"]
+    
+    authentication_service = AuthenticationService()
+
+    if new_password != confirmed_new_password:
+        return jsonify({"message": "New passwords do not match"}), 400
+    
+    if old_password == new_password:
+        return jsonify({"message": "New password must be different from old password"}), 400
+    
+    if len(new_password) <= 0:
+        return jsonify({"message": "New password must not be empty"}), 400
+    
+    current_identity = json.loads(get_jwt_identity())
+    account_id = current_identity["account_id"]
+    
+    if authentication_service.verify_password(account_id, old_password):
+        return jsonify({"message": "Incorrect old password"}), 400
+    
