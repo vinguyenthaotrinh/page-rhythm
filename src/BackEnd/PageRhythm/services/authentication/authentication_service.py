@@ -1,6 +1,6 @@
 from services.authentication.supabase_authentication_api_service import SupabaseAuthenticationAPIService
 from services.account.account_service import AccountService
-from models.account import Account
+from models.account import Account, AccountType
 import datetime
 import bcrypt
 
@@ -34,6 +34,7 @@ class AuthenticationService:
         account_id = AccountService().get_number_of_accounts() + 1
         salt = AuthenticationService.generate_salt()
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
+        account_type = AccountType(account_type)
         account = Account(account_id, email, full_name, first_name, last_name, birthday, bio, salt, hashed_password, account_type, profile_picture)
         return self.supabase.register_account(account)
     
