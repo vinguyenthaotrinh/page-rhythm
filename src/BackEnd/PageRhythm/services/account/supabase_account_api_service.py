@@ -17,8 +17,32 @@ class SupabaseAccountAPIService:
     
     def get_account_by_email(self, email: str) -> Optional[Account]:
         try:
-            response = self.client.table('Account').select('*').eq('email', email).execute()
+            response = self.client.table("Account").select("*").eq("email", email).execute()
             return Account.deserialize_JSON(response.data[0])
         except Exception as e:
             return None
         return None
+    
+    def check_account_exists(self, account_id: int) -> bool:
+        try:
+            response = self.client.table('Account').select('account_id').eq('account_id', account_id).execute()
+            return len(response.data) > 0
+        except Exception as e:
+            return False
+        return False
+    
+    def get_account_by_id(self, account_id: int) -> Optional[Account]:
+        try:
+            response = self.client.table('Account').select('*').eq('account_id', account_id).execute()
+            return Account.deserialize_JSON(response.data[0])
+        except Exception as e:
+            return None
+        return None
+    
+    def update_account(self, account: Account) -> bool:
+        try:
+            response = self.client.table('Account').update(account.to_serializable_JSON()).eq('account_id', account.account_id).execute()
+            return True
+        except Exception as e:
+            return False
+        return False

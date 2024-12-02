@@ -1,7 +1,12 @@
 import base64
 import datetime
+from enum import Enum
 from typing import Optional
 from models.base_entity import BaseEntity
+
+class AccountType(Enum):
+    ADMIN = "admin"
+    USER = "user"
 
 class Account(BaseEntity):
 
@@ -15,8 +20,8 @@ class Account(BaseEntity):
                  bio: str,
                  salt: str,
                  hashed_password: str,
-                 account_type: str,
-                 profile_picture: bytes):
+                 account_type: AccountType,
+                 profile_picture: Optional[bytes]):
         super().__init__()
         self.account_id = account_id
         self.email = email
@@ -60,7 +65,7 @@ class Account(BaseEntity):
     def get_hashed_password(self) -> str:
         return self.hashed_password
     
-    def get_account_type(self) -> str:
+    def get_account_type(self) -> AccountType:
         return self.account_type
     
     def get_profile_picture(self) -> bytes:
@@ -96,10 +101,10 @@ class Account(BaseEntity):
     def set_hashed_password(self, hashed_password: str):
         self.hashed_password = hashed_password
 
-    def set_account_type(self, account_type: str):
+    def set_account_type(self, account_type: AccountType):
         self.account_type = account_type
 
-    def set_profile_picture(self, profile_picture: bytes):
+    def set_profile_picture(self, profile_picture: Optional[bytes]):
         self.profile_picture = profile_picture
 
     def get_ages(self) -> int:
@@ -125,7 +130,7 @@ class Account(BaseEntity):
             "bio": self.bio,
             "salt": self.salt,
             "hashed_password": self.hashed_password,
-            "account_type": self.account_type,
+            "account_type": self.account_type.value,
             "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
     
@@ -139,11 +144,11 @@ class Account(BaseEntity):
         self.bio = dictionary["bio"]
         self.salt = dictionary["salt"]
         self.hashed_password = dictionary["hashed_password"]
-        self.account_type = dictionary["account_type"]
+        self.account_type = AccountType(dictionary["account_type"])
         self.profile_picture = base64.b64decode(dictionary["profile_picture"].encode('utf-8')) if dictionary["profile_picture"] else None
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> 'Account':
-        account = Account(0, "", "", "", "", datetime.date.today(), "", "", "", "", None)
+        account = Account(0, "", "", "", "", datetime.date.today(), "", "", "", AccountType.USER, bytes())
         account.from_serializable_JSON(dictionary)
         return account

@@ -20,8 +20,8 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(seconds=int(os.environ.get("J
 
 app.register_blueprint(home_blueprint)
 app.register_blueprint(book_blueprint, url_prefix='/book')
-app.register_blueprint(account_blueprint, url = '/account')
 app.register_blueprint(comment_blueprint, url_prefix='/comment')
+app.register_blueprint(account_blueprint, url_prefix = '/account')
 app.register_blueprint(statistics_blueprint, url_prefix='/statistics')
 app.register_blueprint(book_rating_blueprint, url_prefix='/book_rating')
 app.register_blueprint(authentication_blueprint, url_prefix='/authentication')
