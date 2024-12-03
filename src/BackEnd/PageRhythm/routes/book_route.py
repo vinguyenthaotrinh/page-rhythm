@@ -6,26 +6,9 @@ from services.book.book_service import BookService
 book_blueprint = Blueprint('book', __name__)
 book_service = BookService()
 
-# 1. Retrieve book information
-@book_blueprint.route('/<string:book_id>', methods=['GET'])
-def get_book_information(book_id):
-    book = book_service.get_book_information(book_id)
-    if book:
-        return jsonify(book.to_serializable_JSON()), 200
-    return jsonify({"message": "Book not found"}), 404
-
-# 2. Search books
-@book_blueprint.route('/search', methods=['GET'])
-def search_book():
-    keyword = request.args.get('keyword', '')
-    genre = request.args.get('genre', None)
-    books = book_service.search_book(keyword, genre)
-    return jsonify([book.to_serializable_JSON() for book in books]), 200
-
-# 3. Create a new book
+# 1. Create a new book
 @book_blueprint.route('/create', methods=['POST'])
 def create_book():
-    # Parse JSON from request body
     data = request.json
     if not data:
         return jsonify({"error": "Invalid input", "message": "No JSON data found"}), 400
@@ -35,8 +18,24 @@ def create_book():
         return jsonify({"message": "Book created successfully"}), 201
     return jsonify({"message": "Failed to create book"}), 400
 
-# 4. Update book details
-@book_blueprint.route('/<string:book_id>', methods=['PUT'])
+# 2. Retrieve book information
+@book_blueprint.route('/<string:book_id>', methods=['GET'])
+def get_book_information(book_id):
+    book = book_service.get_book_information(book_id)
+    if book:
+        return jsonify(book.to_serializable_JSON()), 200
+    return jsonify({"message": "Book not found"}), 404
+
+# 3. Search for books
+@book_blueprint.route('/search', methods=['GET'])
+def search_book():
+    keyword = request.args.get('keyword', '')
+    genre = request.args.get('genre', None)
+    books = book_service.search_book(keyword, genre)
+    return jsonify([book.to_serializable_JSON() for book in books]), 200
+
+# 4. Update book information
+@book_blueprint.route('/<string:book_id>', methods=['PATCH'])
 def update_book(book_id):
     data = request.json
     result = book_service.update_book(book_id, data)
