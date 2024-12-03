@@ -1,4 +1,5 @@
 import json
+import base64
 from datetime import date
 from flask import Blueprint, jsonify, request
 from services.account.account_service import AccountService
@@ -15,6 +16,11 @@ def create_access_token_with_account_id(account_id: int):
 def register():
     data = request.get_json()
 
+    profile_picutre = data["profile_picture"]
+
+    if profile_picutre is not None:
+        profile_picutre = base64.b64decode(profile_picutre)
+
     if AuthenticationService().register_account(
         email = data["email"],
         full_name = data["full_name"],
@@ -24,7 +30,7 @@ def register():
         bio = data["bio"],
         password = data["password"],
         account_type = data["account_type"],
-        profile_picture = data["profile_picture"]
+        profile_picture = profile_picutre
     ):
         account = AccountService().get_account_by_email(data["email"])
         access_token = create_access_token_with_account_id(account.account_id)
