@@ -1,15 +1,15 @@
 CREATE TABLE "Account" (
-  "account_id" bigserial PRIMARY KEY,
-  "email" varchar(255) UNIQUE NOT NULL,
-  "full_name" varchar(255),
-  "first_name" varchar(100),
-  "last_name" varchar(100),
-  "birthday" date,
-  "bio" text,
-  "salt" varchar(255) NOT NULL,
-  "hashed_password" varchar(255) NOT NULL,
-  "account_type" varchar(50),
-  "profile_picture" bytea
+  "account_id"                bigserial PRIMARY KEY,
+  "email"                     varchar(255) UNIQUE NOT NULL,
+  "full_name"                 varchar(255),
+  "first_name"                varchar(100),
+  "last_name"                 varchar(100),
+  "birthday"                  date,
+  "bio"                       text,
+  "salt"                      varchar(255) NOT NULL,
+  "hashed_password"           varchar(255) NOT NULL,
+  "account_type"              varchar(50),
+  "profile_picture"           text
 );
 
 CREATE TABLE "Book" (
