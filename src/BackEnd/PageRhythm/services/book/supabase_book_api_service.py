@@ -36,6 +36,25 @@ class SupabaseBookAPIService:
             return response.data if response.data else []
         except Exception as e:
             return []
+        
+    def check_ownership(self, book_id: str, owner_id: int) -> bool:
+        try:
+            response = self.client.table("Book").select("owner_id").eq("book_id", book_id).execute()
+            if not response.data:
+                return False
+            return response.data[0]["owner_id"] == owner_id
+        except Exception as e:
+            return False
+
+    def get_book_by_id(self, book_id: str):
+        try:
+            response = self.client.table("Book").select("*").eq("book_id", book_id).execute()
+            if not response.data:
+                return None
+            book_data = response.data[0]
+            return Book(**book_data)
+        except Exception as e:
+            return None
 
     # 4. Update book information
     def update_book(self, book: Book) -> bool:

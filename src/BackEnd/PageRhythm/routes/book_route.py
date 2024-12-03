@@ -18,6 +18,7 @@ def create_book():
         return jsonify({"error": "Invalid input", "message": "No JSON data found"}), 400
     data['owner_id'] = owner_id
     result = book_service.create_book(data)
+    
     if result:
         return jsonify({"message": "Book created successfully"}), 201
     return jsonify({"message": "Failed to create book"}), 400
@@ -38,11 +39,16 @@ def search_book():
     books = book_service.search_book(keyword, genre)
     return jsonify([book.to_serializable_JSON() for book in books]), 200
 
-# 4. Update book information
 @book_blueprint.route('/<string:book_id>', methods=['PATCH'])
+@jwt_required()
 def update_book(book_id):
-    data = request.json
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"] 
+    data = request.json  
+    if not book_service.check_ownership(book_id, owner_id):
+        return jsonify({"message": "You do not have permission to update this book"}), 403
     result = book_service.update_book(book_id, data)
+    
     if result:
         return jsonify({"message": "Book updated successfully"}), 200
     return jsonify({"message": "Failed to update book"}), 400

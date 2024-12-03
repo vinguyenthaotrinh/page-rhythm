@@ -25,11 +25,20 @@ class BookService:
         books_data = self.supabase.search_book(keyword, genre)
         return [Book(**book) for book in books_data]
 
+    def check_ownership(self, book_id: str, owner_id: int) -> bool:
+        return self.supabase.check_ownership(book_id, owner_id)
+
     # 4. Update book information
     def update_book(self, book_id: str, book_data: dict) -> bool:
-        updated_book = Book(**book_data)
-        updated_book.set_book_id(book_id)
-        return self.supabase.update_book(updated_book)
+        existing_book = self.supabase.get_book_by_id(book_id)
+        if not existing_book:
+            return False
+
+        for key, value in book_data.items():
+            if hasattr(existing_book, key):
+                setattr(existing_book, key, value)
+
+        return self.supabase.update_book(existing_book)
 
     # 5. Delete a book
     def delete_book(self, book_id: str) -> bool:
