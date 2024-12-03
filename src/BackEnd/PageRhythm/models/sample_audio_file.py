@@ -20,7 +20,7 @@ class SampleAudioFile(BaseEntity):
         self.upload_time = upload_time
 
     def __str__(self) -> str:  
-        return f"SampleAudioFile(sample_audio_file_id={self.sample_audio_file_id}, file_name={self.file_name}, description={self.description}, owner_id={self.owner_id}, upload_time={self.upload_time})"
+        return f"SampleAudioFile(sample_audio_file_id={self.sample_audio_file_id}, file_name={self.file_name}, description={self.description}, owner_id={self.owner_id}, content={self.content}, upload_time={self.upload_time})"
     
     def get_sample_audio_file_id(self) -> int:
         return self.sample_audio_file_id
