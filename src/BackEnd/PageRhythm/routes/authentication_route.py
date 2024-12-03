@@ -2,9 +2,11 @@ import json
 import base64
 from datetime import date
 from flask import Blueprint, jsonify, request
+from models.banned_account import AccountStatus
 from services.account.account_service import AccountService
 from services.authentication.authentication_service import AuthenticationService
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from services.user_account_management.user_account_management_service import UserAccountManagementService
 
 authentication_blueprint = Blueprint("authentication", __name__)
 
@@ -41,9 +43,19 @@ def register():
 @authentication_blueprint.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
+    account_service = AccountService()
+    authentication_service = AuthenticationService()
+    user_account_management_service = UserAccountManagementService()
 
-    if AuthenticationService().check_password_correct(data["email"], data["password"]):
-        account = AccountService().get_account_by_email(data["email"])
+    account = account_service.get_account_by_email(data["email"])
+
+    if account is None:
+        return jsonify({"message": "The account does not exist"}), 401
+    
+    if user_account_management_service.get_account_status(account.account_id) != AccountStatus.ACTIVE:
+        return jsonify({"message": "The account is banned"}), 401
+
+    if authentication_service.check_password_correct(data["email"], data["password"]):
         access_token = create_access_token_with_account_id(account.account_id)
         return jsonify({"access_token": access_token}), 200
     
