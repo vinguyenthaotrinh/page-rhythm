@@ -1,3 +1,4 @@
+from home_tester import HomeTester
 import unittest
 import requests
 import random
@@ -7,7 +8,7 @@ class AuthenticationTester(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(AuthenticationTester, self).__init__(*args, **kwargs)
-        self.url = "http://127.0.0.1:5000"
+        self.url = HomeTester.get_url()
 
     def test_random_account_registration_1(self):
 

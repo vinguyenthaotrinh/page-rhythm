@@ -1,12 +1,13 @@
-import unittest
+from home_tester import HomeTester
 import requests
+import unittest
 import random
 
 class AccountTester(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(AccountTester, self).__init__(*args, **kwargs)
-        self.url = "http://127.0.0.1:5000"
+        self.url = HomeTester.get_url()
 
     def test_account_retrieval_with_given_email(self):
 

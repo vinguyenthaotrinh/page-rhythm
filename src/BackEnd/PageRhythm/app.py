@@ -32,7 +32,4 @@ app.register_blueprint(user_account_management_blueprint, url_prefix = "/user_ac
 jwt = JWTManager(app)
 
 if __name__ == "__main__":    
-    app.run()
-
-
-
+    app.run(debug = True)
