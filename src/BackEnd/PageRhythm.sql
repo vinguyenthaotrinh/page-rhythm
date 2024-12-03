@@ -40,11 +40,12 @@ CREATE TABLE "TrackedProgress" (
 );
 
 CREATE TABLE "SampleAudioFile" (
-  "sample_audio_file_id" bigserial PRIMARY KEY,
-  "file_name" varchar(255),
-  "description" text,
-  "owner_id" bigserial NOT NULL,
-  "content" bytea
+  "sample_audio_file_id"  bigserial PRIMARY KEY,
+  "file_name"             varchar(255),
+  "description"           text,
+  "owner_id"              bigserial NOT NULL,
+  "content"               text,
+  "upload_time"           timestamp
 );
 
 CREATE TABLE "Comment" (

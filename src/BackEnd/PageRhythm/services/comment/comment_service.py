@@ -3,4 +3,4 @@ from services.comment.supabase_comment_api_service import SupabaseCommentAPIServ
 class CommentService:
     
     def __init__(self):
-        self.supabase = SupabaseCommentAPIService
+        self.supabase = SupabaseCommentAPIService()

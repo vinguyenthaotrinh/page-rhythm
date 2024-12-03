@@ -3,4 +3,4 @@ from services.book_rating.supabase_book_rating_api_service import SupabaseBookRa
 class BookRatingService:
 
     def __init__(self):
-        self.supabase = SupabaseBookRatingAPIService
+        self.supabase = SupabaseBookRatingAPIService()
