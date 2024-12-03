@@ -22,7 +22,7 @@ class Book(BaseEntity):
     def __str__(self) -> str:
         return f"Book(book_id={self.book_id}, title={self.title}, author={self.author}, summary={self.summary}, content={self.content}, genre={self.genre}, owner_id={self.owner_id})"
     
-    def get_book_id(self) -> str:
+    def get_book_id(self) -> int:
         return self.book_id
     
     def get_title(self) -> str:
@@ -43,7 +43,7 @@ class Book(BaseEntity):
     def get_owner_id(self) -> int:
         return self.owner_id
     
-    def set_book_id(self, book_id: str):
+    def set_book_id(self, book_id: int):
         self.book_id = book_id
 
     def set_title(self, title: str):

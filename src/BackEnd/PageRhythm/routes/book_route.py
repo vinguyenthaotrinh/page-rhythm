@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, jsonify, request
 from services.authentication.authentication_service import AuthenticationService
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -8,11 +9,14 @@ book_service = BookService()
 
 # 1. Create a new book
 @book_blueprint.route('/create', methods=['POST'])
+@jwt_required()
 def create_book():
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"]
     data = request.json
     if not data:
         return jsonify({"error": "Invalid input", "message": "No JSON data found"}), 400
-    
+    data['owner_id'] = owner_id
     result = book_service.create_book(data)
     if result:
         return jsonify({"message": "Book created successfully"}), 201
