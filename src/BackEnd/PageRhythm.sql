@@ -13,55 +13,56 @@ CREATE TABLE "Account" (
 );
 
 CREATE TABLE "Book" (
-  "book_id" bigserial PRIMARY KEY,
-  "title" varchar(255),
-  "author" varchar(255),
-  "summary" text,
-  "genre" varchar(100),
-  "owner_id" bigserial NOT NULL,
-  "content" text
+  "book_id"                   bigserial PRIMARY KEY,
+  "title"                     varchar(255),
+  "author"                    varchar(255),
+  "summary"                   text,
+  "genre"                     varchar(100),
+  "owner_id"                  bigserial NOT NULL,
+  "content"                   text
 );
 
 CREATE TABLE "BookRating" (
-  "user_id" bigserial NOT NULL,
-  "book_id" bigserial NOT NULL,
-  "rating" smallint,
-  "date" timestamp,
+  "user_id"                   bigserial NOT NULL,
+  "book_id"                   bigserial NOT NULL,
+  "rating"                    smallint,
+  "date"                      timestamp,
   PRIMARY KEY ("user_id", "book_id")
 );
 
 CREATE TABLE "TrackedProgress" (
-  "user_id" bigserial NOT NULL,
-  "book_id" bigserial NOT NULL,
-  "page_number" int,
-  "status" varchar(50),
-  "most_recent_update_date" date,
+  "user_id"                   bigserial NOT NULL,
+  "book_id"                   bigserial NOT NULL,
+  "page_number"               int,
+  "status"                    varchar(50),
+  "most_recent_update_date"   date,
   PRIMARY KEY ("user_id", "book_id")
 );
 
 CREATE TABLE "SampleAudioFile" (
-  "sample_audio_file_id"  bigserial PRIMARY KEY,
-  "file_name"             varchar(255),
-  "description"           text,
-  "owner_id"              bigserial NOT NULL,
-  "content"               text,
-  "upload_time"           timestamp
+  "sample_audio_file_id"      bigserial PRIMARY KEY,
+  "file_name"                 varchar(255),
+  "description"               text,
+  "owner_id"                  bigserial NOT NULL,
+  "content"                   text,
+  "upload_time"               timestamp
 );
 
 CREATE TABLE "Comment" (
-  "comment_id" bigserial PRIMARY KEY,
-  "book_id" bigserial NOT NULL,
-  "comment_author_id" bigserial NOT NULL,
-  "replied_comment_id" bigserial,
-  "content" text
+  "comment_id"                bigserial PRIMARY KEY,
+  "book_id"                   bigserial NOT NULL,
+  "comment_author_id"         bigserial NOT NULL,
+  "replied_comment_id"        bigserial,
+  "content"                   text,
+  "creation_time"             timestamp
 );
 
 CREATE TABLE "BannedAccount" (
-  "banned_account_id" bigserial PRIMARY KEY NOT NULL,
-  "banning_account_id" bigserial NOT NULL,
-  "ban_type" varchar(50),
-  "start_time" timestamp,
-  "end_time" timestamp
+  "banned_account_id"         bigserial PRIMARY KEY NOT NULL,
+  "banning_account_id"        bigserial NOT NULL,
+  "ban_type"                  varchar(50),
+  "start_time"                timestamp,
+  "end_time"                  timestamp
 );
 
 ALTER TABLE "Book" ADD FOREIGN KEY ("owner_id") REFERENCES "Account" ("account_id");
