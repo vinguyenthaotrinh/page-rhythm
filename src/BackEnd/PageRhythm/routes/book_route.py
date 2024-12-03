@@ -18,9 +18,9 @@ def create_book():
         return jsonify({"error": "Invalid input", "message": "No JSON data found"}), 400
     data['owner_id'] = owner_id
     
-    result = book_service.create_book(data)
-    if result:
-        return jsonify({"message": "Book created successfully"}), 201
+    book_id = book_service.create_book(data)
+    if book_id:
+        return jsonify({"message": "Book created successfully", "book_id": book_id}), 201
     return jsonify({"message": "Failed to create book"}), 400
 
 # 2. Retrieve book information

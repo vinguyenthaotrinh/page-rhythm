@@ -7,14 +7,16 @@ class SupabaseBookAPIService:
         self.client = SupabaseClientService()
 
     # 1. Create a new book
-    def create_book(self, book: Book) -> bool:
+    def create_book(self, book: Book) -> int:
         try:
             book_data = book.to_serializable_JSON()
             book_data.pop('book_id', None)
             response = self.client.table('Book').insert(book_data).execute()  
-            return response.data
+            if response.data:
+                return response.data[0]["book_id"]  # PostgreSQL tự động trả về ID
+            return None
         except Exception as e:
-            return False
+            return None
     
     # 2. Retrieve book information
     def get_book_information(self, book_id: str) -> dict:
