@@ -24,7 +24,7 @@ def create_comment():
 
 @comment_blueprint.route("/reply", methods=["POST"])
 @jwt_required()
-def create_comment():
+def reply_comment():
     current_identity = json.loads(get_jwt_identity())
     comment_author_id = current_identity["account_id"]
     data = request.get_json()
