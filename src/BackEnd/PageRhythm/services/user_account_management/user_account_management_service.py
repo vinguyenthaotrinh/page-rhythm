@@ -36,7 +36,7 @@ class UserAccountManagementService:
         )
         return self.ban_account(banned_account)
     
-    def ban_account_temporarily_to_specific_time(self, banned_account_id: int, banning_acount_id: int, end_time: datetime) -> bool:
+    def ban_account_temporarily_to_specific_end_time(self, banned_account_id: int, banning_acount_id: int, end_time: datetime) -> bool:
         start_time = datetime.now()
         if end_time < start_time:
             return False
@@ -73,6 +73,14 @@ class UserAccountManagementService:
             return AccountStatus.ACTIVE
         if banned_account.ban_type == BanType.PERMANENTLY_BANNED:
             return AccountStatus.PERMANENTLY_BANNED
-        if (banned_account.end_time is not None) and (datetime.now() > banned_account.end_time):
+        
+        current_time = datetime.now()
+
+        if (banned_account.start_time is not None) and (current_time < banned_account.start_time):
             return AccountStatus.ACTIVE
+
+        if (banned_account.end_time is not None) and (current_time > banned_account.end_time):
+            self.unban_account(account_id)
+            return AccountStatus.ACTIVE
+        
         return AccountStatus.TEMPORARILY_BANNED
