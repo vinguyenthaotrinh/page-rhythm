@@ -1,0 +1,14 @@
+#left-corner-reg-img{
+    top: 50%;
+    left: 50%;
+    transform: translate(-729px, 450px);
+    margin-right: auto;
+    z-index: 10;
+  }
+
+  #right-corner-reg-img{
+    top: 50%;
+    left: 50%;
+    transform: translate(-380px, 690px);
+    z-index: 10;
+  }
