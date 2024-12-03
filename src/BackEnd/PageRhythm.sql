@@ -13,7 +13,7 @@ CREATE TABLE "Account" (
 );
 
 CREATE TABLE "Book" (
-  "book_id" varchar(256) PRIMARY KEY,
+  "book_id" bigserial PRIMARY KEY,
   "title" varchar(255),
   "author" varchar(255),
   "summary" text,
@@ -24,7 +24,7 @@ CREATE TABLE "Book" (
 
 CREATE TABLE "BookRating" (
   "user_id" bigserial NOT NULL,
-  "book_id" varchar(256) NOT NULL,
+  "book_id" bigserial NOT NULL,
   "rating" smallint,
   "date" timestamp,
   PRIMARY KEY ("user_id", "book_id")
@@ -32,7 +32,7 @@ CREATE TABLE "BookRating" (
 
 CREATE TABLE "TrackedProgress" (
   "user_id" bigserial NOT NULL,
-  "book_id" varchar(256) NOT NULL,
+  "book_id" bigserial NOT NULL,
   "page_number" int,
   "status" varchar(50),
   "most_recent_update_date" date,
@@ -40,7 +40,7 @@ CREATE TABLE "TrackedProgress" (
 );
 
 CREATE TABLE "SampleAudioFile" (
-  "sample_audio_file_id" varchar(256) PRIMARY KEY,
+  "sample_audio_file_id" bigserial PRIMARY KEY,
   "file_name" varchar(255),
   "description" text,
   "owner_id" bigserial NOT NULL,
@@ -48,10 +48,10 @@ CREATE TABLE "SampleAudioFile" (
 );
 
 CREATE TABLE "Comment" (
-  "comment_id" varchar(256) PRIMARY KEY,
-  "book_id" varchar(256) NOT NULL,
+  "comment_id" bigserial PRIMARY KEY,
+  "book_id" bigserial NOT NULL,
   "comment_author_id" bigserial NOT NULL,
-  "replied_comment_id" varchar(256),
+  "replied_comment_id" bigserial,
   "content" text
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE "BannedAccount" (
   "end_time" timestamp
 );
 
-ALTER TABLE "Book" ADD FOREIGN KEY ("ownerID") REFERENCES "Account" ("account_id");
+ALTER TABLE "Book" ADD FOREIGN KEY ("owner_id") REFERENCES "Account" ("account_id");
 
 ALTER TABLE "BookRating" ADD FOREIGN KEY ("user_id") REFERENCES "Account" ("account_id");
 
