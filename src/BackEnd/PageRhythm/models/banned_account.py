@@ -1,8 +1,14 @@
 from enum import Enum
+from typing import Optional
 from datetime import datetime
 from models.base_entity import BaseEntity
 
 class BanType(Enum):
+    PERMANENTLY_BANNED = "permanently_banned"
+    TEMPORARILY_BANNED = "temporarily_banned"
+
+class AccountStatus(Enum):
+    ACTIVE = "active"
     PERMANENTLY_BANNED = "permanently_banned"
     TEMPORARILY_BANNED = "temporarily_banned"
 
@@ -13,7 +19,7 @@ class BannedAccount(BaseEntity):
                  banning_account_id: int,
                  ban_type: BanType,
                  start_time: datetime.datetime,
-                 end_time: datetime.datetime):
+                 end_time: Optional[datetime.datetime]):
         super().__init__()
         self.banned_account_id = banned_account_id
         self.banning_account_id = banning_account_id
@@ -36,7 +42,7 @@ class BannedAccount(BaseEntity):
     def get_start_time(self) -> datetime.datetime:
         return self.start_time
     
-    def get_end_time(self) -> datetime.datetime:
+    def get_end_time(self) -> Optional[datetime.datetime]:
         return self.end_time
     
     def set_banned_account_id(self, banned_account_id: int) -> bool:
@@ -57,7 +63,7 @@ class BannedAccount(BaseEntity):
     def set_start_time(self, start_time: datetime.datetime):
         self.start_time = start_time
 
-    def set_end_time(self, end_time: datetime.datetime):
+    def set_end_time(self, end_time: Optional[datetime.datetime]):
         self.end_time = end_time
 
     def to_serializable_JSON(self) -> dict:
