@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from services.authentication.authentication_service import AuthenticationService
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from services.book_rating.book_rating_service import BookRatingService
 
 book_rating_blueprint = Blueprint("book_rating", __name__)
