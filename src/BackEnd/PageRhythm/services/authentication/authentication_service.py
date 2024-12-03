@@ -1,6 +1,7 @@
 from services.authentication.supabase_authentication_api_service import SupabaseAuthenticationAPIService
 from services.account.account_service import AccountService
 from models.account import Account, AccountType
+from typing import Optional
 import datetime
 import bcrypt
 
@@ -30,7 +31,7 @@ class AuthenticationService:
                         bio: str,
                         password: str,
                         account_type: str,
-                        profile_picture: bytes) -> bool:
+                        profile_picture: Optional[bytes]) -> bool:
         account_id = AccountService().get_number_of_accounts() + 1
         salt = AuthenticationService.generate_salt()
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)

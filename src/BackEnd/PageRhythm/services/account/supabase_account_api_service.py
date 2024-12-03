@@ -20,6 +20,7 @@ class SupabaseAccountAPIService:
             response = self.client.table("Account").select("*").eq("email", email).execute()
             return Account.deserialize_JSON(response.data[0])
         except Exception as e:
+            print(e)
             return None
         return None
     

@@ -3,13 +3,13 @@ from models.base_entity import BaseEntity
 class Book(BaseEntity):
 
     def __init__(self, 
-                 book_id: str,
                  title: str,
                  author: str,
                  summary: str,
                  content: str,
                  genre: str,
-                 owner_id: int):
+                 owner_id: int,
+                 book_id: int = None):
         super().__init__()
         self.book_id = book_id
         self.title = title

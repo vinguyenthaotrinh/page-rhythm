@@ -5,7 +5,7 @@ class BookRating(BaseEntity):
 
     def __init__(self, 
                  user_id: int,
-                 book_id: str,
+                 book_id: int,
                  rating: int,
                  date: datetime.date):
         super().__init__()
@@ -20,7 +20,7 @@ class BookRating(BaseEntity):
     def get_user_id(self) -> int:
         return self.user_id
     
-    def get_book_id(self) -> str:
+    def get_book_id(self) -> int:
         return self.book_id
     
     def get_rating(self) -> int:
@@ -35,7 +35,7 @@ class BookRating(BaseEntity):
         self.user_id = user_id
         return True
 
-    def set_book_id(self, book_id: str):
+    def set_book_id(self, book_id: int):
         self.book_id = book_id
 
     def set_rating(self, rating: int) -> bool:
@@ -60,3 +60,12 @@ class BookRating(BaseEntity):
         self.set_book_id(dictionary["book_id"])
         self.set_rating(dictionary["rating"])
         self.set_date(datetime.datetime.strptime(dictionary["date"], "%Y-%m-%d").date())
+
+    @staticmethod
+    def deserialize_JSON(dictionary: dict) -> "BookRating":
+        return BookRating(
+            user_id=dictionary["user_id"],
+            book_id=dictionary["book_id"],
+            rating=dictionary["rating"],
+            date=datetime.datetime.strptime(dictionary["date"], "%Y-%m-%d").date()
+        )

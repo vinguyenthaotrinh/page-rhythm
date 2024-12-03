@@ -1,6 +1,7 @@
 import unittest
 import requests
 import random
+import base64
 
 class AuthenticationTester(unittest.TestCase):
 
@@ -11,10 +12,21 @@ class AuthenticationTester(unittest.TestCase):
     def test_random_account_registration_1(self):
 
         def get_image_bytes(url):
-            response = requests.get(url)
-            if response.status_code == 200:
-                return response.content  
-            return None
+            try:
+                response = requests.get(url, stream=True) 
+                response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+                
+                # Check if the content is an image
+                if "image" in response.headers.get("content-type", ""):
+                    #print(len(response.content))
+                    encoded_data = base64.b64encode(response.content).decode("utf-8")
+                    return encoded_data
+                else:
+                    print("URL does not point to an image.")
+                    return None
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+                return None
 
         email = f"user{random.randint(100000000000, 999999999999)}@gmail.com"
         first_name = "Joel"
@@ -50,10 +62,20 @@ class AuthenticationTester(unittest.TestCase):
     def test_random_account_registration_2(self):
 
         def get_image_bytes(url):
-            response = requests.get(url)
-            if response.status_code == 200:
-                return response.content  
-            return None
+            try:
+                response = requests.get(url, stream=True) 
+                response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+                
+                # Check if the content is an image
+                if "image" in response.headers.get("content-type", ""):
+                    encoded_data = base64.b64encode(response.content).decode("utf-8")
+                    return encoded_data
+                else:
+                    print("URL does not point to an image.")
+                    return None
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+                return None
 
         email = f"user{random.randint(100000000000, 999999999999)}@gmail.com"
         first_name = "Joel"
