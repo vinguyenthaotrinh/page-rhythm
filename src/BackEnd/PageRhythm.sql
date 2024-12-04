@@ -29,7 +29,7 @@ CREATE TABLE "BookRating" (
   "user_id"                   bigserial NOT NULL,
   "book_id"                   bigserial NOT NULL,
   "rating"                    smallint,
-  "date"                      timestamp,
+  "date"                      date,
   PRIMARY KEY ("user_id", "book_id")
 );
 

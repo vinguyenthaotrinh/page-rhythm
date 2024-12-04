@@ -1,13 +1,12 @@
-import datetime
 from models.base_entity import BaseEntity
 
 class BookRating(BaseEntity):
 
     def __init__(self, 
-                 user_id: int,
                  book_id: int,
                  rating: int,
-                 date: datetime.date):
+                 user_id: int = None,
+                 date: str = None):
         super().__init__()
         self.user_id = user_id
         self.book_id = book_id
@@ -26,7 +25,7 @@ class BookRating(BaseEntity):
     def get_rating(self) -> int:
         return self.rating
     
-    def get_date(self) -> datetime.date:
+    def get_date(self) -> str:
         return self.date
     
     def set_user_id(self, user_id: int) -> bool:
@@ -44,7 +43,7 @@ class BookRating(BaseEntity):
         self.rating = rating
         return True
 
-    def set_date(self, date: datetime.date):
+    def set_date(self, date: str):
         self.date = date
 
     def to_serializable_JSON(self) -> dict:
@@ -59,7 +58,7 @@ class BookRating(BaseEntity):
         self.set_user_id(dictionary["user_id"])
         self.set_book_id(dictionary["book_id"])
         self.set_rating(dictionary["rating"])
-        self.set_date(datetime.datetime.strptime(dictionary["date"], "%Y-%m-%d").date())
+        self.set_date(dictionary["date"])
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "BookRating":
@@ -67,5 +66,5 @@ class BookRating(BaseEntity):
             user_id=dictionary["user_id"],
             book_id=dictionary["book_id"],
             rating=dictionary["rating"],
-            date=datetime.datetime.strptime(dictionary["date"], "%Y-%m-%d").date()
+            date=dictionary["date"]
         )
