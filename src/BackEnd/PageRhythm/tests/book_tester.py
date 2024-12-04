@@ -1,3 +1,4 @@
+import datetime
 import unittest
 import requests
 
@@ -16,9 +17,9 @@ class BookTester(unittest.TestCase):
 
     def setUp(self):
         if not self.account_exists():
-            # print("Account does not exist. Registering account...")
+            print("Account does not exist. Registering account...")
             self.register_account()
-        # print("Logging in...")
+        print("Logging in...")
         self.login_account()
 
     def account_exists(self):
@@ -53,7 +54,7 @@ class BookTester(unittest.TestCase):
         self.assertEqual(response.status_code, 200, "Login failed.")
         self.token = response.json().get("access_token")
         self.assertIsNotNone(self.token, "Token not received.")
-        # print("Login successful.")
+        print("Login successful.")
 
     def test_create_book(self):
         headers = {"Authorization": f"Bearer {self.token}"}
@@ -61,8 +62,11 @@ class BookTester(unittest.TestCase):
         with open("user_local_files/content.txt", "w") as f:
             f.write("This is the content of the book.")
         
-        with open("user_local_files/content.txt", "rb") as content_file:
-            files = {"content": content_file}
+        with open("user_local_files/content.txt", "rb") as content_file, open("user_local_files/book_image.png", "rb") as image_file:
+            files = {
+                "content": content_file,
+                "image": image_file
+            }
             data = {
                 "title": "Learn Flask",
                 "author": "John Doe",
@@ -76,9 +80,25 @@ class BookTester(unittest.TestCase):
         self.assertEqual(response_data.get("message"), "Book created successfully")
         book_id = response_data.get("book_id")
         self.assertIsNotNone(book_id, "Book ID not returned after creation.")
+        print(f"Book created with ID: {book_id}")
         return book_id 
-
-
+    
+    def test_get_book_information(self):
+        book_id = 1 #self.test_create_book()
+        response = requests.get(f"{self.book_url}/{book_id}")
+        self.assertEqual(response.status_code, 200)
+        print(response.json())
+    
+    def test_search_book(self):
+        search_params = {
+            "keyword": "Flask",
+            "genre": "Programming"
+        }
+        response = requests.get(f"{self.book_url}/search", params=search_params)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json(), list)
+        print(response.json())
+        
     def test_update_book(self):
         book_id = self.test_create_book()
 
@@ -97,7 +117,7 @@ class BookTester(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json().get("message"), "Book updated successfully")
-
+        print("Book updated successfully.")
 
     def test_delete_book(self):
         book_id = self.test_create_book()  
@@ -106,6 +126,7 @@ class BookTester(unittest.TestCase):
         delete_response = requests.delete(f"{self.book_url}/{book_id}", headers=headers)
         self.assertEqual(delete_response.status_code, 200, "Failed to delete book.")
         self.assertEqual(delete_response.json().get("message"), "Book deleted successfully")
+        print("Book deleted successfully.")
 
 if __name__ == "__main__":
     # unittest.main()

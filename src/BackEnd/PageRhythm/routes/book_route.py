@@ -16,7 +16,6 @@ def create_book():
     owner_id = current_identity["account_id"]
 
     data = request.form
-    # Lấy các thông tin khác từ form data
     title = data.get("title")
     author = data.get("author")
     summary = data.get("summary")
@@ -46,7 +45,7 @@ def create_book():
         "content": content,
         "image": image_data,
         "book_rating": 0.0,
-        "released_date": datetime.datetime.now().date()
+        "released_date": datetime.datetime.today().strftime("%Y-%m-%d")
     }
 
     book_id = book_service.create_book(book_data)
@@ -77,18 +76,15 @@ def update_book(book_id):
     current_identity = json.loads(get_jwt_identity())
     owner_id = current_identity["account_id"]
 
-    # Kiểm tra quyền sở hữu
     if not book_service.check_ownership(book_id, owner_id):
         return jsonify({"message": "You do not have permission to update this book."}), 403
 
     data = request.form
-    # Lấy các thông tin từ form data
     title = data.get("title")
     author = data.get("author")
     summary = data.get("summary")
     genre = data.get("genre")
 
-    # Kiểm tra file `content` nếu có
     content = None
     if "content" in request.files:
         content_file = request.files["content"]
@@ -107,7 +103,6 @@ def update_book(book_id):
             except Exception as e:
                 return jsonify({"message": "Failed to read the image file."}), 400
 
-    # Chỉ cập nhật các trường không rỗng
     updated_data = {key: value for key, value in {
         "title": title,
         "author": author,

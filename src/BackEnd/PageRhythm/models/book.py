@@ -10,7 +10,7 @@ class Book(BaseEntity):
                  content: str,
                  genre: str,
                  owner_id: int,
-                 released_date: datetime.date,
+                 released_date: str,
                  book_id: int = None,
                  book_rating: float = 0.0,
                  image: str = None):
@@ -54,7 +54,7 @@ class Book(BaseEntity):
     def get_owner_id(self) -> int:
         return self.owner_id
 
-    def get_released_date(self) -> datetime.date:
+    def get_released_date(self) -> str:
         return self.released_date
 
     def get_book_rating(self) -> float:
@@ -87,7 +87,7 @@ class Book(BaseEntity):
         self.owner_id = owner_id
         return True
 
-    def set_released_date(self, released_date: datetime.date):
+    def set_released_date(self, released_date: str):
         self.released_date = released_date
 
     def set_book_rating(self, book_rating: float):
