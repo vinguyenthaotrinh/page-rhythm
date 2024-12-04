@@ -19,4 +19,7 @@ def get_tracked_progress():
 
     tracked_progress = statistics_service.get_tracked_progress(user_id, book_id)
 
-    
+    return jsonify({
+        "status": "success",
+        "data": tracked_progress.to_serializable_JSON()
+    }), 200
