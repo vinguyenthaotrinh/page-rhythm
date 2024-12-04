@@ -56,32 +56,48 @@ class BookTester(unittest.TestCase):
         # print("Login successful.")
 
     def test_create_book(self):
-        new_book_data = {
-            "title": "Learn Flask",
-            "author": "John Doe",
-            "summary": "A book about Flask.",
-            "content": "Flask is a lightweight Python web framework.",
-            "genre": "Programming"
-        }
         headers = {"Authorization": f"Bearer {self.token}"}
-        response = requests.post(f"{self.book_url}/create", json=new_book_data, headers=headers)
+        
+        with open("user_local_files/content.txt", "w") as f:
+            f.write("This is the content of the book.")
+        
+        with open("user_local_files/content.txt", "rb") as content_file:
+            files = {"content": content_file}
+            data = {
+                "title": "Learn Flask",
+                "author": "John Doe",
+                "summary": "A book about Flask.",
+                "genre": "Programming"
+            }
+            response = requests.post(f"{self.book_url}/create", data=data, files=files, headers=headers)
+        
         self.assertEqual(response.status_code, 201)
         response_data = response.json()
         self.assertEqual(response_data.get("message"), "Book created successfully")
         book_id = response_data.get("book_id")
         self.assertIsNotNone(book_id, "Book ID not returned after creation.")
-        return book_id  
+        return book_id 
+
 
     def test_update_book(self):
-        book_id = self.test_create_book()  
-        updated_data = {
-            "title": "Learn Flask - Updated",
-            "author": "Jane Doe"
-        }
+        book_id = self.test_create_book()
+
         headers = {"Authorization": f"Bearer {self.token}"}
-        response = requests.patch(f"{self.book_url}/{book_id}", json=updated_data, headers=headers)
+        
+        with open("user_local_files/updated_content.txt", "w") as f:
+            f.write("This is the updated content of the book.")
+        
+        with open("user_local_files/updated_content.txt", "rb") as updated_file:
+            files = {"content": updated_file}
+            data = {
+                "title": "Learn Flask - Updated",
+                "author": "Jane Doe"
+            }
+            response = requests.patch(f"{self.book_url}/{book_id}", data=data, files=files, headers=headers)
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json().get("message"), "Book updated successfully")
+
 
     def test_delete_book(self):
         book_id = self.test_create_book()  
@@ -97,7 +113,7 @@ if __name__ == "__main__":
     # suite.addTest(BookTester("test_create_book"))
     # suite.addTest(BookTester("test_get_book_information"))
     # suite.addTest(BookTester("test_search_book"))
-    # suite.addTest(BookTester("test_update_book"))
-    suite.addTest(BookTester("test_delete_book"))
+    suite.addTest(BookTester("test_update_book"))
+    # suite.addTest(BookTester("test_delete_book"))
     runner = unittest.TextTestRunner()
     runner.run(suite)
