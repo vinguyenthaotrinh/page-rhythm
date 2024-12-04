@@ -51,7 +51,7 @@ class BookRating(BaseEntity):
             "user_id": self.user_id,
             "book_id": self.book_id,
             "rating": self.rating,
-            "date": self.date.strftime("%Y-%m-%d")
+            "date": self.date
         }
     
     def from_serializable_JSON(self, dictionary: dict):
