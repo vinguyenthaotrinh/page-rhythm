@@ -19,7 +19,10 @@ CREATE TABLE "Book" (
   "summary"                   text,
   "genre"                     varchar(100),
   "owner_id"                  bigserial NOT NULL,
-  "content"                   text
+  "content"                   text,
+  "released_date"             timestamp DEFAULT CURRENT_TIMESTAMP,
+  "book_rating"               float DEFAULT 0,
+  "image"                     text;
 );
 
 CREATE TABLE "BookRating" (
