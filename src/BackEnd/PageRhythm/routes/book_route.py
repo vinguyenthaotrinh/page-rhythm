@@ -65,11 +65,21 @@ def get_book_information(book_id):
 # 3. Search for books
 @book_blueprint.route('/search', methods=['GET'])
 def search_book():
-    keyword = request.args.get('keyword', '')
+    title = request.args.get('title', '')
     genre = request.args.get('genre', None)
-    books = book_service.search_book(keyword, genre)
+    books = book_service.search_book(title, genre)
     return jsonify([book.to_serializable_JSON() for book in books]), 200
 
+# 4. Get my book
+@book_blueprint.route('/mylib', methods=['GET'])
+@jwt_required()
+def get_my_lib():
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"]
+    books = book_service.get_book_by_owner(owner_id)
+    return jsonify([book.to_serializable_JSON() for book in books]), 200
+
+# 5. Update book information
 @book_blueprint.route('/<string:book_id>', methods=['PATCH'])
 @jwt_required()
 def update_book(book_id):
@@ -117,7 +127,7 @@ def update_book(book_id):
         return jsonify({"message": "Book updated successfully"}), 200
     return jsonify({"message": "Failed to update book"}), 400
 
-# 5. Delete a book
+# 6. Delete a book
 @book_blueprint.route('/<string:book_id>', methods=['DELETE'])
 @jwt_required()
 def delete_book(book_id):

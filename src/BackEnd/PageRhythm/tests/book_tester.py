@@ -87,37 +87,46 @@ class BookTester(unittest.TestCase):
         book_id = 1 #self.test_create_book()
         response = requests.get(f"{self.book_url}/{book_id}")
         self.assertEqual(response.status_code, 200)
-        print(response.json())
     
     def test_search_book(self):
         search_params = {
-            "keyword": "Flask",
+            "title": "Flask",
             "genre": "Programming"
         }
         response = requests.get(f"{self.book_url}/search", params=search_params)
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json(), list)
-        print(response.json())
         
-    def test_update_book(self):
-        book_id = self.test_create_book()
-
+    def test_get_my_lib(self):
+        headers = {"Authorization": f"Bearer {self.token}"}
+        response = requests.get(f"{self.book_url}/mylib", headers=headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json(), list)
+        return response.json()
+        
+    def test_update_book(self):        
+        books = self.test_get_my_lib()
         headers = {"Authorization": f"Bearer {self.token}"}
         
+        if not books:
+            self.fail("No books found to update.")
+        
+        book_id = books[0]['book_id'] 
+
         with open("user_local_files/updated_content.txt", "w") as f:
             f.write("This is the updated content of the book.")
         
         with open("user_local_files/updated_content.txt", "rb") as updated_file:
             files = {"content": updated_file}
             data = {
-                "title": "Learn Flask - Updated",
+                "title": "Updated title",
                 "author": "Jane Doe"
             }
             response = requests.patch(f"{self.book_url}/{book_id}", data=data, files=files, headers=headers)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json().get("message"), "Book updated successfully")
-        print("Book updated successfully.")
+        print(f"Book with ID = {book_id} updated successfully.")
 
     def test_delete_book(self):
         book_id = self.test_create_book()  
@@ -134,6 +143,7 @@ if __name__ == "__main__":
     # suite.addTest(BookTester("test_create_book"))
     # suite.addTest(BookTester("test_get_book_information"))
     # suite.addTest(BookTester("test_search_book"))
+    # suite.addTest(BookTester("test_get_my_lib"))
     suite.addTest(BookTester("test_update_book"))
     # suite.addTest(BookTester("test_delete_book"))
     runner = unittest.TextTestRunner()

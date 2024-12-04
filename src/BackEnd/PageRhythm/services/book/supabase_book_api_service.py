@@ -29,9 +29,9 @@ class SupabaseBookAPIService:
             return None
 
     # 3. Search for books
-    def search_book(self, keyword: str, genre: str = None) -> list:
+    def search_book(self, title: str, genre: str = None) -> list:
         try:
-            query = self.client.table('Book').select('*').ilike('title', f'%{keyword}%')
+            query = self.client.table('Book').select('*').ilike('title', f'%{title}%')
             if genre:
                 query = query.ilike('genre', genre)
             response = query.execute()
@@ -57,8 +57,16 @@ class SupabaseBookAPIService:
             return Book(**book_data)
         except Exception as e:
             return None
+    
+    # 4. Get book by owner
+    def get_book_by_owner(self, owner_id: int) -> list:
+        try:
+            response = self.client.table("Book").select("*").eq("owner_id", owner_id).execute()
+            return response.data if response.data else []
+        except Exception as e:
+            return []
 
-    # 4. Update book information
+    # 5. Update book information
     def update_book(self, book: Book) -> bool:
         try:
             response = self.client.table('Book').update(book.to_serializable_JSON()).eq('book_id', book.get_book_id()).execute()
@@ -66,7 +74,7 @@ class SupabaseBookAPIService:
         except Exception as e:
             return False
     
-    # 5. Delete a book
+    # 6. Delete a book
     def delete_book(self, book_id: str) -> bool:
         try:
             response = self.client.table('Book').delete().eq('book_id', book_id).execute()
