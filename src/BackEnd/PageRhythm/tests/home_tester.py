@@ -1,4 +1,5 @@
 import requests
+from typing import Optional
 
 class HomeTester:
 
@@ -15,11 +16,21 @@ class HomeTester:
         return "https://page-rhythm-back-end.onrender.com"
 
     @staticmethod
-    def get_url() -> str:
+    def get_url() -> Optional[str]:
         if HomeTester.is_in_debug_mode():
             return HomeTester.get_local_url()
-        url = HomeTester.get_deployed_url()
-        response = requests.get(f"{url}/health")
-        if response.status_code != 200:
-            url = HomeTester.get_local_url()
-        return url
+        
+        URLs = [
+            HomeTester.get_local_url(),
+            HomeTester.get_deployed_url()
+        ]
+
+        for url in URLs:
+            try:
+                response = requests.get(f"{url}/health")
+                if response.status_code == 200:
+                    return url
+            except:
+                pass
+
+        return None
