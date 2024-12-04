@@ -1,3 +1,4 @@
+import datetime
 from models.base_entity import BaseEntity
 
 class Book(BaseEntity):
@@ -9,8 +10,8 @@ class Book(BaseEntity):
                  content: str,
                  genre: str,
                  owner_id: int,
+                 released_date: datetime.date,
                  book_id: int = None,
-                 released_date: str = None,
                  book_rating: float = 0.0,
                  image: str = None):
         super().__init__()
@@ -53,7 +54,7 @@ class Book(BaseEntity):
     def get_owner_id(self) -> int:
         return self.owner_id
 
-    def get_released_date(self) -> str:
+    def get_released_date(self) -> datetime.date:
         return self.released_date
 
     def get_book_rating(self) -> float:
@@ -62,7 +63,6 @@ class Book(BaseEntity):
     def get_image(self) -> str:
         return self.image
     
-    # Setter methods
     def set_book_id(self, book_id: int):
         self.book_id = book_id
 
@@ -87,7 +87,7 @@ class Book(BaseEntity):
         self.owner_id = owner_id
         return True
 
-    def set_released_date(self, released_date: str):
+    def set_released_date(self, released_date: datetime.date):
         self.released_date = released_date
 
     def set_book_rating(self, book_rating: float):
@@ -96,7 +96,6 @@ class Book(BaseEntity):
     def set_image(self, image: str):
         self.image = image
     
-    # Serialization
     def to_serializable_JSON(self) -> dict:
         return {
             "book_id": self.book_id,

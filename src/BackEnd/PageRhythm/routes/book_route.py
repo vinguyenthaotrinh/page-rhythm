@@ -1,8 +1,9 @@
-import json
 from flask import Blueprint, jsonify, request
-from services.authentication.authentication_service import AuthenticationService
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from services.book.book_service import BookService
+import json
+import base64
+import datetime
 
 book_blueprint = Blueprint('book', __name__)
 book_service = BookService()
@@ -14,34 +15,38 @@ def create_book():
     current_identity = json.loads(get_jwt_identity())
     owner_id = current_identity["account_id"]
 
+    data = request.form
     # Lấy các thông tin khác từ form data
-    title = request.form.get("title")
-    author = request.form.get("author")
-    summary = request.form.get("summary")
-    genre = request.form.get("genre")
+    title = data.get("title")
+    author = data.get("author")
+    summary = data.get("summary")
+    genre = data.get("genre")
     
-    # Kiểm tra và đọc file `content`
-    if "content" not in request.files:
-        return jsonify({"message": "Content file is required."}), 400
+    content_file = request.files.get('content')
+    if not content_file or content_file.filename == '':
+        return jsonify({"message": "Content file is required"}), 400
 
-    content_file = request.files["content"]
-    if content_file.filename == "":
-        return jsonify({"message": "No selected file."}), 400
-
-    # Đọc nội dung file (giả sử là tệp văn bản `.txt`)
     try:
         content = content_file.read().decode("utf-8")
     except Exception as e:
         return jsonify({"message": "Failed to read the content file."}), 400
+    
+    image_file = request.files.get('image')
+    if image_file:
+        image_data = base64.b64encode(image_file.read()).decode('utf-8')
+    else:
+        image_data = None
 
-    # Gộp dữ liệu vào dictionary để tạo sách
     book_data = {
         "title": title,
         "author": author,
         "summary": summary,
-        "content": content,
         "genre": genre,
-        "owner_id": owner_id
+        "owner_id": owner_id,
+        "content": content,
+        "image": image_data,
+        "book_rating": 0.0,
+        "released_date": datetime.datetime.now().date()
     }
 
     book_id = book_service.create_book(book_data)
@@ -76,11 +81,12 @@ def update_book(book_id):
     if not book_service.check_ownership(book_id, owner_id):
         return jsonify({"message": "You do not have permission to update this book."}), 403
 
+    data = request.form
     # Lấy các thông tin từ form data
-    title = request.form.get("title")
-    author = request.form.get("author")
-    summary = request.form.get("summary")
-    genre = request.form.get("genre")
+    title = data.get("title")
+    author = data.get("author")
+    summary = data.get("summary")
+    genre = data.get("genre")
 
     # Kiểm tra file `content` nếu có
     content = None
@@ -91,14 +97,24 @@ def update_book(book_id):
                 content = content_file.read().decode("utf-8")
             except Exception as e:
                 return jsonify({"message": "Failed to read the content file."}), 400
+            
+    image = None
+    if "image" in request.files:
+        image_file = request.files["image"]
+        if image_file.filename != "":
+            try:
+                image = base64.b64encode(image_file.read()).decode("utf-8")
+            except Exception as e:
+                return jsonify({"message": "Failed to read the image file."}), 400
 
     # Chỉ cập nhật các trường không rỗng
     updated_data = {key: value for key, value in {
         "title": title,
         "author": author,
         "summary": summary,
+        "genre": genre,
         "content": content,
-        "genre": genre
+        "image": image
     }.items() if value is not None}
 
     result = book_service.update_book(book_id, updated_data)
