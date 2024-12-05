@@ -11,9 +11,8 @@ class SupabaseBookRatingAPIService:
         try:
             rating_data = rating.to_serializable_JSON()
             response = self.client.table("BookRating").insert(rating_data).execute()
-            return response.data is not None
+            return response.data 
         except Exception as e:
-            print(f"Error creating rating: {e}")
             return False
 
     # 2. Calculate average rating for a book
@@ -23,7 +22,6 @@ class SupabaseBookRatingAPIService:
             ratings = [record["rating"] for record in response.data]
             return sum(ratings) / len(ratings) if ratings else 0.0
         except Exception as e:
-            print(f"Error calculating average rating: {e}")
             return 0.0
 
     # 3. Get all ratings for a specific book
@@ -32,7 +30,6 @@ class SupabaseBookRatingAPIService:
             response = self.client.table("BookRating").select("*").eq("book_id", book_id).execute()
             return response.data if response.data else []
         except Exception as e:
-            print(f"Error fetching ratings for book: {e}")
             return []
 
     # 4. Get a specific user's rating for a specific book
@@ -43,27 +40,27 @@ class SupabaseBookRatingAPIService:
                                    .eq("book_id", book_id).execute()
             return response.data[0] if response.data else None
         except Exception as e:
-            print(f"Error fetching user rating: {e}")
             return None
 
     # 5. Update average rating for a book
     def update_book_rating(self, book_id: int, average_rating: float) -> bool:
         try:
             response = self.client.table("Book").update({"book_rating": average_rating}).eq("book_id", book_id).execute()
-            return response.data is not None
+            return response.data 
         except Exception as e:
-            print(f"Error updating book average rating: {e}")
             return False
         
     # 6. Update an existing rating
     def update_rating(self, rating: BookRating) -> bool:
         try:
-            response = self.client.table("BookRating").update(rating.to_serializable_JSON()) \
-                                   .eq("user_id", rating.user_id) \
-                                   .eq("book_id", rating.book_id).execute()
-            return response.data is not None
+            rating_data = rating.to_serializable_JSON()
+            rating_data.pop("user_id")
+            rating_data.pop("book_id")
+            response = self.client.table("BookRating").update(rating_data) \
+                                   .eq("user_id", rating.get_user_id()) \
+                                   .eq("book_id", rating.get_book_id()).execute()
+            return response.data 
         except Exception as e:
-            print(f"Error updating rating: {e}")
             return False
 
     # 7. Delete a rating
@@ -72,7 +69,6 @@ class SupabaseBookRatingAPIService:
             response = self.client.table("BookRating").delete() \
                                    .eq("user_id", user_id) \
                                    .eq("book_id", book_id).execute()
-            return response.data is not None
+            return response.data 
         except Exception as e:
-            print(f"Error deleting rating: {e}")
             return False
