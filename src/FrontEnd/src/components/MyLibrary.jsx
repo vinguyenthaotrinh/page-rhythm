@@ -1,7 +1,7 @@
 import React from 'react'
-import SideBar from './SideBar'
-import SearchBar from './SearchBar'
-import BookCar from './BookCar'
+// import SideBar from './SideBar'
+// import SearchBar from './SearchBar'
+import BookCard from './BookCard.jsx'
 import '../styles/my-library-styles.css'
 import '../styles/landing-style.css'
 
@@ -10,6 +10,13 @@ import '../styles/home-styles.css'
 import images from '../assets/images'
 
 export default function MyLibrary() {
+
+  const books = [
+    { id: 1, title: 'Book Name', author: 'Author Name', releaseDate: 'Release Date' },
+    { id: 2, title: 'Book Name', author: 'Author Name', releaseDate: 'Release Date' },
+    { id: 3, title: 'Book Name', author: 'Author Name', releaseDate: 'Release Date' },
+    { id: 4, title: 'Book Name', author: 'Author Name', releaseDate: 'Release Date' },
+  ];
   return (
     <>
       {/* <div className="library">
@@ -29,13 +36,13 @@ export default function MyLibrary() {
       </div>
       <div className="library">
         <div className="box" id="side-bar">
-          <nav>
+          <nav class="nav-side-bar">
             <ul>
               <li>
-                <NavLink to="/books">Books</NavLink>
+                <NavLink to="/mylibrary/books">Books</NavLink>
               </li>
               <li>
-                <NavLink to="/voices">Voices</NavLink>
+                <NavLink to="/mylibrary/voices">Voices</NavLink>
               </li>
             </ul>
           </nav>
@@ -46,19 +53,20 @@ export default function MyLibrary() {
             <button className="add-button">Add</button>
             </div>
             <div class="book-search-inner" id="library-search-bar">
-              <image src={images.search} class="search-icon" />
+              <img src={images.search} className="search-icon" />
               <input
                 type="text"
                 id="searchInput"
                 placeholder="Search Your Books"
-                oninput="handleSearch()"
+                onInput="handleSearch()"
                 class="input-info"
               />
             </div>
           </div>
-          <div className="tools" id="book-card">
-            <p>Library</p>
-            
+          <div className="tools" id="books-grid">
+            {books.map(book => (
+              <BookCard key={book.id} book={book} />
+            ))}
           </div>
         </div>
         

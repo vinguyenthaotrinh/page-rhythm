@@ -11,25 +11,30 @@ import ResetPass2 from "./components/ResetPass2.jsx";
 import NavBar from './NavBar.jsx';
 import Home from './components/Home.jsx';
 import MyLibrary from './components/MyLibrary.jsx';
-
+import HomeBookCard from './components/HomeBookCard.jsx';
+import BookDetails from './components/BookDetails.jsx';
+import ReviewBox from './components/ReviewBox.jsx'
+import Button from './components/Button.jsx';
+import AudioCard from './components/AudioCard.jsx'
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
       <div className="App">
-        <NavBar />
+        {/* <NavBar /> */}
         {/* <Background /> */}
         {/* <Login/> */}
         {/* <Register/> */}
         {/* <ResetPass1/> */}
         {/* <ResetPass2/> */}
-        {/* <NavBar /> */}
+        {/* <NavBar />
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/mylibrary" element={<MyLibrary/>}/>
-        </Routes>
-
+        </Routes> */}
+        {/* <HomeBookCard/> */}
+        {/* <ReviewBox/> */}
+        <AudioCard/>
       </div>
 
     </>
