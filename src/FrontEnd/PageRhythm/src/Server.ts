@@ -78,17 +78,17 @@ class Server {
         }
     }
 
-    public async login(email: string, password: string): Promise<void> {
+    public async login(email: string, password: string): Promise<Response> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
         }
-
-        const url = `${this.host}/login`;
+    
+        const url = `${this.host}/authentication/login`;
         const body = {
             email,
             password,
         };
-
+    
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -97,21 +97,19 @@ class Server {
                 },
                 body: JSON.stringify(body),
             });
-
-            if (!response.ok) {
-                const errorBody = await response.json();
-                throw new Error(`Login failed: ${errorBody.message || "Unknown error"}`);
+    
+            if (response.ok) {
+                const data = await response.json();
+                this.sessionToken = data.sessionToken; // Save the session token if login is successful
+                console.log("Login successful, session token stored.");
             }
 
-            const data = await response.json();
-
-            this.sessionToken = data["access_token"];
-            
-            console.log("Login successful, session token stored.");
+            console.log(response);
+    
+            return response; // Return the pure response object
         } catch (error) {
-            const errorMessage = error instanceof Error ? error.message : String(error);
-            console.error("Error during login:", errorMessage);
-            throw new Error(errorMessage);
+            console.error("Error during login:", error);
+            throw error; // Rethrow the error to handle it elsewhere
         }
     }
 
