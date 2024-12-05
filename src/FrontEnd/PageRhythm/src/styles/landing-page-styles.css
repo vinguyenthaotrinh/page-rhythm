@@ -1,0 +1,42 @@
+@import url('fonts.css');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#landing-page {
+    background-color: #F6FFDE;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins-Regular', sans-serif;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo section positioning */
+#logo-section {
+    display: flex;
+    align-items: center; /* Vertically align logo and text */
+    position: absolute; /* Position it in the top left corner */
+    top: 10px;
+    left: 10px;
+}
+
+#logo {
+    width: 40px; /* Adjust logo size */
+    height: auto;
+    margin-right: 10px; /* Space between logo and title */
+}
+
+#title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #333;
+    margin: 0; /* Remove default margin */
+}
