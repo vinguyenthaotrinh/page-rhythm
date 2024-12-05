@@ -6,6 +6,9 @@ import EYE_ON_ICON from "./assets/images/eye-on-icon.png";
 import EYE_OFF_ICON from "./assets/images/eye-off-icon.png";
 import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-login-section-bottom-left-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER from "./assets/images/landing-page-login-section-top-right-corner.png";
+import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom-left-corner.png";
+import LANDING_PAGE_BOTTOM_RIGHT_CORNER from "./assets/images/landing-page-bottom-right-corner.png";
+import LANDING_PAGE_SHADOW from "./assets/images/landing-page-shadow.png";
 
 const IMAGES = {
     LOGO,
@@ -15,7 +18,10 @@ const IMAGES = {
     LOCK_ICON,
     GOOGLE_ICON,
     EYE_ON_ICON,
-    EYE_OFF_ICON
+    EYE_OFF_ICON,
+    LANDING_PAGE_BOTTOM_LEFT_CORNER,
+    LANDING_PAGE_BOTTOM_RIGHT_CORNER,
+    LANDING_PAGE_SHADOW,
 };
 
 export default IMAGES;

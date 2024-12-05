@@ -140,3 +140,18 @@ html, body {
     height: auto;
     cursor: pointer;
 }
+
+.front-left-image-container {
+    position: fixed; /* Position the image relative to the viewport */
+    bottom: 0; /* Align to the bottom of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    width: auto; /* You can specify a width if needed */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
+    z-index: 10; /* Ensure it stays above other content if necessary */
+}
+
+.left-overlay-image {
+    width: 40%; /* Adjust width as needed */
+    height: auto; /* Keep the aspect ratio intact */
+    transform: translate(0%, 4%); /* Position the image */
+}

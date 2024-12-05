@@ -12,10 +12,8 @@ function LogoSection() {
 }
 
 function LoginSection() {
-    // State to toggle password visibility
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-    // Function to toggle the password visibility
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
     };
@@ -90,6 +88,11 @@ export default function LandingPage() {
         <div id="landing-page">
             <LogoSection />
             <LoginSection />
+
+            <div className="front-left-image-container" id="left-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" />
+            </div>
+
         </div>
     );
 }
