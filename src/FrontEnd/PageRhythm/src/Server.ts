@@ -1,4 +1,4 @@
-class Server {
+export default class Server {
     private static instance: Server | null = null;
     private host: string | null = null;
     private sessionToken: string | null = null;
@@ -100,11 +100,9 @@ class Server {
     
             if (response.ok) {
                 const data = await response.json();
-                this.sessionToken = data.sessionToken; // Save the session token if login is successful
+                this.sessionToken = data["access_token"]; // Save the session token if login is successful
                 console.log("Login successful, session token stored.");
             }
-
-            console.log(response);
     
             return response; // Return the pure response object
         } catch (error) {

@@ -1,4 +1,5 @@
 import IMAGES from "../images";
+import Server from "../Server";
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import "../styles/landing-page-styles.css";
@@ -30,34 +31,26 @@ function LoginSection() {
         setError(''); // Clear any previous error
 
         try {
-            // Send the login request to the server
-            const response = await fetch('/api/login', {  // Update the API endpoint accordingly
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                }),
-            });
-
-            const data = await response.json();
-            
+            setLoadingLoginRequest(true); // Start loading
+        
+            const server = await Server.getInstance();
+            const response = await server.login(email, password); // Use the login method from the Server class
+        
             if (response.ok) {
-                // Handle successful login (e.g., redirect, save token, etc.)
-                console.log('Login successful', data);
-                // Redirect or save token logic goes here
+                console.log('Login successful');
+        
+                // Save the session token or handle redirection
+                // Example: Redirect or update app state
+                // navigateToDashboard();
             } else {
-                // Handle server errors (e.g., invalid credentials)
-                setError(data.message || 'Login failed');
+                const errorData = await response.json();
+                setError(errorData.message || 'Login failed'); // Handle server errors (e.g., invalid credentials)
             }
         } catch (err) {
-            // Handle network or other errors
-            setError('An error occurred. Please try again.');
+            setError('An error occurred. Please try again.'); // Handle network or other errors
             console.error('Login error:', err);
         } finally {
-            setLoadingLoginRequest(false);  // Stop loading when the request is done
+            setLoadingLoginRequest(false); // Stop loading when the request is done
         }
     };
 

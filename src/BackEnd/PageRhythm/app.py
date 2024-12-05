@@ -10,10 +10,12 @@ from routes.home_route import home_blueprint
 from routes.book_route import book_blueprint
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
+from flask_cors import CORS
 from flask import Flask
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['JWT_SECRET_KEY'] = os.environ.get("JWT_SECRET_KEY")
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(seconds=int(os.environ.get("JWT_ACCESS_TOKEN_EXPIRATION_DURATION_IN_SECONDS")))
