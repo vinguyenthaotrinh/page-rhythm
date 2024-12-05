@@ -1,0 +1,41 @@
+.audio-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 16px auto;
+    background-color: #efead3;
+  }
+  
+  
+  .audio-card-info {
+    margin-left: 16px;
+    flex: 1;
+  }
+  
+  .audio-card-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  audio {
+    position: absolute;
+    width: 60%;
+    outline: none;
+    margin-top: 50px;
+  }
+
+  .audio-btn{
+    width: fit-content;
+    margin-left: 610px;
+    margin-top: 1px;
+    max-height: 20%;
+  }
+
+  
