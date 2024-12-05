@@ -43,7 +43,7 @@ html, body {
 
 #login-section {
     position: relative;
-    width: 700px;
+    width: 800px;
     height: 420px;
     background-color: #a4c0ed;
     margin: auto;
@@ -62,14 +62,14 @@ html, body {
 #login-section-top-right-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(88%, -108%);
+    transform: translate(108%, -108%);
     width: 240px;
 }
 
 #login-section-bottom-left-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(-164%, -9%);
+    transform: translate(-184%, -9%);
     width:229px;
     margin-right: auto;
 }
@@ -148,10 +148,26 @@ html, body {
     width: auto; /* You can specify a width if needed */
     height: auto; /* Automatically adjust height to maintain aspect ratio */
     z-index: 10; /* Ensure it stays above other content if necessary */
+    transform: translate(0%, 4%); /* Position the image */
 }
 
 .left-overlay-image {
     width: 40%; /* Adjust width as needed */
     height: auto; /* Keep the aspect ratio intact */
-    transform: translate(0%, 4%); /* Position the image */
+}
+
+.front-right-image-container {
+    position: fixed; /* Fixes the image to the viewport */
+    bottom: 0; /* Aligns it to the bottom of the viewport */
+    right: 0; /* Aligns it to the right of the viewport */
+    width: auto; /* Auto adjusts the width */
+    height: auto; /* Maintains aspect ratio */
+    z-index: 10; /* Ensures it stays on top of other elements */
+    transform: translate(60%, 0%);
+}
+
+.right-overlay-image {
+    width: 40%; /* Adjust this as needed for your design */
+    height: auto; /* Maintain aspect ratio */
+
 }

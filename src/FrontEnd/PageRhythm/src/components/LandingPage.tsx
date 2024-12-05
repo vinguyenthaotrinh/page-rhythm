@@ -90,7 +90,11 @@ export default function LandingPage() {
             <LoginSection />
 
             <div className="front-left-image-container" id="left-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" />
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" alt="Left corner image" />
+            </div>
+
+            <div className="front-right-image-container" id="right-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="right-overlay-image" alt="Right corner image"/>
             </div>
 
         </div>
