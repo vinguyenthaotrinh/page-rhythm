@@ -3,19 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import Background from "./components/Background.jsx"
-import Login from "./components/Login.jsx"
-import Register from "./components/Register.jsx"
-import ResetPass1 from "./components/ResetPass1.jsx"
-import ResetPass2 from "./components/ResetPass2.jsx";
-import NavBar from './NavBar.jsx';
-import Home from './components/Home.jsx';
-import MyLibrary from './components/MyLibrary.jsx';
-import HomeBookCard from './components/HomeBookCard.jsx';
-import BookDetails from './components/BookDetails.jsx';
-import ReviewBox from './components/ReviewBox.jsx'
-import Button from './components/Button.jsx';
-import AudioCard from './components/AudioCard.jsx'
+
+import {AudioCard} from './components'
 function App() {
   
   return (
@@ -34,7 +23,17 @@ function App() {
         </Routes> */}
         {/* <HomeBookCard/> */}
         {/* <ReviewBox/> */}
-        <AudioCard/>
+        <h1>Audio Playlist</h1>
+      <AudioCard
+        title="Song 1"
+        artist="Artist 1"
+        audioUrl="#"
+      />
+      <AudioCard
+        title="Song 2"
+        artist="Artist 2"
+        audioUrl="#"
+      />
       </div>
 
     </>
