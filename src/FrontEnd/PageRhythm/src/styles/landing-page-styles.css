@@ -24,7 +24,7 @@ html, body {
     align-items: center; /* Vertically align logo and text */
     position: absolute; /* Position it in the top left corner */
     top: 20px;
-    left: 20px;
+    left: 24px;
 }
 
 #logo {
@@ -43,21 +43,15 @@ html, body {
 
 #login-section {
     position: relative;
-    width: 650px;
+    width: 700px;
     height: 420px;
     background-color: #a4c0ed;
     margin: auto;
-    margin-top: 90px;
+    margin-top: 128px;
     padding: 20px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#login-section p {
-    font-family: Poppins_ExtraLight;
-    margin-top: 30px;
-    color: #ffffff;
 }
 
 .overlay-image{
@@ -68,14 +62,81 @@ html, body {
 #login-section-top-right-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(65%, -105%);
-    width:250px;
+    transform: translate(88%, -108%);
+    width: 240px;
 }
 
 #login-section-bottom-left-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(-150%, -9%);
+    transform: translate(-164%, -9%);
     width:229px;
     margin-right: auto;
+}
+
+#welcome-description{
+    font-family: Poppins-Regular;
+}
+
+#welcome-text{
+    font-family: Poppins-Bold;
+    font-size: 24px;
+}
+
+#login-title{
+    color: #000000;
+}
+
+.input-container{
+    position: relative;
+    width: 400px;
+    margin: 10px auto;
+}
+
+.input-container input{
+    width: 100%;
+    padding: 10px 10px 10px 60px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: white;
+    color:#000000;
+    font-family: Poppins-Regular;
+}
+
+.input-icon{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: auto;
+    border: none;
+}
+
+.input-info::placeholder{
+    font-family: Poppins-Regular;
+    opacity: 0.5;
+}
+
+#google-login{
+    margin: auto;
+    line-height: auto;
+    color:#000000;
+}
+
+#login-button {
+    background-color: #F6FFDE;
+    color: #000000;
+}
+
+#eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: auto;
+    cursor: pointer;
 }
