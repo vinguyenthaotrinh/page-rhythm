@@ -1,15 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import LoginPage from './LoginPage'
+import React from 'react';
+import './App.css';
+import LandingPage from './components/LandingPage'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
+export default function App() {
 
   return (
-    <div>
-      <LoginPage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className="App">
+            <LandingPage />
+          </div>
+        } />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   )
 }
-
-export default App;
