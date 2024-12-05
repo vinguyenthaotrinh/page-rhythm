@@ -1,9 +1,0 @@
-.custom-button:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
-  }
-  
-  .custom-button:active {
-    transform: scale(0.98);
-  }
