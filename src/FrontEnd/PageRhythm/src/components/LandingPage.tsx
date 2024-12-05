@@ -1,4 +1,5 @@
 import IMAGES from "../images";
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import "../styles/landing-page-styles.css";
 
@@ -12,10 +13,52 @@ function LogoSection() {
 }
 
 function LoginSection() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
+    const [error, setError] = useState('');
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
+    };
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();  // Prevent form default submission behavior
+
+        setLoadingLoginRequest(true);  // Set loading state to true
+        setError(''); // Clear any previous error
+
+        try {
+            // Send the login request to the server
+            const response = await fetch('/api/login', {  // Update the API endpoint accordingly
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Handle successful login (e.g., redirect, save token, etc.)
+                console.log('Login successful', data);
+                // Redirect or save token logic goes here
+            } else {
+                // Handle server errors (e.g., invalid credentials)
+                setError(data.message || 'Login failed');
+            }
+        } catch (err) {
+            // Handle network or other errors
+            setError('An error occurred. Please try again.');
+            console.error('Login error:', err);
+        } finally {
+            setLoadingLoginRequest(false);  // Stop loading when the request is done
+        }
     };
 
     return (
@@ -40,14 +83,16 @@ function LoginSection() {
 
             <br />
 
-            <form>
+            <form onSubmit={handleLogin}>
                 <div className="input-container">
                     <img src={IMAGES.USER_ICON} className="input-icon" />
                     <input 
                         type="email" 
                         placeholder="Enter Your Email"      
                         className="input-info" 
-                        required 
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}  // Update email state
                     />
                 </div>
 
@@ -58,7 +103,9 @@ function LoginSection() {
                         type={isPasswordVisible ? "text" : "password"}  // Toggle password visibility
                         placeholder="Enter Your Password" 
                         className="input-info" 
-                        required 
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}  // Update password state
                     />
                     <img 
                         src={isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
@@ -68,7 +115,7 @@ function LoginSection() {
                     />
                 </div>
                 
-                <button type="submit" id="login-button">Login</button>
+                <button type="submit" id="login-button" disabled = {loadingLoginRequest}>Login</button>
             
                 <div id="google-login">
                     <p>Login with</p>
