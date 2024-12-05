@@ -1,27 +1,26 @@
 class Server {
     private static instance: Server | null = null;
     private host: string | null = null;
+    private sessionToken: string | null = null;
 
-    private constructor() {} // Private constructor to prevent direct instantiation
+    private constructor() {}
 
-    // Singleton initializer
     public static async getInstance(): Promise<Server> {
         if (Server.instance === null) {
             Server.instance = new Server();
-            //https://page-rhythm-back-end.onrender.com"
-            // "http://127.0.0.1:5000"
-            await Server.instance.initializeHost(null, "http://127.0.0.1:5000");
+            await Server.instance.initializeHost(
+                null,//"https://page-rhythm-back-end.onrender.com", 
+                "http://127.0.0.1:5000"
+            );
         }
         return Server.instance;
     }
 
-    // Perform health check or directly set the available host
     private async initializeHost(deployedUrl: string | null, localUrl: string | null): Promise<void> {
         if (deployedUrl === null && localUrl === null) {
             throw new Error("Both deployedUrl and localUrl cannot be null.");
         }
 
-        // If one is null, pick the other without a health check
         if (deployedUrl === null) {
             this.host = localUrl!;
             console.log("Host set directly to local URL:", localUrl);
@@ -34,7 +33,6 @@ class Server {
             return;
         }
 
-        // Perform health check if both URLs are available
         try {
             const response = await fetch(`${deployedUrl}/health`);
             if (response.ok) {
@@ -50,12 +48,10 @@ class Server {
         }
     }
 
-    // Get the current host URL
     public getHost(): string | null {
         return this.host;
     }
 
-    // Send a request to the current host
     public async sendRequest(endpoint: string, method: string = "GET", body: object | null = null): Promise<any> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
@@ -80,5 +76,46 @@ class Server {
             console.error("Error sending request:", error);
             throw error;
         }
+    }
+
+    public async login(email: string, password: string): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+
+        const url = `${this.host}/login`;
+        const body = {
+            email,
+            password,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json();
+                throw new Error(`Login failed: ${errorBody.message || "Unknown error"}`);
+            }
+
+            const data = await response.json();
+
+            this.sessionToken = data["access_token"];
+            
+            console.log("Login successful, session token stored.");
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            console.error("Error during login:", errorMessage);
+            throw new Error(errorMessage);
+        }
+    }
+
+    public getSessionToken(): string | null {
+        return this.sessionToken;
     }
 }
