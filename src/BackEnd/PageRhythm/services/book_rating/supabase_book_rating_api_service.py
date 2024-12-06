@@ -25,7 +25,7 @@ class SupabaseBookRatingAPIService:
             return 0.0
 
     # 3. Get all ratings for a specific book
-    def get_ratings_for_book(self, book_id: int) -> list:
+    def get_book_ratings(self, book_id: int) -> list:
         try:
             response = self.client.table("BookRating").select("*").eq("book_id", book_id).execute()
             return response.data if response.data else []
@@ -33,7 +33,7 @@ class SupabaseBookRatingAPIService:
             return []
 
     # 4. Get a specific user's rating for a specific book
-    def get_rating_by_user(self, user_id: int, book_id: int) -> dict:
+    def get_user_rating(self, user_id: int, book_id: int) -> dict:
         try:
             response = self.client.table("BookRating").select("*") \
                                    .eq("user_id", user_id) \

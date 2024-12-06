@@ -57,7 +57,6 @@ def create_book():
 @book_blueprint.route('/<string:book_id>', methods=['GET'])
 def get_book_information(book_id):
     book = book_service.get_book_information(book_id)
-    
     if book:
         return jsonify(book.to_serializable_JSON()), 200
     return jsonify({"message": "Book not found"}), 404
