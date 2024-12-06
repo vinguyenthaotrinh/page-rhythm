@@ -19,7 +19,7 @@ class SupabaseBookAPIService:
             return None
     
     # 2. Retrieve book information
-    def get_book_information(self, book_id: str) -> dict:
+    def get_book_information(self, book_id: int) -> dict:
         try:
             response = self.client.table('Book').select('*').eq('book_id', book_id).execute()
             if response.data:
@@ -39,7 +39,7 @@ class SupabaseBookAPIService:
         except Exception as e:
             return []
         
-    def check_ownership(self, book_id: str, owner_id: int) -> bool:
+    def check_ownership(self, book_id: int, owner_id: int) -> bool:
         try:
             response = self.client.table("Book").select("owner_id").eq("book_id", book_id).execute()
             if not response.data:
@@ -48,7 +48,7 @@ class SupabaseBookAPIService:
         except Exception as e:
             return False
 
-    def get_book_by_id(self, book_id: str):
+    def get_book_by_id(self, book_id: int):
         try:
             response = self.client.table("Book").select("*").eq("book_id", book_id).execute()
             if not response.data:
@@ -75,7 +75,7 @@ class SupabaseBookAPIService:
             return False
     
     # 6. Delete a book
-    def delete_book(self, book_id: str) -> bool:
+    def delete_book(self, book_id: int) -> bool:
         try:
             response = self.client.table('Book').delete().eq('book_id', book_id).execute()
             return response.data
