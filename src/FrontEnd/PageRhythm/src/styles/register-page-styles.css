@@ -1,0 +1,210 @@
+@import url('fonts.css');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#register-page {
+    background-color: #F6FFDE;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins-Regular', sans-serif;
+    height: 100vh;  /* Full viewport height */
+    width: 100vw;   /* Full viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo section positioning */
+#logo-section {
+    display: flex;
+    align-items: center; /* Vertically align logo and text */
+    position: absolute; /* Position it in the top left corner */
+    top: 20px;
+    left: 24px;
+}
+
+#logo {
+    width: 60px; /* Initial width */
+    height: 54px; /* Adjust height to maintain aspect ratio and make the image 1.5x of text height */
+    margin-right: 15px; /* Increase space between logo and title */
+}
+
+#title {
+    font-size: 24px; /* Font size for the title */
+    font-weight: bold;
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #333;
+    margin: 0; /* Remove default margin */
+}
+
+#login-section {
+    position: relative;
+    width: 800px;
+    height: 420px;
+    background-color: #a4c0ed;
+    margin: auto;
+    margin-top: 128px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-image{
+    position:absolute;
+    z-index: 10;
+}
+
+#login-section-top-right-corner-image {
+    top: 50%;
+    left: 50%;
+    transform: translate(108%, -108%);
+    width: 240px;
+}
+
+#login-section-bottom-left-corner-image {
+    top: 50%;
+    left: 50%;
+    transform: translate(-184%, -9%);
+    width:229px;
+    margin-right: auto;
+}
+
+#welcome-description{
+    font-family: Poppins-Regular;
+}
+
+#welcome-text{
+    font-family: Poppins-Bold;
+    font-size: 24px;
+}
+
+#login-title{
+    color: #000000;
+}
+
+.input-container{
+    position: relative;
+    width: 400px;
+    margin: 10px auto;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 60px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: white;
+    color:#000000;
+    font-family: Poppins-Regular;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: auto;
+    border: none;
+}
+
+.input-info::placeholder {
+    font-family: Poppins-Regular;
+    opacity: 0.5;
+}
+
+#google-login{
+    margin: auto;
+    line-height: auto;
+    color:#000000;
+}
+
+#login-button {
+    background-color: #F6FFDE;
+    color: #000000;
+}
+
+#eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: auto;
+    cursor: pointer;
+}
+
+.front-left-image-container {
+    position: fixed;    /* Position the image relative to the viewport */
+    bottom: 0;          /* Align to the bottom of the viewport */
+    left: 0;            /* Align to the left of the viewport */
+    width: 20%;         /* Adjust width as needed */
+    z-index: 10;        /* Ensure it stays above other content if necessary */
+    transform: translate(0%, 4%); /* Position the image */
+}
+
+.left-overlay-image {
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Keep the aspect ratio intact */
+}
+
+.front-right-image-container {
+    position: fixed;    /* Fixes the image to the viewport */
+    bottom: 0;          /* Aligns it to the bottom of the viewport */
+    right: 0;           /* Aligns it to the right of the viewport */
+    width: auto;        /* Auto adjusts the width */
+    height: auto;       /* Maintains aspect ratio */
+    z-index: 10;        /* Ensures it stays on top of other elements */
+    transform: translate(60%, 0%);
+}
+
+.right-overlay-image {
+    width: 40%;     /* Adjust this as needed for your design */
+    height: auto;   /* Maintain aspect ratio */
+}
+
+#authentication-sections {
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    align-items: center;    /* Center horizontally */
+    gap: 20px;              /* Add space between sections */
+    margin-top: 128px;      /* Adjust as needed */
+    transform: translate(0%, -12%);
+}
+
+#signup-section {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;     /* Align the text and link vertically */
+    gap: 10px;               /* Space between "New User?" and "Sign Up" */
+    margin-top: 4px;        /* Adjust vertical spacing from LoginSection */
+    font-size: 16px;
+}
+
+#signup-title {
+    font-size: 16px;          /* Match the text size with "Sign Up" */
+    font-weight: normal;      /* Ensure consistency with the link */
+    font-family: 'Poppins-Regular', sans-serif;
+    color: #333;
+    margin: 0;                /* Remove default margin */
+}
+
+#signup-link {
+    font-size: 16px;
+    font-weight: bold;        /* Emphasize the link */
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #4CAF50;           /* Green for the link */
+    text-decoration: none;    /* Remove underline */
+    cursor: pointer;
+}
+
+#signup-link:hover {
+    text-decoration: underline; /* Add underline on hover for clarity */
+}
