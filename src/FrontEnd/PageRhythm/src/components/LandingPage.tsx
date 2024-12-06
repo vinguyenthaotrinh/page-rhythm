@@ -5,10 +5,23 @@ import "../styles/landing-page-styles.css";
 import { Link, useNavigate } from 'react-router-dom';
 
 function LogoSection() {
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/landing-page');
+    };
+
     return (
-        <div id="landing-page-logo-section">
-            <img id="landing-page-logo" src={IMAGES.LOGO} alt="Logo" />
-            <h1 id="landing-page-title">PageRhythm</h1>
+        <div 
+            id="register-page-logo-section"
+            role="button"
+            tabIndex={0}
+            onClick={handleLogoClick}
+            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
+            style={{ cursor: 'pointer' }}
+        >
+            <img id="register-page-logo" src={IMAGES.LOGO} alt="Logo" />
+            <h1 id="register-page-title">PageRhythm</h1>
         </div>
     );
 }

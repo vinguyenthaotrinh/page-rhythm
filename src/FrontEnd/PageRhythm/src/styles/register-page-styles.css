@@ -226,7 +226,7 @@ html, body {
     font-size: 16px;
     font-weight: bold;        /* Emphasize the link */
     font-family: 'Poppins-Bold', sans-serif;
-    color: #4CAF50;           /* Green for the link */
+    color: #265073;           /* Green for the link */
     text-decoration: none;    /* Remove underline */
     cursor: pointer;
 }

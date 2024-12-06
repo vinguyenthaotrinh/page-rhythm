@@ -199,7 +199,7 @@ html, body {
 #landing-page-signup-link {
     font-size: 16px;
     font-family: "Poppins-Regular", sans-serif;
-    color: #4730bd;           
+    color: #265073;           
     text-decoration: none;      /* Remove underline */
     cursor: pointer;
 }
@@ -209,7 +209,7 @@ html, body {
 }
 
 #landing-page-forgot-password-link {
-    color: #4730bd;           
+    color: #265073;           
     font-family: "Poppins-Regular", sans-serif;
 }
 

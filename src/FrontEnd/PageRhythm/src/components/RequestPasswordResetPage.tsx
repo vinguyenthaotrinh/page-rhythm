@@ -5,25 +5,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import "../styles/request-password-reset-page-styles.css";
 
 function LogoSection() {
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/landing-page');
+    };
+
     return (
-        <div id="landing-page-logo-section">
-            <img id="landing-page-logo" src={IMAGES.LOGO} alt="Logo" />
-            <h1 id="landing-page-title">PageRhythm</h1>
+        <div 
+            id="request-password-reset-page-logo-section"
+            role="button"
+            tabIndex={0}
+            onClick={handleLogoClick}
+            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
+            style={{ cursor: 'pointer' }}
+        >
+            <img id="request-password-reset-page-logo" src={IMAGES.LOGO} alt="Logo" />
+            <h1 id="request-password-reset-page-title">PageRhythm</h1>
         </div>
     );
 }
 
-function LoginSection() {
+function RequestPasswordResetSection() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(prevState => !prevState);
-    };
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
@@ -35,16 +42,7 @@ function LoginSection() {
             setLoadingLoginRequest(true);   // Start loading
         
             const server = await Server.getInstance();
-            const response = await server.login(email, password); // Use the login method from the Server class
-        
-            if (response.ok) {
-                console.log('Login successful');
-        
-                navigate('/home-page');
-            } else {
-                const errorData = await response.json();
-                setError(errorData.message || 'Login failed'); // Handle server errors (e.g., invalid credentials)
-            }
+            //TO BE CONTINUED
         } catch (err) {
             setError('An error occurred. Please try again.'); // Handle network or other errors
             console.error('Login error:', err);
@@ -54,78 +52,51 @@ function LoginSection() {
     };
 
     return (
-        <div id="landing-page-login-section">
+        <div id="request-password-reset-page-main-section">
             <img 
                 src={IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
-                className="landing-page-overlay-image" 
-                id="landing-page-login-section-top-right-corner-image" 
+                className="request-password-reset-page-overlay-image" 
+                id="request-password-reset-page-login-section-top-right-corner-image" 
             />
             <img 
                 src={IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
-                className="landing-page-overlay-image" 
-                id="landing-page-login-section-bottom-left-corner-image" 
+                className="request-password-reset-page-overlay-image" 
+                id="request-password-reset-page-login-section-bottom-left-corner-image" 
             />
       
             <br /><br />
             
-            <div id="landing-page-login-title">
-                <h1 id="landing-page-welcome-text">Welcome Back</h1>
-                <div id="landing-page-welcome-description"> Login to continue </div>
+            <div id="request-password-reset-page-login-title">
+                <h1 id="request-password-reset-page-welcome-text">Forgot Your Password?</h1>
+                <div id="request-password-reset-page-welcome-description"> Don't worry </div>
             </div>
 
             <br />
 
             <form onSubmit={handleLogin}>
-                <div className="landing-page-input-container">
-                    <img src={IMAGES.MAIL_ICON} className="landing-page-input-icon" />
+                <div className="request-password-reset-page-input-container">
+                    <img src={IMAGES.MAIL_ICON} className="request-password-reset-page-input-icon" />
                     <input 
                         type="email" 
-                        placeholder="Enter your email"      
-                        className="landing-page-input-info" 
+                        placeholder="Enter your registered email"      
+                        className="request-password-reset-page-input-info" 
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}  // Update email state
                     />
                 </div>
-
-                <div className="landing-page-input-container">
-                    <img src={IMAGES.LOCK_ICON} className="landing-page-input-icon" />
-                    <input 
-                        id="password-input" 
-                        type={isPasswordVisible ? "text" : "password"}  // Toggle password visibility
-                        placeholder="Enter your password" 
-                        className="landing-page-input-info" 
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}                       // Update password state
-                    />
-                    <img 
-                        src={isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
-                        id="landing-page-eye-icon" 
-                        alt="Eye Icon" 
-                        onClick={togglePasswordVisibility}                                  // Call the toggle function on click
-                    />
-                </div>
                 
-                <button type="submit" id="landing-page-login-button" disabled = {loadingLoginRequest}>Login</button>
-            
-                <div id="landing-page-google-login">
-                    <p>Login with</p>
-                    <a href="#">
-                        <img src={IMAGES.GOOGLE_ICON} />
-                    </a>
-                </div>
+                <button type="submit" id="request-password-reset-page-submit-button" disabled = {loadingLoginRequest}>Send password reset email</button>
 
             </form>
         </div>
     );
 }
 
-function SignupSection() {
+function LoginSection() {
     return (
-        <div id="landing-page-signup-section">
-            <h1 id="landing-page-signup-title">New User?</h1>
-            <Link to="/register-page" id="landing-page-signup-button">Sign Up</Link>
+        <div id="request-password-reset-page-login-section">
+            <Link to="/landing-page" id="request-password-reset-page-login-link">Back to Login</Link>
         </div>
     );
 }
@@ -135,17 +106,17 @@ export default function RequestPasswordResetPage() {
     return (
         <div id="landing-page">
             <LogoSection />
-            <div id="landing-page-authentication-sections">
+            <div id="request-password-reset-page-authentication-sections">
+                <RequestPasswordResetSection />
                 <LoginSection />
-                <SignupSection />
             </div>
 
-            <div className="landing-page-front-left-image-container" id="landing-page-left-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="landing-page-left-overlay-image" alt="Left corner image" />
+            <div className="request-password-reset-page-front-left-image-container" id="request-password-reset-page-left-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="request-password-reset-page-left-overlay-image" alt="Left corner image" />
             </div>
 
-            <div className="landing-page-front-right-image-container" id="landing-page-right-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="landing-page-right-overlay-image" alt="Right corner image"/>
+            <div className="request-password-reset-page-front-right-image-container" id="request-password-reset-page-right-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="request-password-reset-page-right-overlay-image" alt="Right corner image"/>
             </div>
 
         </div>
