@@ -14,35 +14,36 @@ function LogoSection() {
 }
 
 function SignupSection() {
+    const [bio, setBio] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState("");
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
+    const [loadingSignupRequest, setLoadingSignupRequest] = useState(false);
     const [error, setError] = useState("");
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
     };
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
 
-        setLoadingLoginRequest(true);       // Set loading state to true
+        setLoadingSignupRequest(true);       // Set loading state to true
         setError("");                       // Clear any previous error
 
         const navigate = useNavigate();
 
         try {
-            setLoadingLoginRequest(true);   // Start loading
+            setLoadingSignupRequest(true);   // Start loading
         
             const server = await Server.getInstance();
             const response = await server.login(email, password); // Use the login method from the Server class
         
             if (response.ok) {
                 console.log('Login successful');
-        
-                // Save the session token or handle redirection
-                // Example: Redirect or update app state
+
                 navigate('/home-page');
             } else {
                 const errorData = await response.json();
@@ -52,7 +53,7 @@ function SignupSection() {
             setError('An error occurred. Please try again.');   // Handle network or other errors
             console.error('Login error:', err);
         } finally {
-            setLoadingLoginRequest(false);                      // Stop loading when the request is done
+            setLoadingSignupRequest(false);                      // Stop loading when the request is done
         }
     };
 
@@ -72,13 +73,13 @@ function SignupSection() {
             <br /><br />
             
             <div id="register-page-signup-title">
-                <h1 id="register-page-welcome-text">Welcome Back</h1>
-                <div id="register-page-welcome-description"> Login to continue </div>
+                <h1 id="register-page-welcome-text">Welcome to PageRhythm</h1>
+                <div id="register-page-welcome-description"> Sign up to continue </div>
             </div>
 
             <br />
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignup}>
                 <div className="register-page-input-container">
                     <img src={IMAGES.USER_ICON} className="register-page-input-icon" />
                     <input 
@@ -110,7 +111,7 @@ function SignupSection() {
                     />
                 </div>
                 
-                <button type="submit" id="register-page-signup-button" disabled = {loadingLoginRequest}>Login</button>
+                <button type="submit" id="register-page-signup-button" disabled = {loadingSignupRequest}>Sign up</button>
 
             </form>
         </div>

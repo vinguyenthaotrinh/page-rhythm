@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
+import ProfilePage from "./components/ProfilePage";
 import RegisterPage from "./components/RegisterPage";
 import RequestPasswordResetPage from "./components/RequestPasswordResetPage";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
