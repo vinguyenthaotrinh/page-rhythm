@@ -19,21 +19,21 @@ html, body {
 }
 
 /* Logo section positioning */
-#logo-section {
+#landing-page-logo-section {
     display: flex;
-    align-items: center; /* Vertically align logo and text */
-    position: absolute; /* Position it in the top left corner */
+    align-items: center;    /* Vertically align logo and text */
+    position: absolute;     /* Position it in the top left corner */
     top: 20px;
     left: 24px;
 }
 
-#logo {
-    width: 60px; /* Initial width */
-    height: 54px; /* Adjust height to maintain aspect ratio and make the image 1.5x of text height */
-    margin-right: 15px; /* Increase space between logo and title */
+#landing-page-logo {
+    width: 60px;            /* Initial width */
+    height: 54px;           /* Adjust height to maintain aspect ratio and make the image 1.5x of text height */
+    margin-right: 15px;     /* Increase space between logo and title */
 }
 
-#title {
+#landing-page-title {
     font-size: 24px; /* Font size for the title */
     font-weight: bold;
     font-family: 'Poppins-Bold', sans-serif;
@@ -41,7 +41,7 @@ html, body {
     margin: 0; /* Remove default margin */
 }
 
-#login-section {
+#landing-page-login-section {
     position: relative;
     width: 800px;
     height: 420px;
@@ -54,19 +54,19 @@ html, body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.overlay-image{
+.landing-page-overlay-image{
     position:absolute;
     z-index: 10;
 }
 
-#login-section-top-right-corner-image {
+#landing-page-login-section-top-right-corner-image {
     top: 50%;
     left: 50%;
     transform: translate(108%, -108%);
     width: 240px;
 }
 
-#login-section-bottom-left-corner-image {
+#landing-page-login-section-bottom-left-corner-image {
     top: 50%;
     left: 50%;
     transform: translate(-184%, -9%);
@@ -74,26 +74,26 @@ html, body {
     margin-right: auto;
 }
 
-#welcome-description{
+#landing-page-welcome-description{
     font-family: Poppins-Regular;
 }
 
-#welcome-text{
+#landing-page-welcome-text{
     font-family: Poppins-Bold;
     font-size: 24px;
 }
 
-#login-title{
+#landing-page-login-title{
     color: #000000;
 }
 
-.input-container{
+.landing-page-input-container{
     position: relative;
     width: 400px;
     margin: 10px auto;
 }
 
-.input-container input {
+.landing-page-input-container input {
     width: 100%;
     padding: 10px 10px 10px 60px;
     border: 1px solid #ccc;
@@ -105,7 +105,7 @@ html, body {
     font-family: Poppins-Regular;
 }
 
-.input-icon {
+.landing-page-input-icon {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -115,23 +115,23 @@ html, body {
     border: none;
 }
 
-.input-info::placeholder {
+.landing-page-input-info::placeholder {
     font-family: Poppins-Regular;
     opacity: 0.5;
 }
 
-#google-login{
+#landing-page-google-login{
     margin: auto;
     line-height: auto;
     color:#000000;
 }
 
-#login-button {
+#landing-page-login-button {
     background-color: #F6FFDE;
     color: #000000;
 }
 
-#eye-icon {
+#landing-page-eye-icon {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -141,7 +141,7 @@ html, body {
     cursor: pointer;
 }
 
-.front-left-image-container {
+.landing-page-front-left-image-container {
     position: fixed;    /* Position the image relative to the viewport */
     bottom: 0;          /* Align to the bottom of the viewport */
     left: 0;            /* Align to the left of the viewport */
@@ -150,12 +150,12 @@ html, body {
     transform: translate(0%, 4%); /* Position the image */
 }
 
-.left-overlay-image {
+.landing-page-left-overlay-image {
     width: 100%; /* Adjust width as needed */
     height: auto; /* Keep the aspect ratio intact */
 }
 
-.front-right-image-container {
+.landing-page-front-right-image-container {
     position: fixed;    /* Fixes the image to the viewport */
     bottom: 0;          /* Aligns it to the bottom of the viewport */
     right: 0;           /* Aligns it to the right of the viewport */
@@ -165,12 +165,12 @@ html, body {
     transform: translate(60%, 0%);
 }
 
-.right-overlay-image {
+.landing-page-right-overlay-image {
     width: 40%;     /* Adjust this as needed for your design */
     height: auto;   /* Maintain aspect ratio */
 }
 
-#authentication-sections {
+#landing-page-authentication-sections {
     display: flex;
     flex-direction: column; /* Arrange children vertically */
     align-items: center;    /* Center horizontally */
@@ -179,7 +179,7 @@ html, body {
     transform: translate(0%, -12%);
 }
 
-#signup-section {
+#landing-page-signup-section {
     display: flex;
     justify-content: center; /* Center the content horizontally */
     align-items: center;     /* Align the text and link vertically */
@@ -188,7 +188,7 @@ html, body {
     font-size: 16px;
 }
 
-#signup-title {
+#landing-page-signup-title {
     font-size: 16px;          /* Match the text size with "Sign Up" */
     font-weight: normal;      /* Ensure consistency with the link */
     font-family: 'Poppins-Regular', sans-serif;
@@ -196,7 +196,7 @@ html, body {
     margin: 0;                /* Remove default margin */
 }
 
-#signup-link {
+#landing-page-signup-link {
     font-size: 16px;
     font-weight: bold;        /* Emphasize the link */
     font-family: 'Poppins-Bold', sans-serif;
@@ -205,6 +205,6 @@ html, body {
     cursor: pointer;
 }
 
-#signup-link:hover {
+#landing-page-signup-link:hover {
     text-decoration: underline; /* Add underline on hover for clarity */
 }

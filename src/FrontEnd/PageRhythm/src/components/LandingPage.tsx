@@ -6,9 +6,9 @@ import "../styles/landing-page-styles.css";
 
 function LogoSection() {
     return (
-        <div id="logo-section">
-            <img id="logo" src={IMAGES.LOGO} alt="Logo" />
-            <h1 id="title">PageRhythm</h1>
+        <div id="landing-page-logo-section">
+            <img id="landing-page-logo" src={IMAGES.LOGO} alt="Logo" />
+            <h1 id="landing-page-title">PageRhythm</h1>
         </div>
     );
 }
@@ -55,62 +55,62 @@ function LoginSection() {
     };
 
     return (
-        <div id="login-section">
+        <div id="landing-page-login-section">
             <img 
                 src={IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
-                className="overlay-image" 
-                id="login-section-top-right-corner-image" 
+                className="landing-page-overlay-image" 
+                id="landing-page-login-section-top-right-corner-image" 
             />
             <img 
                 src={IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
-                className="overlay-image" 
-                id="login-section-bottom-left-corner-image" 
+                className="landing-page-overlay-image" 
+                id="landing-page-login-section-bottom-left-corner-image" 
             />
       
             <br /><br />
             
-            <div id="login-title">
-                <h1 id="welcome-text">Welcome Back</h1>
-                <div id="welcome-description"> Login to continue </div>
+            <div id="landing-page-login-title">
+                <h1 id="landing-page-welcome-text">Welcome Back</h1>
+                <div id="landing-page-welcome-description"> Login to continue </div>
             </div>
 
             <br />
 
             <form onSubmit={handleLogin}>
-                <div className="input-container">
-                    <img src={IMAGES.USER_ICON} className="input-icon" />
+                <div className="landing-page-input-container">
+                    <img src={IMAGES.USER_ICON} className="landing-page-input-icon" />
                     <input 
                         type="email" 
                         placeholder="Enter Your Email"      
-                        className="input-info" 
+                        className="landing-page-input-info" 
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}  // Update email state
                     />
                 </div>
 
-                <div className="input-container">
-                    <img src={IMAGES.LOCK_ICON} className="input-icon" />
+                <div className="landing-page-input-container">
+                    <img src={IMAGES.LOCK_ICON} className="landing-page-input-icon" />
                     <input 
                         id="password-input" 
                         type={isPasswordVisible ? "text" : "password"}  // Toggle password visibility
                         placeholder="Enter Your Password" 
-                        className="input-info" 
+                        className="landing-page-input-info" 
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}                       // Update password state
                     />
                     <img 
                         src={isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
-                        id="eye-icon" 
+                        id="landing-page-eye-icon" 
                         alt="Eye Icon" 
                         onClick={togglePasswordVisibility}                                  // Call the toggle function on click
                     />
                 </div>
                 
-                <button type="submit" id="login-button" disabled = {loadingLoginRequest}>Login</button>
+                <button type="submit" id="landing-page-login-button" disabled = {loadingLoginRequest}>Login</button>
             
-                <div id="google-login">
+                <div id="landing-page-google-login">
                     <p>Login with</p>
                     <a href="#">
                         <img src={IMAGES.GOOGLE_ICON} />
@@ -124,9 +124,9 @@ function LoginSection() {
 
 function SignupSection() {
     return (
-        <div id="signup-section">
-            <h1 id="signup-title">New User?</h1>
-            <Link to="/register-page" id="signup-button">Sign Up</Link>
+        <div id="landing-page-signup-section">
+            <h1 id="landing-page-signup-title">New User?</h1>
+            <Link to="/register-page" id="landing-page-signup-button">Sign Up</Link>
         </div>
     );
 }
@@ -136,17 +136,17 @@ export default function LandingPage() {
     return (
         <div id="landing-page">
             <LogoSection />
-            <div id="authentication-sections">
+            <div id="landing-page-authentication-sections">
                 <LoginSection />
                 <SignupSection />
             </div>
 
-            <div className="front-left-image-container" id="left-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" alt="Left corner image" />
+            <div className="landing-page-front-left-image-container" id="landing-page-left-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="landing-page-left-overlay-image" alt="Left corner image" />
             </div>
 
-            <div className="front-right-image-container" id="right-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="right-overlay-image" alt="Right corner image"/>
+            <div className="landing-page-front-right-image-container" id="landing-page-right-corner-image">
+                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="landing-page-right-overlay-image" alt="Right corner image"/>
             </div>
 
         </div>
