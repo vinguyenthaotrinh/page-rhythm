@@ -1,6 +1,6 @@
 import IMAGES from "../images";
 import Server from "../Server";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../styles/landing-page-styles.css";
 import { Link, useNavigate } from 'react-router-dom';
 
