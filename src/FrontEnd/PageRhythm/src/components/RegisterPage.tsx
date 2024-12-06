@@ -1,8 +1,8 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import "../styles/register-page-styles.css";
+import { Link, useNavigate } from 'react-router-dom';
 
 function LogoSection() {
     return (
@@ -30,6 +30,8 @@ function SignupSection() {
         setLoadingLoginRequest(true);       // Set loading state to true
         setError("");                       // Clear any previous error
 
+        const navigate = useNavigate();
+
         try {
             setLoadingLoginRequest(true);   // Start loading
         
@@ -41,16 +43,16 @@ function SignupSection() {
         
                 // Save the session token or handle redirection
                 // Example: Redirect or update app state
-                // navigateToDashboard();
+                navigate('/home-page');
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'Login failed'); // Handle server errors (e.g., invalid credentials)
+                setError(errorData.message || 'Login failed');  // Handle server errors (e.g., invalid credentials)
             }
         } catch (err) {
-            setError('An error occurred. Please try again.'); // Handle network or other errors
+            setError('An error occurred. Please try again.');   // Handle network or other errors
             console.error('Login error:', err);
         } finally {
-            setLoadingLoginRequest(false); // Stop loading when the request is done
+            setLoadingLoginRequest(false);                      // Stop loading when the request is done
         }
     };
 

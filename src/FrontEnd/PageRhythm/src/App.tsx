@@ -10,10 +10,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home-page" element={<HomePage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
-        <Route path="/request-password-reset" element={<RequestPasswordResetPage />} />
+        <Route path="/request-password-reset-page" element={<RequestPasswordResetPage />} />
         <Route path="/" element={<Navigate to="/landing-page" />} />
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Routes>
