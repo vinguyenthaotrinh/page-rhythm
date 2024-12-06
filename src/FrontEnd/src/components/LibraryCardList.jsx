@@ -3,7 +3,7 @@ import '../styles/card-list-styles.css'
 import '../styles/my-library-styles.css'
 import images from '../assets/images'
 
-import {AudioCard, BookCard, Button, SearchBar} from '.'
+import {AudioCard, BookCard, Button, SearchBar} from '../components'
 export default function LibraryCardList(cards, isBook) {
   const books = [
     { id: 1, title: 'Book Name', author: 'Author Name', releaseDate: 'Release Date' },

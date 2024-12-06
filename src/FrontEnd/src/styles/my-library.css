@@ -1,0 +1,22 @@
+    .library-title{
+        display: flex;
+        text-align: center;
+    }
+
+    .my-library-container{
+        display: flex;
+    }
+
+    .side-container{
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+        float: left;
+        min-height: 100%;
+    }
+
+    #right-side{
+        margin-left: -1000px;
+    }
+
+    

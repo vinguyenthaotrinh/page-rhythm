@@ -7,7 +7,7 @@
     return(
         <>
             
-                <nav>
+                <nav className="core-nav">
                     <div className="navbar-left">
                         <img src={images.logo1} alt="PageRhythm Logo" className="navbar-logo" />
                         <h1 className="navbar-title">PageRhythm</h1>

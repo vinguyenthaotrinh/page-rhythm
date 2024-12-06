@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import {AudioCard, LibraryCardList, SearchBar} from './components'
+import {AudioCard, LibraryCardList, MyLibrary, NavSideBar, SearchBar} from './components'
 import NavBar from './NavBar'
 function App() {
   
@@ -35,8 +35,10 @@ function App() {
           audioUrl="#"
         /> */}
         <NavBar/>
-        <LibraryCardList/>
-        <SearchBar/>
+        {/* <LibraryCardList/>
+        <SearchBar/> */}
+        <MyLibrary/>
+    
       </div>
 
     </>

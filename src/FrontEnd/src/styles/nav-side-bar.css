@@ -1,0 +1,22 @@
+.nav-side-bar.active {
+    color: #afc3d3;
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-underline-offset: 10px;
+}
+
+.nav-side-bar {
+    width: 200px;
+    height: 100vh;
+    padding: 20px 0;
+}
+
+.nav-side-bar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-side-bar li {
+    margin: 10px 0;
+}

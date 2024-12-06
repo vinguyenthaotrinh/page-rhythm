@@ -1,13 +1,8 @@
 import React from 'react'
-// import SideBar from './SideBar'
-// import SearchBar from './SearchBar'
-import BookCard from './BookCard.jsx'
-import '../styles/my-library-styles.css'
-import '../styles/landing-style.css'
-
 import { NavLink } from 'react-router-dom'
-import '../styles/home-styles.css'
+import '../styles/my-library.css'
 import images from '../assets/images'
+import {LibraryCardList, NavSideBar} from '../components'
 
 export default function MyLibrary() {
 
@@ -30,7 +25,7 @@ export default function MyLibrary() {
           </div>
         </div>
       </div> */}
-      <image src={images.search} class="search-icon" />
+      {/* <image src={images.search} class="search-icon" />
       <div className="library-title">
         <h1>My Library</h1>
       </div>
@@ -70,6 +65,17 @@ export default function MyLibrary() {
           </div>
         </div>
         
+      </div> */}
+      <div className='library-title'>
+       <h1>My Library</h1>
+       </div>
+      <div className='my-library-container'>
+        <div className='side-container' id='left-side'>
+          <NavSideBar/>
+        </div>
+        <div className='side-container' id='right-side'>
+          <LibraryCardList className='content'/>
+        </div>
       </div>
     </>
   )
