@@ -121,12 +121,22 @@ function LoginSection() {
     );
 }
 
+function SignupSection() {
+    return (
+        <div id="signup-section">
+            <h1 id="signup-title">New User?</h1>
+            <a href="#" id="signup-button">Sign Up</a>
+        </div>
+    );
+}
+
 export default function LandingPage() {
 
     return (
         <div id="landing-page">
             <LogoSection />
             <LoginSection />
+            <SignupSection />
 
             <div className="front-left-image-container" id="left-corner-image">
                 <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" alt="Left corner image" />

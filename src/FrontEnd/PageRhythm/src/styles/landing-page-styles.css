@@ -11,8 +11,8 @@ html, body {
     padding: 0;
     margin: 0;
     font-family: 'Poppins-Regular', sans-serif;
-    height: 100vh; /* Full viewport height */
-    width: 100vw; /* Full viewport width */
+    height: 100vh;  /* Full viewport height */
+    width: 100vw;   /* Full viewport width */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +93,7 @@ html, body {
     margin: 10px auto;
 }
 
-.input-container input{
+.input-container input {
     width: 100%;
     padding: 10px 10px 10px 60px;
     border: 1px solid #ccc;
@@ -105,7 +105,7 @@ html, body {
     font-family: Poppins-Regular;
 }
 
-.input-icon{
+.input-icon {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -115,7 +115,7 @@ html, body {
     border: none;
 }
 
-.input-info::placeholder{
+.input-info::placeholder {
     font-family: Poppins-Regular;
     opacity: 0.5;
 }
@@ -142,12 +142,12 @@ html, body {
 }
 
 .front-left-image-container {
-    position: fixed; /* Position the image relative to the viewport */
-    bottom: 0; /* Align to the bottom of the viewport */
-    left: 0; /* Align to the left of the viewport */
-    width: auto; /* You can specify a width if needed */
-    height: auto; /* Automatically adjust height to maintain aspect ratio */
-    z-index: 10; /* Ensure it stays above other content if necessary */
+    position: fixed;    /* Position the image relative to the viewport */
+    bottom: 0;          /* Align to the bottom of the viewport */
+    left: 0;            /* Align to the left of the viewport */
+    width: auto;        /* You can specify a width if needed */
+    height: auto;       /* Automatically adjust height to maintain aspect ratio */
+    z-index: 10;        /* Ensure it stays above other content if necessary */
     transform: translate(0%, 4%); /* Position the image */
 }
 
@@ -157,17 +157,34 @@ html, body {
 }
 
 .front-right-image-container {
-    position: fixed; /* Fixes the image to the viewport */
-    bottom: 0; /* Aligns it to the bottom of the viewport */
-    right: 0; /* Aligns it to the right of the viewport */
-    width: auto; /* Auto adjusts the width */
-    height: auto; /* Maintains aspect ratio */
-    z-index: 10; /* Ensures it stays on top of other elements */
+    position: fixed;    /* Fixes the image to the viewport */
+    bottom: 0;          /* Aligns it to the bottom of the viewport */
+    right: 0;           /* Aligns it to the right of the viewport */
+    width: auto;        /* Auto adjusts the width */
+    height: auto;       /* Maintains aspect ratio */
+    z-index: 10;        /* Ensures it stays on top of other elements */
     transform: translate(60%, 0%);
 }
 
 .right-overlay-image {
-    width: 40%; /* Adjust this as needed for your design */
-    height: auto; /* Maintain aspect ratio */
+    width: 40%;     /* Adjust this as needed for your design */
+    height: auto;   /* Maintain aspect ratio */
+}
 
+#signup-section {
+    text-align: center; /* Optional: Center the content inside the section */
+}
+
+#signup-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Example button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#signup-button:hover {
+    background-color: #0056b3; /* Darken button on hover */
 }

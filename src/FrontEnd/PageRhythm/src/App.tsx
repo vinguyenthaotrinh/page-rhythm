@@ -5,14 +5,14 @@ import RegisterPage from "./components/RegisterPage";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 export default function App() {
-
   return (
     <Router>
       <Routes>
-        <Route path="/landing_page" element={<LandingPage />} />
-        <Route path="/register_page" element={<RegisterPage />} />
-        <Route path="/" element={<Navigate to="/landing_page" />} />
+        <Route path="/landing-page" element={<LandingPage />} />
+        <Route path="/register-page" element={<RegisterPage />} />
+        <Route path="/" element={<Navigate to="/landing-page" />} />
+        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Routes>
     </Router>
-  )
+  );
 }
