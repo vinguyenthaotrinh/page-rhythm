@@ -6,40 +6,44 @@
 }
 
 
-nav{
+nav {
     display:flex;
     justify-content: space-between;
     align-items: center;
     background-color: #f6ffde;
 }
 
-.navbar-left{
+.navigation-bar-left{
     display: flex;
     justify-content: space-between;
     text-align: center;
     margin-left: 12px;
 }
-.navbar-logo{
+
+.navigation-bar-logo{
     height: 45px;
     float:left;
     /* margin-right: 2px; */
     margin-top: 12px;
 }
 
-.navbar-title{
-  font-family: 'Poppins-Black';
-  font-size: 22px;
-  padding-top: 9px;
+.navigation-bar-title{
+    font-size: 24px; /* Font size for the title */
+    font-weight: bold;
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #333;
+    margin: 0; /* Remove default margin */
+    padding: 16px;
 }
 
-.navbar-right {
+.navigation-bar-right {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-right: 20px;
 }
 
-.navbar-avatar {
+.navigation-bar-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
