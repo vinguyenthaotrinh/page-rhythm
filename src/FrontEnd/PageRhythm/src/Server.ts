@@ -104,14 +104,58 @@ export default class Server {
                 console.log("Login successful, session token stored.");
             }
     
-            return response; // Return the pure response object
+            return response;    // Return the pure response object
         } catch (error) {
             console.error("Error during login:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            throw error;        // Rethrow the error to handle it elsewhere
         }
     }
 
     public getSessionToken(): string | null {
         return this.sessionToken;
+    }
+
+    public async signup(fullName: string, email: string, password: string, date: string, bio: string): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+
+        const url = `${this.host}/authentication/register`;
+        const body = {
+            "email": email,
+            "full_name": fullName,
+            "first_name": "",
+            "last_name": "",
+            "birthday": {
+                "month": date.split("/")[0],
+                "day": date.split("/")[1],
+                "year": date.split("/")[2],
+            },
+            "password": password,
+            "bio": bio,
+            "account_type": "user",
+            "profile_picture": null,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                this.sessionToken = data["access_token"]; // Save the session token if signup is successful
+                console.log("Signup successful, session token stored.");
+            }
+
+            return response;    // Return the pure response object
+        } catch (error) {
+            console.error("Error during signup:", error);
+            throw error;        // Rethrow the error to handle it elsewhere
+        }
     }
 }

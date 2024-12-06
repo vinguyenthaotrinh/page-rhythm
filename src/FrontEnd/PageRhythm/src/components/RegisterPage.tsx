@@ -16,15 +16,22 @@ function LogoSection() {
 function SignupSection() {
     const [bio, setBio] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [firstPassword, setFirstPassword] = useState("");
+    const [secondPassword, setSecondPassword] = useState("");
     const [fullName, setFullName] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isFirstPasswordVisible, setIsFirstPasswordVisible] = useState(false);
+    const [isSecondPasswordVisible, setIsSecondPasswordVisible] = useState(false);
     const [loadingSignupRequest, setLoadingSignupRequest] = useState(false);
     const [error, setError] = useState("");
+    const [agreeWithTerms, setAgreeWithTerms] = useState(false);
 
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(prevState => !prevState);
+    const toggleFirstPasswordVisibility = () => {
+        setIsFirstPasswordVisible(previousState => !previousState);
+    };
+
+    const toggleSecondPasswordVisibility = () => {
+        setIsSecondPasswordVisible(previousState => !previousState);
     };
 
     const handleSignup = async (e: React.FormEvent) => {
@@ -33,25 +40,31 @@ function SignupSection() {
         setLoadingSignupRequest(true);       // Set loading state to true
         setError("");                       // Clear any previous error
 
+        if (firstPassword !== secondPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
         const navigate = useNavigate();
 
         try {
             setLoadingSignupRequest(true);   // Start loading
         
             const server = await Server.getInstance();
-            const response = await server.login(email, password); // Use the login method from the Server class
-        
-            if (response.ok) {
-                console.log('Login successful');
 
+            const response = await server.signup(fullName, email, firstPassword, dateOfBirth, bio);
+
+            if (response.ok) {
+                console.log('Signup successful');
+        
                 navigate('/home-page');
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'Login failed');  // Handle server errors (e.g., invalid credentials)
+                setError(errorData.message || "Signup failed"); // Handle server errors (e.g., invalid credentials)
             }
         } catch (err) {
             setError('An error occurred. Please try again.');   // Handle network or other errors
-            console.error('Login error:', err);
+            console.error('Signup error:', err);
         } finally {
             setLoadingSignupRequest(false);                      // Stop loading when the request is done
         }
@@ -83,8 +96,20 @@ function SignupSection() {
                 <div className="register-page-input-container">
                     <img src={IMAGES.USER_ICON} className="register-page-input-icon" />
                     <input 
+                        type="text" 
+                        placeholder="Enter your full name"      
+                        className="register-page-input-info" 
+                        required
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}  // Update full name state
+                    />
+                </div>
+                
+                <div className="register-page-input-container">
+                    <img src={IMAGES.MAIL_ICON} className="register-page-input-icon" />
+                    <input 
                         type="email" 
-                        placeholder="Enter Your Email"      
+                        placeholder="Enter your email"      
                         className="register-page-input-info" 
                         required
                         value={email}
@@ -95,20 +120,80 @@ function SignupSection() {
                 <div className="register-page-input-container">
                     <img src={IMAGES.LOCK_ICON} className="register-page-input-icon" />
                     <input 
-                        id="register-page-password-input" 
-                        type={isPasswordVisible ? "text" : "password"}  // Toggle password visibility
-                        placeholder="Enter Your Password" 
+                        id="register-page-first-password-input" 
+                        type={isFirstPasswordVisible ? "text" : "password"}  // Toggle password visibility
+                        placeholder="Create password" 
                         className="register-page-input-info" 
                         required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}                       // Update password state
+                        value={firstPassword}
+                        onChange={(e) => setFirstPassword(e.target.value)}                       // Update password state
                     />
                     <img 
-                        src={isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
-                        id="register-page-eye-icon" 
+                        src={isFirstPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
+                        className="register-page-eye-icon" 
                         alt="Eye Icon" 
-                        onClick={togglePasswordVisibility}                                  // Call the toggle function on click
+                        onClick={toggleFirstPasswordVisibility}                                  // Call the toggle function on click
                     />
+                </div>
+
+                <div className="register-page-input-container">
+                    <img src={IMAGES.LOCK_ICON} className="register-page-input-icon" />
+                    <input 
+                        id="register-page-second-password-input" 
+                        type={isFirstPasswordVisible ? "text" : "password"}  // Toggle password visibility
+                        placeholder="Confirm password" 
+                        className="register-page-input-info" 
+                        required
+                        value={secondPassword}
+                        onChange={(e) => setSecondPassword(e.target.value)}                       // Update password state
+                    />
+                    <img 
+                        src={isSecondPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
+                        className="register-page-eye-icon" 
+                        alt="Eye Icon" 
+                        onClick={toggleSecondPasswordVisibility}                                  // Call the toggle function on click
+                    />
+                </div>
+
+                <div className="register-page-input-container">
+                    <img src={IMAGES.CALENDAR_ICON} className="register-page-input-icon" />
+                    <input 
+                        type="date" 
+                        placeholder="Enter your date of birth (mm/dd/yyyy)"      
+                        className="register-page-input-info" 
+                        required
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}  // Update date of birth state
+                    />
+                </div>
+
+                <div className="register-page-input-container">
+                    <img src={IMAGES.PENCIL_ICON} id="register-page-pencil-icon" />
+                    <textarea
+                        placeholder="Write your bio here"    
+                        className="register-page-input-info" 
+                        required
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}  // Update bio state
+                        rows = {8}
+                    />
+                </div>
+
+                <div 
+                    className="register-page-input-container"
+                    id = "register-page-terms-container"
+                >
+                    <label htmlFor="agree-terms" className="terms-label">
+                        <input 
+                            type="checkbox" 
+                            id="agree-terms"
+                            name="agree-terms" 
+                            required 
+                            checked={agreeWithTerms} 
+                            onChange={(e) => setAgreeWithTerms(e.target.checked)} // Update agree state
+                        />
+                        I agree with the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>
+                    </label>
                 </div>
                 
                 <button type="submit" id="register-page-signup-button" disabled = {loadingSignupRequest}>Sign up</button>

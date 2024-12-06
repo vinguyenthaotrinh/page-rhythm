@@ -78,10 +78,10 @@ function LoginSection() {
 
             <form onSubmit={handleLogin}>
                 <div className="landing-page-input-container">
-                    <img src={IMAGES.USER_ICON} className="landing-page-input-icon" />
+                    <img src={IMAGES.MAIL_ICON} className="landing-page-input-icon" />
                     <input 
                         type="email" 
-                        placeholder="Enter Your Email"      
+                        placeholder="Enter your email"      
                         className="landing-page-input-info" 
                         required
                         value={email}
@@ -94,7 +94,7 @@ function LoginSection() {
                     <input 
                         id="password-input" 
                         type={isPasswordVisible ? "text" : "password"}  // Toggle password visibility
-                        placeholder="Enter Your Password" 
+                        placeholder="Enter your password" 
                         className="landing-page-input-info" 
                         required
                         value={password}

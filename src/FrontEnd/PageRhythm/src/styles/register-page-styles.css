@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 #register-page {
@@ -11,7 +12,7 @@ html, body {
     padding: 0;
     margin: 0;
     font-family: 'Poppins-Regular', sans-serif;
-    height: 100vh;  /* Full viewport height */
+    min-height: 100vh;  /* Full viewport height */
     width: 100vw;   /* Full viewport width */
     display: flex;
     justify-content: center;
@@ -44,11 +45,13 @@ html, body {
 #register-page-signup-section {
     position: relative;
     width: 800px;
-    height: 420px;
+    min-height: 432px;
     background-color: #a4c0ed;
     margin: auto;
-    margin-top: 128px;
-    padding: 20px;
+    margin-top: 700px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 120px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -62,14 +65,14 @@ html, body {
 #register-page-signup-section-top-right-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(108%, -108%);
+    transform: translate(108%, -164%);
     width: 240px;
 }
 
 #register-page-signup-section-bottom-left-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(-184%, -9%);
+    transform: translate(-184%, 56%);
     width:229px;
     margin-right: auto;
 }
@@ -91,6 +94,9 @@ html, body {
     position: relative;
     width: 400px;
     margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .register-page-input-container input {
@@ -103,13 +109,39 @@ html, body {
     background-color: white;
     color:#000000;
     font-family: Poppins-Regular;
+    margin-bottom: 8px;
+}
+
+.register-page-input-container textarea {
+    width: 100%;
+    padding: 10px 10px 10px 60px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: white;
+    color:#000000;
+    font-family: Poppins-Regular;
+    margin-bottom: 8px;
 }
 
 .register-page-input-icon {
     position: absolute;
     top: 50%;
     left: 10px;
-    transform: translateY(-50%);
+    object-fit: contain;
+    transform: translateY(-60%);
+    width: 22px;
+    height: auto;
+    border: none;
+}
+
+#register-page-pencil-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    object-fit: contain;
+    transform: translateY(-450%);
     width: 22px;
     height: auto;
     border: none;
@@ -125,11 +157,11 @@ html, body {
     color: #000000;
 }
 
-#register-page-eye-icon {
+.register-page-eye-icon {
     position: absolute;
     top: 50%;
     right: 10px;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
     width: 22px;
     height: auto;
     cursor: pointer;
@@ -156,7 +188,7 @@ html, body {
     width: auto;        /* Auto adjusts the width */
     height: auto;       /* Maintains aspect ratio */
     z-index: 10;        /* Ensures it stays on top of other elements */
-    transform: translate(60%, 0%);
+    transform: translate(58%, 0%);
 }
 
 .register-page-right-overlay-image {
@@ -201,4 +233,77 @@ html, body {
 
 #register-page-login-link:hover {
     text-decoration: underline; /* Add underline on hover for clarity */
+}
+
+/* Hide the default checkbox and create a custom round one */
+.terms-label input[type="checkbox"] {
+    accent-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;  /* Round checkbox */
+    margin-right: 10px;  /* Space between checkbox and text */
+    border: 2px solid #a4c0ed;  /* Light blue border */
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle; /* Ensures alignment with label text */
+    
+}
+
+/* Add a tick mark when checked */
+.terms-label input[type="checkbox"]:checked::before {
+    content: "✔";  /* Checkmark */
+    position: absolute;
+    top: -1px;  /* Adjust the position of the checkmark */
+    left: 4px;  /* Adjust the position of the checkmark */
+    color: #000000;  /* Matching the border color */
+    font-size: 16px;  /* Make the checkmark fit the circle */
+}
+
+
+/* Optional: Style the label text */
+.terms-label {
+    font-family: 'Poppins-Regular', sans-serif;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.terms-label a {
+    margin-left: 4px;
+}
+
+#register-page-terms-container {
+    display: flex;
+    align-items: center; /* Vertically center the checkbox and the label text */
+}
+
+#register-page::-webkit-scrollbar {
+    width: 12px; /* Set the width of the scrollbar */
+    height: 12px; /* Set the height of the scrollbar (horizontal) */
+}
+
+/* Style the track (background of the scrollbar) */
+#register-page::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Light grey background */
+    border-radius: 10px;  /* Rounded corners for the scrollbar track */
+}
+
+/* Style the thumb (the draggable part of the scrollbar) */
+#register-page::-webkit-scrollbar-thumb {
+    background-color: #a4c0ed; /* Light blue color */
+    border-radius: 10px;  /* Rounded corners for the thumb */
+    border: 3px solid #f0f0f0; /* Add a border to give some contrast */
+}
+
+/* Hover effect for the thumb */
+#register-page::-webkit-scrollbar-thumb:hover {
+    background-color: #125acf; /* Darker blue when hovered */
+}
+
+/* Customize the corner (where horizontal and vertical scrollbars meet) */
+#register-page::-webkit-scrollbar-corner {
+    background: #f0f0f0; /* Same as the track background */
 }
