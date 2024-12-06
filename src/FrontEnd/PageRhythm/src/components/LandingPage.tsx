@@ -1,6 +1,5 @@
 import IMAGES from "../images";
 import Server from "../Server";
-import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import "../styles/landing-page-styles.css";
 
@@ -14,24 +13,24 @@ function LogoSection() {
 }
 
 function LoginSection() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
     };
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();  // Prevent form default submission behavior
+        e.preventDefault();                 // Prevent form default submission behavior
 
-        setLoadingLoginRequest(true);  // Set loading state to true
-        setError(''); // Clear any previous error
+        setLoadingLoginRequest(true);       // Set loading state to true
+        setError("");                       // Clear any previous error
 
         try {
-            setLoadingLoginRequest(true); // Start loading
+            setLoadingLoginRequest(true);   // Start loading
         
             const server = await Server.getInstance();
             const response = await server.login(email, password); // Use the login method from the Server class
@@ -98,13 +97,13 @@ function LoginSection() {
                         className="input-info" 
                         required
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}  // Update password state
+                        onChange={(e) => setPassword(e.target.value)}                       // Update password state
                     />
                     <img 
                         src={isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
                         id="eye-icon" 
                         alt="Eye Icon" 
-                        onClick={togglePasswordVisibility}  // Call the toggle function on click
+                        onClick={togglePasswordVisibility}                                  // Call the toggle function on click
                     />
                 </div>
                 
