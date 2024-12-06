@@ -77,10 +77,10 @@ export default function NavigationBar() {
                 <div className="navigation-bar-right">
                    <ul>
                         <li>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/home-page">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/mylibrary">My Library</NavLink>
+                            <NavLink to="/my-library-page">My Library</NavLink>
                         </li>
                     </ul>
                     <ProfilePictureSectionOfNavigationBar />
