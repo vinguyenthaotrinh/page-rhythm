@@ -1,0 +1,40 @@
+.book-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 500px;
+    height: 290px;
+  }
+  
+
+  .book-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .book-info {
+    padding: 10px 0;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .edit-button {
+    background-color: #0066ff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }

@@ -1,0 +1,18 @@
+.search-bar{
+    position: relative;
+}
+
+.search-bar input{
+    padding-left: 50px;
+    border-radius: 15px;
+}
+
+.search-bar input::placeholder{
+    font-family: Poppins-Regular;
+}
+
+.search-bar img{
+    width: 20px;
+    position: absolute;
+    margin-left: 12px;
+}

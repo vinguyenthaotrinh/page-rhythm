@@ -1,6 +1,6 @@
 import React from 'react'
 import images from '../assets/images'
-import '../styles/my-library-styles.css'
+import '../styles/book-card.css'
 
 export default function BookCard({book}) {
   return (
