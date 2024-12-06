@@ -30,6 +30,21 @@ def get_account_with_email():
             "message": str(e)
         }), 500
     
+@account_blueprint.route("/profile", methods=["GET"])
+@jwt_required()
+def get_profile():
+    account_service = AccountService()
+    current_identity = json.loads(get_jwt_identity())
+    account_id = current_identity["account_id"]
+    account = account_service.get_account_by_id(account_id)
+    if account:
+        return jsonify({
+            "status": "success",
+            "data": account.get_serializable_profile()
+        }), 200
+    else:
+        return jsonify({"message": "Account not found"}), 404
+    
 @account_blueprint.route("/update_account_profile_information", methods=["PUT"])
 @jwt_required()
 def update_account_profile_information():

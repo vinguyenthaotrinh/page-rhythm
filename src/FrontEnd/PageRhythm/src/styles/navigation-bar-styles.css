@@ -1,38 +1,43 @@
-.active{
+.active {
     color: #265073;
     font-weight: bold;
     text-decoration-line: underline;
     text-underline-offset: 10px;
 }
 
-
 nav {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #f6ffde;
+    position: fixed; /* Makes the navbar fixed at the top */
+    top: 0;          /* Positions it at the top of the viewport */
+    left: 0;         /* Ensures it spans from the left */
+    width: 100%;     /* Takes the full horizontal width */
+    z-index: 1000;   /* Ensures it appears above other elements */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for distinction */
+    padding: 8px 20px; /* Adds padding for spacing */
 }
 
-.navigation-bar-left{
+.navigation-bar-left {
     display: flex;
     justify-content: space-between;
     text-align: center;
     margin-left: 12px;
 }
 
-.navigation-bar-logo{
-    height: 45px;
-    float:left;
-    /* margin-right: 2px; */
+.navigation-bar-logo {
+    height: 44px;
+    float: left;
     margin-top: 12px;
 }
 
-.navigation-bar-title{
-    font-size: 24px; /* Font size for the title */
+.navigation-bar-title {
+    font-size: 28px;    /* Font size for the title */
     font-weight: bold;
     font-family: 'Poppins-Bold', sans-serif;
     color: #333;
-    margin: 0; /* Remove default margin */
+    margin: 0;          /* Remove default margin */
     padding: 16px;
 }
 
@@ -48,21 +53,34 @@ nav {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    margin-right: 20px;
 }
 
-nav ul{
-    display:flex;
+nav ul {
+    display: flex;
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
 }
 
-nav ul li{
+nav ul li {
     list-style: none;
 }
 
-nav ul li a{
-    display: block;
+nav ul li a {
+    display: inline-block;
     text-decoration: none;
-    color:black;
+    color: black;
     padding: 0.5rem;
     margin: 0 0.5rem;
+    border: 2px solid transparent;
     border-radius: 0.5rem;
+    font-weight: normal; /* Ensure the width matches the non-bold version */
+    width: 100px; /* Fixed width */
+    text-align: center; /* Center the text */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #265073;
 }

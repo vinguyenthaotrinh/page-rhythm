@@ -134,6 +134,21 @@ class Account(BaseEntity):
             "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
     
+    def get_serializable_profile(self) -> dict:
+        return {
+            "email": self.email,
+            "full_name": self.full_name,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "birthday": {
+                "year": self.birthday.year,
+                "month": self.birthday.month,
+                "day": self.birthday.day
+            },
+            "bio": self.bio,
+            "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
+        }
+    
     def from_serializable_JSON(self, dictionary: dict):
         self.account_id = dictionary["account_id"]
         self.email = dictionary["email"]

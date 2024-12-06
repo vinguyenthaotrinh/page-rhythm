@@ -159,4 +159,34 @@ export default class Server {
             throw error;        // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async getProfile(): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+
+        if (!this.sessionToken) {
+            throw new Error("Session token is not set.");
+        }
+
+        const url = `${this.host}/account/profile`;
+
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${this.sessionToken}`,
+                },
+            });
+
+            if (response.ok) {
+                return await response.json();
+            }
+
+            throw new Error(`Failed to get profile: ${response.status}`);
+        } catch (error) {
+            console.error("Error getting profile:", error);
+            throw error;
+        }
+    }
 }

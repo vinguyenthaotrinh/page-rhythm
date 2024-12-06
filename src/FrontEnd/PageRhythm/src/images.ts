@@ -11,6 +11,7 @@ import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER from "./assets/images/landi
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER from "./assets/images/landing-page-login-section-top-right-corner.png";
 import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom-left-corner.png";
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER from "./assets/images/landing-page-bottom-right-corner.png";
+import DEFAULT_PROFILE_PICTURE from "./assets/images/default-profile-picture.png";
 
 const IMAGES = {
     LOGO,
@@ -25,7 +26,8 @@ const IMAGES = {
     EYE_OFF_ICON,
     MAIL_ICON,
     PENCIL_ICON,
-    CALENDAR_ICON
+    CALENDAR_ICON,
+    DEFAULT_PROFILE_PICTURE,
 };
 
 export default IMAGES;
