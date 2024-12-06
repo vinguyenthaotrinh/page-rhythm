@@ -19,6 +19,7 @@ function LoginSection() {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
@@ -29,8 +30,6 @@ function LoginSection() {
 
         setLoadingLoginRequest(true);       // Set loading state to true
         setError("");                       // Clear any previous error
-
-        const navigate = useNavigate();
 
         try {
             setLoadingLoginRequest(true);   // Start loading

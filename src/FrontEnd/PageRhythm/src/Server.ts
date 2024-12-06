@@ -115,21 +115,22 @@ export default class Server {
         return this.sessionToken;
     }
 
-    public async signup(fullName: string, email: string, password: string, date: string, bio: string): Promise<any> {
+    public async signup(fullName: string, email: string, password: string, birthday: string, bio: string): Promise<any> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
         }
 
         const url = `${this.host}/authentication/register`;
+
         const body = {
             "email": email,
             "full_name": fullName,
             "first_name": "",
             "last_name": "",
             "birthday": {
-                "month": date.split("/")[0],
-                "day": date.split("/")[1],
-                "year": date.split("/")[2],
+                "day": parseInt(birthday.split("-")[2], 10),    // Parse the day as an integer
+                "month": parseInt(birthday.split("-")[1], 10),  // Parse the month as an integer
+                "year": parseInt(birthday.split("-")[0], 10),   // Parse the year as an integer
             },
             "password": password,
             "bio": bio,

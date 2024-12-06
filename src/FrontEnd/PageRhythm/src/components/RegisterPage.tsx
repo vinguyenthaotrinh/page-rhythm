@@ -25,6 +25,7 @@ function SignupSection() {
     const [loadingSignupRequest, setLoadingSignupRequest] = useState(false);
     const [error, setError] = useState("");
     const [agreeWithTerms, setAgreeWithTerms] = useState(false);
+    const navigate = useNavigate();
 
     const toggleFirstPasswordVisibility = () => {
         setIsFirstPasswordVisible(previousState => !previousState);
@@ -44,8 +45,6 @@ function SignupSection() {
             setError("Passwords do not match");
             return;
         }
-
-        const navigate = useNavigate();
 
         try {
             setLoadingSignupRequest(true);   // Start loading
