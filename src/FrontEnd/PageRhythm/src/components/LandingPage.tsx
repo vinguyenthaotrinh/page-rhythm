@@ -1,6 +1,7 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import "../styles/landing-page-styles.css";
 
 function LogoSection() {
@@ -125,7 +126,7 @@ function SignupSection() {
     return (
         <div id="signup-section">
             <h1 id="signup-title">New User?</h1>
-            <a href="#" id="signup-button">Sign Up</a>
+            <Link to="/register-page" id="signup-button">Sign Up</Link>
         </div>
     );
 }
@@ -135,8 +136,10 @@ export default function LandingPage() {
     return (
         <div id="landing-page">
             <LogoSection />
-            <LoginSection />
-            <SignupSection />
+            <div id="authentication-sections">
+                <LoginSection />
+                <SignupSection />
+            </div>
 
             <div className="front-left-image-container" id="left-corner-image">
                 <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="left-overlay-image" alt="Left corner image" />

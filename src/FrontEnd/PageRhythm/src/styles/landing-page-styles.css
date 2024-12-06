@@ -145,14 +145,13 @@ html, body {
     position: fixed;    /* Position the image relative to the viewport */
     bottom: 0;          /* Align to the bottom of the viewport */
     left: 0;            /* Align to the left of the viewport */
-    width: auto;        /* You can specify a width if needed */
-    height: auto;       /* Automatically adjust height to maintain aspect ratio */
+    width: 20%;         /* Adjust width as needed */
     z-index: 10;        /* Ensure it stays above other content if necessary */
     transform: translate(0%, 4%); /* Position the image */
 }
 
 .left-overlay-image {
-    width: 40%; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
     height: auto; /* Keep the aspect ratio intact */
 }
 
@@ -171,20 +170,41 @@ html, body {
     height: auto;   /* Maintain aspect ratio */
 }
 
+#authentication-sections {
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    align-items: center;    /* Center horizontally */
+    gap: 20px;              /* Add space between sections */
+    margin-top: 128px;      /* Adjust as needed */
+    transform: translate(0%, -12%);
+}
+
 #signup-section {
-    text-align: center; /* Optional: Center the content inside the section */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;     /* Align the text and link vertically */
+    gap: 10px;               /* Space between "New User?" and "Sign Up" */
+    margin-top: 4px;        /* Adjust vertical spacing from LoginSection */
+    font-size: 16px;
 }
 
-#signup-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff; /* Example button color */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
+#signup-title {
+    font-size: 16px;          /* Match the text size with "Sign Up" */
+    font-weight: normal;      /* Ensure consistency with the link */
+    font-family: 'Poppins-Regular', sans-serif;
+    color: #333;
+    margin: 0;                /* Remove default margin */
 }
 
-#signup-button:hover {
-    background-color: #0056b3; /* Darken button on hover */
+#signup-link {
+    font-size: 16px;
+    font-weight: bold;        /* Emphasize the link */
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #4CAF50;           /* Green for the link */
+    text-decoration: none;    /* Remove underline */
+    cursor: pointer;
+}
+
+#signup-link:hover {
+    text-decoration: underline; /* Add underline on hover for clarity */
 }
