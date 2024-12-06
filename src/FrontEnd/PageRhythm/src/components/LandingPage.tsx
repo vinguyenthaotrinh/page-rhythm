@@ -108,13 +108,21 @@ function LoginSection() {
                 </div>
                 
                 <button type="submit" id="landing-page-login-button" disabled = {loadingLoginRequest}>Login</button>
+
+                <div id = "landing-page-request-password-reset-link-container">
+                    <Link to="/request-password-reset-page" id="landing-page-forgot-password-link">Forgot Password?</Link>
+                </div>
             
+                {
+                /*
                 <div id="landing-page-google-login">
                     <p>Login with</p>
                     <a href="#">
                         <img src={IMAGES.GOOGLE_ICON} />
                     </a>
                 </div>
+                */
+                }
 
             </form>
         </div>
@@ -125,7 +133,7 @@ function SignupSection() {
     return (
         <div id="landing-page-signup-section">
             <h1 id="landing-page-signup-title">New User?</h1>
-            <Link to="/register-page" id="landing-page-signup-button">Sign Up</Link>
+            <Link to="/register-page" id="landing-page-signup-link">Sign Up</Link>
         </div>
     );
 }
