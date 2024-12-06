@@ -22,9 +22,7 @@ class SupabaseBookAPIService:
     def get_book_information(self, book_id: int) -> dict:
         try:
             response = self.client.table('Book').select('*').eq('book_id', book_id).execute()
-            if response.data:
-                return response.data[0]
-            return None
+            return response.data[0] if response.data else None
         except Exception as e:
             return None
 

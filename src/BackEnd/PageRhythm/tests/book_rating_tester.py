@@ -85,20 +85,18 @@ class BookRatingTester(unittest.TestCase):
 
     def test_get_book_ratings(self):
         book_id = 1  # Assuming a book with ID 1 exists
-        response = requests.get(f"{self.rating_url}/list/{book_id}")
+        response = requests.get(f"{self.rating_url}/{book_id}")
         self.assertEqual(response.status_code, 200)
-        ratings = response.json()
-        self.assertIsInstance(ratings, list)
+        self.assertIsInstance(response.json(), list)
         print(f"Ratings for book ID {book_id} successfully retrieved.")
 
     def test_get_user_rating(self):
         headers = {"Authorization": f"Bearer {self.token}"}
         book_id = 1  # Assuming a book with ID 1 exists
-        response = requests.get(f"{self.rating_url}/user/{book_id}", headers=headers)
+        response = requests.get(f"{self.rating_url}/{book_id}/my_rating", headers=headers)
         self.assertEqual(response.status_code, 200)
-        user_rating = response.json()
-        self.assertIsInstance(user_rating, dict)
-        print(f"User's rating for book ID {book_id}: {user_rating}")
+        self.assertIsInstance(response.json(), dict)
+        print(f"User's rating for book ID {book_id} successfully retrieved.")
 
 
 if __name__ == "__main__":
@@ -106,8 +104,8 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTest(BookRatingTester("test_add_rating"))
     suite.addTest(BookRatingTester("test_update_rating"))
-    # suite.addTest(BookRatingTester("test_get_book_ratings"))
-    # suite.addTest(BookRatingTester("test_get_user_rating"))
+    suite.addTest(BookRatingTester("test_get_book_ratings"))
+    suite.addTest(BookRatingTester("test_get_user_rating"))
     suite.addTest(BookRatingTester("test_delete_rating"))
     runner = unittest.TextTestRunner()
     runner.run(suite)
