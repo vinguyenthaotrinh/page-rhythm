@@ -11,7 +11,7 @@ export default function HomePage() {
     const [books, setBooks] = useState([
         {
             title: "There's a Million Books",
-            author: "Author Name",
+            author: "Mr Anderson",
             genre: "Fiction",
             rating: 4,
             releaseDate: "01/01/2023",
@@ -19,7 +19,15 @@ export default function HomePage() {
         },
         {
             title: "There's a Million Books",
-            author: "Author Name",
+            author: "Smith",
+            genre: "Non-Fiction",
+            rating: 4,
+            releaseDate: "02/15/2022",
+            cover: IMAGES.DEFAULT_BOOK_COVER,
+        },
+        {
+            title: "There's a Million Books",
+            author: "Morpheus",
             genre: "Non-Fiction",
             rating: 4,
             releaseDate: "02/15/2022",
@@ -84,6 +92,25 @@ export default function HomePage() {
                 <div className="home-page-book-list-header">Rating</div>
                 <div className="home-page-book-list-header">Genre</div>
                 <div className="home-page-book-list-header">Release Date</div>
+            </div>
+
+            <div className="home-page-book-list">
+                {books.map((book, index) => (
+                    <div className="home-page-book-list-item" key={index}>
+                        <div className="home-page-book-title">
+                            <div className="home-page-book-cover">
+                                <img src={book.cover} alt={book.title} />
+                            </div>
+                            <div className="home-page-book-info">
+                                <h3>{book.title}</h3>
+                                <p>{book.author}</p>
+                            </div>
+                        </div>
+                        <div className="home-page-book-rating">{book.rating}</div>
+                        <div className="home-page-book-genre">{book.genre}</div>
+                        <div className="home-page-book-release-date">{book.releaseDate}</div>
+                    </div>
+                ))}
             </div>
         </div>
     )

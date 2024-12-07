@@ -122,9 +122,9 @@ html, body {
 .home-page-book-list-headers {
     display: grid;
     position: sticky;
-    grid-template-columns: 1fr 1fr 1fr 1fr;  /* Equal width for each column */
+    grid-template-columns: 2fr 1fr 1fr 1fr;  /* Equal width for each column */
     font-weight: bold;
-    padding: 10px;
+    padding: 12px;
     background-color: transparent; /* Light background color for headers */
     margin-bottom: 12px;
     top: 160px;
@@ -142,4 +142,58 @@ html, body {
 
 .home-page-book-list-header:last-child {
     border-right: none;  /* Remove border on the last column */
+}
+
+.home-page-book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 100px;
+}
+
+/* Book Item Container */
+.home-page-book-list-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;  /* Grid for book details */
+    gap: 12px;
+    padding: 16px;
+    background-color: #EFEAD3;
+    border-radius: 8px;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Column (Cover + Title and Author) */
+.home-page-book-title {
+    display: grid;
+    grid-template-columns: 1fr 3fr;  /* Cover in the first column, title and author in the second */
+    gap: 8px;
+}
+
+/* Book Cover */
+.home-page-book-cover img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Book Info (Title + Author) */
+.home-page-book-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.home-page-book-info p {
+    margin: 0;
+    font-size: 14px;
+    color: gray;
+}
+
+/* Rating, Genre, Release Date */
+.home-page-book-rating,
+.home-page-book-genre,
+.home-page-book-release-date {
+    text-align: center;
+    font-size: 14px;
 }
