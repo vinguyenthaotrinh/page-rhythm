@@ -211,3 +211,8 @@ html, body {
     justify-content: center;  /* Optionally horizontally center as well */
     border-left: 1px solid transparent;
 }
+
+#home-page-book-list-header-title {
+    text-align: left;  /* Align the Title header text to the left */
+    padding-left: 32px;  /* Optional: Adjust padding for better spacing */
+}

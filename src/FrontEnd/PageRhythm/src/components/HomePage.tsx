@@ -96,7 +96,10 @@ export default function HomePage() {
             </div>
 
             <div className="home-page-book-list-headers">
-                <div className="home-page-book-list-header">Title</div>
+                <div 
+                    className="home-page-book-list-header"
+                    id = "home-page-book-list-header-title"
+                >Title</div>
                 <div className="home-page-book-list-header">Rating</div>
                 <div className="home-page-book-list-header">Genre</div>
                 <div className="home-page-book-list-header">Release Date</div>
