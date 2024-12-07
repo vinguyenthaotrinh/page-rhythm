@@ -11,7 +11,7 @@ export default function PasswordProfilePage() {
         <div className="password-profile-page">
             <NavigationBar />
             <div className="password-profile-page-container">
-                <ProfileSectionBar />
+                <ProfileSectionBar currentOption="password" />
                 <div className="password-profile-page-profile-content">
                     <h1 id = "password-profile-page-title">Password</h1>
                     <p>You can change your password here</p>

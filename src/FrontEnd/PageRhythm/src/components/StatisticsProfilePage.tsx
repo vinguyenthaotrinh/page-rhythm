@@ -11,7 +11,7 @@ export default function StatisticsProfilePage() {
         <div className="statistics-profile-page">
             <NavigationBar />
             <div className="statistics-profile-page-container">
-                <ProfileSectionBar />
+                <ProfileSectionBar currentOption="statistics" />
                 <div className="statistics-profile-page-profile-content">
                     <h1 id = "statistics-profile-page-title">Statistics</h1>
                 </div>
