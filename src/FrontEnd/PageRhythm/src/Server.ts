@@ -1,7 +1,6 @@
 export default class Server {
     private static instance: Server | null = null;
     private host: string | null = null;
-    private sessionToken: string | null = null;
 
     private constructor() {}
 
@@ -100,7 +99,7 @@ export default class Server {
     
             if (response.ok) {
                 const data = await response.json();
-                this.sessionToken = data["access_token"]; // Save the session token if login is successful
+                localStorage.setItem("sessionToken", data["access_token"]); // Save the session token if login is successful
                 console.log("Login successful, session token stored.");
             }
     
@@ -112,7 +111,7 @@ export default class Server {
     }
 
     public getSessionToken(): string | null {
-        return this.sessionToken;
+        return localStorage.getItem("sessionToken");
     }
 
     public async signup(fullName: string, email: string, password: string, birthday: string, bio: string): Promise<any> {
@@ -149,7 +148,7 @@ export default class Server {
 
             if (response.ok) {
                 const data = await response.json();
-                this.sessionToken = data["access_token"]; // Save the session token if signup is successful
+                localStorage.setItem("sessionToken", data["access_token"]); // Save the session token if signup is successful
                 console.log("Signup successful, session token stored.");
             }
 
@@ -165,12 +164,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
 
-        if (!this.sessionToken) {
-            console.warn("No session token found. Already logged out?");
-            return;
-        }
-
-        this.sessionToken = null;
+        localStorage.removeItem("sessionToken");
     }
 
     public async getAllBooksInRandomOrder(): Promise<any[]> {
@@ -180,12 +174,14 @@ export default class Server {
     
         const url = `${this.host}/book/all/random`;  // Update the endpoint to match the server-side route
     
+        const sessionToken = this.getSessionToken();
+
         try {
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${this.sessionToken}`  // Include the session token if required for authorization
+                    "Authorization": `Bearer ${sessionToken}`  // Include the session token if required for authorization
                 }
             });
     
@@ -202,4 +198,35 @@ export default class Server {
         }
     }
 
+    // New method to fetch profile data
+    public async getProfile(): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+
+        const url = `${this.host}/account/profile`; // Endpoint to get the profile
+
+        const sessionToken = this.getSessionToken();
+
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Profile fetched successfully:", data);
+                return data;  // Returns the profile data
+            } else {
+                throw new Error("Profile fetch failed");
+            }
+        } catch (error) {
+            console.error("Error during profile fetch:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }

@@ -18,6 +18,12 @@ export default function HomePage() {
                 const server = await Server.getInstance();  // Get the server instance
                 const randomBooks = await server.getAllBooksInRandomOrder();  // Fetch random books
                 setBooks(randomBooks);  // Set the fetched books into the state
+
+                //print the fetched books
+
+                for (let i = 0; i < randomBooks.length; i++) {
+                    console.log(randomBooks[i].image);
+                }
             } catch (error) {
                 console.error("Error fetching books:", error);
             }
@@ -47,6 +53,13 @@ export default function HomePage() {
     const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedGenre(event.target.value);
     };
+
+    const decodeBookCover = (bookCover: string | null) => {
+        if (!bookCover) {
+            return IMAGES.DEFAULT_BOOK_COVER;
+        }
+        return `data:image/jpeg;base64,${bookCover}`;
+    }
 
     return (
         <div id = "home-page">
@@ -91,16 +104,19 @@ export default function HomePage() {
                     <div className="home-page-book-list-item" key={index}>
                         <div className="home-page-book-title">
                             <div className="home-page-book-cover">
-                                <img src={book.cover} alt={book.title} />
+                                <img 
+                                    src={decodeBookCover(book.image)} 
+                                    alt={book.title} 
+                                />
                             </div>
                             <div className="home-page-book-info">
-                                <h3>{book.title}</h3>
-                                <p>{book.author}</p>
+                                <h3>{book.title || "Unknown"}</h3> {/* Show "Unknown" if title is null */}
+                                <p>{book.author || "Unknown"}</p> {/* Show "Unknown" if author is null */}
                             </div>
                         </div>
-                        <div className="home-page-book-rating">{book.rating}</div>
-                        <div className="home-page-book-genre">{book.genre}</div>
-                        <div className="home-page-book-release-date">{book.releaseDate}</div>
+                        <div className="home-page-book-rating">{book.rating || 5}</div> {/* Show "Unknown" if rating is null */}
+                        <div className="home-page-book-genre">{book.genre || "Unknown"}</div> {/* Show "Unknown" if genre is null */}
+                        <div className="home-page-book-release-date">{book.releaseDate || "Unknown"}</div> {/* Show "Unknown" if releaseDate is null */}
                     </div>
                 ))}
             </div>

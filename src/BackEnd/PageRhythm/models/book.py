@@ -121,3 +121,9 @@ class Book(BaseEntity):
         self.set_released_date(dictionary.get("released_date"))
         self.set_book_rating(dictionary.get("book_rating", 0.0))
         self.set_image(dictionary.get("image"))
+
+    @staticmethod
+    def deserialize_JSON(dictionary: dict) -> "Book":
+        book = Book(None, None, None, None, None, None, None)
+        book.from_serializable_JSON(dictionary)
+        return book

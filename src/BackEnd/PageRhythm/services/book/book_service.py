@@ -54,4 +54,4 @@ class BookService:
     def get_all_books_in_random_order(self) -> list[Book]:
         books = self.supabase.get_all_books()
         random.shuffle(books)
-        return [Book(**book) for book in books]
+        return books
