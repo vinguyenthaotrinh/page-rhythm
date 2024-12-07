@@ -51,14 +51,18 @@ export default function HomePage() {
     return (
         <div id = "home-page">
             <NavigationBar />
-            <div id="home-page-content">
-                <div id="home-page-search-container">
+            <div id="home-page-search-container">
+                <div className="input-container">
+                    <img src={IMAGES.SEARCH_ICON} alt="Search Icon" className="input-icon" />
                     <input
                         type="text"
                         placeholder="Find Your Books"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                </div>
+                <div className="select-container">
+                    <img src={IMAGES.SLIDERS_ICON} alt="Genre Icon" className="select-icon" />
                     <select value={selectedGenre} onChange={handleGenreChange}>
                         <option value="All">All</option>
                         <option value="Science Fiction">Science Fiction</option>
@@ -68,9 +72,11 @@ export default function HomePage() {
                         <option value="Romance">Romance</option>
                         <option value="Horror">Horror</option>
                     </select>
-                    <button onClick={handleSearch}>Search</button>
-                    </div>
                 </div>
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div id="home-page-content">
+            </div>
         </div>
     )
 }
