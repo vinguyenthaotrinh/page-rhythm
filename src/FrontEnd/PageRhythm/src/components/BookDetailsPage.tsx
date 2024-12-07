@@ -87,7 +87,7 @@ export default function BookDetailsPage() {
                     {/* Right Column (Book Information) */}
                     <div id="book-details-page-introduction">
                         {/* Book Title and Buttons */}
-                        <div className="book-details-row">
+                        <div className="book-details-page-title-row">
                             <h2>{book.title}</h2>
                             <div className="buttons">
                                 <button>Read This Book</button>

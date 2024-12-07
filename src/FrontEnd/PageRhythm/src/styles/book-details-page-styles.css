@@ -92,10 +92,16 @@ html, body {
 
 /* Styling for individual rows */
 .book-details-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex;  /* Use flexbox to align label and value on the same line */
+    justify-content: flex-start;  /* Align to the left */
+    gap: 8px;  /* Space between the label and value */
     margin-bottom: 12px;
+}
+
+.book-details-page-title-row {
+    display: flex;
+    justify-content: space-between;  /* Space between title and rating */
+    align-items: center;  /* Align vertically */
 }
 
 /* Buttons Row */
