@@ -4,6 +4,7 @@
 html, body {
     overflow: hidden;
     height: 100%;
+    padding: 0;
     margin: 0;
 }
 
@@ -44,4 +45,12 @@ html, body {
     width: 24px;  /* Adjust the icon size as needed */
     height: 24px; /* Adjust the icon size as needed */
     margin-right: 8px; /* Space between the icon and the text */
+}
+
+#book-details-page-main-section {
+    flex-grow: 1;  /* Takes up remaining vertical space */
+    margin-top: 80px;  /* Adds space below the fixed back button */
+    padding: 20px;
+    overflow-y: auto;  /* Allows scrolling if content overflows */
+    background-color: #F6FFDE;  /* White background for the main section */
 }

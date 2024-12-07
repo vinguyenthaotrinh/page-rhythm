@@ -26,6 +26,11 @@ export default function BookDetailsPage() {
                     <span>Back</span>
                 </div>
             </div>
+            <div
+                id = "book-details-page-main-section"
+            >
+                Hello
+            </div>
         </div>
     )
 }
