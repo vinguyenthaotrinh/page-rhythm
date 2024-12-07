@@ -16,19 +16,19 @@ function ProfileSectionBar() {
         <div className="profile-section-bar">
             <button 
                 className="profile-section-button" 
-                onClick={() => handleSectionClick("/profile-page")}
+                onClick={() => handleSectionClick("/profile/general")}
             >
                 General
             </button>
             <button 
                 className="profile-section-button" 
-                onClick={() => handleSectionClick("/profile-page/password")}
+                onClick={() => handleSectionClick("/profile/password")}
             >
                 Password
             </button>
             <button 
                 className="profile-section-button" 
-                onClick={() => handleSectionClick("/profile-page/statistics")}
+                onClick={() => handleSectionClick("/profile/statistics")}
             >
                 Statistics
             </button>
@@ -44,9 +44,14 @@ function ProfileSectionBar() {
 
 export default function ProfilePage() {
     return (
-        <div>
+        <div className="profile-page">
             <NavigationBar />
-            <ProfileSectionBar />
+            <div className="profile-page-container">
+                <ProfileSectionBar />
+                <div className="profile-content">
+                    {/* Content for the selected section goes here */}
+                </div>
+            </div>
         </div>
-    )
+    );
 }

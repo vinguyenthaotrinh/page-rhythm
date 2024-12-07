@@ -1,33 +1,39 @@
+/* Full page layout */
 .profile-page-container {
     display: flex;
     flex-direction: row;
-    margin: 20px;
-    padding: 20px;
+    height: calc(100vh - 60px); /* Full viewport height minus navigation bar height */
+    margin-top: 60px; /* Match navigation bar height */
 }
 
+/* Vertical sidebar */
 .profile-section-bar {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: flex-start; /* Align buttons at the top */
+    align-items: stretch;
     width: 200px;
     background-color: #f6f6f6;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 20px 0; /* Padding for spacing */
+    border-right: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Sidebar buttons */
 .profile-section-button {
-    padding: 10px 15px;
+    padding: 15px;
     background-color: #265073;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin: 5px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
     text-align: left;
 }
 
+/* Hover and active state */
 .profile-section-button:hover {
     background-color: #193c5c;
 }
@@ -40,10 +46,12 @@
     background-color: #c9302c;
 }
 
+/* Main content area */
 .profile-content {
     flex-grow: 1;
     padding: 20px;
     background-color: #ffffff;
-    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
