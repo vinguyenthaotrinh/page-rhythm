@@ -2,6 +2,7 @@
 
 /* Ensure body and root elements take full height */
 html, body {
+    overflow: hidden;
     height: 100%;
     margin: 0;
 }
@@ -120,12 +121,13 @@ html, body {
 
 .home-page-book-list-headers {
     display: grid;
+    position: sticky;
     grid-template-columns: 1fr 1fr 1fr 1fr;  /* Equal width for each column */
     font-weight: bold;
     padding: 10px;
     background-color: transparent; /* Light background color for headers */
     margin-bottom: 12px;
-    margin-top: 80px;
+    top: 160px;
     border-radius: 8px;  /* Optional: rounded corners for headers */
 }
 

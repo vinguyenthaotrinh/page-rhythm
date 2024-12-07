@@ -78,13 +78,12 @@ export default function HomePage() {
                 </div>
                 <button onClick={handleSearch}>Search</button>
             </div>
-            <div id="home-page-content">
-                <div className="home-page-book-list-headers">
-                    <div className="home-page-book-list-header">Title</div>
-                    <div className="home-page-book-list-header">Rating</div>
-                    <div className="home-page-book-list-header">Genre</div>
-                    <div className="home-page-book-list-header">Release Date</div>
-                </div>
+
+            <div className="home-page-book-list-headers">
+                <div className="home-page-book-list-header">Title</div>
+                <div className="home-page-book-list-header">Rating</div>
+                <div className="home-page-book-list-header">Genre</div>
+                <div className="home-page-book-list-header">Release Date</div>
             </div>
         </div>
     )
