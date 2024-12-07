@@ -22,14 +22,6 @@ html, body {
     flex-shrink: 0;        /* Prevent shrinking */
 }
 
-/* Separate search container and content layout */
-#home-page-content {
-    flex-grow: 1;          /* Take all remaining space */
-    display: flex;
-    flex-direction: column; /* Stack search container and content */
-    gap: 20px;             /* Add spacing between search container and content */
-}
-
 /* Search container */
 #home-page-search-container {
     align-self: center;
@@ -148,7 +140,9 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: 100px;
+    margin-top: 80px;
+    max-height: calc(100vh - 0px); /* Make the book list scrollable by reducing the height */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 /* Book Item Container */
