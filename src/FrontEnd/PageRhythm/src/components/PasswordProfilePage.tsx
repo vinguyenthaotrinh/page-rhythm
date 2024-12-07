@@ -79,44 +79,62 @@ export default function PasswordProfilePage() {
                         id = "password-profile-page-profile-information-section"
                     >
                         <form className="password-profile-page-profile-form">
-                            <label>
+                            <label className="password-profile-page-input-label">
                                 Full Name:
-                                <input
-                                    type="text"
-                                    name="fullName"
-                                    value={profile.fullName}
-                                    onChange={handleInputChange}
-                                    className="password-profile-page-profile-input"
-                                />
+                                <div className="password-profile-page-input-container">
+                                    <img src={IMAGES.USER_ICON} alt="Full Name Icon" className="password-profile-page-input-icon" />
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        value={profile.fullName}
+                                        onChange={handleInputChange}
+                                        className="password-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
+                            <label className="password-profile-page-input-label">
                                 Email:
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={profile.email}
-                                    onChange={handleInputChange}
-                                    className="password-profile-page-profile-input"
-                                />
+                                <div className="password-profile-page-input-container">
+                                    <img src={IMAGES.MAIL_ICON} alt="Email Icon" className="password-profile-page-input-icon" />
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={profile.email}
+                                        onChange={handleInputChange}
+                                        className="password-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
-                                Birthday:
-                                <input
-                                    type="date"
-                                    name="birthday"
-                                    value={profile.birthday}
-                                    onChange={handleInputChange}
-                                    className="password-profile-page-profile-input"
-                                />
+                            <label className="password-profile-page-input-label">
+                                Birthday (DD/MM/YYYY):
+                                <div className="password-profile-page-input-container">
+                                    <img src={IMAGES.CALENDAR_ICON} alt="Birthday Icon" className="password-profile-page-input-icon" />
+                                    <input
+                                        type="date"
+                                        name="birthday"
+                                        value={profile.birthday}
+                                        onChange={handleInputChange}
+                                        className="password-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
+                            <label className="password-profile-page-input-label">
                                 Bio:
-                                <textarea
-                                    name="bio"
-                                    value={profile.bio}
-                                    onChange={handleInputChange}
-                                    className="password-profile-page-profile-textarea"
-                                />
+                                <div className="password-profile-page-input-container">
+                                    <img 
+                                        src={IMAGES.PENCIL_ICON} 
+                                        alt="Bio Icon" 
+                                        className="password-profile-page-input-icon" 
+                                        id = "password-profile-page-bio-icon"
+                                    />
+                                    <textarea
+                                        name="bio"
+                                        value={profile.bio}
+                                        onChange={handleInputChange}
+                                        className="password-profile-page-profile-textarea"
+                                        rows={8}
+                                    />
+                                </div>
                             </label>
                             <div className="password-profile-page-profile-buttons">
                                 <button
