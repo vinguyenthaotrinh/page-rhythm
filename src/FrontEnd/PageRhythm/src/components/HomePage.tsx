@@ -52,8 +52,8 @@ export default function HomePage() {
         <div id = "home-page">
             <NavigationBar />
             <div id="home-page-search-container">
-                <div className="input-container">
-                    <img src={IMAGES.SEARCH_ICON} alt="Search Icon" className="input-icon" />
+                <div className="home-page-input-container">
+                    <img src={IMAGES.SEARCH_ICON} alt="Search Icon" className="home-page-input-icon" />
                     <input
                         type="text"
                         placeholder="Find Your Books"
@@ -61,10 +61,10 @@ export default function HomePage() {
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
-                <div className="select-container">
-                    <img src={IMAGES.SLIDERS_ICON} alt="Genre Icon" className="select-icon" />
+                <div className="home-page-select-container">
+                    <img src={IMAGES.SLIDERS_ICON} alt="Genre Icon" className="home-page-select-icon" />
                     <select value={selectedGenre} onChange={handleGenreChange}>
-                        <option value="All">All</option>
+                        <option value="All">All genres</option>
                         <option value="Science Fiction">Science Fiction</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Non-Fiction">Non-Fiction</option>
