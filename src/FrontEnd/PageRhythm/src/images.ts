@@ -15,6 +15,7 @@ import DEFAULT_PROFILE_PICTURE from "./assets/images/default-profile-picture.png
 import DEFAULT_BOOK_COVER from "./assets/images/default-book-cover.png";
 import SEARCH_ICON from "./assets/images/search-icon.png";
 import SLIDERS_ICON from "./assets/images/sliders-icon.png";
+import LEFT_ARROW_ICON from "./assets/images/left-arrow-icon.png";
 
 const IMAGES = {
     LOGO,
@@ -34,6 +35,7 @@ const IMAGES = {
     DEFAULT_BOOK_COVER,
     SEARCH_ICON,
     SLIDERS_ICON,
+    LEFT_ARROW_ICON,
 };
 
 export default IMAGES;

@@ -9,11 +9,14 @@ export default function BookDetailsPage() {
     const { bookID } = useParams<{ bookID: string }>();
 
     return (
-        <div>
+        <div
+            id = "book-details-page"
+        >
             <NavigationBar />
-            <div id="book-details-page-content">
-                <h1 id="book-details-page-title">Book Details</h1>
-                <p id="book-details-page-description">This page will display details of a book {bookID}</p>
+            <div
+                id = "back-button-container"
+            >
+                Back
             </div>
         </div>
     )

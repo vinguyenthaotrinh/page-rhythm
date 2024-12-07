@@ -1,0 +1,33 @@
+@import url('fonts.css');
+
+/* Ensure body and root elements take full height */
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+}
+
+/* Make the main container full viewport height */
+#book-details-page {
+    display: flex;
+    flex-direction: column; /* Stack NavigationBar and Content vertically */
+    height: 100vh;         /* Full viewport height */
+    width: 100vw;          /* Full viewport width */
+    background-color: #F6FFDE;
+    color: black;
+    padding: 12px;
+}
+
+
+#back-button-container {
+    align-self: center;
+    background-color: transparent;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 80px;
+    border-radius: 8px;
+}
