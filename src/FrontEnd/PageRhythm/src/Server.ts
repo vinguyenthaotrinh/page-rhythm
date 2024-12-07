@@ -229,4 +229,48 @@ export default class Server {
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async updateProfile(profile: any): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/account/update_account_profile_information`; // Endpoint to update the profile
+    
+        const sessionToken = this.getSessionToken();
+    
+        const body = {
+            full_name: profile.fullName,
+            email: profile.email,
+            bio: profile.bio,
+            first_name: "",
+            last_name: "",
+            profile_picture: null,
+            birthday: {
+                day: parseInt(profile.birthday.split("-")[2], 10),    // Parse the day as an integer
+                month: parseInt(profile.birthday.split("-")[1], 10),  // Parse the month as an integer
+                year: parseInt(profile.birthday.split("-")[0], 10),   // Parse the year as an integer
+            }
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+                body: JSON.stringify(body), // Send the updated profile data as the body
+            });
+    
+            if (response.ok) {
+                console.log("Profile updated successfully.");
+            } else {
+                throw new Error(`Profile update failed with status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Error during profile update:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }

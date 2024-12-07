@@ -20,18 +20,19 @@ export default function GeneralProfilePage() {
     const loadProfile = async () => {
         try {
             const server = await Server.getInstance();
-            const profileData = await server.getProfile(); // Fetch profile from server
+            const profile = await server.getProfile(); // Fetch profile from server
+            console.log(profile);
             setOriginalProfile({
-                fullName: profileData.full_name || "",
-                email: profileData.email || "",
-                bio: profileData.bio || "",
-                birthday: profileData.birthday || "",
+                fullName: profile.data.full_name || "",
+                email: profile.data.email || "",
+                bio: profile.data.bio || "",
+                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
             setProfile({
-                fullName: profileData.full_name || "",
-                email: profileData.email || "",
-                bio: profileData.bio || "",
-                birthday: profileData.birthday || "",
+                fullName: profile.data.full_name || "",
+                email: profile.data.email || "",
+                bio: profile.data.bio || "",
+                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
         } catch (error) {
             console.error("Error loading profile:", error);
@@ -54,7 +55,7 @@ export default function GeneralProfilePage() {
     const handleSave = async () => {
         try {
             const server = await Server.getInstance();
-            //await server.updateProfile(profile); // Replace with actual API call to update profile
+            await server.updateProfile(profile);
             setOriginalProfile(profile);
             setHasUnsavedChanges(false);
         } catch (error) {
@@ -99,15 +100,6 @@ export default function GeneralProfilePage() {
                                 />
                             </label>
                             <label>
-                                Bio:
-                                <textarea
-                                    name="bio"
-                                    value={profile.bio}
-                                    onChange={handleInputChange}
-                                    className="profile-textarea"
-                                />
-                            </label>
-                            <label>
                                 Birthday:
                                 <input
                                     type="date"
@@ -115,6 +107,15 @@ export default function GeneralProfilePage() {
                                     value={profile.birthday}
                                     onChange={handleInputChange}
                                     className="profile-input"
+                                />
+                            </label>
+                            <label>
+                                Bio:
+                                <textarea
+                                    name="bio"
+                                    value={profile.bio}
+                                    onChange={handleInputChange}
+                                    className="profile-textarea"
                                 />
                             </label>
                             <div className="profile-buttons">
