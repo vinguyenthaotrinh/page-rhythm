@@ -83,7 +83,13 @@ def change_password():
     
     current_identity = json.loads(get_jwt_identity())
     account_id = current_identity["account_id"]
+
+    account = AccountService().get_account_by_id(account_id)
     
-    if authentication_service.verify_password(account_id, old_password):
+    if not authentication_service.verify_password(account_id, old_password):
         return jsonify({"message": "Incorrect old password"}), 400
+    
+    authentication_service.change_password(account_id, new_password)
+
+    return jsonify({"message": "Password changed successfully"}), 200
     

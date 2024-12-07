@@ -275,5 +275,42 @@ export default class Server {
     }
 
     public async changePassword(passwords: any): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/authentication/change_password`;  // Endpoint to change the password
+    
+        const sessionToken = this.getSessionToken();
+    
+        const body = {
+            old_password: passwords.currentPassword,
+            new_password: passwords.newPassword,
+            confirmed_new_password: passwords.confirmedNewPassword,
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+                body: JSON.stringify(body), // Send the password data as the body
+            });
+    
+            if (response.ok) {
+                console.log("Password changed successfully.");
+                // You can add further success handling here, e.g., notify the user.
+            } else {
+                const data = await response.json();
+                console.error("Error changing password:", data.message);
+                // Handle specific error messages from the server.
+                throw new Error(data.message || "Failed to change password");
+            }
+        } catch (error) {
+            console.error("Error during password change:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
     }
 }

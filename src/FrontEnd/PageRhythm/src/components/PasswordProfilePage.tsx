@@ -29,7 +29,7 @@ export default function PasswordProfilePage() {
     const handleSave = async () => {
         try {
             const server = await Server.getInstance();
-            //await server.changePassword(passwords);
+            await server.changePassword(passwords);
             setHasUnsavedChanges(false);
         } catch (error) {
             console.error("Error while saving profile", error);
