@@ -78,7 +78,7 @@ export default function GeneralProfilePage() {
                     <div
                         id = "general-profile-page-profile-information-section"
                     >
-                        <form className="profile-form">
+                        <form className="general-profile-page-profile-form">
                             <label>
                                 Full Name:
                                 <input
@@ -86,7 +86,7 @@ export default function GeneralProfilePage() {
                                     name="fullName"
                                     value={profile.fullName}
                                     onChange={handleInputChange}
-                                    className="profile-input"
+                                    className="general-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -96,7 +96,7 @@ export default function GeneralProfilePage() {
                                     name="email"
                                     value={profile.email}
                                     onChange={handleInputChange}
-                                    className="profile-input"
+                                    className="general-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -106,7 +106,7 @@ export default function GeneralProfilePage() {
                                     name="birthday"
                                     value={profile.birthday}
                                     onChange={handleInputChange}
-                                    className="profile-input"
+                                    className="general-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -115,19 +115,19 @@ export default function GeneralProfilePage() {
                                     name="bio"
                                     value={profile.bio}
                                     onChange={handleInputChange}
-                                    className="profile-textarea"
+                                    className="general-profile-page-profile-textarea"
                                 />
                             </label>
-                            <div className="profile-buttons">
+                            <div className="general-profile-page-profile-buttons">
                                 <button
                                     type="button"
                                     onClick={handleSave}
-                                    className={`profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
+                                    className={`general-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
                                     disabled={!hasUnsavedChanges}
                                 >
                                     Save
                                 </button>
-                                <button type="button" onClick={handleReset} className="profile-reset-button">
+                                <button type="button" onClick={handleReset} className="general-profile-page-profile-reset-button">
                                     Reset
                                 </button>
                             </div>

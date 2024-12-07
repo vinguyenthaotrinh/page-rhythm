@@ -58,7 +58,7 @@
 
 
 
-.profile-form {
+.general-profile-page-profile-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -68,8 +68,8 @@
     text-align: left;
 }
 
-.profile-input,
-.profile-textarea {
+.general-profile-page-profile-input,
+.general-profile-page-profile-textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -80,18 +80,18 @@
     border-radius: 12px;
 }
 
-.profile-textarea {
+.general-profile-page-profile-textarea {
     resize: vertical;
 }
 
-.profile-buttons {
+.general-profile-page-profile-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
 }
 
-.profile-save-button,
-.profile-reset-button {
+.general-profile-page-profile-save-button,
+.general-profile-page-profile-reset-button {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -100,23 +100,23 @@
     transition: background-color 0.2s;
 }
 
-.profile-save-button.active {
+.general-profile-page-profile-save-button.active {
     background-color: #007bff;
     color: white;
     cursor: pointer;
 }
 
-.profile-save-button:disabled {
+.general-profile-page-profile-save-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.profile-reset-button {
+.general-profile-page-profile-reset-button {
     background-color: #f0f0f0;
     color: black;
     cursor: pointer;
 }
 
-.profile-reset-button:hover {
+.general-profile-page-profile-reset-button:hover {
     background-color: #e0e0e0;
 }
