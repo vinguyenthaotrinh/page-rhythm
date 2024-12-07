@@ -73,12 +73,12 @@ export default function PasswordProfilePage() {
             <NavigationBar />
             <div className="password-profile-page-container">
                 <ProfileSectionBar currentOption="password" />
-                <div className="general-profile-page-profile-content">
-                    <h1 id = "general-profile-page-title">General Information</h1>
+                <div className="password-profile-page-profile-content">
+                    <h1 id = "password-profile-page-title">Change Your Password Here</h1>
                     <div
-                        id = "general-profile-page-profile-information-section"
+                        id = "password-profile-page-profile-information-section"
                     >
-                        <form className="general-profile-page-profile-form">
+                        <form className="password-profile-page-profile-form">
                             <label>
                                 Full Name:
                                 <input
@@ -86,7 +86,7 @@ export default function PasswordProfilePage() {
                                     name="fullName"
                                     value={profile.fullName}
                                     onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
+                                    className="password-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -96,7 +96,7 @@ export default function PasswordProfilePage() {
                                     name="email"
                                     value={profile.email}
                                     onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
+                                    className="password-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -106,7 +106,7 @@ export default function PasswordProfilePage() {
                                     name="birthday"
                                     value={profile.birthday}
                                     onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
+                                    className="password-profile-page-profile-input"
                                 />
                             </label>
                             <label>
@@ -115,19 +115,19 @@ export default function PasswordProfilePage() {
                                     name="bio"
                                     value={profile.bio}
                                     onChange={handleInputChange}
-                                    className="general-profile-page-profile-textarea"
+                                    className="password-profile-page-profile-textarea"
                                 />
                             </label>
-                            <div className="general-profile-page-profile-buttons">
+                            <div className="password-profile-page-profile-buttons">
                                 <button
                                     type="button"
                                     onClick={handleSave}
-                                    className={`general-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
+                                    className={`password-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
                                     disabled={!hasUnsavedChanges}
                                 >
                                     Save
                                 </button>
-                                <button type="button" onClick={handleReset} className="general-profile-page-profile-reset-button">
+                                <button type="button" onClick={handleReset} className="password-profile-page-profile-reset-button">
                                     Reset
                                 </button>
                             </div>

@@ -79,44 +79,62 @@ export default function GeneralProfilePage() {
                         id = "general-profile-page-profile-information-section"
                     >
                         <form className="general-profile-page-profile-form">
-                            <label>
+                            <label className="general-profile-page-input-label">
                                 Full Name:
-                                <input
-                                    type="text"
-                                    name="fullName"
-                                    value={profile.fullName}
-                                    onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
-                                />
+                                <div className="general-profile-page-input-container">
+                                    <img src={IMAGES.USER_ICON} alt="Full Name Icon" className="general-profile-page-input-icon" />
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        value={profile.fullName}
+                                        onChange={handleInputChange}
+                                        className="general-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
+                            <label className="general-profile-page-input-label">
                                 Email:
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={profile.email}
-                                    onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
-                                />
+                                <div className="general-profile-page-input-container">
+                                    <img src={IMAGES.MAIL_ICON} alt="Email Icon" className="general-profile-page-input-icon" />
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={profile.email}
+                                        onChange={handleInputChange}
+                                        className="general-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
-                                Birthday:
-                                <input
-                                    type="date"
-                                    name="birthday"
-                                    value={profile.birthday}
-                                    onChange={handleInputChange}
-                                    className="general-profile-page-profile-input"
-                                />
+                            <label className="general-profile-page-input-label">
+                                Birthday (DD/MM/YYYY):
+                                <div className="general-profile-page-input-container">
+                                    <img src={IMAGES.CALENDAR_ICON} alt="Birthday Icon" className="general-profile-page-input-icon" />
+                                    <input
+                                        type="date"
+                                        name="birthday"
+                                        value={profile.birthday}
+                                        onChange={handleInputChange}
+                                        className="general-profile-page-profile-input"
+                                    />
+                                </div>
                             </label>
-                            <label>
+                            <label className="general-profile-page-input-label">
                                 Bio:
-                                <textarea
-                                    name="bio"
-                                    value={profile.bio}
-                                    onChange={handleInputChange}
-                                    className="general-profile-page-profile-textarea"
-                                />
+                                <div className="general-profile-page-input-container">
+                                    <img 
+                                        src={IMAGES.PENCIL_ICON} 
+                                        alt="Bio Icon" 
+                                        className="general-profile-page-input-icon" 
+                                        id = "general-profile-page-bio-icon"
+                                    />
+                                    <textarea
+                                        name="bio"
+                                        value={profile.bio}
+                                        onChange={handleInputChange}
+                                        className="general-profile-page-profile-textarea"
+                                        rows={8}
+                                    />
+                                </div>
                             </label>
                             <div className="general-profile-page-profile-buttons">
                                 <button
