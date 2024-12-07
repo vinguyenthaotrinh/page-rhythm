@@ -61,6 +61,10 @@ export default function HomePage() {
         return `data:image/jpeg;base64,${bookCover}`;
     }
 
+    const handleBookClick = (bookID: string) => {
+        navigate(`/book-details-page/${bookID}`);  // Redirect to the book details page
+    };
+
     return (
         <div id = "home-page">
             <NavigationBar />
@@ -101,7 +105,11 @@ export default function HomePage() {
 
             <div className="home-page-book-list">
                 {books.map((book, index) => (
-                    <div className="home-page-book-list-item" key={index}>
+                    <div 
+                        className="home-page-book-list-item" 
+                        key={index}
+                        onClick={() => handleBookClick(book.book_id)}  // Redirect to book details page on click
+                    >
                         <div className="home-page-book-title">
                             <div className="home-page-book-cover">
                                 <img 
@@ -116,7 +124,7 @@ export default function HomePage() {
                         </div>
                         <div className="home-page-book-rating">{book.rating || 5}</div> {/* Show "Unknown" if rating is null */}
                         <div className="home-page-book-genre">{book.genre || "Unknown"}</div> {/* Show "Unknown" if genre is null */}
-                        <div className="home-page-book-release-date">{book.releaseDate || "Unknown"}</div> {/* Show "Unknown" if releaseDate is null */}
+                        <div className="home-page-book-release-date">{book.released_date || "Unknown"}</div> {/* Show "Unknown" if releaseDate is null */}
                     </div>
                 ))}
             </div>

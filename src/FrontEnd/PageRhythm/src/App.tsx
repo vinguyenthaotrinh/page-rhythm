@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
         <Route path="/my-library-page" element={<MyLibraryPage />} />
-        <Route path="/book-details-page" element={<BookDetailsPage />} />
+        <Route path="/book-details-page/:bookID" element={<BookDetailsPage />} />
         <Route path="/request-password-reset-page" element={<RequestPasswordResetPage />} />
         <Route path="/" element={<Navigate to="/landing-page" />} />
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
