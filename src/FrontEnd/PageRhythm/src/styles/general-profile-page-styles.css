@@ -120,6 +120,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
+    border-radius: 24px;
 }
 
 .general-profile-page-profile-save-button.active {
@@ -129,7 +130,7 @@
 }
 
 .general-profile-page-profile-save-button.active:hover {
-    background-color: #51bcea;
+    background-color: #0f4ba3;
 }
 
 .general-profile-page-profile-save-button:disabled {
@@ -144,7 +145,7 @@
 }
 
 .general-profile-page-profile-reset-button:hover {
-    background-color: #51bcea;
+    background-color: #0f4ba3;
 }
 
 #general-profile-page-bio-icon {

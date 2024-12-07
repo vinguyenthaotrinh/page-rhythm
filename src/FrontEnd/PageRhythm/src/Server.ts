@@ -313,4 +313,44 @@ export default class Server {
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async searchBooks(title: string, genre: string | null): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = new URL(`${this.host}/book/search`);  // Construct the URL for the search endpoint
+    
+        // Add query parameters for title and genre
+        if (title) {
+            url.searchParams.append('title', title);
+        }
+    
+        if (genre) {
+            url.searchParams.append('genre', genre);
+        }
+    
+        const sessionToken = this.getSessionToken();
+    
+        try {
+            const response = await fetch(url.toString(), {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Include session token if required for authorization
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Search request failed with status: ${response.status}`);
+            }
+    
+            const books = await response.json();  // Expecting a JSON array of books
+            return books;  // Return the array of books found
+        } catch (error) {
+            console.error("Error during search:", error);
+            throw error;  // Rethrow the error to handle it elsewhere
+        }
+    }
+    
 }

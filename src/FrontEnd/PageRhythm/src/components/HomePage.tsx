@@ -32,22 +32,21 @@ export default function HomePage() {
         fetchBooks();
     }, []);
     
-    const handleSearch = () => {
-        // Implement search logic here
-        // Filter books based on searchTerm and selectedGenre
-    
-        const filteredBooks = books.filter((book) => {
-            if (selectedGenre === "All") {
-                return book.title.toLowerCase().includes(searchTerm.toLowerCase());
-            } else {
-                return (
-                    book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                    book.genre === selectedGenre
-                );
-            }
-        });
+    const handleSearch = async () => {
+        try {
+            const server = await Server.getInstance();  // Get the server instance
 
-        setBooks(filteredBooks);
+            // Call the searchBooks method with the search term and selected genre
+            const searchResults = await server.searchBooks(searchTerm, selectedGenre === "All" ? null : selectedGenre);
+
+            // Set the state with the search results
+            setBooks(searchResults);
+
+            // Optionally, you can log the results to verify
+            console.log("Search results:", searchResults);
+        } catch (error) {
+            console.error("Error during search:", error);
+        }
     };
     
     const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
