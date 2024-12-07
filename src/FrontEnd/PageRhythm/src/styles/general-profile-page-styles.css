@@ -39,12 +39,13 @@
     cursor: pointer;
     margin: 1px 20px;
     text-align: left;
+    font-family: 'Poppins-Regular', sans-serif;
     transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
 }
 
 /* Hover state with underline */
 .general-profile-page-profile-section-button:hover {
-    text-decoration: underline; /* Underline on hover */
+    font-family: 'Poppins-Bold', sans-serif;
     color: #265073; /* Slightly darker text color on hover */
 }
 
@@ -75,4 +76,15 @@
     color: #265073;
     align-items: center;
     font-family : 'Poppins-Bold', sans-serif;
+}
+
+.general-profile-page-profile-section-button:hover::after {
+    content: ""; /* Required to display the pseudo-element */
+    position: absolute;
+    left: 0; /* Position it to the left of the button */
+    top: 50%; /* Align it vertically in the middle */
+    transform: translateY(-50%); /* Center it vertically */
+    width: 4px; /* Thickness of the bar */
+    height: 4%; /* Height of the bar (adjust as needed) */
+    background-color: orange; /* Color of the vertical bar */
 }
