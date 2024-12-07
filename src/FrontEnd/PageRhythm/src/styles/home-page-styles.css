@@ -115,3 +115,24 @@ html, body {
 #home-page-search-container button:hover {
     background-color: #0f4ba3;
 }
+
+.home-page-book-list-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  /* Equal width for each column */
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f0f0f0; /* Light background color for headers */
+    margin-bottom: 10px;
+    border-radius: 8px;  /* Optional: rounded corners for headers */
+}
+
+.home-page-book-list-header {
+    text-align: center;
+    padding: 8px;
+    background-color: #f6f6f6;  /* Slightly different background for the headers */
+    border-right: 1px solid #ddd;  /* Border between columns */
+}
+
+.home-page-book-list-header:last-child {
+    border-right: none;  /* Remove border on the last column */
+}

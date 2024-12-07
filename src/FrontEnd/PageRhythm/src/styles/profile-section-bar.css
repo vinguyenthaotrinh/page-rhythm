@@ -62,7 +62,6 @@
     color: #265073; /* Slightly darker text color on hover */
 }
 
-/* Apply underline to hovered button */
 .profile-page-profile-section-button.hover-effect::after {
     content: "";                      /* Required to display the pseudo-element */
     position: absolute;
@@ -72,7 +71,7 @@
     width: 4px;                        /* Thickness of the bar */
     height: 60%;                       /* Height of the bar (adjust as needed) */
     background-color: orange;          /* Color of the vertical bar */
-    transition: all 1s ease;         /* Smooth transition */
+    transition: all 1s ease;            /* Smooth transition */
 }
 
 /* Active section (current option) will have the same effect as hovered option when no other button is hovered */

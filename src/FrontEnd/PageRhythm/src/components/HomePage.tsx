@@ -10,25 +10,28 @@ export default function HomePage() {
     const [selectedGenre, setSelectedGenre] = useState("All");
     const [books, setBooks] = useState([
         {
-          title: "There's a Million Books",
-          author: "Author Name",
-          genre: "Fiction",
-          releaseDate: "01/01/2023",
+            title: "There's a Million Books",
+            author: "Author Name",
+            genre: "Fiction",
+            rating: 4,
+            releaseDate: "01/01/2023",
+            cover: IMAGES.DEFAULT_BOOK_COVER,
         },
         {
-          title: "There's a Million Books",
-          author: "Author Name",
-          genre: "Non-Fiction",
-          releaseDate: "02/15/2022",
+            title: "There's a Million Books",
+            author: "Author Name",
+            genre: "Non-Fiction",
+            rating: 4,
+            releaseDate: "02/15/2022",
+            cover: IMAGES.DEFAULT_BOOK_COVER,
         },
-        // Add more book data here
     ]);
     
     const navigate = useNavigate();
     
     const handleSearch = () => {
-    // Implement search logic here
-    // Filter books based on searchTerm and selectedGenre
+        // Implement search logic here
+        // Filter books based on searchTerm and selectedGenre
     
         const filteredBooks = books.filter((book) => {
             if (selectedGenre === "All") {
@@ -76,6 +79,12 @@ export default function HomePage() {
                 <button onClick={handleSearch}>Search</button>
             </div>
             <div id="home-page-content">
+                <div className="home-page-book-list-headers">
+                    <div className="home-page-book-list-header">Title</div>
+                    <div className="home-page-book-list-header">Rating</div>
+                    <div className="home-page-book-list-header">Genre</div>
+                    <div className="home-page-book-list-header">Release Date</div>
+                </div>
             </div>
         </div>
     )
