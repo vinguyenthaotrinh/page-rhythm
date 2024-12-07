@@ -1,0 +1,32 @@
+/* Ensure body and root elements take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Make the main container full viewport height */
+#home-page {
+    display: flex;
+    flex-direction: column; /* Stack NavigationBar and Content vertically */
+    height: 100vh;         /* Full viewport height */
+    width: 100vw;          /* Full viewport width */
+    background-color: #F6FFDE;
+}
+
+/* Ensure the navigation bar height is fixed */
+#home-page nav {
+    flex-shrink: 0;        /* Prevent shrinking */
+}
+
+/* Make home-page-content occupy the remaining space */
+#home-page-content {
+    flex-grow: 1;          /* Take all remaining space */
+    display: flex;         /* Optional: Center the content */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;    /* Center-align the text */
+    padding: 20px;         /* Add padding for aesthetics */
+    background-color: #F6FFDE;
+    color: black;
+}
