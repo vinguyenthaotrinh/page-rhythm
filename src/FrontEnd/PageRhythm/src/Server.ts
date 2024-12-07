@@ -160,33 +160,16 @@ export default class Server {
         }
     }
 
-    public async getProfile(): Promise<any> {
+    public async logout(): Promise<void> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
         }
 
         if (!this.sessionToken) {
-            throw new Error("Session token is not set.");
+            console.warn("No session token found. Already logged out?");
+            return;
         }
 
-        const url = `${this.host}/account/profile`;
-
-        try {
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${this.sessionToken}`,
-                },
-            });
-
-            if (response.ok) {
-                return await response.json();
-            }
-
-            throw new Error(`Failed to get profile: ${response.status}`);
-        } catch (error) {
-            console.error("Error getting profile:", error);
-            throw error;
-        }
+        this.sessionToken = null;
     }
 }
