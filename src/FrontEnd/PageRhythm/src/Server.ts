@@ -273,4 +273,7 @@ export default class Server {
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async changePassword(passwords: any): Promise<void> {
+    }
 }

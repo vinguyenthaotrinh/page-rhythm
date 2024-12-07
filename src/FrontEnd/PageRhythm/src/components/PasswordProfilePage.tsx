@@ -7,65 +7,33 @@ import ProfileSectionBar from "./ProfileSectionBar";
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function PasswordProfilePage() {
-    const [originalProfile, setOriginalProfile] = useState({
-        fullName: "",
-        email: "",
-        bio: "",
-        birthday: "",
+
+    const [passwords, setPasswords] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmedNewPassword: ""
     });
 
-    const [profile, setProfile] = useState({ ...originalProfile });
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-
-    const loadProfile = async () => {
-        try {
-            const server = await Server.getInstance();
-            const profile = await server.getProfile(); // Fetch profile from server
-            console.log(profile);
-            setOriginalProfile({
-                fullName: profile.data.full_name || "",
-                email: profile.data.email || "",
-                bio: profile.data.bio || "",
-                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
-            });
-            setProfile({
-                fullName: profile.data.full_name || "",
-                email: profile.data.email || "",
-                bio: profile.data.bio || "",
-                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
-            });
-        } catch (error) {
-            console.error("Error loading profile:", error);
-        }
-    };
-
-    useEffect(() => {
-        loadProfile();
-    }, []);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
-        setProfile((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+        setPasswords((previous) => {
+            const updatedPasswords = { ...previous, [name]: value };
+            console.log(updatedPasswords); // Log updated value here
+            return updatedPasswords;
+        });
         setHasUnsavedChanges(true);
     };
 
     const handleSave = async () => {
         try {
             const server = await Server.getInstance();
-            await server.updateProfile(profile);
-            setOriginalProfile(profile);
+            //await server.changePassword(passwords);
             setHasUnsavedChanges(false);
         } catch (error) {
-            console.error("Error saving profile:", error);
+            console.error("Error while saving profile", error);
         }
-    };
-
-    const handleReset = () => {
-        setProfile({ ...originalProfile });
-        setHasUnsavedChanges(false);
     };
 
     return (
@@ -80,59 +48,41 @@ export default function PasswordProfilePage() {
                     >
                         <form className="password-profile-page-profile-form">
                             <label className="password-profile-page-input-label">
-                                Full Name:
+                                Enter your current password:
                                 <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.USER_ICON} alt="Full Name Icon" className="password-profile-page-input-icon" />
+                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
                                     <input
-                                        type="text"
-                                        name="fullName"
-                                        value={profile.fullName}
+                                        type="password"
+                                        name="currentPassword"
+                                        value={passwords.currentPassword}
                                         onChange={handleInputChange}
                                         className="password-profile-page-profile-input"
                                     />
                                 </div>
                             </label>
                             <label className="password-profile-page-input-label">
-                                Email:
+                                Enter your new password:
                                 <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.MAIL_ICON} alt="Email Icon" className="password-profile-page-input-icon" />
+                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
                                     <input
-                                        type="email"
-                                        name="email"
-                                        value={profile.email}
+                                        type="password"
+                                        name="newPassword"
+                                        value={passwords.newPassword}
                                         onChange={handleInputChange}
                                         className="password-profile-page-profile-input"
                                     />
                                 </div>
                             </label>
                             <label className="password-profile-page-input-label">
-                                Birthday (DD/MM/YYYY):
+                                Confirm your new password:
                                 <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.CALENDAR_ICON} alt="Birthday Icon" className="password-profile-page-input-icon" />
+                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
                                     <input
-                                        type="date"
-                                        name="birthday"
-                                        value={profile.birthday}
+                                        type="password"
+                                        name="confirmedNewPassword"
+                                        value={passwords.confirmedNewPassword}
                                         onChange={handleInputChange}
                                         className="password-profile-page-profile-input"
-                                    />
-                                </div>
-                            </label>
-                            <label className="password-profile-page-input-label">
-                                Bio:
-                                <div className="password-profile-page-input-container">
-                                    <img 
-                                        src={IMAGES.PENCIL_ICON} 
-                                        alt="Bio Icon" 
-                                        className="password-profile-page-input-icon" 
-                                        id = "password-profile-page-bio-icon"
-                                    />
-                                    <textarea
-                                        name="bio"
-                                        value={profile.bio}
-                                        onChange={handleInputChange}
-                                        className="password-profile-page-profile-textarea"
-                                        rows={8}
                                     />
                                 </div>
                             </label>
@@ -144,9 +94,6 @@ export default function PasswordProfilePage() {
                                     disabled={!hasUnsavedChanges}
                                 >
                                     Save
-                                </button>
-                                <button type="button" onClick={handleReset} className="password-profile-page-profile-reset-button">
-                                    Reset
                                 </button>
                             </div>
                         </form>
