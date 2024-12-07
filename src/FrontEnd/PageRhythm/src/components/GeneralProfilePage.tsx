@@ -14,7 +14,11 @@ export default function GeneralProfilePage() {
                 <ProfileSectionBar currentOption="general" />
                 <div className="general-profile-page-profile-content">
                     <h1 id = "general-profile-page-title">General Information</h1>
-                    <p>This is where your profile content will be displayed depending on the section.</p>
+                    <div
+                        id = "general-profile-page-profile-information-section"
+                    >
+                        Fill here
+                    </div>
                 </div>
             </div>
         </div>
