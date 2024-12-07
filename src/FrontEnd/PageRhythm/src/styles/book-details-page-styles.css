@@ -67,7 +67,6 @@ html, body {
     display: flex;  /* Use flexbox to center the image */
     justify-content: center;  /* Center horizontally */
     align-items: center;  /* Center vertically, if needed */
-    
 }
 
 /* Left Column (Book Cover) */
@@ -82,4 +81,52 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+/* Right Column (Book Information) */
+#book-details-page-introduction {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Styling for individual rows */
+.book-details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* Buttons Row */
+.buttons {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+/* Optional styling for book details text */
+strong {
+    font-weight: bold;
 }

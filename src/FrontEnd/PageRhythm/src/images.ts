@@ -16,6 +16,8 @@ import DEFAULT_BOOK_COVER from "./assets/images/default-book-cover.png";
 import SEARCH_ICON from "./assets/images/search-icon.png";
 import SLIDERS_ICON from "./assets/images/sliders-icon.png";
 import LEFT_ARROW_ICON from "./assets/images/left-arrow-icon.png";
+import FILLED_STAR_ICON from "./assets/images/filled-star-icon.png";
+import EMPTY_STAR_ICON from "./assets/images/empty-star-icon.png";
 
 const IMAGES = {
     LOGO,
@@ -36,6 +38,8 @@ const IMAGES = {
     SEARCH_ICON,
     SLIDERS_ICON,
     LEFT_ARROW_ICON,
+    FILLED_STAR_ICON,
+    EMPTY_STAR_ICON,
 };
 
 export default IMAGES;

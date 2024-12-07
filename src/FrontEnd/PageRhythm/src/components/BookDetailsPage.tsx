@@ -47,6 +47,19 @@ export default function BookDetailsPage() {
         return <div>Loading...</div>; // Placeholder while waiting for data
     }
 
+    const getStarRating = (rating: number) => {
+        const roundedRating = Math.round(rating);
+        let stars = [];
+        for (let i = 0; i < 5; i++) {
+            if (i < roundedRating) {
+                stars.push(<img key={i} src={IMAGES.FILLED_STAR_ICON} alt="Star" className="star-icon" />);
+            } else {
+                stars.push(<img key={i} src={IMAGES.EMPTY_STAR_ICON} alt="Star" className="star-icon" />);
+            }
+        }
+        return stars;
+    }
+
     return (
         <div
             id = "book-details-page"
@@ -73,7 +86,43 @@ export default function BookDetailsPage() {
 
                     {/* Right Column (Book Information) */}
                     <div id="book-details-page-introduction">
-                        To be continued...
+                        {/* Book Title and Buttons */}
+                        <div className="book-details-row">
+                            <h2>{book.title}</h2>
+                            <div className="buttons">
+                                <button>Read This Book</button>
+                                <button>Listen To Audio Book</button>
+                            </div>
+                        </div>
+
+                        {/* Author Name */}
+                        <div className="book-details-row">
+                            <strong>Author:</strong> {book.author}
+                        </div>
+
+                        {/* Rating */}
+                        <div className="book-details-row">
+                            <strong>Rating:</strong>
+                            <div className="star-rating">
+                                {getStarRating(book.rating)}
+                                <span>{book.rating}</span>
+                            </div>
+                        </div>
+
+                        {/* Release Date */}
+                        <div className="book-details-row">
+                            <strong>Release Date:</strong> {new Date(book.released_date).toLocaleDateString()}
+                        </div>
+
+                        {/* Genre */}
+                        <div className="book-details-row">
+                            <strong>Genre:</strong> {book.genre}
+                        </div>
+
+                        {/* Summary */}
+                        <div className="book-details-row">
+                            <strong>Summary:</strong> {book.summary}
+                        </div>
                     </div>
                 </div>
             </div>
