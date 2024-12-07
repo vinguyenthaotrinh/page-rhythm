@@ -1,0 +1,49 @@
+.profile-page-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 20px;
+}
+
+.profile-section-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200px;
+    background-color: #f6f6f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section-button {
+    padding: 10px 15px;
+    background-color: #265073;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+}
+
+.profile-section-button:hover {
+    background-color: #193c5c;
+}
+
+.logout-button {
+    background-color: #d9534f;
+}
+
+.logout-button:hover {
+    background-color: #c9302c;
+}
+
+.profile-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
