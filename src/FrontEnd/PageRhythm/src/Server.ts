@@ -353,4 +353,34 @@ export default class Server {
         }
     }
     
+    public async getBook(bookID: string): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book/${bookID}`;  // Update the endpoint to match the server-side route
+    
+        const sessionToken = this.getSessionToken();
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`  // Include the session token if required for authorization
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch book. Status: ${response.status}`);
+            }
+    
+            const book = await response.json();  // The response is expected to be a JSON object representing the book
+    
+            return book;  // Return the book object
+        } catch (error) {
+            console.error("Error fetching book:", error);
+            throw error;  // Rethrow the error to handle it elsewhere
+        }
+    }
 }

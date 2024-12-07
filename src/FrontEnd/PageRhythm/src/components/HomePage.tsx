@@ -18,12 +18,6 @@ export default function HomePage() {
                 const server = await Server.getInstance();  // Get the server instance
                 const randomBooks = await server.getAllBooksInRandomOrder();  // Fetch random books
                 setBooks(randomBooks);  // Set the fetched books into the state
-
-                //print the fetched books
-
-                for (let i = 0; i < randomBooks.length; i++) {
-                    console.log(randomBooks[i].image);
-                }
             } catch (error) {
                 console.error("Error fetching books:", error);
             }
