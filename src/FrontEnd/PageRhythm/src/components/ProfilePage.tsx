@@ -12,6 +12,12 @@ function ProfileSectionBar() {
         navigate(path);
     };
 
+    const handleLogout = async () => {
+        const server = await Server.getInstance();
+        await server.logout();
+        navigate("/landing-page");
+    };
+
     return (
         <div className="profile-section-bar">
             <button 
@@ -34,7 +40,7 @@ function ProfileSectionBar() {
             </button>
             <button 
                 className="profile-section-button logout-button" 
-                onClick={() => handleSectionClick("/logout")}
+                onClick={handleLogout}
             >
                 Logout
             </button>

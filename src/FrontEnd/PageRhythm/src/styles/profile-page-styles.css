@@ -8,42 +8,44 @@
 
 /* Vertical sidebar */
 .profile-section-bar {
+    background-color: #F6FFDE;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Align buttons at the top */
     align-items: stretch;
     width: 200px;
-    background-color: #f6f6f6;
-    padding: 20px 0; /* Padding for spacing */
+    padding: 60px 0; /* Padding for spacing */
     border-right: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Sidebar buttons */
+/* Sidebar buttons without background */
 .profile-section-button {
     padding: 15px;
-    background-color: #265073;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: transparent; /* No background */
+    color: black; /* Text color */
+    border: none; /* Remove border */
     font-size: 16px;
     cursor: pointer;
-    margin: 5px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 1px 20px;
     text-align: left;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
 }
 
-/* Hover and active state */
+/* Hover state with underline */
 .profile-section-button:hover {
-    background-color: #193c5c;
+    text-decoration: underline; /* Underline on hover */
+    color: #265073; /* Slightly darker text color on hover */
 }
 
+/* Logout button customization */
 .logout-button {
-    background-color: #d9534f;
+    color: #d9534f; /* Red text for logout */
 }
 
 .logout-button:hover {
-    background-color: #c9302c;
+    text-decoration: underline; /* Underline for logout */
+    color: #c9302c; /* Darker red on hover */
 }
 
 /* Main content area */
