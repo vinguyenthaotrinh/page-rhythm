@@ -1,3 +1,5 @@
+@import url('fonts.css');
+
 /* Ensure body and root elements take full height */
 html, body {
     height: 100%;
@@ -121,16 +123,19 @@ html, body {
     grid-template-columns: 1fr 1fr 1fr 1fr;  /* Equal width for each column */
     font-weight: bold;
     padding: 10px;
-    background-color: #f0f0f0; /* Light background color for headers */
-    margin-bottom: 10px;
+    background-color: transparent; /* Light background color for headers */
+    margin-bottom: 12px;
+    margin-top: 80px;
     border-radius: 8px;  /* Optional: rounded corners for headers */
 }
 
 .home-page-book-list-header {
     text-align: center;
     padding: 8px;
-    background-color: #f6f6f6;  /* Slightly different background for the headers */
-    border-right: 1px solid #ddd;  /* Border between columns */
+    background-color: transparent;  /* Slightly different background for the headers */
+    border-right: 1px solid transparent;  /* Border between columns */
+    color: black;
+    font-family: 'Poppins-Regular', sans-serif;
 }
 
 .home-page-book-list-header:last-child {
