@@ -33,6 +33,14 @@ export default function HomePage() {
             releaseDate: "02/15/2022",
             cover: IMAGES.DEFAULT_BOOK_COVER,
         },
+        {
+            title: "There's a Million Books",
+            author: "Neo",
+            genre: "Non-Fiction",
+            rating: 4,
+            releaseDate: "02/15/2022",
+            cover: IMAGES.DEFAULT_BOOK_COVER,
+        },
     ]);
     
     const navigate = useNavigate();
