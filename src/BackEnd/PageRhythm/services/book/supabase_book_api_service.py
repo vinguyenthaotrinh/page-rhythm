@@ -79,3 +79,11 @@ class SupabaseBookAPIService:
             return response.data
         except Exception as e:
             return False
+
+    def get_all_books(self) -> list[Book]:
+        try:
+            response = self.client.table('Book').select('*').execute()
+            return [Book(**book) for book in response.data]
+        except Exception as e:
+            return []
+        return []

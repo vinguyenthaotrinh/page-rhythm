@@ -8,42 +8,23 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function HomePage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGenre, setSelectedGenre] = useState("All");
-    const [books, setBooks] = useState([
-        {
-            title: "There's a Million Books",
-            author: "Mr Anderson",
-            genre: "Fiction",
-            rating: 4,
-            releaseDate: "01/01/2023",
-            cover: IMAGES.DEFAULT_BOOK_COVER,
-        },
-        {
-            title: "There's a Million Books",
-            author: "Smith",
-            genre: "Non-Fiction",
-            rating: 4,
-            releaseDate: "02/15/2022",
-            cover: IMAGES.DEFAULT_BOOK_COVER,
-        },
-        {
-            title: "There's a Million Books",
-            author: "Morpheus",
-            genre: "Non-Fiction",
-            rating: 4,
-            releaseDate: "02/15/2022",
-            cover: IMAGES.DEFAULT_BOOK_COVER,
-        },
-        {
-            title: "There's a Million Books",
-            author: "Neo",
-            genre: "Non-Fiction",
-            rating: 4,
-            releaseDate: "02/15/2022",
-            cover: IMAGES.DEFAULT_BOOK_COVER,
-        },
-    ]);
-    
+    const [books, setBooks] = useState<any[]>([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Fetch books on page load
+        const fetchBooks = async () => {
+            try {
+                const server = await Server.getInstance();  // Get the server instance
+                const randomBooks = await server.getAllBooksInRandomOrder();  // Fetch random books
+                setBooks(randomBooks);  // Set the fetched books into the state
+            } catch (error) {
+                console.error("Error fetching books:", error);
+            }
+        };
+
+        fetchBooks();
+    }, []);
     
     const handleSearch = () => {
         // Implement search logic here

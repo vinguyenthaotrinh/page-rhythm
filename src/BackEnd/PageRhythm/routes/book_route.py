@@ -140,3 +140,8 @@ def delete_book(book_id):
     if result:
         return jsonify({"message": "Book deleted successfully"}), 200
     return jsonify({"message": "Failed to delete book"}), 400
+
+@book_blueprint.route("/all/random", methods=['GET'])
+def get_all_books_in_random_order():
+    books = book_service.get_all_books_in_random_order()
+    return jsonify([book.to_serializable_JSON() for book in books]), 200

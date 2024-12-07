@@ -172,4 +172,34 @@ export default class Server {
 
         this.sessionToken = null;
     }
+
+    public async getAllBooksInRandomOrder(): Promise<any[]> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book/all/random`;  // Update the endpoint to match the server-side route
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.sessionToken}`  // Include the session token if required for authorization
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch books. Status: ${response.status}`);
+            }
+    
+            const books = await response.json();  // The response is expected to be a JSON array of books
+    
+            return books;  // Return the shuffled list of books
+        } catch (error) {
+            console.error("Error fetching books:", error);
+            throw error;  // Rethrow the error to handle it elsewhere
+        }
+    }
+
 }
