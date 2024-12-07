@@ -11,6 +11,7 @@ html, body {
     height: 100vh;         /* Full viewport height */
     width: 100vw;          /* Full viewport width */
     background-color: #F6FFDE;
+    padding: 12px;
 }
 
 /* Ensure the navigation bar height is fixed */
@@ -29,4 +30,58 @@ html, body {
     padding: 20px;         /* Add padding for aesthetics */
     background-color: #F6FFDE;
     color: black;
+}
+
+/* General styles for the search container */
+#home-page-search-container {
+    position: sticky; /* Keeps it always at the top of the content */
+    top: 0;           /* Immediately below the navigation bar */
+    background-color: #f6f6f6; /* Light background for the container */
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;  /* Ensure responsiveness for smaller screens */
+    gap: 12px;        /* Space between elements */
+    align-items: center; /* Vertically center align the items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+    z-index: 10;      /* Ensure it's above other content */
+}
+
+/* Input field styles */
+#home-page-search-container input[type="text"] {
+    flex: 1;             /* Make the input grow to take available space */
+    min-width: 200px;    /* Minimum width for the input */
+    padding: 8px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px;  /* Rounded corners */
+    background-color: white; /* White background */
+    font-size: 16px;
+    color: black;
+}
+
+/* Select dropdown styles */
+#home-page-search-container select {
+    flex: 0 0 auto;       /* Prevent growing too large */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 16px;
+    color: black;
+}
+
+/* Button styles */
+#home-page-search-container button {
+    flex: 0 0 auto;       /* Prevent growing too large */
+    padding: 10px 16px;
+    background-color: #125acf; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#home-page-search-container button:hover {
+    background-color: #0f4ba3; /* Darker shade on hover */
 }

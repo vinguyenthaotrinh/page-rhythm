@@ -12,6 +12,7 @@ import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER from "./assets/images/landing
 import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom-left-corner.png";
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER from "./assets/images/landing-page-bottom-right-corner.png";
 import DEFAULT_PROFILE_PICTURE from "./assets/images/default-profile-picture.png";
+import DEFAULT_BOOK_COVER from "./assets/images/default-book-cover.png";
 
 const IMAGES = {
     LOGO,
@@ -28,6 +29,7 @@ const IMAGES = {
     PENCIL_ICON,
     CALENDAR_ICON,
     DEFAULT_PROFILE_PICTURE,
+    DEFAULT_BOOK_COVER
 };
 
 export default IMAGES;
