@@ -15,19 +15,33 @@ html, body {
     width: 100vw;          /* Full viewport width */
     background-color: #F6FFDE;
     color: black;
-    padding: 12px;
 }
 
 
-#back-button-container {
-    align-self: center;
+#book-details-page-back-button-region {
     background-color: transparent;
     padding: 16px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Align children to the left */
     align-items: center;
     gap: 12px;
     position: sticky;
     top: 80px;
     border-radius: 8px;
+}
+
+#book-details-page-back-button-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+    margin-left: 24px;
+}
+
+.book-details-page-back-button-icon {
+    width: 24px;  /* Adjust the icon size as needed */
+    height: 24px; /* Adjust the icon size as needed */
+    margin-right: 8px; /* Space between the icon and the text */
 }

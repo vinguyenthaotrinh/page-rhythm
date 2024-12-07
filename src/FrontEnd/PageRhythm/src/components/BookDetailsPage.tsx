@@ -7,6 +7,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function BookDetailsPage() {
     const { bookID } = useParams<{ bookID: string }>();
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+        navigate(-1); // Navigate back to the previous page
+    };
 
     return (
         <div
@@ -14,9 +19,12 @@ export default function BookDetailsPage() {
         >
             <NavigationBar />
             <div
-                id = "back-button-container"
+                id = "book-details-page-back-button-region"
             >
-                Back
+                <div id="book-details-page-back-button-container" onClick={handleBackClick}>
+                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="book-details-page-back-button-icon" />
+                    <span>Back</span>
+                </div>
             </div>
         </div>
     )
