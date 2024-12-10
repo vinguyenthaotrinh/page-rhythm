@@ -89,3 +89,4 @@ def delete_rating(book_id):
         return jsonify({"message": "Rating deleted successfully"}), 200
     
     return jsonify({"message": "Failed to delete rating"}), 400
+

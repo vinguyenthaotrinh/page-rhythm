@@ -169,12 +169,12 @@ export default function BookDetailsPage() {
 
                         {/* Rating */}
                         {
-                            book && book.rating && (
+                            book && book.book_rating && (
                                 <div className="book-details-row">
                                     <strong>Rating:</strong>
                                     <div className="star-rating">
-                                    {getStarRating(book.rating)}
-                                    <span>{book.rating}</span>
+                                    {getStarRating(book.book_rating)}
+                                    <span>{book.book_rating}</span>
                                     </div>
                                 </div>
                             )

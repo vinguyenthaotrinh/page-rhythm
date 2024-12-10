@@ -64,4 +64,3 @@ class BookRatingService:
             average_rating = self.supabase.calculate_average_rating(book_id)
             self.supabase.update_book_rating(book_id, average_rating)
         return success
-
