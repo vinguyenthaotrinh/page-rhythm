@@ -89,9 +89,18 @@ export default function BookDetailsPage() {
                         {/* Book Title and Buttons */}
                         <div className="book-details-page-title-row">
                             <h2>{book.title}</h2>
-                            <div className="buttons">
-                                <button>Read This Book</button>
-                                <button>Listen To Audio Book</button>
+                            <div className="book-details-page-buttons">
+                                <button
+                                    id = "book-details-page-read-button"
+                                    className = "book-details-page-button"
+                                >
+                                    Read This Book
+                                </button>
+                                <button
+                                    id = "book-details-page-listen-button"
+                                    className = "book-details-page-button"
+                                >   Listen To Audio Book
+                                </button>
                             </div>
                         </div>
 
@@ -101,13 +110,17 @@ export default function BookDetailsPage() {
                         </div>
 
                         {/* Rating */}
-                        <div className="book-details-row">
-                            <strong>Rating:</strong>
-                            <div className="star-rating">
-                                {getStarRating(book.rating)}
-                                <span>{book.rating}</span>
-                            </div>
-                        </div>
+                        {
+                            book && book.rating && (
+                                <div className="book-details-row">
+                                    <strong>Rating:</strong>
+                                    <div className="star-rating">
+                                    {getStarRating(book.rating)}
+                                    <span>{book.rating}</span>
+                                    </div>
+                                </div>
+                            )
+                        }
 
                         {/* Release Date */}
                         <div className="book-details-row">
@@ -125,6 +138,15 @@ export default function BookDetailsPage() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div
+                id = "book-details-page-review-section"
+            >
+                Rating & Comments
+                <button>
+                    Write a comment
+                </button>
+                {/*Click one of five stars to give a rating or click the highest enabled star to roll-back a given rating*/}
             </div>
         </div>
     )
