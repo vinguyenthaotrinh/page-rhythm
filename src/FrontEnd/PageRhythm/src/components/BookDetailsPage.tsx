@@ -8,6 +8,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 export default function BookDetailsPage() {
     const { bookID } = useParams<{ bookID: string }>();
     const [book, setBook] = useState<any>(null);
+
+    const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
+
+    const handleRating = (rating: number) => {
+        setUserRating(rating); // Update the selected rating
+    };
+
+
     const navigate = useNavigate();
 
     const handleBackClick = () => {
@@ -139,14 +147,22 @@ export default function BookDetailsPage() {
                     </div>
                 </div>
             </div>
-            <div
-                id = "book-details-page-review-section"
-            >
-                Rating & Comments
-                <button>
-                    Write a comment
-                </button>
-                {/*Click one of five stars to give a rating or click the highest enabled star to roll-back a given rating*/}
+            <div id="book-details-page-review-section">
+                <strong>Rating & Comments:</strong>
+                <div className="review-section-content">
+                    <div className="star-rating">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <img
+                                key={star}
+                                src={star <= (userRating || 0) ? IMAGES.FILLED_STAR_ICON : IMAGES.EMPTY_STAR_ICON}
+                                alt={`${star} Star`}
+                                className="star-icon"
+                                onClick={() => handleRating(star)} // Handle click to set rating
+                            />
+                        ))}
+                    </div>
+                    <button className="write-comment-button">Write a comment</button>
+                </div>
             </div>
         </div>
     )

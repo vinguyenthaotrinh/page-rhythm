@@ -151,3 +151,51 @@ html, body {
 strong {
     font-weight: bold;
 }
+
+#book-details-page-review-section {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; /* Align items vertically on the same line */
+    gap: 16px; /* Space between items */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-section-content {
+    display: flex;
+    align-items: center; /* Align items on the same row */
+    gap: 16px; /* Space between stars and button */
+}
+
+.star-rating {
+    display: flex; /* Layout stars horizontally */
+    gap: 4px; /* Space between stars */
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.star-icon:hover {
+    transform: scale(1.2); /* Slight zoom-in effect on hover */
+}
+
+.write-comment-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #265073;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.write-comment-button:hover {
+    background-color: #1A3E5C;
+}
