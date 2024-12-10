@@ -177,8 +177,8 @@ html, body {
 }
 
 .register-page-left-overlay-image {
-    width: 100%; /* Adjust width as needed */
-    height: auto; /* Keep the aspect ratio intact */
+    width: 100%;        /* Adjust width as needed */
+    height: auto;       /* Keep the aspect ratio intact */
 }
 
 .register-page-front-right-image-container {
@@ -236,7 +236,7 @@ html, body {
 }
 
 /* Hide the default checkbox and create a custom round one */
-.terms-label input[type="checkbox"] {
+.register-page- input[type="checkbox"] {
     accent-color: white;
     width: 20px;
     height: 20px;
@@ -252,18 +252,18 @@ html, body {
 }
 
 /* Add a tick mark when checked */
-.terms-label input[type="checkbox"]:checked::before {
-    content: "✔";  /* Checkmark */
+.register-page-terms-label input[type="checkbox"]:checked::before {
+    content: "✔";          /* Checkmark */
     position: absolute;
-    top: -1px;  /* Adjust the position of the checkmark */
-    left: 4px;  /* Adjust the position of the checkmark */
-    color: #000000;  /* Matching the border color */
-    font-size: 16px;  /* Make the checkmark fit the circle */
+    top: -1px;              /* Adjust the position of the checkmark */
+    left: 4px;                  /* Adjust the position of the checkmark */
+    color: #000000;             /* Matching the border color */
+    font-size: 16px;            /* Make the checkmark fit the circle */
 }
 
 
 /* Optional: Style the label text */
-.terms-label {
+.register-page-terms-label {
     font-family: 'Poppins-Regular', sans-serif;
     font-size: 16px;
     color: #333;
@@ -271,7 +271,7 @@ html, body {
     align-items: center;
 }
 
-.terms-label a {
+.register-page-terms-label a {
     margin-left: 4px;
 }
 

@@ -17,7 +17,7 @@ function LogoSection() {
             role="button"
             tabIndex={0}
             onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
+            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
             style={{ cursor: 'pointer' }}
         >
             <img id="register-page-logo" src={IMAGES.LOGO} alt="Logo" />
@@ -195,7 +195,7 @@ function SignupSection() {
                     className="register-page-input-container"
                     id = "register-page-terms-container"
                 >
-                    <label htmlFor="agree-terms" className="terms-label">
+                    <label htmlFor="agree-terms" className="register-page-terms-label">
                         <input 
                             type="checkbox" 
                             id="agree-terms"

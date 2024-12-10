@@ -11,10 +11,29 @@ export default function BookDetailsPage() {
 
     const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
 
-    const handleRating = (rating: number) => {
-        setUserRating(rating); // Update the selected rating
-    };
+    const handleRating = async (rating: number) => {
+        // If the user clicks the currently selected rating, reset the rating
+        if (rating === userRating) {
+            setUserRating(null); // Reset the rating
 
+            const server = await Server.getInstance();
+
+            if (!bookID) {
+                console.error("Book ID is undefined. Cannot delete rating.");
+                return; // Exit early if bookID is undefined
+            }
+
+            try {
+                await server.deleteBookRating(bookID); // Delete the rating from the server
+                console.log("Rating deleted successfully.");
+            } catch (error) {
+                console.error("Failed to delete rating:", error);
+            }
+            
+        } else {
+            setUserRating(rating); // Update the rating
+        }
+    };
 
     const navigate = useNavigate();
 
@@ -150,6 +169,7 @@ export default function BookDetailsPage() {
             <div id="book-details-page-review-section">
                 <strong>Rating & Comments:</strong>
                 <div className="review-section-content">
+                    <button className="write-comment-button">Write a comment</button>
                     <div className="star-rating">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <img
@@ -160,8 +180,7 @@ export default function BookDetailsPage() {
                                 onClick={() => handleRating(star)} // Handle click to set rating
                             />
                         ))}
-                    </div>
-                    <button className="write-comment-button">Write a comment</button>
+                    </div>                
                 </div>
             </div>
         </div>

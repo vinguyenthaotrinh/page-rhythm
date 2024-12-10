@@ -9,7 +9,7 @@ book_rating_blueprint = Blueprint("book_rating", __name__)
 book_rating_service = BookRatingService()
 
 # 1. Add a new rating
-@book_rating_blueprint.route('/create', methods=['POST'])
+@book_rating_blueprint.route("/create", methods=["POST"])
 @jwt_required()
 def add_rating():
     user_id = json.loads(get_jwt_identity())["account_id"]
@@ -34,13 +34,13 @@ def add_rating():
     return jsonify({"message": "Failed to add rating"}), 400
 
 # 2. Get all ratings for a specific book
-@book_rating_blueprint.route('/<int:book_id>', methods=['GET'])
+@book_rating_blueprint.route("/<int:book_id>", methods=["GET"])
 def get_book_ratings(book_id):
     ratings = book_rating_service.get_book_ratings(book_id)
     return jsonify([rating.to_serializable_JSON() for rating in ratings]), 200
 
-# 3. Get a specific user's rating for a specific book
-@book_rating_blueprint.route('/<int:book_id>/my_rating', methods=['GET'])
+# 3. Get a specific user"s rating for a specific book
+@book_rating_blueprint.route("/<int:book_id>/my_rating", methods=["GET"])
 @jwt_required()
 def get_user_rating(book_id):
     user_id = json.loads(get_jwt_identity())["account_id"]
@@ -50,7 +50,7 @@ def get_user_rating(book_id):
     return jsonify({"message": "No rating found for this user and book"}), 404
 
 # 4. Update an existing rating
-@book_rating_blueprint.route('/<int:book_id>', methods=['PATCH'])
+@book_rating_blueprint.route("/<int:book_id>", methods=["PATCH"])
 @jwt_required()
 def update_rating(book_id):
     user_id = json.loads(get_jwt_identity())["account_id"]
@@ -73,12 +73,14 @@ def update_rating(book_id):
     return jsonify({"message": "Failed to update rating"}), 400
 
 # 5. Delete a rating
-@book_rating_blueprint.route('/<int:book_id>', methods=['DELETE'])
+@book_rating_blueprint.route("/<int:book_id>", methods=["DELETE"])
 @jwt_required()
 def delete_rating(book_id):
     user_id = json.loads(get_jwt_identity())["account_id"]
 
     success = book_rating_service.delete_rating(user_id, book_id)
+
     if success:
         return jsonify({"message": "Rating deleted successfully"}), 200
+    
     return jsonify({"message": "Failed to delete rating"}), 400

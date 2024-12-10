@@ -383,4 +383,21 @@ export default class Server {
             throw error;  // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async deleteBookRating(bookID: string): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `/rating/${bookID}`; // Backend endpoint for deleting a rating
+        const sessionToken = this.getSessionToken();
+    
+        try {
+            const response = await this.sendRequest(url, "DELETE", null); // DELETE request with no body
+            console.log(`Rating for book ${bookID} deleted successfully:`, response);
+        } catch (error) {
+            console.error(`Error deleting rating for book ${bookID}:`, error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }
