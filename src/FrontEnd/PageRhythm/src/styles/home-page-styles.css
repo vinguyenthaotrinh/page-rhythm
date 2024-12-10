@@ -1,11 +1,6 @@
 @import url('fonts.css');
 
-/* Ensure body and root elements take full height */
-html, body {
-    overflow: hidden;
-    height: 100%;
-    margin: 0;
-}
+
 
 /* Make the main container full viewport height */
 #home-page {
