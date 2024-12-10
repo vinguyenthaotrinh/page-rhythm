@@ -389,14 +389,101 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `/rating/${bookID}`; // Backend endpoint for deleting a rating
+        const url = `/book_rating/${bookID}`; // Backend endpoint for deleting a rating
+        const sessionToken = this.getSessionToken();
+    
+        if (!sessionToken) {
+            throw new Error("Session token is missing. Please log in again.");
+        }
+    
+        try {
+            const response = await fetch(`${this.host}${url}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Ensure the token is included
+                },
+            });
+    
+            if (!response.ok) {
+                // Log the status and error details
+                console.error(
+                    `Failed to delete rating for book ${bookID}. HTTP status: ${response.status}, message: ${response.statusText}`
+                );
+                throw new Error(`Failed to delete rating: ${response.statusText} (${response.status})`);
+            }
+    
+            console.log(`Rating for book ${bookID} deleted successfully.`);
+        } catch (error) {
+            console.error(`Error deleting rating for book ${bookID}:`, error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async getBookRating(bookID: string): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book_rating/${bookID}/my_rating`; // Backend endpoint for fetching a book's rating
+    
         const sessionToken = this.getSessionToken();
     
         try {
-            const response = await this.sendRequest(url, "DELETE", null); // DELETE request with no body
-            console.log(`Rating for book ${bookID} deleted successfully:`, response);
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}` // Include the session token if required for authorization
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch rating for book ${bookID}. Status: ${response.status}`);
+            }
+    
+            const rating = await response.json(); // The response is expected to be a JSON object representing the rating
+    
+            return rating; // Return the rating object
         } catch (error) {
-            console.error(`Error deleting rating for book ${bookID}:`, error);
+            console.error(`Error fetching rating for book ${bookID}:`, error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async insertBookRating(bookID: string, rating: number): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book_rating/create`;  // The endpoint for creating a new rating
+    
+        const sessionToken = this.getSessionToken();
+    
+        const body = {
+            book_id: bookID,
+            rating: rating,
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+                body: JSON.stringify(body), // Send the rating data as the body
+            });
+    
+            if (response.ok) {
+                console.log("Rating inserted successfully.");
+            } else {
+                const data = await response.json();
+                console.error("Error inserting rating:", data.message || "Failed to insert rating");
+                throw new Error(data.message || "Failed to insert rating");
+            }
+        } catch (error) {
+            console.error("Error during rating insertion:", error);
             throw error; // Rethrow the error to handle it elsewhere
         }
     }

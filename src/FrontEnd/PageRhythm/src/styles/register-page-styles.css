@@ -90,7 +90,7 @@ html, body {
     color: #000000;
 }
 
-.register-page-input-container{
+.register-page-input-container {
     position: relative;
     width: 400px;
     margin: 10px auto;
@@ -110,6 +110,27 @@ html, body {
     color:#000000;
     font-family: Poppins-Regular;
     margin-bottom: 8px;
+}
+
+.last-register-page-input-container {
+    position: relative;
+    width: 400px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.last-register-page-input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 60px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: white;
+    color:#000000;
+    font-family: Poppins-Regular;
 }
 
 .register-page-input-container textarea {
@@ -236,31 +257,19 @@ html, body {
 }
 
 /* Hide the default checkbox and create a custom round one */
-.register-page- input[type="checkbox"] {
+#register-page-agree-terms {
     accent-color: white;
     width: 20px;
     height: 20px;
     border-radius: 50%;  /* Round checkbox */
-    margin-right: 10px;  /* Space between checkbox and text */
+    margin-right: 8px;
     border: 2px solid #a4c0ed;  /* Light blue border */
     background-color: white;
     position: relative;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle; /* Ensures alignment with label text */
-    
 }
-
-/* Add a tick mark when checked */
-.register-page-terms-label input[type="checkbox"]:checked::before {
-    content: "✔";          /* Checkmark */
-    position: absolute;
-    top: -1px;              /* Adjust the position of the checkmark */
-    left: 4px;                  /* Adjust the position of the checkmark */
-    color: #000000;             /* Matching the border color */
-    font-size: 16px;            /* Make the checkmark fit the circle */
-}
-
 
 /* Optional: Style the label text */
 .register-page-terms-label {
@@ -269,7 +278,10 @@ html, body {
     color: #333;
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
+
 
 .register-page-terms-label a {
     margin-left: 4px;
@@ -278,6 +290,7 @@ html, body {
 #register-page-terms-container {
     display: flex;
     align-items: center; /* Vertically center the checkbox and the label text */
+    justify-content: start; /* Align items to the left */
 }
 
 #register-page::-webkit-scrollbar {

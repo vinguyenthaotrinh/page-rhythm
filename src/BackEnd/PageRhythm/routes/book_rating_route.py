@@ -12,11 +12,12 @@ book_rating_service = BookRatingService()
 @book_rating_blueprint.route("/create", methods=["POST"])
 @jwt_required()
 def add_rating():
+    
     user_id = json.loads(get_jwt_identity())["account_id"]
     data = request.json
     book_id = data.get("book_id")
     rating = data.get("rating")
-    
+
     if not (1 <= rating <= 5):
         return jsonify({"message": "Rating must be between 1 and 5"}), 400
 
@@ -31,6 +32,7 @@ def add_rating():
 
     if success:
         return jsonify({"message": "Rating added successfully"}), 201
+    
     return jsonify({"message": "Failed to add rating"}), 400
 
 # 2. Get all ratings for a specific book
@@ -44,9 +46,12 @@ def get_book_ratings(book_id):
 @jwt_required()
 def get_user_rating(book_id):
     user_id = json.loads(get_jwt_identity())["account_id"]
+
     rating = book_rating_service.get_user_rating(user_id, book_id)
+
     if rating:
         return jsonify(rating.to_serializable_JSON()), 200
+    
     return jsonify({"message": "No rating found for this user and book"}), 404
 
 # 4. Update an existing rating

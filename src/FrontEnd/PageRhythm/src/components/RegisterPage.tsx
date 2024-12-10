@@ -192,13 +192,13 @@ function SignupSection() {
                 </div>
 
                 <div 
-                    className="register-page-input-container"
+                    className="last-register-page-input-container"
                     id = "register-page-terms-container"
                 >
                     <label htmlFor="agree-terms" className="register-page-terms-label">
                         <input 
                             type="checkbox" 
-                            id="agree-terms"
+                            id="register-page-agree-terms"
                             name="agree-terms" 
                             required 
                             checked={agreeWithTerms} 

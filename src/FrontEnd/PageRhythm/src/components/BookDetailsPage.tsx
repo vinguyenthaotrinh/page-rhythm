@@ -12,26 +12,38 @@ export default function BookDetailsPage() {
     const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
 
     const handleRating = async (rating: number) => {
-        // If the user clicks the currently selected rating, reset the rating
-        if (rating === userRating) {
-            setUserRating(null); // Reset the rating
+        const server = await Server.getInstance();
 
-            const server = await Server.getInstance();
+        if (!bookID) {
+            console.error("Book ID is undefined. Cannot delete rating.");
+            return; // Exit early if bookID is undefined
+        }
 
-            if (!bookID) {
-                console.error("Book ID is undefined. Cannot delete rating.");
-                return; // Exit early if bookID is undefined
+        try {
+            if (rating === userRating) {
+                // If the user clicks the currently selected rating, reset the rating
+
+                if (userRating !== null) {
+                    await server.deleteBookRating(bookID); // Delete the existing rating
+                    console.log("Rating deleted successfully.");
+                }
+
+                setUserRating(null); 
+            } else {
+
+                // Delete the existing rating before updating
+                if (userRating !== null && userRating !== undefined) {
+                    await server.deleteBookRating(bookID);
+                    console.log("Existing rating deleted successfully.");
+                }
+                
+                // Update the rating
+                setUserRating(rating); // Update the rating locally
+                await server.insertBookRating(bookID, rating); // Send the new rating to the server
+                console.log(`Rating updated to ${rating}.`);
             }
-
-            try {
-                await server.deleteBookRating(bookID); // Delete the rating from the server
-                console.log("Rating deleted successfully.");
-            } catch (error) {
-                console.error("Failed to delete rating:", error);
-            }
-            
-        } else {
-            setUserRating(rating); // Update the rating
+        } catch (error) {
+            console.error("Error handling rating:", error);
         }
     };
 
@@ -65,8 +77,27 @@ export default function BookDetailsPage() {
             }
         };
 
+        const fetchUserRating = async () => {
+            try {
+                if (!bookID) {
+                    console.error("Book ID is not available.");
+                    return;
+                }
+
+                const server = await Server.getInstance();
+                const rating = await server.getBookRating(bookID); // Fetch user rating
+                if (rating) {
+                    setUserRating(rating.rating); // Set the user rating in state
+                    console.log("User rating fetched successfully.", rating);
+                }
+            } catch (error) {
+                console.error("Error fetching user rating:", error);
+            }
+        };
+
         if (bookID) {
             fetchBookDetails(); // Fetch details when the component mounts
+            fetchUserRating(); // Fetch user rating when the component mounts
         }
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 
