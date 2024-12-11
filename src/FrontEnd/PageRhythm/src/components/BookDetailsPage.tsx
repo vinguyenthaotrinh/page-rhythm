@@ -105,7 +105,7 @@ export default function BookDetailsPage() {
                 }
 
                 const server = await Server.getInstance();
-                const commentsData = await server.getAllComments(bookID); // Fetch comments for the book
+                const commentsData = await server.retrieveAllComments(bookID); // Fetch comments for the book
                 setComments(commentsData); // Update the state with the fetched comments
                 console.log("Comments fetched successfully.", commentsData);
             } catch (error) {
@@ -136,7 +136,7 @@ export default function BookDetailsPage() {
                     </div>
                     <div className="comment-header-right">
                         <div className="comment-author">
-                            <span className="author-username">{comment.comment_author_id}</span>
+                            <span className="author-username">{comment.comment_author_full_name}</span>
                             <span className="comment-date">{new Date(comment.create_time).toLocaleString()}</span>
                         </div>
                         <div className="comment-content">{comment.content}</div>

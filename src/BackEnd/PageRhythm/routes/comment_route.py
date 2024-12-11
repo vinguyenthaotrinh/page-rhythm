@@ -47,3 +47,11 @@ def get_all_comments():
     comments = comment_service.get_all_comments(book_id)
 
     return jsonify([comment.to_serializable_JSON() for comment in comments]), 200
+
+@comment_blueprint.route("/retrieve_all_comments", methods=["GET"])
+def retrieve_all_comments():
+    book_id = request.args.get("book_id")
+    comment_service = CommentService()
+    comments = comment_service.retrieve_all_comments(book_id)
+
+    return jsonify([comment.to_serializable_JSON() for comment in comments]), 200
