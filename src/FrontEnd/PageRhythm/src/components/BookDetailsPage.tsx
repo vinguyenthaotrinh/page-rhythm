@@ -137,6 +137,10 @@ export default function BookDetailsPage() {
         return stars;
     }
 
+    const handleWriteCommentButtonClick = () => {
+        navigate(`/comment-page/${bookID}/null`); // Navigate to the comment page
+    };
+
     return (
         <div
             id = "book-details-page"
@@ -220,7 +224,10 @@ export default function BookDetailsPage() {
             <div id="book-details-page-review-section">
                 <strong>Rating & Comments:</strong>
                 <div className="review-section-content">
-                    <button className="write-comment-button">Write a comment</button>
+                    <button 
+                        className="write-comment-button"
+                        onClick={handleWriteCommentButtonClick}
+                    >Write a comment</button>
                     <div className="star-rating">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <img
