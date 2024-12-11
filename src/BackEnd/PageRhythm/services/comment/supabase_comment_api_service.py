@@ -1,4 +1,5 @@
 from services.supabase_client_service import SupabaseClientService
+from models.displayed_comment import DisplayedComment
 from models.comment import Comment
 from typing import Optional
 import datetime
@@ -45,6 +46,14 @@ class SupabaseCommentAPIService:
         try:
             response = self.client.table('Comment').select('*').eq('book_id', book_id).execute()
             return [Comment.deserialize_JSON(comment) for comment in response.data]
+        except Exception as e:
+            return []
+        return []
+    
+    def retrieve_all_comments(self, book_id: int) -> DisplayedComment:
+        try:
+            response = self.client.table('Comment').select('*').eq('book_id', book_id).execute()
+            return response.data
         except Exception as e:
             return []
         return []
