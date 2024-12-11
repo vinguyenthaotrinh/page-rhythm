@@ -9,11 +9,6 @@ export default function CommentPage() {
 
     const { bookID } = useParams<{ bookID: string }>();
     const {repliedCommentID} = useParams<{ repliedCommentID: string }>();
-    /**
-     * 
-     * repliedCommentID is the ID (int) of the comment that the user is replying to.
-     * repliedCommentID can be null
-     * **/
 
     const navigate = useNavigate();
     const [comment, setComment] = useState<string>(""); // Stores user input for the comment
@@ -28,9 +23,29 @@ export default function CommentPage() {
             return;
         }
 
+        if (bookID === undefined) {
+            console.error("Book ID is undefined.");
+            return;
+        }
+
+        if (repliedCommentID === undefined) {
+            console.error("Replied comment ID is undefined.");
+            return;
+        }
+
         try {
             const server = await Server.getInstance();
-            //await server.addComment(bookID, comment, repliedCommentID); 
+
+            // Parse the repliedCommentID as an integer if it's not "null" string
+            const parsedRepliedCommentID = (repliedCommentID === "null") ? null : parseInt(repliedCommentID, 10);
+
+            if (parsedRepliedCommentID === null) {
+                // If repliedCommentID is "null" or parsed as null, create a new comment
+                await server.createComment(bookID, comment);
+            } else if (parsedRepliedCommentID !== undefined) {
+                // If there is a valid repliedCommentID, reply to an existing comment
+                await server.replyToComment(bookID, comment, parsedRepliedCommentID);
+            }
             console.log("Comment submitted successfully.");
             navigate(-1); // Navigate back to the previous page after submission
         } catch (error) {

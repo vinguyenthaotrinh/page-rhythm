@@ -68,18 +68,19 @@
     font-size: 16px;
     font-family: "Poppins-Regular", sans-serif;
     outline: none;
+    color: black;
     resize: none; /* Disable resizing */
     background-color: #FFFFFF;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
 }
 
 #comment-textarea:focus {
-    border-color: #5EBA7D; /* Green border for focus state */
+    border-color: #265073; /* Green border for focus state */
     box-shadow: 0px 0px 6px rgba(94, 186, 125, 0.5); /* Glow effect */
 }
 
 #comment-submit-button {
-    background-color: #5EBA7D; /* Green button color */
+    background-color: #265073; 
     color: #FFFFFF; /* White text color */
     font-family: "Poppins-Bold", sans-serif;
     font-size: 16px;
@@ -92,9 +93,9 @@
 }
 
 #comment-submit-button:hover {
-    background-color: #4DA76B; /* Darker green on hover */
+    background-color: #1A3E5C; /* Darker green on hover */
 }
 
 #comment-submit-button:active {
-    background-color: #3A8653; /* Even darker green on active click */
+    background-color: #1A3E5C; /* Even darker green on active click */
 }

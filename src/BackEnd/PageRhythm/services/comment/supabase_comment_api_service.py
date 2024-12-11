@@ -37,6 +37,7 @@ class SupabaseCommentAPIService:
             response = self.client.table('Comment').insert(comment.to_serializable_JSON()).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
     

@@ -514,4 +514,91 @@ export default class Server {
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async createComment(bookID: string, content: string): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/comment/create`; // Endpoint for creating a new comment
+    
+        const sessionToken = this.getSessionToken();
+    
+        if (!sessionToken) {
+            throw new Error("Session token is missing. Please log in again.");
+        }
+    
+        const body = {
+            book_id: bookID, // The book ID the comment is associated with
+            content: content, // The content of the comment
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+                body: JSON.stringify(body), // Send the comment data as the body
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error creating comment:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to create comment.");
+            }
+    
+            const result = await response.json(); // The response is expected to confirm success
+            console.log("Comment created successfully:", result);
+            return result; // Return the success result
+        } catch (error) {
+            console.error("Error during comment creation:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async replyToComment(bookID: string, content: string, repliedCommentID: number): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/comment/reply`; // Endpoint for replying to a comment
+    
+        const sessionToken = this.getSessionToken();
+    
+        if (!sessionToken) {
+            throw new Error("Session token is missing. Please log in again.");
+        }
+    
+        const body = {
+            book_id: bookID, // The book ID associated with the reply
+            content: content, // The content of the reply
+            replied_comment_id: repliedCommentID, // The ID of the comment being replied to
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Include JWT token for authorization
+                },
+                body: JSON.stringify(body), // Send the reply data as the body
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error replying to comment:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to reply to comment.");
+            }
+    
+            const result = await response.json(); // The response is expected to confirm success
+            console.log("Reply created successfully:", result);
+            return result; // Return the success result
+        } catch (error) {
+            console.error("Error during reply creation:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }
