@@ -65,6 +65,8 @@ export default function ProfileSectionBar({ currentOption }: ProfileSectionBarPr
             <button 
                 className="profile-page-profile-section-button logout-button" 
                 onClick={handleLogout}
+                onMouseEnter={() => setHoveredOption("logout")}
+                onMouseLeave={() => setHoveredOption(null)}
             >
                 Logout
             </button>
