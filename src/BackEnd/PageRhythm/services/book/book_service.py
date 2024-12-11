@@ -30,6 +30,9 @@ class BookService:
     def check_ownership(self, book_id: int, owner_id: int) -> bool:
         return self.supabase.check_ownership(book_id, owner_id)
     
+    def get_all_genres(self) -> list:
+        return self.supabase.get_all_genres()
+    
     # 4. Get book by owner
     def get_book_by_owner(self, owner_id: int) -> list:
         books_data = self.supabase.get_book_by_owner(owner_id)
