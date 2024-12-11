@@ -121,6 +121,25 @@ export default function ReadBookPage() {
                     </div>
                 </div>
 
+                <div
+                    id = "read-book-page-content-body"
+                >
+
+                    <div
+                        id = "read-book-page-left-content-page"
+                        className = "read-book-page-content-page"
+                    >
+                        Left Page
+                    </div>
+
+                    <div
+                        id = "read-book-page-right-content-page"
+                        className = "read-book-page-content-page"
+                    >
+                        Right Page
+                    </div>
+
+                </div>
 
             </div>
         </div>
