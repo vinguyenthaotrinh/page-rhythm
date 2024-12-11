@@ -10,7 +10,7 @@ export default function ReadBookPage() {
     const { bookID } = useParams<{ bookID: string }>();
     const [book, setBook] = useState<any>(null);
     const navigate = useNavigate();
-    const pageCapacity = 100;
+    const pageCapacity = 1600;
 
     const [currentLeftPage, setCurrentLeftPage] = useState(1);
     const [contentPages, setContentPages] = useState<string[]>([]);
@@ -54,6 +54,18 @@ export default function ReadBookPage() {
     if (!book) {
         return <div>Loading...</div>; // Placeholder while waiting for data
     }
+
+    const onLeftButtonClick = () => {
+        if (currentLeftPage > 1) {
+            setCurrentLeftPage(currentLeftPage - 1);
+        }
+    };
+
+    const onRightButtonClick = () => {
+        if (currentLeftPage < contentPages.length) {
+            setCurrentLeftPage(currentLeftPage + 1);
+        }
+    };
 
     return (
         <div
@@ -108,6 +120,7 @@ export default function ReadBookPage() {
                     >
                         <button
                             className = "read-book-page-navigation-button"
+                            onClick = {onLeftButtonClick}
                         >
                             <img src={IMAGES.LEFT_ICON} alt="Previous" className="read-book-page-navigation-icon" />
                         </button>
@@ -120,6 +133,7 @@ export default function ReadBookPage() {
 
                         <button
                             className = "read-book-page-navigation-button"
+                            onClick = {onRightButtonClick}
                         >
                             <img src={IMAGES.RIGHT_ICON} alt="Next" className="read-book-page-navigation-icon" />
                         </button>

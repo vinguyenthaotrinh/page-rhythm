@@ -1,5 +1,9 @@
 @import url("fonts.css");
 
+html, body {
+    background-color: #F6FFDE;
+}
+
 #read-book-page {
     display: flex;
     flex-direction: column; /* Stack NavigationBar and Content vertically */
