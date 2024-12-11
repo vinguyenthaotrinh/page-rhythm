@@ -142,16 +142,22 @@
 .read-book-page-content-page {
     background-color: white; /* White background for each page */
     color: black; /* Black text color */
-    width: 25%; /* 25% width of the parent */
+    width: 40%; /* 25% width of the parent */
     height: 100%; /* Take the full height of the parent */
     padding: 16px; /* Optional padding inside the pages */
     box-sizing: border-box; /* Ensure padding doesn't affect the width */
-  }
+    margin: 0 20px; /* Space between the pages */
+}
   
-  /* Adjust layout for the right page when there's only one page left */
-  #read-book-page-content-body {
+#read-book-page-content-body {
     display: flex;
-    justify-content: space-between; /* Space the pages equally */
+    justify-content: center; /* Center the two pages horizontally */
+    align-items: flex-start; /* Align the pages at the top */
     height: calc(100% - 64px); /* The remaining height of the parent */
     width: 100%; /* Full width of the parent */
-  }
+    padding-bottom: 8px;
+}
+
+.read-book-page-content-page:hover {
+    box-shadow: 0 0 0 2px inset #265073;
+}
