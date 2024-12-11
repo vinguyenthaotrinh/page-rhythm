@@ -55,3 +55,9 @@ class BookService:
         books = self.supabase.get_all_books()
         random.shuffle(books)
         return books
+
+    def get_all_book_pages(self, book_id: int, page_capacity: int) -> list[str]:
+        content = self.get_book_information(book_id).content
+        words = content.split()
+        print(words)
+        return []

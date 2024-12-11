@@ -10,9 +10,10 @@ export default function ReadBookPage() {
     const { bookID } = useParams<{ bookID: string }>();
     const [book, setBook] = useState<any>(null);
     const navigate = useNavigate();
+    const pageCapacity = 100;
 
     const [currentLeftPage, setCurrentLeftPage] = useState(1);
-    const [numberOfPages, setNumberOfPages] = useState(2);
+    const [contentPages, setContentPages] = useState<string[]>([]);
     
     const handleBackClick = () => {
         navigate(-1); // Navigate back to the previous page
@@ -35,7 +36,11 @@ export default function ReadBookPage() {
 
                 const server = await Server.getInstance();  // Get the server instance
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
+
                 setBook(book);  // Set the book details in state
+
+                const pages = await server.getContentPages(parseInt(bookID), pageCapacity);  // Fetch the content pages
+                setContentPages(pages);  // Set the content pages in state
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
@@ -108,9 +113,9 @@ export default function ReadBookPage() {
                         </button>
 
                         <span>
-                            {currentLeftPage >= numberOfPages
-                                ? `${currentLeftPage} of ${numberOfPages}`
-                                : `Page ${currentLeftPage} & ${currentLeftPage + 1} of ${numberOfPages}`}
+                            {currentLeftPage >= contentPages.length
+                                ? `${currentLeftPage} of ${contentPages.length}`
+                                : `Page ${currentLeftPage} & ${currentLeftPage + 1} of ${contentPages.length}`}
                         </span>
 
                         <button
@@ -127,7 +132,7 @@ export default function ReadBookPage() {
                     </div>
 
                     {/* Conditionally hide the right page if it's the last page */}
-                    {currentLeftPage < numberOfPages && (
+                    {currentLeftPage < contentPages.length && (
                     <div id="read-book-page-right-content-page" className="read-book-page-content-page">
                         Right page content here
                     </div>
