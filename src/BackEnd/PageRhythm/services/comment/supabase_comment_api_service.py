@@ -40,4 +40,10 @@ class SupabaseCommentAPIService:
             return False
         return False
     
-    
+    def get_all_comments(self, book_id: int) -> list[Comment]:
+        try:
+            response = self.client.table('Comment').select('*').eq('book_id', book_id).execute()
+            return [Comment.deserialize_JSON(comment) for comment in response.data]
+        except Exception as e:
+            return []
+        return []

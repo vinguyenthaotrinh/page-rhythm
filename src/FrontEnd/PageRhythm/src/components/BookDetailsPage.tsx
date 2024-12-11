@@ -11,6 +11,8 @@ export default function BookDetailsPage() {
 
     const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
 
+    const [comments, setComments] = useState<any[]>([]); // Comments for the book
+
     const handleRating = async (rating: number) => {
         const server = await Server.getInstance();
 
@@ -95,9 +97,26 @@ export default function BookDetailsPage() {
             }
         };
 
+        const fetchComments = async () => {
+            try {
+                if (!bookID) {
+                    console.error("Book ID is not available.");
+                    return;
+                }
+
+                const server = await Server.getInstance();
+                const commentsData = await server.getAllComments(bookID); // Fetch comments for the book
+                setComments(commentsData); // Update the state with the fetched comments
+                console.log("Comments fetched successfully.", commentsData);
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            }
+        };
+
         if (bookID) {
             fetchBookDetails(); // Fetch details when the component mounts
             fetchUserRating(); // Fetch user rating when the component mounts
+            fetchComments(); // Fetch comments when the component
         }
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 
@@ -197,6 +216,7 @@ export default function BookDetailsPage() {
                     </div>
                 </div>
             </div>
+
             <div id="book-details-page-review-section">
                 <strong>Rating & Comments:</strong>
                 <div className="review-section-content">
@@ -214,6 +234,7 @@ export default function BookDetailsPage() {
                     </div>                
                 </div>
             </div>
+
         </div>
     )
 }

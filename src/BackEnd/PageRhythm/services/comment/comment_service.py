@@ -31,3 +31,6 @@ class CommentService:
         )
       
         return self.supabase.insert_comment(comment)
+    
+    def get_all_comments(self, book_id: int) -> list[Comment]:
+        return self.supabase.get_all_comments(book_id)

@@ -487,4 +487,31 @@ export default class Server {
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
+
+    public async getAllComments(bookID: string): Promise<any[]> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/comment/get_all_comments?book_id=${bookID}`; // Backend endpoint to fetch all comments for a book
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch comments for book ${bookID}. Status: ${response.status}`);
+            }
+    
+            const comments = await response.json(); // The response is expected to be a JSON array of comments
+            return comments; // Return the array of comments
+        } catch (error) {
+            console.error(`Error fetching comments for book ${bookID}:`, error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }

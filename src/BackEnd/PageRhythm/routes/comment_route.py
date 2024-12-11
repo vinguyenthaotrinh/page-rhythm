@@ -39,3 +39,11 @@ def reply_comment():
         return jsonify({"status": "success"}), 200
     
     return jsonify({"message": "Failed to create comment"}), 500
+
+@comment_blueprint.route("/get_all_comments", methods=["GET"])
+def get_all_comments():
+    book_id = request.args.get("book_id")
+    comment_service = CommentService()
+    comments = comment_service.get_all_comments(book_id)
+
+    return jsonify([comment.to_serializable_JSON() for comment in comments]), 200
