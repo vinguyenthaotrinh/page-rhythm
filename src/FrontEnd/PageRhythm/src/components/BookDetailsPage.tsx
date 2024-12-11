@@ -213,7 +213,7 @@ export default function BookDetailsPage() {
                 >
                     {/* Left Column (Book Cover) */}
                     <div id="book-details-page-cover">
-                        <img src={decodeBookCover(book.cover)} alt="Book Cover" />
+                        <img src={decodeBookCover(book.image)} alt="Book Cover" />
                     </div>
 
                     {/* Right Column (Book Information) */}

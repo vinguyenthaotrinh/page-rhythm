@@ -77,6 +77,27 @@ export default function ReadBookPage() {
                 <div
                     id = "read-book-page-content-header"
                 >
+
+                    <div
+                        id = "read-book-page-book-details-section"
+                    >
+                        <img
+                            src = {decodeBookCover(book.image)}
+                            alt = {book.title}
+                            id = "read-book-page-book-cover"
+                        />
+                        <div
+                            id = "read-book-page-book-details"
+                        >
+                            <h1
+                                id = "read-book-page-book-title"
+                            >{book.title}</h1>
+                            <h2
+                                id = "read-book-page-book-author"
+                            >{book.author}</h2>
+                        </div>
+                    </div>
+
                     <div
                         id = "read-book-page-navigation-section"
                     >

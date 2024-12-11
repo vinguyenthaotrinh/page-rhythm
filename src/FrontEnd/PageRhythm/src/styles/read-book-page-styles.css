@@ -69,18 +69,16 @@
     flex-direction: column;      /* Stack children vertically */
 }
 
-
 #read-book-page-content-header {
-    position: sticky;
-    top: 0; /* Fix header at the top of the content region */
-    background-color: transparent; /* White background for the header */
+    position: relative;  /* This makes the parent container a reference point for absolute positioning */
     padding: 10px 20px;
-    /*border-bottom: 2px solid #ddd;*/ /* Optional: A subtle border between header and content */
+    background-color: transparent;
     display: flex;
-    justify-content: center; /* Center the navigation */
+    justify-content: center;  /* Center the navigation */
     align-items: center;
     color: white;
     width: 100%;
+    z-index: 1;  /* Ensures this section is above others */
 }
 
 #read-book-page-navigation-section {
@@ -109,4 +107,34 @@
 
 .read-book-page-navigation-button:hover {
     border-color: grey;
+}
+
+#read-book-page-book-cover {
+    height: 48px;            /* Set height to 80% of the parent's height */
+    width: auto;            /* Set width to auto to maintain aspect ratio */
+    object-fit: cover;      /* Maintain the aspect ratio and ensure it fills the space without stretching */
+    border-radius: 8px;     /* Optional: Rounded corners */
+}
+
+#read-book-page-book-details-section {
+    position: absolute;  /* Position it absolutely within the parent */
+    left: 64px;  /* 12px from the left boundary of the parent */
+    top: 0;  /* Align it to the top of the parent */
+    display: flex;
+    align-items: center;  /* Vertically align content */
+    gap: 12px;  /* Space between the cover image and text */
+}
+
+#read-book-page-book-details {
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 12px;
+}
+
+#read-book-page-book-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#read-book-page-book-author {
+    font-size: 12px;
 }
