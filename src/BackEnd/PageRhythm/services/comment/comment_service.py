@@ -1,5 +1,5 @@
 from services.comment.supabase_comment_api_service import SupabaseCommentAPIService
-from models.comment import Comment
+from models.comment import Comment, DisplayedComment
 from typing import Optional
 import datetime
 
@@ -34,3 +34,6 @@ class CommentService:
     
     def get_all_comments(self, book_id: int) -> list[Comment]:
         return self.supabase.get_all_comments(book_id)
+    
+    def retrieve_all_comments(self, book_id: int) -> list[DisplayedComment]:
+        return self.supabase.retrieve_all_comments(book_id)
