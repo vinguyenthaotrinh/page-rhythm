@@ -38,7 +38,7 @@ export default function ReadBookPage() {
             <div
                 id = "read-book-page-content-region"
             >
-
+                
             </div>
         </div>
     )

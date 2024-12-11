@@ -10,8 +10,11 @@
 }
 
 #read-book-page-top-region {
-    background-color: transparent;
-    padding: 16px;
+    background-color: transparent; /* Light blue background */
+    margin-left: 128px;
+    margin-right: 128px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     display: flex;
     justify-content: space-between;  /* Space between left and right buttons */
     align-items: center;
@@ -52,4 +55,17 @@
     background-color: rgb(242, 242, 242);
     color: #1A3E5C;
     border: 2px solid #1A3E5C;
+}
+
+#read-book-page-content-region {
+    background-color: #4D4D4D;   /* Light grey background */
+    flex-grow: 1;                /* Allow it to grow and take remaining space */
+    margin-bottom: 16px;         /* Space between the content and the bottom */
+    margin-left: 128px;
+    margin-right: 128px;
+    margin-top: 68px;            /* Space between the content and the top */
+    /*border-radius: 8px;*/          /* Rounded corners */
+    display: flex;
+    justify-content: center;     /* Center content horizontally */
+    align-items: center;         /* Center content vertically */
 }
