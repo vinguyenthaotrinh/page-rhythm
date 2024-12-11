@@ -11,8 +11,8 @@
 
 #read-book-page-top-region {
     background-color: transparent; /* Light blue background */
-    margin-left: 128px;
-    margin-right: 128px;
+    margin-left: 64px;
+    margin-right: 64px;
     padding-top: 16px;
     padding-bottom: 16px;
     display: flex;
@@ -20,7 +20,7 @@
     align-items: center;
     gap: 12px;
     position: sticky;
-    top: 80px;
+    top: 72px;
     border-radius: 8px;
 }
 
@@ -61,11 +61,52 @@
     background-color: #4D4D4D;   /* Light grey background */
     flex-grow: 1;                /* Allow it to grow and take remaining space */
     margin-bottom: 16px;         /* Space between the content and the bottom */
-    margin-left: 128px;
-    margin-right: 128px;
-    margin-top: 68px;            /* Space between the content and the top */
-    /*border-radius: 8px;*/          /* Rounded corners */
+    margin-left: 64px;
+    margin-right: 64px;
+    margin-top: 64px;            /* Space between the content and the top */
+    /*border-radius: 8px;*/      /* Optional: Rounded corners */
     display: flex;
     justify-content: center;     /* Center content horizontally */
     align-items: center;         /* Center content vertically */
+}
+
+#read-book-page-content-header {
+    position: sticky;
+    top: 0; /* Fix header at the top of the content region */
+    background-color: transparent; /* White background for the header */
+    padding: 10px 20px;
+    /*border-bottom: 2px solid #ddd;*/ /* Optional: A subtle border between header and content */
+    display: flex;
+    justify-content: center; /* Center the navigation */
+    align-items: center;
+    color: white;
+    width: 100%;
+}
+
+#read-book-page-navigation-section {
+    display: flex;
+    justify-content: space-between; /* Space between the navigation buttons and page number */
+    align-items: center;
+    padding: 0 20px;
+}
+
+.read-book-page-navigation-icon {
+    width: 24px; /* Icon size */
+    height: 24px;
+    cursor: pointer;
+}
+
+#read-book-page-navigation-section span {
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.read-book-page-navigation-button {
+    background-color: transparent;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.read-book-page-navigation-button:hover {
+    border-color: grey;
 }

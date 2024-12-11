@@ -18,6 +18,8 @@ import SLIDERS_ICON from "./assets/images/sliders-icon.png";
 import LEFT_ARROW_ICON from "./assets/images/left-arrow-icon.png";
 import FILLED_STAR_ICON from "./assets/images/filled-star-icon.png";
 import EMPTY_STAR_ICON from "./assets/images/empty-star-icon.png";
+import LEFT_ICON from "./assets/images/left-icon.png";
+import RIGHT_ICON from "./assets/images/right-icon.png";
 
 const IMAGES = {
     LOGO,
@@ -40,6 +42,8 @@ const IMAGES = {
     LEFT_ARROW_ICON,
     FILLED_STAR_ICON,
     EMPTY_STAR_ICON,
+    LEFT_ICON,
+    RIGHT_ICON
 };
 
 export default IMAGES;
