@@ -1,8 +1,8 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import NavigationBar from "./NavigationBar";
-import "../styles/my-library-section-bar.css";
 import React, { useState, useEffect } from "react";
+import "../styles/my-library-section-bar-styles.css";
 import { Link, useNavigate } from "react-router-dom";
 
 interface MyLibrarySectionBarProps {
@@ -42,7 +42,7 @@ export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionB
             </button>
             <button 
                 className={`my-library-page-my-library-section-button ${getButtonClass("voices")}`} 
-                onClick={() => handleSectionClick("/profile-page/voices")}
+                onClick={() => handleSectionClick("/my-library-page/voices")}
                 onMouseEnter={() => setHoveredOption("voices")}
                 onMouseLeave={() => setHoveredOption(null)}
             >

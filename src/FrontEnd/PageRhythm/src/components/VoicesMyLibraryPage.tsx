@@ -4,14 +4,17 @@ import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import "../styles/voices-my-library-page-styles.css";
 import { Link, useNavigate } from 'react-router-dom';
+import MyLibrarySectionBar from "./MyLibrarySectionBar"
 
 export default function VoicesMyLibraryPage() {
     return (
-        <div>
+        <div id="voices-my-library-page">
             <NavigationBar />
-            <div id="my-library-page-content">
-                <h1 id="my-library-page-title">My Library</h1>
-                <p id="my-library-page-description">Your personal collection of books</p>
+            <div id="voices-my-library-page-container">
+                <MyLibrarySectionBar currentOption="voices" />
+                <div id="voices-my-library-page-content">
+                    Hello
+                </div>
             </div>
         </div>
     )
