@@ -56,27 +56,42 @@ class BookService:
         random.shuffle(books)
         return books
 
-    def get_all_book_pages(self, book_id: int, page_capacity: int) -> list[str]:
+    def get_all_book_pages(self, book_id: int, page_capacity: int, maximum_line_length: int) -> list[str]:
         content = self.get_book_information(book_id).content
         words = content.split(" ")
         pages = []
         current_page = ""
+        current_page_length = 0
+
         for word in words:
             word_length = len(word)
+
             if word_length == 0:
                 continue
-            next_length = len(current_page)
-            if next_length == 0:
-                next_length += len(word)
+            
+            if current_page_length == 0:
+                current_page_length += word_length
+                current_page += word
             else:
-                next_length += len(word) + 1
-            if next_length <= page_capacity:
+                current_page_length += word_length + 1
                 current_page += " " + word
-            else:
-                pages.append(current_page)
-                current_page = word
 
+            for _ in range(word.count("\n")):
+                if current_page_length % maximum_line_length != 0:
+                    current_page_length += maximum_line_length - (current_page_length % maximum_line_length)
+                else:
+                    current_page_length += maximum_line_length
+
+            if current_page_length >= page_capacity:
+                if len(pages) > 0:
+                    pages[-1] += " ..."
+                pages.append(current_page)
+                current_page = ""
+                current_page_length = 0
+            
         if len(current_page) > 0:
+            if len(pages) > 0:
+                pages[-1] += "..."
             pages.append(current_page)
 
         return pages

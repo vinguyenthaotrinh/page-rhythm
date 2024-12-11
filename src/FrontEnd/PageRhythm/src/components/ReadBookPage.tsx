@@ -11,6 +11,7 @@ export default function ReadBookPage() {
     const [book, setBook] = useState<any>(null);
     const navigate = useNavigate();
     const pageCapacity = 1600;
+    const maximumLineLength = 80;
 
     const [currentLeftPage, setCurrentLeftPage] = useState(1);
     const [contentPages, setContentPages] = useState<string[]>([]);
@@ -39,7 +40,7 @@ export default function ReadBookPage() {
 
                 setBook(book);  // Set the book details in state
 
-                const pages = await server.getContentPages(parseInt(bookID), pageCapacity);  // Fetch the content pages
+                const pages = await server.getContentPages(parseInt(bookID), pageCapacity, maximumLineLength);  // Fetch the content pages
                 setContentPages(pages);  // Set the content pages in state
             } catch (error) {
                 console.error("Error fetching book details:", error);
@@ -142,26 +143,27 @@ export default function ReadBookPage() {
 
                 <div id="read-book-page-content-body">
                     <div id="read-book-page-left-content-page" className="read-book-page-content-page">
-                        {/* Split the left page content by newlines and render each line with a <br /> */}
-                        {contentPages[currentLeftPage - 1].split('\n').map((line, index) => (
-                        <React.Fragment key={index}>
+                        {/* Check if the left page content is defined before rendering */}
+                        {contentPages[currentLeftPage - 1] &&
+                        contentPages[currentLeftPage - 1].split('\n').map((line, index) => (
+                            <React.Fragment key={index}>
                             {line}
                             <br />
-                        </React.Fragment>
+                            </React.Fragment>
                         ))}
                     </div>
 
                     {/* Conditionally hide the right page if it's the last page */}
-                    {currentLeftPage < contentPages.length && (
-                            <div id="read-book-page-right-content-page" className="read-book-page-content-page">
-                            {/* Split the right page content by newlines and render each line with a <br /> */}
-                            {contentPages[currentLeftPage].split('\n').map((line, index) => (
-                                <React.Fragment key={index}>
-                                {line}
-                                <br />
-                                </React.Fragment>
-                            ))}
-                            </div>
+                    {currentLeftPage < contentPages.length && contentPages[currentLeftPage] && (
+                        <div id="read-book-page-right-content-page" className="read-book-page-content-page">
+                        {/* Check if the right page content is defined before rendering */}
+                        {contentPages[currentLeftPage].split('\n').map((line, index) => (
+                            <React.Fragment key={index}>
+                            {line}
+                            <br />
+                            </React.Fragment>
+                        ))}
+                        </div>
                     )}
                 </div>
 

@@ -146,6 +146,6 @@ def get_all_books_in_random_order():
     books = book_service.get_all_books_in_random_order()
     return jsonify([book.to_serializable_JSON() for book in books]), 200
 
-@book_blueprint.route("/get_all_book_pages/<int:book_id>/<int:page_capacity>", methods=["GET"])
-def get_all_book_pages(book_id, page_capacity):
-    return jsonify(book_service.get_all_book_pages(book_id, page_capacity)), 200
+@book_blueprint.route("/get_all_book_pages/<int:book_id>/<int:page_capacity>/<int:maximum_line_length>", methods=["GET"])
+def get_all_book_pages(book_id, page_capacity, maximum_line_length):
+    return jsonify(book_service.get_all_book_pages(book_id, page_capacity, maximum_line_length)), 200

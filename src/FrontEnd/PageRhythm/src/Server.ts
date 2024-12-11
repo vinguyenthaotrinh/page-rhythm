@@ -629,12 +629,12 @@ export default class Server {
         }
     }
 
-    public async getContentPages(bookID: number, pageCapacity: number): Promise<any[]> {
+    public async getContentPages(bookID: number, pageCapacity: number, maximumLineLength: number): Promise<any[]> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}`; // Endpoint to fetch book pages
+        const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}/${maximumLineLength}`; // Update the endpoint to match the server-side route
 
         try {
             // Assuming you have a method to fetch book pages from the database or an API.
