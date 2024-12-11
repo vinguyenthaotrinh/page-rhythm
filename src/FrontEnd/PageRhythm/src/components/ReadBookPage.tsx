@@ -12,7 +12,7 @@ export default function ReadBookPage() {
     const navigate = useNavigate();
 
     const [currentLeftPage, setCurrentLeftPage] = useState(1);
-    const [numberOfPages, setNumberOfPages] = useState(0);
+    const [numberOfPages, setNumberOfPages] = useState(2);
     
     const handleBackClick = () => {
         navigate(-1); // Navigate back to the previous page
@@ -121,24 +121,17 @@ export default function ReadBookPage() {
                     </div>
                 </div>
 
-                <div
-                    id = "read-book-page-content-body"
-                >
-
-                    <div
-                        id = "read-book-page-left-content-page"
-                        className = "read-book-page-content-page"
-                    >
-                        Left Page
+                <div id="read-book-page-content-body">
+                    <div id="read-book-page-left-content-page" className="read-book-page-content-page">
+                    Left page content here
                     </div>
 
-                    <div
-                        id = "read-book-page-right-content-page"
-                        className = "read-book-page-content-page"
-                    >
-                        Right Page
+                    {/* Conditionally hide the right page if it's the last page */}
+                    {currentLeftPage < numberOfPages && (
+                    <div id="read-book-page-right-content-page" className="read-book-page-content-page">
+                        Right page content here
                     </div>
-
+                    )}
                 </div>
 
             </div>

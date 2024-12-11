@@ -138,3 +138,20 @@
 #read-book-page-book-author {
     font-size: 12px;
 }
+
+.read-book-page-content-page {
+    background-color: white; /* White background for each page */
+    color: black; /* Black text color */
+    width: 25%; /* 25% width of the parent */
+    height: 100%; /* Take the full height of the parent */
+    padding: 16px; /* Optional padding inside the pages */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+  }
+  
+  /* Adjust layout for the right page when there's only one page left */
+  #read-book-page-content-body {
+    display: flex;
+    justify-content: space-between; /* Space the pages equally */
+    height: calc(100% - 64px); /* The remaining height of the parent */
+    width: 100%; /* Full width of the parent */
+  }
