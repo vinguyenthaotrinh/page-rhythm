@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function HomePage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGenre, setSelectedGenre] = useState("All");
+    const [genres, setGenres] = useState<string[]>([]);
     const [books, setBooks] = useState<any[]>([]);
     const navigate = useNavigate();
 
@@ -24,6 +25,20 @@ export default function HomePage() {
         };
 
         fetchBooks();
+    }, []);
+
+    useEffect(() => {
+        const fetchGenres = async () => {
+            try {
+                const server = await Server.getInstance();
+                const genresList = await server.getAllGenres();
+                setGenres(genresList);
+            } catch (error) {
+                console.error("Error fetching genres:", error);
+            }
+        };
+
+        fetchGenres();
     }, []);
     
     const handleSearch = async () => {
@@ -75,6 +90,9 @@ export default function HomePage() {
                     <img src={IMAGES.SLIDERS_ICON} alt="Genre Icon" className="home-page-select-icon" />
                     <select value={selectedGenre} onChange={handleGenreChange}>
                         <option value="All">All genres</option>
+                        {genres.map((genre) => (
+                            <option key={genre} value={genre}>{genre}</option>
+                        ))}
                         <option value="Science Fiction">Science Fiction</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Non-Fiction">Non-Fiction</option>

@@ -314,6 +314,37 @@ export default class Server {
         }
     }
 
+    public async getAllGenres(): Promise<any> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book/genres`;
+    
+        const sessionToken = this.getSessionToken();
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}` 
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch genres. Status: ${response.status}`);
+            }
+    
+            const genres = await response.json();
+    
+            return genres;
+        } catch (error) {
+            console.error("Error fetching genres:", error);
+            throw error;
+        }
+    }
+
     public async searchBooks(title: string, genre: string | null): Promise<any> {
         if (!this.host) {
             throw new Error("Host is not initialized.");
