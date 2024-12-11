@@ -1,15 +1,15 @@
 import IMAGES from "../images";
 import Server from "../Server";
-import "../styles/profile-section-bar.css";
 import NavigationBar from "./NavigationBar";
+import "../styles/my-library-section-bar.css";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
-interface ProfileSectionBarProps {
+interface MyLibrarySectionBarProps {
     currentOption: string;
 }
 
-export default function ProfileSectionBar({ currentOption }: ProfileSectionBarProps) {
+export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionBarProps) {
     const [hoveredOption, setHoveredOption] = useState<string | null>(null);
     const navigate = useNavigate();
 

@@ -7,6 +7,7 @@ import RegisterPage from "./components/RegisterPage";
 import ReadBookPage from "./components/ReadBookPage";
 import MyLibraryPage from "./components/MyLibraryPage";
 import BookDetailsPage from "./components/BookDetailsPage";
+import ListenToBookPage from "./components/ListenToBookPage";
 import GeneralProfilePage from "./components/GeneralProfilePage";
 import PasswordProfilePage from "./components/PasswordProfilePage";
 import StatisticsProfilePage from "./components/StatisticsProfilePage";
