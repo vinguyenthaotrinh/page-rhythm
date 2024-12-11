@@ -188,6 +188,10 @@ export default function BookDetailsPage() {
         navigate(`/comment-page/${bookID}/null`); // Navigate to the comment page
     };
 
+    const handleReadThisBookButtonClick = () => {
+        navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
+    };
+
     return (
         <div
             id = "book-details-page"
@@ -221,6 +225,7 @@ export default function BookDetailsPage() {
                                 <button
                                     id = "book-details-page-read-button"
                                     className = "book-details-page-button"
+                                    onClick = {handleReadThisBookButtonClick}
                                 >
                                     Read This Book
                                 </button>
