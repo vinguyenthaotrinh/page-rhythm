@@ -630,19 +630,21 @@ export default class Server {
     }
 
     public async getContentPages(bookID: number, pageCapacity: number): Promise<any[]> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}`; // Endpoint to fetch book pages
+
         try {
             // Assuming you have a method to fetch book pages from the database or an API.
-            const response = await fetch(`/book/get_all_book_pages`, {
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    book_id: bookID,
-                    page_capacity: pageCapacity
-                })
+                }
             });
-    
+
             // Ensure the response is OK
             if (!response.ok) {
                 throw new Error(`Error fetching pages: ${response.statusText}`);

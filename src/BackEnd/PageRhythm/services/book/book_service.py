@@ -59,5 +59,23 @@ class BookService:
     def get_all_book_pages(self, book_id: int, page_capacity: int) -> list[str]:
         content = self.get_book_information(book_id).content
         words = content.split()
-        print(words)
-        return []
+        pages = []
+        current_page = ""
+        for word in words:
+            next_length = len(current_page)
+            if next_length == 0:
+                next_length += len(word)
+            else:
+                next_length += len(word) + 1
+            if next_length <= page_capacity:
+                current_page += " " + word
+            else:
+                pages.append(current_page)
+                current_page = word
+
+        if len(current_page) > 0:
+            pages.append(current_page)
+
+        print(pages)
+
+        return pages

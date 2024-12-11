@@ -128,13 +128,13 @@ export default function ReadBookPage() {
 
                 <div id="read-book-page-content-body">
                     <div id="read-book-page-left-content-page" className="read-book-page-content-page">
-                    Left page content here
+                        {contentPages[currentLeftPage - 1]}
                     </div>
 
                     {/* Conditionally hide the right page if it's the last page */}
                     {currentLeftPage < contentPages.length && (
                     <div id="read-book-page-right-content-page" className="read-book-page-content-page">
-                        Right page content here
+                        {contentPages[currentLeftPage]}
                     </div>
                     )}
                 </div>
