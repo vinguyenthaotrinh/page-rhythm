@@ -55,6 +55,14 @@ class SupabaseBookAPIService:
             return Book(**book_data)
         except Exception as e:
             return None
+        
+    def get_all_genres(self) -> list:
+        try:
+            response = self.client.table('Book').select('genre').execute()
+            genres = {book['genre'] for book in response.data if 'genre' in book}
+            return list(genres)
+        except Exception as e:
+            return []
     
     # 4. Get book by owner
     def get_book_by_owner(self, owner_id: int) -> list:

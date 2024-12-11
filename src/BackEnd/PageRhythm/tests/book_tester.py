@@ -87,6 +87,13 @@ class BookTester(unittest.TestCase):
         book_id = 1 #self.test_create_book()
         response = requests.get(f"{self.book_url}/{book_id}")
         self.assertEqual(response.status_code, 200)
+        
+    def test_get_all_genres(self):
+        response = requests.get(f"{self.book_url}/genres")
+        self.assertEqual(response.status_code, 200)
+        genres = response.json()
+        self.assertIsInstance(genres, list)
+        print("Genres:", genres)
     
     def test_search_book(self):
         search_params = {
@@ -142,6 +149,7 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTest(BookTester("test_create_book"))
     suite.addTest(BookTester("test_get_book_information"))
+    suite.addTest(BookTester("test_get_all_genres"))
     suite.addTest(BookTester("test_search_book"))
     suite.addTest(BookTester("test_get_my_lib"))
     suite.addTest(BookTester("test_update_book"))

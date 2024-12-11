@@ -61,6 +61,11 @@ def get_book_information(book_id):
         return jsonify(book.to_serializable_JSON()), 200
     return jsonify({"message": "Book not found"}), 404
 
+@book_blueprint.route("/genres", methods=["GET"])
+def get_all_genres():
+    genres = book_service.get_all_genres()
+    return jsonify(genres), 200
+
 # 3. Search for books
 @book_blueprint.route("/search", methods=["GET"])
 def search_book():
