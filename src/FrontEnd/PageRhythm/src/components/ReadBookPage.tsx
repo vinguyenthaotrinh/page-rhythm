@@ -19,6 +19,7 @@ export default function ReadBookPage() {
             id = "read-book-page"
         >
             <NavigationBar />
+            
             <div
                 id = "read-book-page-top-region"
             >
@@ -32,6 +33,12 @@ export default function ReadBookPage() {
                     className = "read-book-page-button"
                 >   Listen To Audio Book
                 </button>
+            </div>
+
+            <div
+                id = "read-book-page-content-region"
+            >
+
             </div>
         </div>
     )

@@ -3,12 +3,12 @@
 /* Make the main container full viewport height */
 #book-details-page {
     display: flex;
-    flex-direction: column; /* Stack NavigationBar and Content vertically */
-    height: 100vh;         /* Full viewport height */
-    width: 100vw;          /* Full viewport width */
+    flex-direction: column;     /* Stack NavigationBar and Content vertically */
+    height: 100vh;              /* Full viewport height */
+    width: 100vw;               /* Full viewport width */
     background-color: #F6FFDE;
     color: black;
-    overflow-y: auto;  /* Allows scrolling if content overflows */
+    overflow-y: auto;           /* Allows scrolling if content overflows */
 }
 
 #book-details-page-back-button-region {
@@ -35,30 +35,30 @@
 }
 
 .book-details-page-back-button-icon {
-    width: 24px;  /* Adjust the icon size as needed */
-    height: 24px; /* Adjust the icon size as needed */
-    margin-right: 8px; /* Space between the icon and the text */
+    width: 24px;        /* Adjust the icon size as needed */
+    height: 24px;       /* Adjust the icon size as needed */
+    margin-right: 8px;  /* Space between the icon and the text */
 }
 
 #book-details-page-main-section {
-    flex-grow: 0;  /* Takes up remaining vertical space */
-    margin-top: 80px;  /* Adds space below the fixed back button */
+    flex-grow: 0;                   /* Takes up remaining vertical space */
+    margin-top: 80px;               /* Adds space below the fixed back button */
     padding-left: 32px;
     padding-right: 32px;
-    background-color: #F6FFDE;  /* White background for the main section */
+    background-color: #F6FFDE;      /* White background for the main section */
 }
 
 #book-details-page-information-section {
     display: grid;
     grid-template-columns: 1fr 3fr;  /* 1:3 ratio for columns */
     gap: 20px;
-    align-items: start;  /* Align content at the top */
+    align-items: start;             /* Align content at the top */
 }
 
 #book-details-page-cover {
-    display: flex;  /* Use flexbox to center the image */
-    justify-content: center;  /* Center horizontally */
-    align-items: center;  /* Center vertically, if needed */
+    display: flex;              /* Use flexbox to center the image */
+    justify-content: center;    /* Center horizontally */
+    align-items: center;        /* Center vertically, if needed */
 }
 
 /* Left Column (Book Cover) */
@@ -84,16 +84,16 @@
 
 /* Styling for individual rows */
 .book-details-row {
-    display: flex;  /* Use flexbox to align label and value on the same line */
-    justify-content: flex-start;  /* Align to the left */
-    gap: 8px;  /* Space between the label and value */
+    display: flex;                  /* Use flexbox to align label and value on the same line */
+    justify-content: flex-start;    /* Align to the left */
+    gap: 8px;                       /* Space between the label and value */
     margin-bottom: 12px;
 }
 
 .book-details-page-title-row {
     display: flex;
-    justify-content: space-between;  /* Space between title and rating */
-    align-items: center;  /* Align vertically */
+    justify-content: space-between;     /* Space between title and rating */
+    align-items: center;                /* Align vertically */
 }
 
 /* Buttons Row */
