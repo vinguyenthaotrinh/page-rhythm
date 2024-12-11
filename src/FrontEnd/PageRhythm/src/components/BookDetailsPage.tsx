@@ -114,9 +114,9 @@ export default function BookDetailsPage() {
         };
 
         if (bookID) {
-            fetchBookDetails(); // Fetch details when the component mounts
-            fetchUserRating(); // Fetch user rating when the component mounts
-            fetchComments(); // Fetch comments when the component
+            fetchBookDetails(); 
+            fetchUserRating();
+            fetchComments();
         }
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 

@@ -1,4 +1,4 @@
-@import url('fonts.css');
+@import url("fonts.css");
 
 #comment-page {
     display: flex;
@@ -33,12 +33,10 @@
 }
 
 .comment-page-back-button-icon {
-    width: 24px;  /* Adjust the icon size as needed */
-    height: 24px; /* Adjust the icon size as needed */
-    margin-right: 8px; /* Space between the icon and the text */
+    width: 24px;        /* Adjust the icon size as needed */
+    height: 24px;       /* Adjust the icon size as needed */
+    margin-right: 8px;  /* Space between the icon and the text */
 }
-
-/* Add this to comment-page-styles.css */
 
 #comment-page-main-section {
     display: flex;

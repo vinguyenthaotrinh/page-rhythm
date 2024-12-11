@@ -1,4 +1,4 @@
-@import url('fonts.css');
+@import url("fonts.css");
 
 /* Make the main container full viewport height */
 #book-details-page {
@@ -10,7 +10,6 @@
     color: black;
     overflow-y: auto;  /* Allows scrolling if content overflows */
 }
-
 
 #book-details-page-back-button-region {
     background-color: #F6FFDE;
@@ -125,7 +124,13 @@
     background-color: white;
     color: #265073;
     border: 2px solid #265073;
-    transition: background-color 0.3s;
+    transition: background-color color border 4s;
+}
+
+#book-details-page-listen-button:hover {
+    background-color: rgb(242, 242, 242);
+    color: #1A3E5C;
+    border: 2px solid #1A3E5C;
 }
 
 /* Star Rating */

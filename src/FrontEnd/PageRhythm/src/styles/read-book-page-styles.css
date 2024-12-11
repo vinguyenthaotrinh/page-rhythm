@@ -1,0 +1,51 @@
+@import url("fonts.css");
+
+#read-book-page {
+    display: flex;
+    flex-direction: column; /* Stack NavigationBar and Content vertically */
+    height: 100vh;         /* Full viewport height */
+    width: 100vw;          /* Full viewport width */
+    background-color: #F6FFDE;
+    color: black;
+}
+
+#read-book-page-top-region {
+    background-color: transparent;
+    padding: 16px;
+    display: flex;
+    justify-content: flex-start; /* Align children to the left */
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 80px;
+    border-radius: 8px;
+}
+
+#read-book-page-back-button-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+    margin-left: 24px;
+}
+
+.read-book-page-back-button-icon {
+    width: 24px;        /* Adjust the icon size as needed */
+    height: 24px;       /* Adjust the icon size as needed */
+    margin-right: 8px;  /* Space between the icon and the text */
+}
+
+#read-book-page-listen-button {
+    background-color: white;
+    color: #265073;
+    border: 2px solid #265073;
+    transition: background-color color border 4s;
+}
+
+#read-book-page-listen-button:hover {
+    background-color: rgb(242, 242, 242);
+    color: #1A3E5C;
+    border: 2px solid #1A3E5C;
+}
