@@ -64,11 +64,11 @@
     margin-left: 64px;
     margin-right: 64px;
     margin-top: 64px;            /* Space between the content and the top */
-    /*border-radius: 8px;*/      /* Optional: Rounded corners */
+    /* No centering here now */
     display: flex;
-    justify-content: center;     /* Center content horizontally */
-    align-items: center;         /* Center content vertically */
+    flex-direction: column;      /* Stack children vertically */
 }
+
 
 #read-book-page-content-header {
     position: sticky;
