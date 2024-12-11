@@ -8,11 +8,12 @@
     width: 100vw;          /* Full viewport width */
     background-color: #F6FFDE;
     color: black;
+    overflow-y: auto;  /* Allows scrolling if content overflows */
 }
 
 
 #book-details-page-back-button-region {
-    background-color: transparent;
+    background-color: #F6FFDE;
     padding: 16px;
     display: flex;
     justify-content: flex-start; /* Align children to the left */
@@ -21,6 +22,7 @@
     position: sticky;
     top: 80px;
     border-radius: 8px;
+    z-index: 20;
 }
 
 #book-details-page-back-button-container {
@@ -44,7 +46,6 @@
     margin-top: 80px;  /* Adds space below the fixed back button */
     padding-left: 32px;
     padding-right: 32px;
-    overflow-y: auto;  /* Allows scrolling if content overflows */
     background-color: #F6FFDE;  /* White background for the main section */
 }
 
@@ -188,4 +189,84 @@ strong {
 
 .write-comment-button:hover {
     background-color: #1A3E5C;
+}
+
+#book-details-page-comments-section {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+}
+
+.comment {
+    margin-bottom: 16px;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    align-items: flex-start; /* Align items to the start of the container */
+}
+
+.comment-header-left {
+    margin-right: 12px; /* Space between profile picture and content */
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-header-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.author-username {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #777;
+}
+
+.comment-content {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.book-details-page-reply-button {
+    background-color: transparent;
+    color: #265073;
+    transition: color 0.3s;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.book-details-page-reply-button:hover {
+    text-decoration: underline;
+    color: #1A3E5C;
+}
+
+/* Replies indentation */
+.replies {
+    margin-left: 20px;
+    margin-top: 10px;
+    border-left: 2px solid #ddd;
+    padding-left: 15px;
 }

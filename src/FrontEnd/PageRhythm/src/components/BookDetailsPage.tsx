@@ -124,6 +124,53 @@ export default function BookDetailsPage() {
         return <div>Loading...</div>; // Placeholder while waiting for data
     }
 
+    // Recursively render comments and their replies
+    const renderComment = (comment: any, allComments: any[]) => {
+        const replies = allComments.filter((reply: any) => reply.replied_comment_id === comment.comment_id);
+    
+        return (
+            <div key={comment.comment_id} className="comment">
+                <div className="comment-header">
+                    <div className="comment-header-left">
+                        <img src={IMAGES.DEFAULT_PROFILE_PICTURE} alt="Profile" className="profile-picture" />
+                    </div>
+                    <div className="comment-header-right">
+                        <div className="comment-author">
+                            <span className="author-username">{comment.comment_author_id}</span>
+                            <span className="comment-date">{new Date(comment.create_time).toLocaleString()}</span>
+                        </div>
+                        <div className="comment-content">{comment.content}</div>
+                    </div>
+                </div>
+                <button className="book-details-page-reply-button" onClick={() => handleReplyClick(comment.comment_id)}>Reply comment</button>
+    
+                {/* Recursively render replies */}
+                {replies.length > 0 && (
+                    <div className="replies">
+                        {replies.map((reply: any) => renderComment(reply, allComments))}
+                    </div>
+                )}
+            </div>
+        );
+    };
+    
+
+    // Handle the reply button click (navigate to the comment page for that comment)
+    const handleReplyClick = (repliedCommentID: number) => {
+        navigate(`/comment-page/${bookID}/${repliedCommentID}`);
+    };
+
+    // Render the comment tree
+    const renderCommentTree = () => {
+        // Root comments are those that don't have a replied_comment_id
+        const rootComments = comments.filter((comment: any) => !comment.replied_comment_id);
+        return (
+            <div className="comments-section">
+                {rootComments.map((comment: any) => renderComment(comment, comments))}
+            </div>
+        );
+    };
+
     const getStarRating = (rating: number) => {
         const roundedRating = Math.round(rating);
         let stars = [];
@@ -240,6 +287,12 @@ export default function BookDetailsPage() {
                         ))}
                     </div>                
                 </div>
+            </div>
+            
+            <div
+                id = "book-details-page-comments-section"
+            >
+                {renderCommentTree()}
             </div>
 
         </div>
