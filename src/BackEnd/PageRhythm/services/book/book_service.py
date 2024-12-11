@@ -58,10 +58,13 @@ class BookService:
 
     def get_all_book_pages(self, book_id: int, page_capacity: int) -> list[str]:
         content = self.get_book_information(book_id).content
-        words = content.split()
+        words = content.split(" ")
         pages = []
         current_page = ""
         for word in words:
+            word_length = len(word)
+            if word_length == 0:
+                continue
             next_length = len(current_page)
             if next_length == 0:
                 next_length += len(word)
@@ -75,7 +78,5 @@ class BookService:
 
         if len(current_page) > 0:
             pages.append(current_page)
-
-        print(pages)
 
         return pages

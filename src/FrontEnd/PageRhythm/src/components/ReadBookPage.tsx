@@ -142,14 +142,26 @@ export default function ReadBookPage() {
 
                 <div id="read-book-page-content-body">
                     <div id="read-book-page-left-content-page" className="read-book-page-content-page">
-                        {contentPages[currentLeftPage - 1]}
+                        {/* Split the left page content by newlines and render each line with a <br /> */}
+                        {contentPages[currentLeftPage - 1].split('\n').map((line, index) => (
+                        <React.Fragment key={index}>
+                            {line}
+                            <br />
+                        </React.Fragment>
+                        ))}
                     </div>
 
                     {/* Conditionally hide the right page if it's the last page */}
                     {currentLeftPage < contentPages.length && (
-                    <div id="read-book-page-right-content-page" className="read-book-page-content-page">
-                        {contentPages[currentLeftPage]}
-                    </div>
+                            <div id="read-book-page-right-content-page" className="read-book-page-content-page">
+                            {/* Split the right page content by newlines and render each line with a <br /> */}
+                            {contentPages[currentLeftPage].split('\n').map((line, index) => (
+                                <React.Fragment key={index}>
+                                {line}
+                                <br />
+                                </React.Fragment>
+                            ))}
+                            </div>
                     )}
                 </div>
 
