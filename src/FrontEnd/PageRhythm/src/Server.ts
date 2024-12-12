@@ -8,7 +8,7 @@ export default class Server {
         if (Server.instance === null) {
             Server.instance = new Server();
             await Server.instance.initializeHost(
-                null,//"https://page-rhythm-back-end.onrender.com", 
+                "https://page-rhythm-back-end.onrender.com", 
                 "http://127.0.0.1:5000"
             );
         }
@@ -52,9 +52,8 @@ export default class Server {
     }
 
     public async sendRequest(endpoint: string, method: string = "GET", body: object | null = null): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
 
         const url = `${this.host}${endpoint}`;
         const options: RequestInit = {
@@ -78,9 +77,8 @@ export default class Server {
     }
 
     public async login(email: string, password: string): Promise<Response> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/authentication/login`;
         const body = {
@@ -160,9 +158,9 @@ export default class Server {
     }
 
     public async logout(): Promise<void> {
-        if (!this.host) {
+
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
 
         localStorage.removeItem("sessionToken");
     }
