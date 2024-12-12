@@ -8,7 +8,7 @@ export default class Server {
         if (Server.instance === null) {
             Server.instance = new Server();
             await Server.instance.initializeHost(
-                "https://page-rhythm-back-end.onrender.com", 
+                null,//"https://page-rhythm-back-end.onrender.com", 
                 "http://127.0.0.1:5000"
             );
         }
