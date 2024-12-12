@@ -1,4 +1,5 @@
 import LOGO from "./assets/images/logo.png";
+import ADD_ICON from "./assets/images/add-icon.png";
 import USER_ICON from "./assets/images/user-icon.png";
 import LOCK_ICON from "./assets/images/lock-icon.png";
 import MAIL_ICON from "./assets/images/mail-icon.png";
@@ -43,7 +44,8 @@ const IMAGES = {
     FILLED_STAR_ICON,
     EMPTY_STAR_ICON,
     LEFT_ICON,
-    RIGHT_ICON
+    RIGHT_ICON,
+    ADD_ICON
 };
 
 export default IMAGES;

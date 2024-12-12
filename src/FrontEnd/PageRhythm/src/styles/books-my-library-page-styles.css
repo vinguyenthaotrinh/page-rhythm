@@ -17,13 +17,87 @@
 }
 
 #books-my-library-page-content {
-    flex-grow: 1;               /* Ensures the content fills the available space */
+    flex-grow: 1;  /* Ensures the content fills the available space */
     display: flex;
-    flex-direction: column;     /* Stacks title and information section vertically */
+    flex-direction: column;  /* Stacks title and information section vertically */
     padding: 20px;
     background-color: #F6FFDE;
     overflow: hidden;
     color: black;
     font-family: "Poppins-Regular", sans-serif;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for profile content */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional shadow for profile content */
+    position: relative;  /* Ensures that the "Add" button can be absolutely positioned */
+}
+
+#add-book-button {
+    position: absolute; /* Fixed position within the container */
+    top: 20px;  /* Space from the top */
+    left: 20px;  /* Space from the left */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #265073;
+    margin: 12px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;  /* Ensure the button is above other content */
+    transition: background-color 0.3s ease;
+}
+
+#add-book-button:hover {
+    background-color: #1c3a56;
+}
+
+#books-list-container {
+    margin-top: 60px;  /* Creates space below the Add button */
+    flex-grow: 1;  /* Allows this container to take up the remaining space */
+    overflow-y: auto;  /* Enables scrolling if there are too many books */
+}
+
+#books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
+    gap: 20px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.book-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);  /* Adds a hover effect to lift the item */
+}
+
+.book-cover {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.book-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Make it responsive for smaller screens */
+@media (max-width: 768px) {
+    #books-grid {
+        grid-template-columns: 1fr;  /* Switch to single column for small screens */
+    }
+
+    #add-book-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }
