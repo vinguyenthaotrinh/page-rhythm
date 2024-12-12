@@ -44,6 +44,7 @@ export default function BooksMyLibraryPage() {
                         onClick={handleAddClick}
                     >
                         Add
+                        <img src={IMAGES.ADD_ICON} alt="Add Icon" className="add-icon" /> 
                     </button>
 
                     {/* Scrollable section for books */}
