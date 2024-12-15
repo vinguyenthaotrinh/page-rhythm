@@ -12,6 +12,13 @@ export default function BooksMyLibraryPage() {
     const [showConfirmation, setShowConfirmation] = useState(false);    // Confirmation box visibility
     const [bookToDelete, setBookToDelete] = useState<any | null>(null); // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay] = useState(false);        // State for Add Overlay
+    const [imagePreview, setImagePreview] = useState<string | null>(null); // For image preview (cover image)
+    const [selectedFile, setSelectedFile] = useState<File | null>(null); // Track the selected file for upload
+    const [bookName, setBookName] = useState("");                       // Book name input
+    const [authorName, setAuthorName] = useState("");                   // Author name input
+    const [releaseDate, setReleaseDate] = useState<string | null>("");  // Release date input
+    const [genre, setGenre] = useState<string | null>("");              // Genre input
+    const [summary, setSummary] = useState("");                         // Summary input
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,6 +40,36 @@ export default function BooksMyLibraryPage() {
 
     const handleAddClick = () => {
         setShowAddOverlay(true);  // Show the overlay
+    };
+
+    const handleBookUpload = () => {
+        if (selectedFile && bookName && authorName) {
+            console.log("Uploading book with details:", {
+                bookName,
+                authorName,
+                releaseDate,
+                genre,
+                summary,
+                selectedFile
+            });
+            // Add logic for book upload here (e.g., send to server)
+        } else {
+            console.log("Please fill in all required fields.");
+        }
+    };
+
+    const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedFile(file);
+
+            // Create a preview of the image
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string); // Set the preview URL
+            };
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
     };
 
     const handleDeleteClick = (book: any) => {
@@ -166,14 +203,60 @@ export default function BooksMyLibraryPage() {
             {showAddOverlay && (
                 <div className="add-overlay">
                     <div className="add-overlay-content">
-                        <h1
-                            id="add-overlay-title"
-                        >
-                            Add your book here
-                        </h1>
+                        <h1 id="add-overlay-title">Add your book here</h1>
                         <p>Please enter the book information</p>
+
+                        {/* Input fields for book details */}
+                        <input
+                            type="text"
+                            placeholder="Book Name"
+                            value={bookName}
+                            onChange={(e) => setBookName(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Author Name"
+                            value={authorName}
+                            onChange={(e) => setAuthorName(e.target.value)}
+                        />
+                        <input
+                            type="date"
+                            placeholder="Release Date"
+                            value={releaseDate || ""}
+                            onChange={(e) => setReleaseDate(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Genre (optional)"
+                            value={genre || ""}
+                            onChange={(e) => setGenre(e.target.value)}
+                        />
+                        <textarea
+                            placeholder="Summary"
+                            value={summary}
+                            onChange={(e) => setSummary(e.target.value)}
+                        />
+
+                        {/* File input for uploading a cover image */}
+                        <input
+                            type="file"
+                            id="file-input"
+                            onChange={handleFileSelect}
+                            accept="image/*"
+                        />
+                        {imagePreview && (
+                            <div>
+                                <p>Preview:</p>
+                                <img
+                                    src={imagePreview}
+                                    alt="Selected file preview"
+                                    style={{ width: "200px" }}
+                                />
+                            </div>
+                        )}
+
                         <div className="add-overlay-buttons">
-                            <button onClick={() => navigate("/add-book")}>Go to Add Book</button>
+                            <button onClick={handleBookUpload}>Upload Book</button>
                             <button onClick={() => setShowAddOverlay(false)}>Close</button>
                         </div>
                     </div>
