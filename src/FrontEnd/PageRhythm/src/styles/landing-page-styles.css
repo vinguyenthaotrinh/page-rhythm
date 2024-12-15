@@ -151,8 +151,8 @@ html, body {
 }
 
 .landing-page-left-overlay-image {
-    width: 100%; /* Adjust width as needed */
-    height: auto; /* Keep the aspect ratio intact */
+    width: 100%;        /* Adjust width as needed */
+    height: auto;       /* Keep the aspect ratio intact */
 }
 
 .landing-page-front-right-image-container {
@@ -219,4 +219,11 @@ html, body {
 
 #landing-page-request-password-reset-link-container {
     margin-top: 12px;
+}
+
+.landing-page-error-message {
+    color: red;
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+    padding: 12px;
 }

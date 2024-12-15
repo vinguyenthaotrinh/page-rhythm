@@ -59,7 +59,7 @@ def login():
         access_token = create_access_token_with_account_id(account.account_id)
         return jsonify({"access_token": access_token}), 200
     
-    return jsonify({"message": "Invalid login information"}), 401
+    return jsonify({"message": "The email or password is not correct"}), 401
 
 @authentication_blueprint.route("/change_password", methods=["PUT"])
 @jwt_required()

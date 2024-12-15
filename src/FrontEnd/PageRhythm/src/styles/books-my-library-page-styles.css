@@ -141,13 +141,14 @@
     background-color: #265073;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
     max-width: 200px; /* Limit the width of the button */
     width: 100%; /* Make it responsive */
+    justify-content: space-between;
 }
 
 .book-item-edit-button:hover {
@@ -159,9 +160,9 @@
     display: flex;
     align-items: center;
     background-color: white;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
-    border-radius: 5px;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+    border-radius: 12px;
     padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
@@ -170,6 +171,7 @@
     /* Remove the width 100% to prevent it from expanding */
     max-width: 200px; /* Optional: limit the width of the button */
     width: auto; /* Ensure the width adapts to the content */
+    justify-content: space-between;
 }
 
 .book-item-delete-button:hover {

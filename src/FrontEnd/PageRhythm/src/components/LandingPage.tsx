@@ -119,7 +119,10 @@ function LoginSection() {
                         onClick={togglePasswordVisibility}                                  // Call the toggle function on click
                     />
                 </div>
-                
+
+                {/* Display error message if it's not null or empty */}
+                {error && <div className="landing-page-error-message">{error}</div>}
+
                 <button type="submit" id="landing-page-login-button" disabled = {loadingLoginRequest}>Login</button>
 
                 <div id = "landing-page-request-password-reset-link-container">
