@@ -16,9 +16,8 @@ export default class Server {
     }
 
     private async initializeHost(deployedUrl: string | null, localUrl: string | null): Promise<void> {
-        if (deployedUrl === null && localUrl === null) {
+        if (deployedUrl === null && localUrl === null) 
             throw new Error("Both deployedUrl and localUrl cannot be null.");
-        }
 
         if (deployedUrl === null) {
             this.host = localUrl!;
@@ -113,9 +112,8 @@ export default class Server {
     }
 
     public async signup(fullName: string, email: string, password: string, birthday: string, bio: string): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
 
         const url = `${this.host}/authentication/register`;
 
@@ -158,7 +156,6 @@ export default class Server {
     }
 
     public async logout(): Promise<void> {
-
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
@@ -166,9 +163,8 @@ export default class Server {
     }
 
     public async getAllBooksInRandomOrder(): Promise<any[]> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book/all/random`;  // Update the endpoint to match the server-side route
     
@@ -183,9 +179,8 @@ export default class Server {
                 }
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch books. Status: ${response.status}`);
-            }
     
             const books = await response.json();  // The response is expected to be a JSON array of books
     
@@ -196,11 +191,9 @@ export default class Server {
         }
     }
 
-    // New method to fetch profile data
     public async getProfile(): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
 
         const url = `${this.host}/account/profile`; // Endpoint to get the profile
 
@@ -229,9 +222,8 @@ export default class Server {
     }
 
     public async updateProfile(profile: any): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/account/update_account_profile_information`; // Endpoint to update the profile
     
@@ -273,11 +265,10 @@ export default class Server {
     }
 
     public async changePassword(passwords: any): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
-        const url = `${this.host}/authentication/change_password`;  // Endpoint to change the password
+        const url = `${this.host}/authentication/change_password`;  
     
         const sessionToken = this.getSessionToken();
     
@@ -313,9 +304,8 @@ export default class Server {
     }
 
     public async getAllGenres(): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book/genres`;
     
@@ -344,9 +334,8 @@ export default class Server {
     }
 
     public async searchBooks(title: string, genre: string | null): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = new URL(`${this.host}/book/search`);  // Construct the URL for the search endpoint
     
@@ -370,9 +359,8 @@ export default class Server {
                 },
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Search request failed with status: ${response.status}`);
-            }
     
             const books = await response.json();  // Expecting a JSON array of books
             return books;  // Return the array of books found
@@ -383,9 +371,8 @@ export default class Server {
     }
     
     public async getBook(bookID: string): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book/${bookID}`;  // Update the endpoint to match the server-side route
     
@@ -414,16 +401,14 @@ export default class Server {
     }
 
     public async deleteBookRating(bookID: string): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `/book_rating/${bookID}`; // Backend endpoint for deleting a rating
         const sessionToken = this.getSessionToken();
     
-        if (!sessionToken) {
+        if (!sessionToken) 
             throw new Error("Session token is missing. Please log in again.");
-        }
     
         try {
             const response = await fetch(`${this.host}${url}`, {
@@ -480,9 +465,8 @@ export default class Server {
     }
 
     public async insertBookRating(bookID: string, rating: number): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book_rating/create`;  // The endpoint for creating a new rating
     
@@ -517,9 +501,8 @@ export default class Server {
     }
 
     public async getAllComments(bookID: string): Promise<any[]> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/comment/get_all_comments?book_id=${bookID}`;
     
@@ -544,9 +527,8 @@ export default class Server {
     }
 
     public async retrieveAllComments(bookID: string): Promise<any[]> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/comment/retrieve_all_comments?book_id=${bookID}`; // Backend endpoint to fetch all comments for a book
     
@@ -571,17 +553,15 @@ export default class Server {
     }
 
     public async createComment(bookID: string, content: string): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/comment/create`; // Endpoint for creating a new comment
     
         const sessionToken = this.getSessionToken();
     
-        if (!sessionToken) {
+        if (!sessionToken) 
             throw new Error("Session token is missing. Please log in again.");
-        }
     
         const body = {
             book_id: bookID, // The book ID the comment is associated with
@@ -614,17 +594,15 @@ export default class Server {
     }
 
     public async replyToComment(bookID: string, content: string, repliedCommentID: number): Promise<any> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/comment/reply`; 
     
         const sessionToken = this.getSessionToken();
     
-        if (!sessionToken) {
+        if (!sessionToken) 
             throw new Error("Session token is missing. Please log in again.");
-        }
     
         const body = {
             book_id: bookID, // The book ID associated with the reply
@@ -658,9 +636,8 @@ export default class Server {
     }
 
     public async getContentPages(bookID: number, pageCapacity: number, maximumLineLength: number): Promise<any[]> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}/${maximumLineLength}`; // Update the endpoint to match the server-side route
 
@@ -673,9 +650,8 @@ export default class Server {
             });
 
             // Ensure the response is OK
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Error fetching pages: ${response.statusText}`);
-            }
     
             const data = await response.json();
             return data; // Return the fetched pages data
@@ -687,17 +663,15 @@ export default class Server {
     }
 
     public async getUserUploadedBooks(): Promise<any[]> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/book/mylib`;
     
         const sessionToken = this.getSessionToken();
     
-        if (!sessionToken) {
+        if (!sessionToken) 
             throw new Error("Session token is missing. Please log in again.");
-        }
     
         try {
             const response = await fetch(url, {
@@ -721,9 +695,8 @@ export default class Server {
     }
 
     public async deleteBook(bookID: string): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `/book/${bookID}`; // Backend endpoint for deleting a book
         const sessionToken = this.getSessionToken();

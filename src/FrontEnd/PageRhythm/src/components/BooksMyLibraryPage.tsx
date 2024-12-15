@@ -245,7 +245,7 @@ export default function BooksMyLibraryPage() {
                                 type="file"
                                 id="file-input"
                                 onChange={handleFileSelect}
-                                accept=".txt,.docx,.pdf"  // You can restrict the accepted file types
+                                accept=".txt"  // You can restrict the accepted file types
                                 className="file-input-button"
                             />
                             
