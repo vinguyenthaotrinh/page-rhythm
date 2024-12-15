@@ -1,6 +1,6 @@
 CREATE TABLE "Account" (
-  "account_id"                bigserial PRIMARY KEY,
-  "email"                     varchar(255) UNIQUE NOT NULL,
+  "account_id"                bigserial     PRIMARY KEY,
+  "email"                     varchar(255)  UNIQUE NOT NULL,
   "full_name"                 varchar(255),
   "first_name"                varchar(100),
   "last_name"                 varchar(100),
