@@ -125,9 +125,10 @@
     margin-top: 5px;
 }
 
-/* Button container */
+/* Button container (this was adjusted to ensure buttons are stacked vertically) */
 .book-item-buttons {
     display: flex;
+    flex-direction: column; /* Stack the buttons vertically */
     gap: 10px; /* Space between buttons */
     margin-top: 10px;
 }
@@ -177,15 +178,24 @@
     height: 16px;
 }
 
-/* Make it responsive for smaller screens */
 @media (max-width: 768px) {
-    #books-my-library-page-books-grid {
-        grid-template-columns: 1fr;  /* Switch to single column for small screens */
+    .books-my-library-page-book-item {
+        flex-direction: column; /* Stack the columns vertically */
+        align-items: flex-start;
     }
 
-    #books-my-library-page-add-book-button {
-        font-size: 14px;
-        padding: 8px 16px;
+    .book-item-left-column {
+        flex: none;
+        margin-bottom: 10px; /* Add spacing between the image and details */
+    }
+
+    .book-item-cover {
+        width: 100%; /* Make the cover full-width for smaller screens */
+        height: auto;
+    }
+
+    .book-item-right-column {
+        align-items: flex-start; /* Align content to the left */
     }
 }
 
