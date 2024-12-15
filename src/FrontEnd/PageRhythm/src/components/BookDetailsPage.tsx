@@ -3,7 +3,7 @@ import Server from "../Server";
 import NavigationBar from "./NavigationBar";
 import "../styles/book-details-page-styles.css";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function BookDetailsPage() {
     const { bookID } = useParams<{ bookID: string }>();
