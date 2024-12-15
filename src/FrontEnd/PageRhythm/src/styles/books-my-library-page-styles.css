@@ -146,6 +146,8 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    max-width: 200px; /* Limit the width of the button */
+    width: 100%; /* Make it responsive */
 }
 
 .book-item-edit-button:hover {
@@ -165,6 +167,8 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    max-width: 200px; /* Limit the width of the button */
+    width: 100%; /* Make it responsive */
 }
 
 .book-item-delete-button:hover {

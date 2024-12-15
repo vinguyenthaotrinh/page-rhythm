@@ -180,7 +180,7 @@ function SignupSection() {
                 </div>
 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.PENCIL_ICON} id="register-page-pencil-icon" />
+                    <img src={IMAGES.BLACK_PENCIL_ICON} id="register-page-pencil-icon" />
                     <textarea
                         placeholder="Write your bio here"    
                         className="register-page-input-info" 

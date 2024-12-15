@@ -122,7 +122,7 @@ export default function GeneralProfilePage() {
                                 Bio:
                                 <div className="general-profile-page-input-container">
                                     <img 
-                                        src={IMAGES.PENCIL_ICON} 
+                                        src={IMAGES.BLACK_PENCIL_ICON} 
                                         alt="Bio Icon" 
                                         className="general-profile-page-input-icon" 
                                         id = "general-profile-page-bio-icon"

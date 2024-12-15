@@ -77,12 +77,12 @@ export default function BooksMyLibraryPage() {
                                                 {/* Edit Button */}
                                                 <button className="book-item-edit-button">
                                                     Edit
-                                                    <img src={IMAGES.PENCIL_ICON} alt="Edit Icon" className="book-item-button-icon" />
+                                                    <img src={IMAGES.WHITE_PENCIL_ICON} alt="Edit Icon" className="book-item-button-icon" />
                                                 </button>
                                                 {/* Delete Button */}
                                                 <button className="book-item-delete-button">
                                                     Delete
-                                                    <img src={IMAGES.TRASH_ICON} alt="Delete Icon" className="book-item-button-icon" />
+                                                    <img src={IMAGES.RED_TRASH_ICON} alt="Delete Icon" className="book-item-button-icon" />
                                                 </button>
                                             </div>
                                         </div>
