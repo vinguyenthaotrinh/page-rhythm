@@ -138,7 +138,7 @@
     display: flex;
     align-items: center;
     gap: 5px; /* Space between text and icon */
-    background-color: #3498db;
+    background-color: #265073;
     color: white;
     border: none;
     border-radius: 5px;
@@ -151,14 +151,13 @@
 }
 
 .book-item-edit-button:hover {
-    background-color: #1c7dcc;
+    background-color: #1c3a56;
 }
 
 /* Delete Button */
 .book-item-delete-button {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between text and icon */
     background-color: white;
     color: #e74c3c;
     border: 1px solid #e74c3c;
@@ -167,8 +166,10 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    max-width: 200px; /* Limit the width of the button */
-    width: 100%; /* Make it responsive */
+    gap: 5px; /* Space between text and icon */
+    /* Remove the width 100% to prevent it from expanding */
+    max-width: 200px; /* Optional: limit the width of the button */
+    width: auto; /* Ensure the width adapts to the content */
 }
 
 .book-item-delete-button:hover {
@@ -176,10 +177,26 @@
     color: white;
 }
 
-/* Button icons */
 .book-item-button-icon {
+    position: relative;
     width: 16px;
     height: 16px;
+}
+
+.icon-normal {
+    display: block; /* Default icon */
+}
+
+.icon-hover {
+    display: none; /* Initially hide the hover icon */
+}
+
+.book-item-delete-button:hover .icon-normal {
+    display: none; /* Hide the default icon when hovering */
+}
+
+.book-item-delete-button:hover .icon-hover {
+    display: block; /* Show the hover icon when hovering */
 }
 
 @media (max-width: 768px) {

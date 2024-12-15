@@ -82,7 +82,10 @@ export default function BooksMyLibraryPage() {
                                                 {/* Delete Button */}
                                                 <button className="book-item-delete-button">
                                                     Delete
-                                                    <img src={IMAGES.RED_TRASH_ICON} alt="Delete Icon" className="book-item-button-icon" />
+                                                    <div className="book-item-button-icon">
+                                                        <img src={IMAGES.RED_TRASH_ICON} alt="Delete Icon" className="icon-normal" />
+                                                        <img src={IMAGES.WHITE_TRASH_ICON} alt="Delete Hover Icon" className="icon-hover" />
+                                                    </div>
                                                 </button>
                                             </div>
                                         </div>
