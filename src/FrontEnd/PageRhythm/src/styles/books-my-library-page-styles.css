@@ -465,6 +465,13 @@
     }
 }
 
+/* Container for input and file name */
+.file-input-container {
+    display: flex;
+    align-items: center; /* Vertically center the elements */
+    gap: 10px; /* Space between input and file name */
+}
+
 /* Hide the default file input */
 .file-input-button {
     display: none;
@@ -495,7 +502,10 @@
 
 /* If needed, show the selected file name after choosing a file */
 .file-name-display {
-    margin-top: 10px;
     font-size: 14px;
     color: #555;
+    max-width: 200px; /* Optional: Limit the file name width */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

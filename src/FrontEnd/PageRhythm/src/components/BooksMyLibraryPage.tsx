@@ -237,23 +237,25 @@ export default function BooksMyLibraryPage() {
                         />
 
                         {/* File input for uploading content */}
-                        <label htmlFor="file-input" className="file-input-label">
-                            Upload Content
-                        </label>
-                        <input
-                            type="file"
-                            id="file-input"
-                            onChange={handleFileSelect}
-                            accept=".txt,.docx,.pdf"  // You can restrict the accepted file types
-                            className="file-input-button"
-                        />
-
-                        {/* Optionally, display the selected file name */}
-                        {selectedFile && (
-                            <div className="file-name-display">
-                                {selectedFile.name}
-                            </div>
-                        )}
+                        <div className="file-input-container">
+                            <label htmlFor="file-input" className="file-input-label">
+                                Upload Content
+                            </label>
+                            <input
+                                type="file"
+                                id="file-input"
+                                onChange={handleFileSelect}
+                                accept=".txt,.docx,.pdf"  // You can restrict the accepted file types
+                                className="file-input-button"
+                            />
+                            
+                            {/* Optionally, display the selected file name */}
+                            {selectedFile && (
+                                <div className="file-name-display">
+                                    {selectedFile.name}
+                                </div>
+                            )}
+                        </div>
 
                         <div className="add-overlay-buttons">
                             <button onClick={handleBookUpload}>Upload Book</button>
