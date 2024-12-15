@@ -117,7 +117,7 @@
 }
 
 #book-details-page-read-button:hover {
-    background-color: #1A3E5C;
+    background-color: #0f4ba3;
 }
 
 #book-details-page-listen-button {
@@ -129,8 +129,8 @@
 
 #book-details-page-listen-button:hover {
     background-color: rgb(242, 242, 242);
-    color: #1A3E5C;
-    border: 2px solid #1A3E5C;
+    color: #0f4ba3;
+    border: 2px solid #0f4ba3;
 }
 
 /* Star Rating */
@@ -193,7 +193,7 @@ strong {
 }
 
 .write-comment-button:hover {
-    background-color: #1A3E5C;
+    background-color: #0f4ba3;
 }
 
 #book-details-page-comments-section {
@@ -265,7 +265,7 @@ strong {
 
 .book-details-page-reply-button:hover {
     text-decoration: underline;
-    color: #1A3E5C;
+    color: #0f4ba3;
 }
 
 /* Replies indentation */

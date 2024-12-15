@@ -20,6 +20,8 @@ export default function PasswordProfilePage() {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmedNewPassword, setShowConfirmedNewPassword] = useState(false);
 
+    const [error, setError] = useState("");  // Add error state
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         setPasswords((previous) => {
@@ -40,8 +42,10 @@ export default function PasswordProfilePage() {
                 newPassword: "",
                 confirmedNewPassword: ""
             });
+            setError(""); // Clear error after successful save
         } catch (error) {
             console.error("Error while saving profile", error);
+            setError("An error occurred while saving the password. Please try again.");
         }
     };
 
@@ -123,6 +127,10 @@ export default function PasswordProfilePage() {
                                     />
                                 </div>
                             </label>
+
+                            {/* Show error message if it's not null or empty */}
+                            {error && <div className="password-profile-page-error-message">{error}</div>}
+
                             <div className="password-profile-page-profile-buttons">
                                 <button
                                     type="button"

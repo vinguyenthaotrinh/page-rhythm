@@ -48,7 +48,7 @@
 }
 
 #books-my-library-page-add-book-button:hover {
-    background-color: #1c3a56;
+    background-color: #0f4ba3;
 }
 
 .books-my-library-page-add-icon {
@@ -152,7 +152,7 @@
 }
 
 .book-item-edit-button:hover {
-    background-color: #1c3a56;
+    background-color: #0f4ba3;
 }
 
 /* Delete Button */
@@ -238,5 +238,5 @@
 }
 
 #books-my-library-page-books-list-container::-webkit-scrollbar-thumb:hover {
-    background-color: #1c3a56; /* Thumb hover color */
+    background-color: #0f4ba3; /* Thumb hover color */
 }

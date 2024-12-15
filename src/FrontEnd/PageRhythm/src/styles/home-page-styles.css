@@ -3,16 +3,16 @@
 /* Make the main container full viewport height */
 #home-page {
     display: flex;
-    flex-direction: column; /* Stack NavigationBar and Content vertically */
-    height: 100vh;         /* Full viewport height */
-    width: 100vw;          /* Full viewport width */
+    flex-direction: column;     /* Stack NavigationBar and Content vertically */
+    height: 100vh;              /* Full viewport height */
+    width: 100vw;               /* Full viewport width */
     background-color: #F6FFDE;
     padding: 12px;
 }
 
 /* Ensure the navigation bar height is fixed */
 #home-page nav {
-    flex-shrink: 0;        /* Prevent shrinking */
+    flex-shrink: 0;             /* Prevent shrinking */
 }
 
 /* Search container */
@@ -46,17 +46,17 @@
     background-color: white;
     font-size: 16px;
     color: #265073;
-    padding-left: 36px;  /* Give space for the icon inside the input */
+    padding-left: 36px;     /* Give space for the icon inside the input */
 }
 
 #home-page-search-container input[type="text"]::placeholder {
-    text-align: center;  /* Align placeholder text to the center */
+    text-align: center;     /* Align placeholder text to the center */
     color: #265073;
 }
 
 .home-page-input-icon {
     position: absolute;
-    left: 12px;  /* Position the icon on the left inside the input box */
+    left: 12px;             /* Position the icon on the left inside the input box */
     width: 20px;
     height: 20px;
 }
