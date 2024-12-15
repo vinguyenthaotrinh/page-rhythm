@@ -7,10 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
 
 export default function BooksMyLibraryPage() {
-    const [books, setBooks] = useState<any[]>([]); // Books data state
-    const [loading, setLoading] = useState(true);  // Loading state
-    const [showConfirmation, setShowConfirmation] = useState(false); // Confirmation box visibility
+    const [books, setBooks] = useState<any[]>([]);                      // Books data state
+    const [loading, setLoading] = useState(true);                       // Loading state
+    const [showConfirmation, setShowConfirmation] = useState(false);    // Confirmation box visibility
     const [bookToDelete, setBookToDelete] = useState<any | null>(null); // Track the selected book for deletion
+    const [showAddOverlay, setShowAddOverlay] = useState(false);        // State for Add Overlay
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function BooksMyLibraryPage() {
     }, []);
 
     const handleAddClick = () => {
-        navigate("/add-book");
+        setShowAddOverlay(true);  // Show the overlay
     };
 
     const handleDeleteClick = (book: any) => {
@@ -156,6 +157,24 @@ export default function BooksMyLibraryPage() {
                             >
                                 No
                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Add Overlay */}
+            {showAddOverlay && (
+                <div className="add-overlay">
+                    <div className="add-overlay-content">
+                        <h1
+                            id="add-overlay-title"
+                        >
+                            Add your book here
+                        </h1>
+                        <p>Please enter the book information</p>
+                        <div className="add-overlay-buttons">
+                            <button onClick={() => navigate("/add-book")}>Go to Add Book</button>
+                            <button onClick={() => setShowAddOverlay(false)}>Close</button>
                         </div>
                     </div>
                 </div>

@@ -314,3 +314,36 @@
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
 }
+
+.add-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;  /* Ensure it's above all other elements */
+}
+
+.add-overlay-content {
+    background-color: #EFEAD3;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.add-overlay-buttons button {
+    margin: 10px;
+}
+
+#add-overlay-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
