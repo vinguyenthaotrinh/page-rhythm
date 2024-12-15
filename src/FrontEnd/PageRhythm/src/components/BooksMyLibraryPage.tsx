@@ -12,7 +12,6 @@ export default function BooksMyLibraryPage() {
     const [showConfirmation, setShowConfirmation] = useState(false);    // Confirmation box visibility
     const [bookToDelete, setBookToDelete] = useState<any | null>(null); // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay] = useState(false);        // State for Add Overlay
-    const [imagePreview, setImagePreview] = useState<string | null>(null); // For image preview (cover image)
     const [selectedFile, setSelectedFile] = useState<File | null>(null); // Track the selected file for upload
     const [bookName, setBookName] = useState("");                       // Book name input
     const [authorName, setAuthorName] = useState("");                   // Author name input
@@ -66,7 +65,6 @@ export default function BooksMyLibraryPage() {
             // Create a preview of the image
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImagePreview(reader.result as string); // Set the preview URL
             };
             reader.readAsDataURL(file); // Read the file as a data URL
         }
@@ -213,6 +211,7 @@ export default function BooksMyLibraryPage() {
                             value={bookName}
                             onChange={(e) => setBookName(e.target.value)}
                         />
+
                         <input
                             type="text"
                             placeholder="Author Name"
@@ -237,21 +236,22 @@ export default function BooksMyLibraryPage() {
                             onChange={(e) => setSummary(e.target.value)}
                         />
 
-                        {/* File input for uploading a cover image */}
+                        {/* File input for uploading content */}
+                        <label htmlFor="file-input" className="file-input-label">
+                            Upload Content
+                        </label>
                         <input
                             type="file"
                             id="file-input"
                             onChange={handleFileSelect}
-                            accept="image/*"
+                            accept=".txt,.docx,.pdf"  // You can restrict the accepted file types
+                            className="file-input-button"
                         />
-                        {imagePreview && (
-                            <div>
-                                <p>Preview:</p>
-                                <img
-                                    src={imagePreview}
-                                    alt="Selected file preview"
-                                    style={{ width: "200px" }}
-                                />
+
+                        {/* Optionally, display the selected file name */}
+                        {selectedFile && (
+                            <div className="file-name-display">
+                                {selectedFile.name}
                             </div>
                         )}
 
@@ -259,6 +259,7 @@ export default function BooksMyLibraryPage() {
                             <button onClick={handleBookUpload}>Upload Book</button>
                             <button onClick={() => setShowAddOverlay(false)}>Close</button>
                         </div>
+
                     </div>
                 </div>
             )}

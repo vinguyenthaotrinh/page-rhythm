@@ -315,35 +315,187 @@
     font-family: "Poppins-SemiBold", sans-serif;
 }
 
+/* Main overlay container */
 .add-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;  /* Ensure it's above all other elements */
+    z-index: 31082003;  /* Ensure overlay appears above other content */
+    transition: opacity 0.3s ease; /* Smooth fade-in/out */
 }
 
+/* Content inside the overlay */
 .add-overlay-content {
-    background-color: #EFEAD3;
+    background-color: #EFEAD3;  /* Light beige background */
     color: black;
     font-family: "Poppins-Regular", sans-serif;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    width: 300px;
+    width: 90%;
+    max-width: 400px; /* Limit the maximum width for large screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;   /* Stack children vertically */
+    justify-content: center;  /* Center the content vertically */
+    align-items: center;      /* Center the content horizontally */
+    gap: 0px;                /* Add space between elements */
+    animation: fadeIn 0.3s ease-out; /* Fade-in effect for content */
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Title styling */
+#add-overlay-title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+    margin-bottom: 15px;
+}
+
+/* Styling for text descriptions */
+.add-overlay p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input fields styling */
+.add-overlay input,
+.add-overlay textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.add-overlay input:focus,
+.add-overlay textarea:focus {
+    border-color: #5b5b5b;  /* Darker border on focus */
+    outline: none;
+}
+
+/* File input styling */
+.add-overlay input[type="file"] {
+    padding: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Image preview container */
+.add-overlay img {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Buttons styling */
+.add-overlay-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
 .add-overlay-buttons button {
-    margin: 10px;
+    background-color: #4CAF50;  /* Green background */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: "Poppins-SemiBold", sans-serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-right: 8px;
+    transition: background-color 0.3s ease;
 }
 
-#add-overlay-title {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
+/* Hover effects for buttons */
+.add-overlay-buttons button:hover {
+    background-color: #45a049;  /* Darker green */
+}
+
+/* Close button with a different color */
+.add-overlay-buttons button:nth-child(2) {
+    background-color: #f44336;  /* Red background */
+}
+
+.add-overlay-buttons button:nth-child(2):hover {
+    background-color: #e53935;  /* Darker red */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .add-overlay-content {
+        width: 85%;  /* Take more width on smaller screens */
+        padding: 15px;
+    }
+
+    #add-overlay-title {
+        font-size: 20px;
+    }
+
+    .add-overlay p {
+        font-size: 14px;
+    }
+
+    .add-overlay-buttons button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+/* Hide the default file input */
+.file-input-button {
+    display: none;
+}
+
+/* Custom label button for uploading content */
+.file-input-label {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #265073;  /* Custom background */
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* Hover effect for the custom file input button */
+.file-input-label:hover {
+    background-color: #0f4ba3;
+}
+
+/* Optional: Style the text inside the label */
+.file-input-label span {
+    font-size: 14px;
+}
+
+/* If needed, show the selected file name after choosing a file */
+.file-name-display {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
 }
