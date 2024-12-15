@@ -58,18 +58,34 @@ export default function BooksMyLibraryPage() {
                         ) : (
                             <div id="books-my-library-page-books-grid">
                                 {books.map((book, index) => (
-                                    <div 
-                                        key={index} 
-                                        className="books-my-library-page-book-item"
-                                    >
-                                        <img 
-                                            src={IMAGES.decodeBookCoverImage(book.image)} 
-                                            alt={book.title} 
-                                            className="books-my-library-page-book-cover" 
-                                        />
-                                        <p 
-                                            className="books-my-library-page-book-title"
-                                        >{book.title}</p>
+                                    <div key={index} className="books-my-library-page-book-item">
+                                        {/* Left column for book cover */}
+                                        <div className="book-item-left-column">
+                                            <img 
+                                                src={IMAGES.decodeBookCoverImage(book.image)} 
+                                                alt={book.title} 
+                                                className="book-item-cover" 
+                                            />
+                                        </div>
+
+                                        {/* Right column for book details */}
+                                        <div className="book-item-right-column">
+                                            <p className="book-item-title">{book.title}</p>
+                                            <p className="book-item-author">Author: {book.author}</p>
+                                            <p className="book-item-release-date">Release Date: {book.releaseDate}</p>
+                                            <div className="book-item-buttons">
+                                                {/* Edit Button */}
+                                                <button className="book-item-edit-button">
+                                                    Edit
+                                                    <img src={IMAGES.PENCIL_ICON} alt="Edit Icon" className="book-item-button-icon" />
+                                                </button>
+                                                {/* Delete Button */}
+                                                <button className="book-item-delete-button">
+                                                    Delete
+                                                    <img src={IMAGES.TRASH_ICON} alt="Delete Icon" className="book-item-button-icon" />
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

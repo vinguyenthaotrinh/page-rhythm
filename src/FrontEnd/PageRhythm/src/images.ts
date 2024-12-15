@@ -5,6 +5,7 @@ import LOCK_ICON from "./assets/images/lock-icon.png";
 import MAIL_ICON from "./assets/images/mail-icon.png";
 import LEFT_ICON from "./assets/images/left-icon.png";
 import RIGHT_ICON from "./assets/images/right-icon.png";
+import TRASH_ICON from "./assets/images/trash-icon.png";
 import PENCIL_ICON from "./assets/images/pencil-icon.png";
 import GOOGLE_ICON from "./assets/images/google-icon.png";
 import EYE_ON_ICON from "./assets/images/eye-on-icon.png";
@@ -46,6 +47,7 @@ const IMAGES = {
     LEFT_ICON,
     RIGHT_ICON,
     ADD_ICON,
+    TRASH_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) {

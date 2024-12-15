@@ -71,32 +71,110 @@
     overflow: auto;
 }
 
+/* Book item container: two-column layout */
 .books-my-library-page-book-item {
+    display: flex;             /* Flexbox for the two-column layout */
     background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    gap: 20px;                 /* Spacing between the two columns */
     transition: transform 0.3s ease;
+    align-items: center;       /* Vertically center the content */
 }
 
 .books-my-library-page-book-item:hover {
     transform: translateY(-5px);  /* Adds a hover effect to lift the item */
 }
 
-.books-my-library-page-book-cover {
-    width: 100%;
-    height: 200px;
+/* Left column: book cover */
+.book-item-left-column {
+    flex: 0 0 120px; /* Fixed width for the book cover */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-item-cover {
+    width: 120px;
+    height: 160px;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.books-my-library-page-book-title {
-    margin-top: 10px;
-    font-size: 16px;
+/* Right column: book details */
+.book-item-right-column {
+    flex: 1;                 /* Takes up the remaining space */
+    display: flex;
+    flex-direction: column;  /* Stacks text and buttons vertically */
+    justify-content: space-between; /* Space out the content vertically */
+}
+
+/* Book details */
+.book-item-title {
+    font-size: 18px;
     font-weight: bold;
     color: #333;
     font-family: "Poppins-SemiBold", sans-serif;
+}
+
+.book-item-author,
+.book-item-release-date {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Button container */
+.book-item-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
+/* Edit Button */
+.book-item-edit-button {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between text and icon */
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.book-item-edit-button:hover {
+    background-color: #1c7dcc;
+}
+
+/* Delete Button */
+.book-item-delete-button {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between text and icon */
+    background-color: white;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-item-delete-button:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Button icons */
+.book-item-button-icon {
+    width: 16px;
+    height: 16px;
 }
 
 /* Make it responsive for smaller screens */
