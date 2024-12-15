@@ -69,6 +69,8 @@
     gap: 20px;
     padding: 20px;
     overflow: auto;
+    max-width: 1000px;
+    margin: 0 auto; /* Center the grid horizontally */
 }
 
 /* Book item container: two-column layout */
@@ -96,10 +98,12 @@
 }
 
 .book-item-cover {
-    width: 120px;
-    height: 160px;
+    width: 180px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 8px;
+    gap: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a black shadow */
 }
 
 /* Right column: book details */
@@ -107,7 +111,7 @@
     flex: 1;                 /* Takes up the remaining space */
     display: flex;
     flex-direction: column;  /* Stacks text and buttons vertically */
-    justify-content: space-between; /* Space out the content vertically */
+    justify-content: flex-start;
 }
 
 /* Book details */
@@ -122,15 +126,15 @@
 .book-item-release-date {
     font-size: 14px;
     color: #555;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 /* Button container (this was adjusted to ensure buttons are stacked vertically) */
 .book-item-buttons {
     display: flex;
     flex-direction: column; /* Stack the buttons vertically */
-    gap: 10px; /* Space between buttons */
-    margin-top: 10px;
+    gap: 8px; /* Space between buttons */
+    margin-top: 0px;
 }
 
 /* Edit Button */
@@ -146,7 +150,7 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
-    max-width: 200px; /* Limit the width of the button */
+    max-width: 120px; /* Limit the width of the button */
     width: 100%; /* Make it responsive */
     justify-content: space-between;
 }
@@ -169,7 +173,7 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     gap: 5px; /* Space between text and icon */
     /* Remove the width 100% to prevent it from expanding */
-    max-width: 200px; /* Optional: limit the width of the button */
+    max-width: 120px;
     width: auto; /* Ensure the width adapts to the content */
     justify-content: space-between;
 }

@@ -72,7 +72,7 @@ export default function BooksMyLibraryPage() {
                                         <div className="book-item-right-column">
                                             <p className="book-item-title">{book.title}</p>
                                             <p className="book-item-author">Author: {book.author}</p>
-                                            <p className="book-item-release-date">Release Date: {book.releaseDate}</p>
+                                            <p className="book-item-release-date">Release Date: {book.releaseDate || "Unknown"}</p>
                                             <div className="book-item-buttons">
                                                 {/* Edit Button */}
                                                 <button className="book-item-edit-button">
