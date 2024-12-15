@@ -4,12 +4,13 @@ import NavigationBar from "./NavigationBar";
 import React, { useState, useEffect } from "react";
 import "../styles/books-my-library-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
-import MyLibrarySectionBar from "./MyLibrarySectionBar"
-import { decode } from "punycode";
+import MyLibrarySectionBar from "./MyLibrarySectionBar";
 
 export default function BooksMyLibraryPage() {
-    const [books, setBooks] = useState<any[]>([]);  // Books data state
-    const [loading, setLoading] = useState(true);   // Loading state
+    const [books, setBooks] = useState<any[]>([]); // Books data state
+    const [loading, setLoading] = useState(true);  // Loading state
+    const [showConfirmation, setShowConfirmation] = useState(false); // Confirmation box visibility
+    const [bookToDelete, setBookToDelete] = useState<any | null>(null); // Track the selected book for deletion
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,8 +18,8 @@ export default function BooksMyLibraryPage() {
             try {
                 setLoading(true);
                 const server = await Server.getInstance();
-                const response = await server.getUserUploadedBooks(); // Call the correct method
-                setBooks(response); // Update the state with fetched books
+                const response = await server.getUserUploadedBooks();
+                setBooks(response);
             } catch (error) {
                 console.error("Error fetching books:", error);
             } finally {
@@ -30,7 +31,31 @@ export default function BooksMyLibraryPage() {
     }, []);
 
     const handleAddClick = () => {
-        navigate("/add-book");  // Assuming this is the page where users can add new books
+        navigate("/add-book");
+    };
+
+    const handleDeleteClick = (book: any) => {
+        setBookToDelete(book); // Set the selected book
+        setShowConfirmation(true); // Show the confirmation box
+    };
+
+    const handleConfirmDelete = async () => {
+        if (bookToDelete) {
+            try {
+                const server = await Server.getInstance();
+                //await server.deleteBook(bookToDelete.id); // Call delete API
+                setBooks(books.filter((b) => b.id !== bookToDelete.id)); // Remove book from state
+                setBookToDelete(null);
+                setShowConfirmation(false);
+            } catch (error) {
+                console.error("Error deleting book:", error);
+            }
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setBookToDelete(null);
+        setShowConfirmation(false); // Close the confirmation box
     };
 
     return (
@@ -39,16 +64,16 @@ export default function BooksMyLibraryPage() {
             <div id="books-my-library-page-container">
                 <MyLibrarySectionBar currentOption="books" />
                 <div id="books-my-library-page-content">
-                    <button 
-                        id="books-my-library-page-add-book-button" 
+                    <button
+                        id="books-my-library-page-add-book-button"
                         onClick={handleAddClick}
                     >
                         Add
-                        <img 
-                            src={IMAGES.ADD_ICON} 
-                            alt="Add Icon" 
-                            className="books-my-library-page-add-icon" 
-                        /> 
+                        <img
+                            src={IMAGES.ADD_ICON}
+                            alt="Add Icon"
+                            className="books-my-library-page-add-icon"
+                        />
                     </button>
 
                     {/* Scrollable section for books */}
@@ -59,32 +84,44 @@ export default function BooksMyLibraryPage() {
                             <div id="books-my-library-page-books-grid">
                                 {books.map((book, index) => (
                                     <div key={index} className="books-my-library-page-book-item">
-                                        {/* Left column for book cover */}
                                         <div className="book-item-left-column">
-                                            <img 
-                                                src={IMAGES.decodeBookCoverImage(book.image)} 
-                                                alt={book.title} 
-                                                className="book-item-cover" 
+                                            <img
+                                                src={IMAGES.decodeBookCoverImage(book.image)}
+                                                alt={book.title}
+                                                className="book-item-cover"
                                             />
                                         </div>
-
-                                        {/* Right column for book details */}
                                         <div className="book-item-right-column">
                                             <p className="book-item-title">{book.title}</p>
                                             <p className="book-item-author">Author: {book.author}</p>
-                                            <p className="book-item-release-date">Release Date: {book.releaseDate || "Unknown"}</p>
+                                            <p className="book-item-release-date">
+                                                Release Date: {book.releaseDate || "Unknown"}
+                                            </p>
                                             <div className="book-item-buttons">
-                                                {/* Edit Button */}
                                                 <button className="book-item-edit-button">
                                                     Edit
-                                                    <img src={IMAGES.WHITE_PENCIL_ICON} alt="Edit Icon" className="book-item-button-icon" />
+                                                    <img
+                                                        src={IMAGES.WHITE_PENCIL_ICON}
+                                                        alt="Edit Icon"
+                                                        className="book-item-button-icon"
+                                                    />
                                                 </button>
-                                                {/* Delete Button */}
-                                                <button className="book-item-delete-button">
+                                                <button
+                                                    className="book-item-delete-button"
+                                                    onClick={() => handleDeleteClick(book)}
+                                                >
                                                     Delete
                                                     <div className="book-item-button-icon">
-                                                        <img src={IMAGES.RED_TRASH_ICON} alt="Delete Icon" className="icon-normal" />
-                                                        <img src={IMAGES.WHITE_TRASH_ICON} alt="Delete Hover Icon" className="icon-hover" />
+                                                        <img
+                                                            src={IMAGES.RED_TRASH_ICON}
+                                                            alt="Delete Icon"
+                                                            className="icon-normal"
+                                                        />
+                                                        <img
+                                                            src={IMAGES.WHITE_TRASH_ICON}
+                                                            alt="Delete Hover Icon"
+                                                            className="icon-hover"
+                                                        />
                                                     </div>
                                                 </button>
                                             </div>
@@ -96,6 +133,29 @@ export default function BooksMyLibraryPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Box */}
+            {showConfirmation && (
+                <div className="confirmation-overlay">
+                    <div className="confirmation-box">
+                        <p>Are you sure you want to delete this book?</p>
+                        <div className="confirmation-buttons">
+                            <button
+                                className="confirmation-button confirm"
+                                onClick={handleConfirmDelete}
+                            >
+                                Yes
+                            </button>
+                            <button
+                                className="confirmation-button cancel"
+                                onClick={handleCancelDelete}
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 }
