@@ -1,4 +1,4 @@
-@import url('fonts.css');
+@import url("fonts.css");
 
 html, body {
     height: 100%;
@@ -13,7 +13,7 @@ html, body {
     margin: 0;
     font-family: 'Poppins-Regular', sans-serif;
     min-height: 100vh;  /* Full viewport height */
-    width: 100vw;   /* Full viewport width */
+    width: 100vw;       /* Full viewport width */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,24 +22,24 @@ html, body {
 /* Logo section positioning */
 #register-page-logo-section {
     display: flex;
-    align-items: center; /* Vertically align logo and text */
-    position: absolute; /* Position it in the top left corner */
+    align-items: center;    /* Vertically align logo and text */
+    position: absolute;     /* Position it in the top left corner */
     top: 20px;
     left: 24px;
 }
 
 #register-page-logo {
-    width: 60px; /* Initial width */
-    height: 54px; /* Adjust height to maintain aspect ratio and make the image 1.5x of text height */
-    margin-right: 15px; /* Increase space between logo and title */
+    width: 60px;            /* Initial width */
+    height: 54px;           /* Adjust height to maintain aspect ratio and make the image 1.5x of text height */
+    margin-right: 15px;     /* Increase space between logo and title */
 }
 
 #register-page-title {
-    font-size: 24px; /* Font size for the title */
+    font-size: 24px;        /* Font size for the title */
     font-weight: bold;
     font-family: 'Poppins-Bold', sans-serif;
     color: #333;
-    margin: 0; /* Remove default margin */
+    margin: 0;              /* Remove default margin */
 }
 
 #register-page-signup-section {
@@ -245,10 +245,10 @@ html, body {
 
 #register-page-login-link {
     font-size: 16px;
-    font-weight: bold;        /* Emphasize the link */
+    font-weight: bold;          /* Emphasize the link */
     font-family: 'Poppins-Bold', sans-serif;
     color: #265073;           /* Green for the link */
-    text-decoration: none;    /* Remove underline */
+    text-decoration: none;      /* Remove underline */
     cursor: pointer;
 }
 
@@ -261,7 +261,7 @@ html, body {
     accent-color: white;
     width: 20px;
     height: 20px;
-    border-radius: 50%;  /* Round checkbox */
+    border-radius: 50%;             /* Round checkbox */
     margin-right: 8px;
     border: 2px solid #a4c0ed;  /* Light blue border */
     background-color: white;
@@ -289,13 +289,13 @@ html, body {
 
 #register-page-terms-container {
     display: flex;
-    align-items: center; /* Vertically center the checkbox and the label text */
+    align-items: center;    /* Vertically center the checkbox and the label text */
     justify-content: start; /* Align items to the left */
 }
 
 #register-page::-webkit-scrollbar {
-    width: 12px; /* Set the width of the scrollbar */
-    height: 12px; /* Set the height of the scrollbar (horizontal) */
+    width: 12px;            /* Set the width of the scrollbar */
+    height: 12px;           /* Set the height of the scrollbar (horizontal) */
 }
 
 /* Style the track (background of the scrollbar) */

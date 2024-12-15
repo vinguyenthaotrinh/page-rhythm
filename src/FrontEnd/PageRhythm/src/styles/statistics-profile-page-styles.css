@@ -1,18 +1,18 @@
-@import url('fonts.css');
+@import url("fonts.css");
 
 /* Full page layout */
 .statistics-profile-page {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Makes the page take up the full viewport height */
-    width: 100vw; /* Makes the page take up the full viewport width */
+    height: 100vh;  /* Makes the page take up the full viewport height */
+    width: 100vw;   /* Makes the page take up the full viewport width */
 }
 
 /* Container for both sidebar and content */
 .statistics-profile-page-container {
     display: flex;
-    flex-grow: 1; /* Ensure content grows to fill the available space */
-    margin-top: 60px; /* Adjust for navigation bar height */
+    flex-grow: 1;               /* Ensure content grows to fill the available space */
+    margin-top: 60px;           /* Adjust for navigation bar height */
     height: calc(100vh - 60px); /* Adjust container height to fill remaining space after navigation bar */
 }
 
@@ -34,6 +34,6 @@
     margin-bottom: 20px;
     color: #265073;
     align-items: center;
-    font-family : 'Poppins-Bold', sans-serif;
+    font-family : "Poppins-Bold", sans-serif;
 }
 

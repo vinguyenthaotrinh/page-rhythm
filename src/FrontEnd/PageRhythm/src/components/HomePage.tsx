@@ -43,7 +43,7 @@ export default function HomePage() {
     
     const handleSearch = async () => {
         try {
-            const server = await Server.getInstance();  // Get the server instance
+            const server = await Server.getInstance();
 
             // Call the searchBooks method with the search term and selected genre
             const searchResults = await server.searchBooks(searchTerm, selectedGenre === "All" ? null : selectedGenre);
