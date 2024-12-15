@@ -45,7 +45,14 @@ const IMAGES = {
     EMPTY_STAR_ICON,
     LEFT_ICON,
     RIGHT_ICON,
-    ADD_ICON
+    ADD_ICON,
+
+    decodeBookCoverImage: (bookCover: string | null) => {
+        if (!bookCover) {
+            return DEFAULT_BOOK_COVER;
+        }
+        return `data:image/jpeg;base64,${bookCover}`;
+    }
 };
 
 export default IMAGES;

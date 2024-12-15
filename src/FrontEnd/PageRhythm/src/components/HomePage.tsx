@@ -62,13 +62,6 @@ export default function HomePage() {
         setSelectedGenre(event.target.value);
     };
 
-    const decodeBookCover = (bookCover: string | null) => {
-        if (!bookCover) {
-            return IMAGES.DEFAULT_BOOK_COVER;
-        }
-        return `data:image/jpeg;base64,${bookCover}`;
-    }
-
     const handleBookClick = (bookID: string) => {
         navigate(`/book-details-page/${bookID}`);  // Redirect to the book details page
     };
@@ -124,7 +117,7 @@ export default function HomePage() {
                         <div className="home-page-book-title">
                             <div className="home-page-book-cover">
                                 <img 
-                                    src={decodeBookCover(book.image)} 
+                                    src={IMAGES.decodeBookCoverImage(book.image)} 
                                     alt={book.title} 
                                 />
                             </div>

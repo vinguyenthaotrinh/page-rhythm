@@ -54,13 +54,6 @@ export default function BookDetailsPage() {
     const handleBackClick = () => {
         navigate(-1); // Navigate back to the previous page
     };
-
-    const decodeBookCover = (bookCover: string | null) => {
-        if (!bookCover) {
-            return IMAGES.DEFAULT_BOOK_COVER;
-        }
-        return `data:image/jpeg;base64,${bookCover}`;
-    }
     
     // Fetch book details from the server
     useEffect(() => {
@@ -213,7 +206,7 @@ export default function BookDetailsPage() {
                 >
                     {/* Left Column (Book Cover) */}
                     <div id="book-details-page-cover">
-                        <img src={decodeBookCover(book.image)} alt="Book Cover" />
+                        <img src={IMAGES.decodeBookCoverImage(book.image)} alt="Book Cover" />
                     </div>
 
                     {/* Right Column (Book Information) */}

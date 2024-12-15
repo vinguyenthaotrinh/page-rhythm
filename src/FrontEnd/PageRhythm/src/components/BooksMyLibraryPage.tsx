@@ -33,13 +33,6 @@ export default function BooksMyLibraryPage() {
         navigate("/add-book");  // Assuming this is the page where users can add new books
     };
 
-    const decodeBookCover = (bookCover: string | null) => {
-        if (!bookCover) {
-            return IMAGES.DEFAULT_BOOK_COVER;
-        }
-        return `data:image/jpeg;base64,${bookCover}`;
-    }
-
     return (
         <div id="books-my-library-page">
             <NavigationBar />
@@ -70,7 +63,7 @@ export default function BooksMyLibraryPage() {
                                         className="books-my-library-page-book-item"
                                     >
                                         <img 
-                                            src={decodeBookCover(book.image)} 
+                                            src={IMAGES.decodeBookCoverImage(book.image)} 
                                             alt={book.title} 
                                             className="books-my-library-page-book-cover" 
                                         />
