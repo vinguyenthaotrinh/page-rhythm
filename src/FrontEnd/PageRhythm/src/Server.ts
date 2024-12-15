@@ -687,4 +687,38 @@ export default class Server {
             throw error;
         }
     }
+
+    public async getUserUploadedBooks(): Promise<any[]> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/book/mylib`; // Backend endpoint for fetching user-uploaded books
+    
+        const sessionToken = this.getSessionToken();
+    
+        if (!sessionToken) {
+            throw new Error("Session token is missing. Please log in again.");
+        }
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Include the session token
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch user-uploaded books. Status: ${response.status}`);
+            }
+    
+            const books = await response.json(); // The response is expected to be a JSON array of books
+            return books; // Return the array of user-uploaded books
+        } catch (error) {
+            console.error("Error fetching user-uploaded books:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
 }

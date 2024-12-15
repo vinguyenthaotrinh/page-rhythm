@@ -10,7 +10,7 @@ class BookService:
 
     # 1. Create a new book
     def create_book(self, book_data: dict) -> int:
-        book_data.pop('book_id', None)
+        book_data.pop("book_id", None)
         new_book = Book(**book_data)
         return self.supabase.create_book(new_book)
     

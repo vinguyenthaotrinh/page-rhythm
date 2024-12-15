@@ -17,8 +17,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-app.config['JWT_SECRET_KEY'] = os.environ.get("JWT_SECRET_KEY")
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(seconds=int(os.environ.get("JWT_ACCESS_TOKEN_EXPIRATION_DURATION_IN_SECONDS")))
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(seconds=int(os.environ.get("JWT_ACCESS_TOKEN_EXPIRATION_DURATION_IN_SECONDS")))
 
 app.register_blueprint(home_blueprint, url_prefix = "/")
 app.register_blueprint(book_blueprint, url_prefix = "/book")

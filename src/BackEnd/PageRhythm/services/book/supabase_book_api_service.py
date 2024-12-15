@@ -10,8 +10,8 @@ class SupabaseBookAPIService:
     def create_book(self, book: Book) -> int:
         try:
             book_data = book.to_serializable_JSON()
-            book_data.pop('book_id', None)
-            response = self.client.table('Book').insert(book_data).execute()  
+            book_data.pop("book_id", None)
+            response = self.client.table("Book").insert(book_data).execute()  
             if response.data:
                 return response.data[0]["book_id"]  # PostgreSQL tự động trả về ID
             return None
@@ -21,7 +21,7 @@ class SupabaseBookAPIService:
     # 2. Retrieve book information
     def get_book_information(self, book_id: int) -> dict:
         try:
-            response = self.client.table('Book').select('*').eq('book_id', book_id).execute()
+            response = self.client.table("Book").select("*").eq("book_id", book_id).execute()
             return response.data[0] if response.data else None
         except Exception as e:
             return None
@@ -29,9 +29,9 @@ class SupabaseBookAPIService:
     # 3. Search for books
     def search_book(self, title: str, genre: str = None) -> list:
         try:
-            query = self.client.table('Book').select('*').ilike('title', f'%{title}%')
+            query = self.client.table("Book").select("*").ilike("title", f"%{title}%")
             if genre:
-                query = query.ilike('genre', genre)
+                query = query.ilike("genre", genre)
             response = query.execute()
             return response.data if response.data else []
         except Exception as e:
@@ -58,8 +58,8 @@ class SupabaseBookAPIService:
         
     def get_all_genres(self) -> list:
         try:
-            response = self.client.table('Book').select('genre').execute()
-            genres = {book['genre'] for book in response.data if 'genre' in book}
+            response = self.client.table("Book").select("genre").execute()
+            genres = {book["genre"] for book in response.data if "genre" in book}
             return list(genres)
         except Exception as e:
             return []
@@ -75,7 +75,7 @@ class SupabaseBookAPIService:
     # 5. Update book information
     def update_book(self, book: Book) -> bool:
         try:
-            response = self.client.table('Book').update(book.to_serializable_JSON()).eq('book_id', book.get_book_id()).execute()
+            response = self.client.table("Book").update(book.to_serializable_JSON()).eq("book_id", book.get_book_id()).execute()
             return response.data
         except Exception as e:
             return False
@@ -83,14 +83,14 @@ class SupabaseBookAPIService:
     # 6. Delete a book
     def delete_book(self, book_id: int) -> bool:
         try:
-            response = self.client.table('Book').delete().eq('book_id', book_id).execute()
+            response = self.client.table("Book").delete().eq("book_id", book_id).execute()
             return response.data
         except Exception as e:
             return False
 
     def get_all_books(self) -> list[Book]:
         try:
-            response = self.client.table('Book').select('*').execute()
+            response = self.client.table("Book").select("*").execute()
             return [Book.deserialize_JSON(book) for book in response.data]
         except Exception as e:
             return []

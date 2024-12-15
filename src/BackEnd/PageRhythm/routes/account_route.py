@@ -8,7 +8,7 @@ account_blueprint = Blueprint("account", __name__)
 
 @account_blueprint.route("/retrieval_with_email", methods=["GET"])
 def get_account_with_email():
-    email = request.args.get('email')
+    email = request.args.get("email")
 
     if not email:
         return jsonify({"message": "Email parameter is required"}), 400

@@ -16,8 +16,9 @@ export default function BooksMyLibraryPage() {
         const fetchBooks = async () => {
             try {
                 setLoading(true);
-                //const response = await Server.getBooks();  // Assuming you have this method in the Server class
-                //setBooks(response.books || []);
+                const server = await Server.getInstance();
+                const response = await server.getUserUploadedBooks(); // Call the correct method
+                setBooks(response); // Update the state with fetched books
             } catch (error) {
                 console.error("Error fetching books:", error);
             } finally {
@@ -28,7 +29,6 @@ export default function BooksMyLibraryPage() {
         fetchBooks();
     }, []);
 
-    // Handle "Add" button click
     const handleAddClick = () => {
         navigate("/add-book");  // Assuming this is the page where users can add new books
     };

@@ -12,11 +12,11 @@ class AuthenticationService:
     
     @staticmethod
     def generate_salt() -> str:
-        return bcrypt.gensalt().decode('utf-8')
+        return bcrypt.gensalt().decode("utf-8")
     
     @staticmethod   
     def generate_hashed_password(password: str, salt: str) -> str:
-        return bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8')).decode('utf-8')
+        return bcrypt.hashpw(password.encode("utf-8"), salt.encode("utf-8")).decode("utf-8")
     
     @staticmethod
     def check_account_id_valid(account_id: int) -> bool:
