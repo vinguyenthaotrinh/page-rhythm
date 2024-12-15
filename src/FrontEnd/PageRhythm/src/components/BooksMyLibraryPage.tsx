@@ -138,6 +138,10 @@ export default function BooksMyLibraryPage() {
             {showConfirmation && (
                 <div className="books-my-library-page-deletion-confirmation-overlay">
                     <div className="books-my-library-page-deletion-confirmation-box">
+                        <h1
+                            id = "books-my-library-page-deletion-confirmation-title"
+                        > Delete your book 
+                        </h1>
                         <p>Are you sure you want to delete this book?</p>
                         <div className="books-my-library-page-deletion-confirmation-buttons">
                             <button
