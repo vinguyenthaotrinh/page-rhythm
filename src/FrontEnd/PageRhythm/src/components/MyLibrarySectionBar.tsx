@@ -1,6 +1,3 @@
-import IMAGES from "../images";
-import Server from "../Server";
-import NavigationBar from "./NavigationBar";
 import React, { useState, useEffect } from "react";
 import "../styles/my-library-section-bar-styles.css";
 import { Link, useNavigate } from "react-router-dom";

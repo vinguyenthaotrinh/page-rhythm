@@ -3,7 +3,7 @@ import Server from "../Server";
 import NavigationBar from "./NavigationBar";
 import "../styles/read-book-page-styles.css";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ReadBookPage() {
 
@@ -145,7 +145,7 @@ export default function ReadBookPage() {
                     <div id="read-book-page-left-content-page" className="read-book-page-content-page">
                         {/* Check if the left page content is defined before rendering */}
                         {contentPages[currentLeftPage - 1] &&
-                        contentPages[currentLeftPage - 1].split('\n').map((line, index) => (
+                        contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
                             <React.Fragment key={index}>
                             {line}
                             <br />
@@ -157,7 +157,7 @@ export default function ReadBookPage() {
                     {currentLeftPage < contentPages.length && contentPages[currentLeftPage] && (
                         <div id="read-book-page-right-content-page" className="read-book-page-content-page">
                         {/* Check if the right page content is defined before rendering */}
-                        {contentPages[currentLeftPage].split('\n').map((line, index) => (
+                        {contentPages[currentLeftPage].split("\n").map((line, index) => (
                             <React.Fragment key={index}>
                             {line}
                             <br />

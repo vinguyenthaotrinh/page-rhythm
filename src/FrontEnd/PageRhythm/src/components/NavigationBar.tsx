@@ -19,8 +19,8 @@ function LogoSectionOfNavigationBar() {
             role="button"
             tabIndex={0}
             onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
-            style={{ cursor: 'pointer' }}
+            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
+            style={{ cursor: "pointer" }}
         >
             <img src={IMAGES.LOGO} alt="PageRhythm Logo" className="navigation-bar-logo" />
             <h1 className="navigation-bar-title">PageRhythm</h1>
@@ -63,7 +63,7 @@ function ProfilePictureSectionOfNavigationBar() {
             role="button"
             tabIndex={0}
             onClick={handleProfilePictureClick}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
         />
     );
 }

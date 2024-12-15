@@ -1,14 +1,14 @@
 import IMAGES from "../images";
 import Server from "../Server";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../styles/register-page-styles.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 function LogoSection() {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate('/landing-page');
+        navigate("/landing-page");
     };
 
     return (
@@ -18,7 +18,7 @@ function LogoSection() {
             tabIndex={0}
             onClick={handleLogoClick}
             onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
         >
             <img id="register-page-logo" src={IMAGES.LOGO} alt="Logo" />
             <h1 id="register-page-title">PageRhythm</h1>
@@ -67,16 +67,16 @@ function SignupSection() {
             const response = await server.signup(fullName, email, firstPassword, dateOfBirth, bio);
 
             if (response.ok) {
-                console.log('Signup successful');
+                console.log("Signup successful");
         
-                navigate('/home-page');
+                navigate("/home-page");
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || "Signup failed"); // Handle server errors (e.g., invalid credentials)
             }
         } catch (err) {
-            setError('An error occurred. Please try again.');   // Handle network or other errors
-            console.error('Signup error:', err);
+            setError("An error occurred. Please try again.");   // Handle network or other errors
+            console.error("Signup error:", err);
         } finally {
             setLoadingSignupRequest(false);                      // Stop loading when the request is done
         }

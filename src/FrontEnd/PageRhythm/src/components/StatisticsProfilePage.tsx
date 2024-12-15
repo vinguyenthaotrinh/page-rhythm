@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import "../styles/statistics-profile-page-styles.css";
 import ProfileSectionBar from "./ProfileSectionBar";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function StatisticsProfilePage() {
     return (

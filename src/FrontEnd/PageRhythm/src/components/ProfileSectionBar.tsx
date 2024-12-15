@@ -1,7 +1,5 @@
-import IMAGES from "../images";
 import Server from "../Server";
 import "../styles/profile-section-bar.css";
-import NavigationBar from "./NavigationBar";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 

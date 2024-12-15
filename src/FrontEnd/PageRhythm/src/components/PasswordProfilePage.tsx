@@ -4,7 +4,7 @@ import NavigationBar from "./NavigationBar";
 import React, { useState, useEffect } from "react";
 import "../styles/password-profile-page-styles.css";
 import ProfileSectionBar from "./ProfileSectionBar";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function PasswordProfilePage() {
 

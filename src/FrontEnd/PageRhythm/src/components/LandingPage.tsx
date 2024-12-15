@@ -2,13 +2,13 @@ import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from "react";
 import "../styles/landing-page-styles.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 function LogoSection() {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate('/landing-page');
+        navigate("/landing-page");
     };
 
     return (
@@ -17,8 +17,8 @@ function LogoSection() {
             role="button"
             tabIndex={0}
             onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
-            style={{ cursor: 'pointer' }}
+            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
+            style={{ cursor: "pointer" }}
         >
             <img id="register-page-logo" src={IMAGES.LOGO} alt="Logo" />
             <h1 id="register-page-title">PageRhythm</h1>
@@ -51,16 +51,16 @@ function LoginSection() {
             const response = await server.login(email, password); // Use the login method from the Server class
         
             if (response.ok) {
-                console.log('Login successful');
+                console.log("Login successful");
         
-                navigate('/home-page');
+                navigate("/home-page");
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'Login failed'); // Handle server errors (e.g., invalid credentials)
+                setError(errorData.message || "Login failed"); // Handle server errors (e.g., invalid credentials)
             }
         } catch (err) {
-            setError('An error occurred. Please try again.'); // Handle network or other errors
-            console.error('Login error:', err);
+            setError("An error occurred. Please try again."); // Handle network or other errors
+            console.error("Login error:", err);
         } finally {
             setLoadingLoginRequest(false); // Stop loading when the request is done
         }
