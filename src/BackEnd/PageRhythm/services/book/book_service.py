@@ -1,4 +1,5 @@
 from services.book.supabase_book_api_service import SupabaseBookAPIService
+from services.book_rating.book_rating_service import BookRatingService
 import random
 import json
 
@@ -52,6 +53,11 @@ class BookService:
 
     # 6. Delete a book
     def delete_book(self, book_id: int) -> bool:
+
+        book_rating_service = BookRatingService()
+
+        book_rating_service.delete_all_ratings_for_book(book_id)
+
         return self.supabase.delete_book(book_id)
 
     def get_all_books_in_random_order(self) -> list[Book]:

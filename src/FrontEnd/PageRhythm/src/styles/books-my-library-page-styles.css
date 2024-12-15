@@ -245,10 +245,8 @@
     background-color: #0f4ba3; /* Thumb hover color */
 }
 
-
-
 /* Confirmation Box Overlay */
-.confirmation-overlay {
+.books-my-library-page-deletion-confirmation-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -262,8 +260,10 @@
 }
 
 /* Confirmation Box */
-.confirmation-box {
-    background-color: white;
+.books-my-library-page-deletion-confirmation-box {
+    background-color: #EFEAD3;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -273,27 +273,38 @@
 }
 
 /* Confirmation Buttons */
-.confirmation-buttons {
+.books-my-library-page-deletion-confirmation-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.confirmation-button {
+.books-my-library-page-deletion-confirmation-button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.confirmation-button.confirm {
+.books-my-library-page-deletion-confirmation-button.confirm {
     background-color: #e74c3c;
     color: white;
 }
 
-.confirmation-button.cancel {
+.books-my-library-page-deletion-confirmation-button.cancel {
     background-color: #ccc;
+    color: black;
+}
+
+.books-my-library-page-deletion-confirmation-button.confirm:hover {
+    background-color: #d43e2d;
+    color: white;
+}
+
+.books-my-library-page-deletion-confirmation-button.cancel:hover {
+    background-color: #ececec;
     color: black;
 }

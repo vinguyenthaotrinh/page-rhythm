@@ -72,3 +72,10 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False
+        
+    def delete_all_ratings_for_book(self, book_id: int) -> bool:
+        try:
+            response = self.client.table("BookRating").delete().eq("book_id", book_id).execute()
+            return response.data 
+        except Exception as e:
+            return False    

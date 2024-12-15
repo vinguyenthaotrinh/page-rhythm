@@ -86,6 +86,7 @@ class SupabaseBookAPIService:
             response = self.client.table("Book").delete().eq("book_id", book_id).execute()
             return response.data
         except Exception as e:
+            print(e)
             return False
 
     def get_all_books(self) -> list[Book]:

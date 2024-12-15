@@ -64,3 +64,6 @@ class BookRatingService:
             average_rating = self.supabase.calculate_average_rating(book_id)
             self.supabase.update_book_rating(book_id, average_rating)
         return success
+    
+    def delete_all_ratings_for_book(self, book_id: int) -> bool:
+        return self.supabase.delete_all_ratings_for_book(book_id)

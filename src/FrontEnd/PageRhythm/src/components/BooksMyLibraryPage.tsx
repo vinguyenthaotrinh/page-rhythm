@@ -35,16 +35,16 @@ export default function BooksMyLibraryPage() {
     };
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book); // Set the selected book
-        setShowConfirmation(true); // Show the confirmation box
+        setBookToDelete(book);      // Set the selected book
+        setShowConfirmation(true);  // Show the confirmation box
     };
 
     const handleConfirmDelete = async () => {
         if (bookToDelete) {
             try {
                 const server = await Server.getInstance();
-                //await server.deleteBook(bookToDelete.id); // Call delete API
-                setBooks(books.filter((b) => b.id !== bookToDelete.id)); // Remove book from state
+                await server.deleteBook(bookToDelete.book_id); 
+                setBooks(books.filter((b) => b.book_id !== bookToDelete.book_id)); // Remove book from state
                 setBookToDelete(null);
                 setShowConfirmation(false);
             } catch (error) {
@@ -136,18 +136,18 @@ export default function BooksMyLibraryPage() {
 
             {/* Confirmation Box */}
             {showConfirmation && (
-                <div className="confirmation-overlay">
-                    <div className="confirmation-box">
+                <div className="books-my-library-page-deletion-confirmation-overlay">
+                    <div className="books-my-library-page-deletion-confirmation-box">
                         <p>Are you sure you want to delete this book?</p>
-                        <div className="confirmation-buttons">
+                        <div className="books-my-library-page-deletion-confirmation-buttons">
                             <button
-                                className="confirmation-button confirm"
+                                className="books-my-library-page-deletion-confirmation-button confirm"
                                 onClick={handleConfirmDelete}
                             >
                                 Yes
                             </button>
                             <button
-                                className="confirmation-button cancel"
+                                className="books-my-library-page-deletion-confirmation-button cancel"
                                 onClick={handleCancelDelete}
                             >
                                 No

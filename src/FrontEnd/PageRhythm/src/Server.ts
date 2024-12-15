@@ -435,7 +435,6 @@ export default class Server {
             });
     
             if (!response.ok) {
-                // Log the status and error details
                 console.error(
                     `Failed to delete rating for book ${bookID}. HTTP status: ${response.status}, message: ${response.statusText}`
                 );
@@ -522,7 +521,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `${this.host}/comment/get_all_comments?book_id=${bookID}`; // Backend endpoint to fetch all comments for a book
+        const url = `${this.host}/comment/get_all_comments?book_id=${bookID}`;
     
         try {
             const response = await fetch(url, {
@@ -619,7 +618,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `${this.host}/comment/reply`; // Endpoint for replying to a comment
+        const url = `${this.host}/comment/reply`; 
     
         const sessionToken = this.getSessionToken();
     
@@ -666,7 +665,6 @@ export default class Server {
         const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}/${maximumLineLength}`; // Update the endpoint to match the server-side route
 
         try {
-            // Assuming you have a method to fetch book pages from the database or an API.
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -693,7 +691,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `${this.host}/book/mylib`; // Backend endpoint for fetching user-uploaded books
+        const url = `${this.host}/book/mylib`;
     
         const sessionToken = this.getSessionToken();
     
@@ -718,6 +716,41 @@ export default class Server {
             return books; // Return the array of user-uploaded books
         } catch (error) {
             console.error("Error fetching user-uploaded books:", error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async deleteBook(bookID: string): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `/book/${bookID}`; // Backend endpoint for deleting a book
+        const sessionToken = this.getSessionToken();
+    
+        if (!sessionToken) {
+            throw new Error("Session token is missing. Please log in again.");
+        }
+    
+        try {
+            const response = await fetch(`${this.host}${url}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Ensure the token is included
+                },
+            });
+    
+            if (!response.ok) {
+                console.error(
+                    `Failed to delete book ${bookID}. HTTP status: ${response.status}, message: ${response.statusText}`
+                );
+                throw new Error(`Failed to delete book: ${response.statusText} (${response.status})`);
+            }
+    
+            console.log(`Book ${bookID} deleted successfully.`);
+        } catch (error) {
+            console.error(`Error deleting book ${bookID}:`, error);
             throw error; // Rethrow the error to handle it elsewhere
         }
     }

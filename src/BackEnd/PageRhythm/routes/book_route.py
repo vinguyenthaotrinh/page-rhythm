@@ -142,8 +142,10 @@ def delete_book(book_id):
         return jsonify({"message": "You do not have permission to delete this book"}), 403
 
     result = book_service.delete_book(book_id)
+
     if result:
         return jsonify({"message": "Book deleted successfully"}), 200
+    
     return jsonify({"message": "Failed to delete book"}), 400
 
 @book_blueprint.route("/all/random", methods=["GET"])
