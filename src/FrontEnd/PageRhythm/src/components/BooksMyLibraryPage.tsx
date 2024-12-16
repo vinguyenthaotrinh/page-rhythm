@@ -114,7 +114,18 @@ export default function BooksMyLibraryPage() {
 
             // Update UI after successful upload
             console.log("Book uploaded successfully!");
-            setBooks((prevBooks) => [...prevBooks, book]); // Add the new book to the list
+
+            const renderedBook = {
+                title: bookName,
+                author: authorName,
+                summary,
+                genre,
+                content: selectedFile,
+                image: selectedCoverImage ? await IMAGES.convertImageFileToBase64(selectedCoverImage) : null, // Convert cover image to base64
+            }
+
+            setBooks((previousBooks) => [...previousBooks, renderedBook]); // Add the new book to the list
+            
             setShowAddOverlay(false); // Close the overlay
         } else {
             console.log("Please fill in all required fields.");

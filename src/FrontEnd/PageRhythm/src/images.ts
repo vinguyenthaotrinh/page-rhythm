@@ -54,10 +54,27 @@ const IMAGES = {
     WHITE_PENCIL_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
-        if (!bookCover) {
+        if (!bookCover) 
             return DEFAULT_BOOK_COVER;
-        }
+
+        const imageExtensions = ["jpeg", "jpg", "png", "gif", "bmp", "webp"];
+
+        for (const extension of imageExtensions) 
+            if (bookCover.includes(`data:image/${extension}`)) 
+                return bookCover;
+
         return `data:image/jpeg;base64,${bookCover}`;
+    },
+
+    convertImageFileToBase64 : (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                resolve(reader.result as string); // Resolve with the base64 string
+            };
+            reader.onerror = reject; // Reject the promise if there's an error
+            reader.readAsDataURL(file); // Read the image file as a base64 string
+        });
     }
 };
 
