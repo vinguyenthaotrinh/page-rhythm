@@ -1,7 +1,9 @@
 from services.statistics.supabase_statistics_api_service import SupabaseStatisticsAPIService
 from models.tracked_progress import TrackedProgress, ReadingStatus
+import matplotlib.pyplot as plt
 from typing import Optional
 import datetime
+import io
 
 class StatisticsService:
 
@@ -105,3 +107,36 @@ class StatisticsService:
                 result[key] = 1
 
         return result
+    
+    def get_diagram_of_finished_books_by_days(self, user_id: int):
+        # Retrieve finished book counts by days
+        finished_book_counts = self.get_finished_book_count_by_days(user_id)
+        
+        # If there are no finished books, handle gracefully
+        if not finished_book_counts:
+            raise ValueError("No finished books data available for the user.")
+        
+        # Extract all dates (days) and their counts
+        sorted_dates = sorted(finished_book_counts.keys())
+        counts = [finished_book_counts[date] for date in sorted_dates]
+
+        # Generate readable labels for each date (e.g., Dec 10, 2024)
+        labels = [datetime.date(*date).strftime('%b %d, %Y') for date in sorted_dates]
+        
+        # Plot the bar chart
+        plt.figure(figsize=(12, 6))
+        plt.bar(labels, counts, color="#4CAF50", alpha=0.8)
+        plt.xlabel("Date", fontsize=12)
+        plt.ylabel("Books Finished", fontsize=12)
+        plt.title("Books Finished Over Time", fontsize=14)
+        plt.xticks(rotation=45, ha="right")
+        plt.tight_layout()
+
+        # Save the plot to a BytesIO object
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format="png")
+        plt.close()
+        buffer.seek(0)  # Reset buffer pointer to the beginning
+        
+        # Return the binary content of the image
+        return buffer.getvalue()
