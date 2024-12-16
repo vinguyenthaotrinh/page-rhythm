@@ -1,9 +1,9 @@
-from flask import Blueprint, jsonify, request
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from services.book.book_service import BookService
 import json
 import base64
 import datetime
+from flask import Blueprint, jsonify, request
+from services.book.book_service import BookService
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 book_blueprint = Blueprint("book", __name__)
 book_service = BookService()

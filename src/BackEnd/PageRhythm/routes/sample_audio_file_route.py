@@ -1,5 +1,6 @@
 import json
 from flask import Blueprint, jsonify, request
+from services.account.account_service import AccountService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from services.sample_audio_files.sample_audio_files_service import SampleAudioFilesService
 
@@ -60,3 +61,15 @@ def update_sample_audio_file_meta_information():
         return jsonify({"message": "Failed to update sample audio file meta information"}), 500
     
     return jsonify({"message": "You do not have permission to update this sample audio file's meta information"}), 403
+
+@sample_audio_file_blueprint.route("/get_uploaded_files", methods=["GET"])
+@jwt_required()
+def get_uploaded_sample_audio_files():
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"]
+
+    sample_audio_files_service = SampleAudioFilesService()
+
+    sample_audio_files = sample_audio_files_service.get_uploaded_sample_audio_files(owner_id)
+
+    return jsonify(sample_audio_files), 200

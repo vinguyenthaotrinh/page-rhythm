@@ -55,3 +55,11 @@ class SupabaseSampleAudioFilesAPIService:
         except Exception as e:
             return False
         return False
+    
+    def get_uploaded_sample_audio_files(self, owner_id: int) -> list[SampleAudioFile]:
+        try:
+            response = self.client.table("SampleAudioFile").select("*").execute()
+            return [SampleAudioFile.deserialize_JSON(data) for data in response.data if data["owner_id"] == owner_id]
+        except Exception as e:
+            return []
+        return None

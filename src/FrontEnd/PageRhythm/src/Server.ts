@@ -175,7 +175,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book/all/random`;  // Update the endpoint to match the server-side route
+        const url = `${this.host}/book/all/random`;  
     
         const sessionToken = this.getSessionToken();
 
@@ -346,7 +346,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = new URL(`${this.host}/book/search`);  // Construct the URL for the search endpoint
+        const url = new URL(`${this.host}/book/search`);  
     
         // Add query parameters for title and genre
         if (title) 
@@ -772,32 +772,28 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        // Construct the URL for the update route, using the bookId
         const url = `${this.host}/book/${book.book_id}`; 
         const sessionToken = this.findSessionToken();
     
-        // Prepare the form data
         const formData = new FormData();
         
-        // Append the fields to the form data (if they exist in the updatedBook object)
         if (book.title) 
             formData.append("title", book.title);
+    
         if (book.author) 
             formData.append("author", book.author);
+    
         if (book.summary) 
             formData.append("summary", book.summary);
+    
         if (book.genre) 
             formData.append("genre", book.genre);
     
-        // Attach content file if it exists
-        if (book.content instanceof File) {
+        if (book.content instanceof File) 
             formData.append("content", book.content);
-        }
     
-        // Attach image file if it exists
-        if (book.image instanceof File) {
+        if (book.image instanceof File) 
             formData.append("image", book.image);
-        }
     
         try {
             const response = await fetch(url, {
@@ -819,6 +815,38 @@ export default class Server {
         } catch (error) {
             console.error("Error during book update:", error);
             throw error; // Rethrow the error for further handling if needed
+        }
+    }
+
+    public async getUserUploadedSampleAudioFiles(): Promise<any[]> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/sample_audio_files/get_uploaded_files`; // The API endpoint for fetching uploaded files
+        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${sessionToken}`, // Pass the JWT token in the Authorization header
+                },
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error fetching uploaded sample audio files:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to fetch uploaded sample audio files.");
+            }
+    
+            const result = await response.json(); // Parse the response body as JSON
+            console.log("Fetched uploaded sample audio files:", result);
+    
+            return result; // Return the fetched sample audio files
+    
+        } catch (error) {
+            console.error("Error during fetching uploaded sample audio files:", error);
+            throw error; // Rethrow the error to be handled elsewhere in the app
         }
     }
 }
