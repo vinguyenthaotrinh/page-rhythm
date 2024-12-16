@@ -205,7 +205,7 @@ export default function BooksMyLibraryPage() {
                                             <p className="book-item-title">{book.title}</p>
                                             <p className="book-item-author">Author: {book.author}</p>
                                             <p className="book-item-release-date">
-                                                Release Date: {book.releaseDate || "Unknown"}
+                                                Release Date: {book.released_date || "Unknown"}
                                             </p>
                                             <div className="book-item-buttons">
                                                 <button className="book-item-edit-button">
