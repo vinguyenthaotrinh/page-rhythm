@@ -55,6 +55,7 @@ export default function BooksMyLibraryPage() {
     const [releaseDate, setReleaseDate] = useState<string | null>("");  // Release date input
     const [genre, setGenre] = useState<string | null>("");              // Genre input
     const [summary, setSummary] = useState("");                         // Summary input
+    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null); // Track the cover image file
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -78,17 +79,43 @@ export default function BooksMyLibraryPage() {
         setShowAddOverlay(true);  // Show the overlay
     };
 
-    const handleBookUpload = () => {
+    const handleCoverImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedCoverImage(file); // Track the selected cover image
+    
+            // Optionally, create a preview of the image
+            const reader = new FileReader();
+            reader.onloadend = () => {
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+    const handleBookUpload = async () => {
         if (selectedFile && bookName && authorName) {
-            console.log("Uploading book with details:", {
-                bookName,
-                authorName,
-                releaseDate,
-                genre,
+            // Prepare the book object
+            const book = {
+                title: bookName,
+                author: authorName,
                 summary,
-                selectedFile
-            });
-            // Add logic for book upload here (e.g., send to server)
+                genre,
+                content: selectedFile,
+                image: selectedCoverImage || null, // Optional cover image
+            };
+
+            console.log("Uploading book with details:", book);
+
+            // Initialize the server instance
+            const server = await Server.getInstance();
+
+            // Call the `uploadBook` method
+            await server.uploadBook(book);
+
+            // Update UI after successful upload
+            console.log("Book uploaded successfully!");
+            setBooks((prevBooks) => [...prevBooks, book]); // Add the new book to the list
+            setShowAddOverlay(false); // Close the overlay
         } else {
             console.log("Please fill in all required fields.");
         }
@@ -99,7 +126,6 @@ export default function BooksMyLibraryPage() {
         if (file) {
             setSelectedFile(file);
 
-            // Create a preview of the image
             const reader = new FileReader();
             reader.onloadend = () => {
             };
@@ -270,6 +296,26 @@ export default function BooksMyLibraryPage() {
                             {selectedFile && (
                                 <div className="file-name-display">
                                     {selectedFile.name}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* File input for uploading cover image */}
+                        <div className="file-input-container">
+                            <label htmlFor="cover-image-input" className="file-input-label">
+                                Upload Cover Image
+                            </label>
+                            <input
+                                type="file"
+                                id="cover-image-input"
+                                onChange={handleCoverImageSelect}
+                                accept="image/*" // Accept image file types
+                                className="file-input-button"
+                            />
+
+                            {selectedCoverImage && (
+                                <div className="file-name-display">
+                                    {selectedCoverImage.name}
                                 </div>
                             )}
                         </div>

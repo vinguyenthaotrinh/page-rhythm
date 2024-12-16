@@ -335,7 +335,10 @@
     background-color: #EFEAD3;  /* Light beige background */
     color: black;
     font-family: "Poppins-Regular", sans-serif;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     border-radius: 10px;
     text-align: center;
     width: 90%;
@@ -469,6 +472,7 @@
 .file-input-container {
     display: flex;
     align-items: center; /* Vertically center the elements */
+    margin-top: 12px;
     gap: 10px; /* Space between input and file name */
 }
 
