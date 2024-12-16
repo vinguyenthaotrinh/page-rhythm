@@ -34,11 +34,17 @@ app.register_blueprint(user_account_management_blueprint,   url_prefix = "/user_
 jwt = JWTManager(app)
 
 from services.statistics.statistics_service import StatisticsService
+from io import BytesIO
+from PIL import Image
+
 
 if __name__ == "__main__":
 
     statistics_service = StatisticsService()
 
     b = statistics_service.get_diagram_of_finished_books_by_days(62)
+
+    image = Image.open(BytesIO(b))  # Load the binary data into an image object
+    image.save("finished_books_diagram.png", "PNG")  # Save the image as a PNG file
 
     app.run(debug = True)
