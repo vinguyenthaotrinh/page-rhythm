@@ -52,8 +52,28 @@
 }
 
 #voices-my-library-page-record-list-container {
-    max-height: 400px;
-    overflow-y: auto;
+    margin-top: 60px;       /* Creates space below the Add button */
+    flex-grow: 1;           /* Allows this container to take up the remaining space */
+    overflow-y: auto;       /* Enables scrolling if there are too many books */
+}
+
+/* For Webkit-based browsers (Chrome, Edge, etc.) */
+#voices-my-library-page-record-list-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#voices-my-library-page-record-list-container::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5); /* Track color */
+}
+
+#voices-my-library-page-record-list-container::-webkit-scrollbar-thumb {
+    background-color: #265073;          /* Thumb color */
+    border-radius: 4px;                     /* Rounded corners for the thumb */
+    border: 2px solid #f1f1f1;              /* Optional: Create spacing around the thumb */
+}
+
+#voices-my-library-page-record-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: #0f4ba3; /* Thumb hover color */
 }
 
 .record-item {
