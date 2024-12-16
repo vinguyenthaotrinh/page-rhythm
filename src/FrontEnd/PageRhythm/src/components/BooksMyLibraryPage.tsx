@@ -6,6 +6,43 @@ import "../styles/books-my-library-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
 
+interface DeletionConfirmationBoxProps {
+    title?: string;             // Optional custom title
+    message?: string;           // Confirmation message
+    onConfirm: () => void;      // Function to call when confirmed
+    onCancel: () => void;       // Function to call when canceled
+}
+
+const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
+    title = "Delete your book", // Default title
+    message = "Are you sure you want to delete this book?", // Default message
+    onConfirm,
+    onCancel,
+}) => {
+    return (
+        <div className="books-my-library-page-deletion-confirmation-overlay">
+            <div className="books-my-library-page-deletion-confirmation-box">
+                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
+                <p>{message}</p>
+                <div className="books-my-library-page-deletion-confirmation-buttons">
+                    <button
+                        className="books-my-library-page-deletion-confirmation-button confirm"
+                        onClick={onConfirm}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="books-my-library-page-deletion-confirmation-button cancel"
+                        onClick={onCancel}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function BooksMyLibraryPage() {
     const [books, setBooks] = useState<any[]>([]);                      // Books data state
     const [loading, setLoading] = useState(true);                       // Loading state
@@ -172,29 +209,10 @@ export default function BooksMyLibraryPage() {
 
             {/* Confirmation Box */}
             {showConfirmation && (
-                <div className="books-my-library-page-deletion-confirmation-overlay">
-                    <div className="books-my-library-page-deletion-confirmation-box">
-                        <h1
-                            id = "books-my-library-page-deletion-confirmation-title"
-                        > Delete your book 
-                        </h1>
-                        <p>Are you sure you want to delete this book?</p>
-                        <div className="books-my-library-page-deletion-confirmation-buttons">
-                            <button
-                                className="books-my-library-page-deletion-confirmation-button confirm"
-                                onClick={handleConfirmDelete}
-                            >
-                                Yes
-                            </button>
-                            <button
-                                className="books-my-library-page-deletion-confirmation-button cancel"
-                                onClick={handleCancelDelete}
-                            >
-                                No
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <DeletionConfirmationBox
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                />
             )}
 
             {/* Add Overlay */}
@@ -249,7 +267,6 @@ export default function BooksMyLibraryPage() {
                                 className="file-input-button"
                             />
                             
-                            {/* Optionally, display the selected file name */}
                             {selectedFile && (
                                 <div className="file-name-display">
                                     {selectedFile.name}

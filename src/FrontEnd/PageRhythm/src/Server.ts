@@ -55,6 +55,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
 
         const url = `${this.host}${endpoint}`;
+
         const options: RequestInit = {
             method,
             headers: {
@@ -80,6 +81,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `${this.host}/authentication/login`;
+
         const body = {
             email,
             password,
@@ -109,6 +111,13 @@ export default class Server {
 
     public getSessionToken(): string | null {
         return localStorage.getItem("sessionToken");
+    }
+
+    public findSessionToken(): string {
+        const sessionToken = this.getSessionToken();
+        if (!sessionToken) 
+            throw new Error("Session token is missing. Please log in again.");
+        return sessionToken;
     }
 
     public async signup(fullName: string, email: string, password: string, birthday: string, bio: string): Promise<any> {
@@ -195,7 +204,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
-        const url = `${this.host}/account/profile`; // Endpoint to get the profile
+        const url = `${this.host}/account/profile`;
 
         const sessionToken = this.getSessionToken();
 
@@ -225,7 +234,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/account/update_account_profile_information`; // Endpoint to update the profile
+        const url = `${this.host}/account/update_account_profile_information`;
     
         const sessionToken = this.getSessionToken();
     
@@ -340,13 +349,11 @@ export default class Server {
         const url = new URL(`${this.host}/book/search`);  // Construct the URL for the search endpoint
     
         // Add query parameters for title and genre
-        if (title) {
+        if (title) 
             url.searchParams.append('title', title);
-        }
     
-        if (genre) {
+        if (genre) 
             url.searchParams.append('genre', genre);
-        }
     
         const sessionToken = this.getSessionToken();
     
@@ -374,7 +381,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book/${bookID}`;  // Update the endpoint to match the server-side route
+        const url = `${this.host}/book/${bookID}`; 
     
         const sessionToken = this.getSessionToken();
     
@@ -404,11 +411,9 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `/book_rating/${bookID}`; // Backend endpoint for deleting a rating
-        const sessionToken = this.getSessionToken();
-    
-        if (!sessionToken) 
-            throw new Error("Session token is missing. Please log in again.");
+        const url = `/book_rating/${bookID}`;
+        
+        const sessionToken = this.findSessionToken();
     
         try {
             const response = await fetch(`${this.host}${url}`, {
@@ -438,7 +443,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
         }
     
-        const url = `${this.host}/book_rating/${bookID}/my_rating`; // Backend endpoint for fetching a book's rating
+        const url = `${this.host}/book_rating/${bookID}/my_rating`; 
     
         const sessionToken = this.getSessionToken();
     
@@ -468,7 +473,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book_rating/create`;  // The endpoint for creating a new rating
+        const url = `${this.host}/book_rating/create`; 
     
         const sessionToken = this.getSessionToken();
     
@@ -530,7 +535,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/comment/retrieve_all_comments?book_id=${bookID}`; // Backend endpoint to fetch all comments for a book
+        const url = `${this.host}/comment/retrieve_all_comments?book_id=${bookID}`;
     
         try {
             const response = await fetch(url, {
@@ -556,16 +561,13 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/comment/create`; // Endpoint for creating a new comment
+        const url = `${this.host}/comment/create`;
     
-        const sessionToken = this.getSessionToken();
-    
-        if (!sessionToken) 
-            throw new Error("Session token is missing. Please log in again.");
+        const sessionToken = this.findSessionToken();
     
         const body = {
-            book_id: bookID, // The book ID the comment is associated with
-            content: content, // The content of the comment
+            book_id: bookID,        // The book ID the comment is associated with
+            content: content,       // The content of the comment
         };
     
         try {
@@ -599,15 +601,12 @@ export default class Server {
     
         const url = `${this.host}/comment/reply`; 
     
-        const sessionToken = this.getSessionToken();
-    
-        if (!sessionToken) 
-            throw new Error("Session token is missing. Please log in again.");
+        const sessionToken = this.findSessionToken();
     
         const body = {
-            book_id: bookID, // The book ID associated with the reply
-            content: content, // The content of the reply
-            replied_comment_id: repliedCommentID, // The ID of the comment being replied to
+            book_id: bookID,                        // The book ID associated with the reply
+            content: content,                       // The content of the reply
+            replied_comment_id: repliedCommentID,   // The ID of the comment being replied to
         };
     
         try {
@@ -639,7 +638,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}/${maximumLineLength}`; // Update the endpoint to match the server-side route
+        const url = `${this.host}/book/get_all_book_pages/${bookID}/${pageCapacity}/${maximumLineLength}`;
 
         try {
             const response = await fetch(url, {
@@ -668,10 +667,7 @@ export default class Server {
     
         const url = `${this.host}/book/mylib`;
     
-        const sessionToken = this.getSessionToken();
-    
-        if (!sessionToken) 
-            throw new Error("Session token is missing. Please log in again.");
+        const sessionToken = this.findSessionToken();
     
         try {
             const response = await fetch(url, {
@@ -698,12 +694,9 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `/book/${bookID}`; // Backend endpoint for deleting a book
-        const sessionToken = this.getSessionToken();
-    
-        if (!sessionToken) {
-            throw new Error("Session token is missing. Please log in again.");
-        }
+        const url = `/book/${bookID}`;
+        
+        const sessionToken = this.findSessionToken();
     
         try {
             const response = await fetch(`${this.host}${url}`, {
@@ -724,6 +717,53 @@ export default class Server {
             console.log(`Book ${bookID} deleted successfully.`);
         } catch (error) {
             console.error(`Error deleting book ${bookID}:`, error);
+            throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async uploadBook(book: any): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/book/create`; // The backend endpoint for book creation
+        const sessionToken = this.findSessionToken();
+    
+        // Prepare the form data
+        const formData = new FormData();
+        formData.append("title", book.title);
+        formData.append("author", book.author);
+        formData.append("summary", book.summary);
+        formData.append("genre", book.genre);
+        
+        if (book.content instanceof File) {
+            formData.append("content", book.content); // Attach the book's content file
+        } else {
+            throw new Error("Invalid content file. Ensure the content is a valid file.");
+        }
+        
+        if (book.image instanceof File) {
+            formData.append("image", book.image); // Attach the book's image file if provided
+        }
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+                },
+                body: formData, // Use FormData as the request body
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error uploading book:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to upload book.");
+            }
+    
+            const result = await response.json(); // Handle the response data if needed
+            console.log("Book uploaded successfully:", result);
+        } catch (error) {
+            console.error("Error during book upload:", error);
             throw error; // Rethrow the error to handle it elsewhere
         }
     }
