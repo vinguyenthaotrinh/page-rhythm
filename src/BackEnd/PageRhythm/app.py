@@ -33,5 +33,21 @@ app.register_blueprint(user_account_management_blueprint,   url_prefix = "/user_
 
 jwt = JWTManager(app)
 
+from services.statistics.supabase_statistics_api_service import SupabaseStatisticsAPIService
+from services.statistics.statistics_service import StatisticsService
+
 if __name__ == "__main__":
+    #s = SupabaseStatisticsAPIService()
+    s = StatisticsService()
+
+    print(s.get_finished_books(62))
+
+    print(s.get_finished_book_count_by_days(62))
+
+    print(s.get_finished_book_count_by_months(62))
+
+    print(s.get_finished_book_count_by_years(62))
+
+    print(s.get_book_count_of_last_week(62))
+
     app.run(debug = True)
