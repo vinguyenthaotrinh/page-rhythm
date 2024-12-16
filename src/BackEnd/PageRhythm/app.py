@@ -33,18 +33,5 @@ app.register_blueprint(user_account_management_blueprint,   url_prefix = "/user_
 
 jwt = JWTManager(app)
 
-from services.statistics.statistics_service import StatisticsService
-from io import BytesIO
-from PIL import Image
-
-
 if __name__ == "__main__":
-
-    statistics_service = StatisticsService()
-
-    b = statistics_service.get_diagram_of_finished_books_by_days(62)
-
-    image = Image.open(BytesIO(b)) 
-    image.save("hi_hello_finished_books_diagram.png", "PNG")
-
     app.run(debug = True)

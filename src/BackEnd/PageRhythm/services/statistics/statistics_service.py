@@ -145,3 +145,67 @@ class StatisticsService:
         
         # Return the binary content of the image
         return buffer.getvalue()
+
+    def get_diagram_of_finished_books_by_months(self, user_id: int):
+        # Retrieve finished book counts by months
+        finished_book_counts = self.get_finished_book_count_by_months(user_id)
+
+        # If there are no finished books, handle gracefully
+        if not finished_book_counts:
+            raise ValueError("No finished books data available for the user.")
+        
+        # Extract all months (year, month) and their counts
+        sorted_months = sorted(finished_book_counts.keys())
+        counts = [finished_book_counts[month] for month in sorted_months]
+
+        # Generate readable labels for each month (e.g., Jan 2024)
+        labels = [datetime.date(year=month[0], month=month[1], day=1).strftime('%b %Y') for month in sorted_months]
+
+        # Plot the bar chart
+        plt.figure(figsize=(10, 6))
+        plt.bar(labels, counts, color="#265073", alpha=0.8)
+        
+        plt.xlabel("Month", fontsize=12)
+        plt.ylabel("Books Finished", fontsize=12)
+        plt.title("Books Finished by Month", fontsize=14)
+        plt.xticks(rotation=45, ha="right")
+        plt.tight_layout()
+
+        # Save the plot to a BytesIO object
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format="png")
+        plt.close()
+        buffer.seek(0)  # Reset buffer pointer to the beginning
+        
+        # Return the binary content of the image
+        return buffer.getvalue()
+    
+    def get_diagram_of_finished_books_by_years(self, user_id: int):
+        # Retrieve finished book counts by years
+        finished_book_counts = self.get_finished_book_count_by_years(user_id)
+
+        # If there are no finished books, handle gracefully
+        if not finished_book_counts:
+            raise ValueError("No finished books data available for the user.")
+        
+        # Extract all years and their counts
+        sorted_years = sorted(finished_book_counts.keys())
+        counts = [finished_book_counts[year] for year in sorted_years]
+
+        # Plot the bar chart
+        plt.figure(figsize=(10, 6))
+        plt.bar(sorted_years, counts, color="#265073", alpha=0.8)
+        
+        plt.xlabel("Year", fontsize=12)
+        plt.ylabel("Books Finished", fontsize=12)
+        plt.title("Books Finished by Year", fontsize=14)
+        plt.tight_layout()
+
+        # Save the plot to a BytesIO object
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format="png")
+        plt.close()
+        buffer.seek(0)  # Reset buffer pointer to the beginning
+        
+        # Return the binary content of the image
+        return buffer.getvalue()
