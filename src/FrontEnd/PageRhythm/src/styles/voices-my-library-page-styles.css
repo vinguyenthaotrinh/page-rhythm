@@ -52,9 +52,14 @@
 }
 
 #voices-my-library-page-record-list-container {
-    margin-top: 60px;       /* Creates space below the Add button */
-    flex-grow: 1;           /* Allows this container to take up the remaining space */
-    overflow-y: auto;       /* Enables scrolling if there are too many books */
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    gap: 20px; /* Adds a 20px gap between items */
+    margin-top: 60px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* For Webkit-based browsers (Chrome, Edge, etc.) */
@@ -78,9 +83,14 @@
 
 .record-item {
     display: flex;
+    background-color: #EFEAD3;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
+    gap: 20px;                 /* Spacing between the two columns */
+    transition: transform 0.3s ease;
+    align-items: center;       /* Vertically center the content */
 }
 
 .record-header {

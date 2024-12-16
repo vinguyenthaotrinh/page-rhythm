@@ -82,7 +82,10 @@ export default function VoicesMyLibraryPage() {
                     {/* Scrollable section for records */}
                     <div id="voices-my-library-page-record-list-container">
                         {records.map((record, index) => (
-                            <div key={record.id} className="record-item">
+                            <div 
+                                key={record.id} 
+                                className="record-item"
+                            >
                                 <div className="record-header">
                                     <span className="audio-name">{record.name}</span>
                                 </div>
@@ -115,17 +118,32 @@ export default function VoicesMyLibraryPage() {
 
                                     {/* Right Column */}
                                     <div className="record-right-column">
-                                        <button
-                                            className="edit-btn"
-                                            onClick={() => handleEdit(index)}
+                                        <button 
+                                            className="book-item-edit-button"
                                         >
                                             Edit
+                                            <img
+                                                src={IMAGES.WHITE_PENCIL_ICON}
+                                                alt="Edit Icon"
+                                                className="book-item-button-icon"
+                                            />
                                         </button>
                                         <button
-                                            className="delete-btn"
-                                            onClick={() => handleDelete(record.id)}
+                                            className="book-item-delete-button"
                                         >
                                             Delete
+                                            <div className="book-item-button-icon">
+                                                <img
+                                                    src={IMAGES.RED_TRASH_ICON}
+                                                    alt="Delete Icon"
+                                                    className="icon-normal"
+                                                />
+                                                <img
+                                                    src={IMAGES.WHITE_TRASH_ICON}
+                                                    alt="Delete Hover Icon"
+                                                    className="icon-hover"
+                                                />
+                                            </div>
                                         </button>
                                     </div>
                                 </div>
