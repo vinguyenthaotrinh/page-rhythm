@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     b = statistics_service.get_diagram_of_finished_books_by_days(62)
 
-    image = Image.open(BytesIO(b))  # Load the binary data into an image object
-    image.save("finished_books_diagram.png", "PNG")  # Save the image as a PNG file
+    image = Image.open(BytesIO(b)) 
+    image.save("hi_hello_finished_books_diagram.png", "PNG")
 
     app.run(debug = True)

@@ -111,7 +111,7 @@ class StatisticsService:
     def get_diagram_of_finished_books_by_days(self, user_id: int):
         # Retrieve finished book counts by days
         finished_book_counts = self.get_finished_book_count_by_days(user_id)
-        
+
         # If there are no finished books, handle gracefully
         if not finished_book_counts:
             raise ValueError("No finished books data available for the user.")
@@ -122,10 +122,15 @@ class StatisticsService:
 
         # Generate readable labels for each date (e.g., Dec 10, 2024)
         labels = [datetime.date(*date).strftime('%b %d, %Y') for date in sorted_dates]
+
+        # Dynamically adjust the figure size based on the number of data points
+        num_data_points = len(sorted_dates)
+        width_factor = max(0.5, 10 / num_data_points)  # Avoid too wide bars if there's just one book read
         
         # Plot the bar chart
-        plt.figure(figsize=(12, 6))
-        plt.bar(labels, counts, color="#4CAF50", alpha=0.8)
+        plt.figure(figsize=(num_data_points * width_factor, 6))  # Adjust width based on data points
+        plt.bar(labels, counts, color="#265073", alpha=0.8)
+        
         plt.xlabel("Date", fontsize=12)
         plt.ylabel("Books Finished", fontsize=12)
         plt.title("Books Finished Over Time", fontsize=14)
