@@ -17,13 +17,36 @@
 }
 
 #voices-my-library-page-content {
-    flex-grow: 1;               /* Ensures the content fills the available space */
+    flex-grow: 1;                   /* Ensures the content fills the available space */
     display: flex;
-    flex-direction: column;     /* Stacks title and information section vertically */
-    padding: 20px;
+    flex-direction: column;         /* Stacks title and information section vertically */
+    padding-top: 20px;
     background-color: #F6FFDE;
     overflow: hidden;
     color: black;
     font-family: "Poppins-Regular", sans-serif;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for profile content */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional shadow for profile content */
+    position: relative;             /* Ensures that the "Add" button can be absolutely positioned */
+}
+
+#voices-my-library-page-add-book-button {
+    position: absolute;             /* Fixed position within the container */
+    top: 20px;                      /* Space from the top */
+    left: 20px;                     /* Space from the left */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #265073;
+    margin: 12px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;                     /* Ensure the button is above other content */
+    transition: background-color 0.3s ease;
+    display: flex;                  /* Use flexbox to align icon and text */
+    align-items: center;            /* Vertically center the items */
+}
+
+#voices-my-library-page-add-book-button:hover {
+    background-color: #0f4ba3;
 }

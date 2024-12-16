@@ -287,20 +287,20 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
 };
 
 export default function BooksMyLibraryPage() {
-    const [books, setBooks] = useState<any[]>([]);                      // Books data state
-    const [loading, setLoading] = useState(true);                       // Loading state
-    const [showConfirmation, setShowConfirmation] = useState(false);    // Confirmation box visibility
-    const [bookToDelete, setBookToDelete] = useState<any | null>(null); // Track the selected book for deletion
-    const [showAddOverlay, setShowAddOverlay] = useState(false);        // State for Add Overlay
-    const [selectedFile, setSelectedFile] = useState<File | null>(null); // Track the selected file for upload
-    const [bookName, setBookName] = useState("");                       // Book name input
-    const [authorName, setAuthorName] = useState("");                   // Author name input
-    const [releaseDate, setReleaseDate] = useState<string | null>("");  // Release date input
-    const [genre, setGenre] = useState<string | null>("");              // Genre input
-    const [summary, setSummary] = useState("");                         // Summary input
-    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null); // Track the cover image file
-    const [showEditOverlay, setShowEditOverlay] = useState(false);  // State for Edit Overlay
-    const [selectedBook, setSelectedBook] = useState<any | null>(null); // State for selected book
+    const [books, setBooks] = useState<any[]>([]);                                      // Books data state
+    const [loading, setLoading] = useState(true);                                       // Loading state
+    const [showConfirmation, setShowConfirmation] = useState(false);                    // Confirmation box visibility
+    const [bookToDelete, setBookToDelete] = useState<any | null>(null);                 // Track the selected book for deletion
+    const [showAddOverlay, setShowAddOverlay] = useState(false);                        // State for Add Overlay
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);                // Track the selected file for upload
+    const [bookName, setBookName] = useState("");                                       // Book name input
+    const [authorName, setAuthorName] = useState("");                                   // Author name input
+    const [releaseDate, setReleaseDate] = useState<string | null>("");                  // Release date input
+    const [genre, setGenre] = useState<string | null>("");                              // Genre input
+    const [summary, setSummary] = useState("");                                         // Summary input
+    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);    // Track the cover image file
+    const [showEditOverlay, setShowEditOverlay] = useState(false);                      // State for Edit Overlay
+    const [selectedBook, setSelectedBook] = useState<any | null>(null);                 // State for selected book
     const navigate = useNavigate();
 
     useEffect(() => {
