@@ -725,7 +725,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book/create`; // The backend endpoint for book creation
+        const url = `${this.host}/book/create`; 
         const sessionToken = this.findSessionToken();
     
         // Prepare the form data
@@ -765,6 +765,60 @@ export default class Server {
         } catch (error) {
             console.error("Error during book upload:", error);
             throw error; // Rethrow the error to handle it elsewhere
+        }
+    }
+
+    public async updateBook(book: any): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        // Construct the URL for the update route, using the bookId
+        const url = `${this.host}/book/${book.book_id}`; 
+        const sessionToken = this.findSessionToken();
+    
+        // Prepare the form data
+        const formData = new FormData();
+        
+        // Append the fields to the form data (if they exist in the updatedBook object)
+        if (book.title) 
+            formData.append("title", book.title);
+        if (book.author) 
+            formData.append("author", book.author);
+        if (book.summary) 
+            formData.append("summary", book.summary);
+        if (book.genre) 
+            formData.append("genre", book.genre);
+    
+        // Attach content file if it exists
+        if (book.content instanceof File) {
+            formData.append("content", book.content);
+        }
+    
+        // Attach image file if it exists
+        if (book.image instanceof File) {
+            formData.append("image", book.image);
+        }
+    
+        try {
+            const response = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${sessionToken}`, // Add JWT authorization header
+                },
+                body: formData, // Send the FormData as the body of the request
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error updating book:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to update book.");
+            }
+    
+            const result = await response.json(); // Handle response if needed
+            console.log("Book updated successfully:", result);
+        } catch (error) {
+            console.error("Error during book update:", error);
+            throw error; // Rethrow the error for further handling if needed
         }
     }
 }

@@ -129,6 +129,7 @@ def update_book(book_id):
     result = book_service.update_book(book_id, updated_data)
     if result:
         return jsonify({"message": "Book updated successfully"}), 200
+    
     return jsonify({"message": "Failed to update book"}), 400
 
 # 6. Delete a book
