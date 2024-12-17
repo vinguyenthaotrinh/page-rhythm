@@ -6,97 +6,61 @@ import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
 import React, { useState, useRef, useEffect } from "react";
 
-interface AddBookOverlayProps {
+interface AddSampleAudioFileOverlayProps {
     showAddOverlay: boolean;
     setShowAddOverlay: React.Dispatch<React.SetStateAction<boolean>>;
     selectedFile: File | null;
     setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
-    bookName: string;
-    setBookName: React.Dispatch<React.SetStateAction<string>>;
-    authorName: string;
-    setAuthorName: React.Dispatch<React.SetStateAction<string>>;
-    releaseDate: string | null;
-    setReleaseDate: React.Dispatch<React.SetStateAction<string | null>>;
-    genre: string | null;
-    setGenre: React.Dispatch<React.SetStateAction<string | null>>;
-    summary: string;
-    setSummary: React.Dispatch<React.SetStateAction<string>>;
-    selectedCoverImage: File | null;
-    setSelectedCoverImage: React.Dispatch<React.SetStateAction<File | null>>;
+    fileName: string;
+    setFileName: React.Dispatch<React.SetStateAction<string>>;
+    description: string;
+    setDescription: React.Dispatch<React.SetStateAction<string>>;
     handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleCoverImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleBookUpload: () => void;
+    handleSampleAudioFileUpload: () => void;
 }
 
-const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
+const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
     showAddOverlay,
     setShowAddOverlay,
     selectedFile,
     setSelectedFile,
-    bookName,
-    setBookName,
-    authorName,
-    setAuthorName,
-    releaseDate,
-    setReleaseDate,
-    genre,
-    setGenre,
-    summary,
-    setSummary,
-    selectedCoverImage,
-    setSelectedCoverImage,
+    fileName,
+    setFileName,
+    description,
+    setDescription,
     handleFileSelect,
-    handleCoverImageSelect,
-    handleBookUpload,
+    handleSampleAudioFileUpload,
 }) => {
     if (!showAddOverlay) return null;
 
     return (
         <div className="add-overlay">
             <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Upload your book here</h1>
-                <p>Please enter the book information</p>
+                <h1 id="add-overlay-title">Upload your sample audio file here</h1>
+                <p>Please enter the file information</p>
 
                 <input
                     type="text"
-                    placeholder="Book Name"
-                    value={bookName}
-                    onChange={(e) => setBookName(e.target.value)}
+                    placeholder="File Name"
+                    value={fileName}
+                    onChange={(e) => setFileName(e.target.value)}
                 />
 
-                <input
-                    type="text"
-                    placeholder="Author Name"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
-                />
-                <input
-                    type="date"
-                    placeholder="Release Date"
-                    value={releaseDate || ""}
-                    onChange={(e) => setReleaseDate(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Genre (optional)"
-                    value={genre || ""}
-                    onChange={(e) => setGenre(e.target.value)}
-                />
                 <textarea
-                    placeholder="Summary"
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
 
                 <div className="file-input-container">
                     <label htmlFor="file-input" className="file-input-label">
-                        Upload Content
+                        Upload File
                     </label>
                     <input
                         type="file"
                         id="file-input"
                         onChange={handleFileSelect}
-                        accept=".txt"
+                        accept=".m4a, .mp3, .wav"
                         className="file-input-button"
                     />
 
@@ -107,27 +71,8 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     )}
                 </div>
 
-                <div className="file-input-container">
-                    <label htmlFor="cover-image-input" className="file-input-label">
-                        Upload Cover Image
-                    </label>
-                    <input
-                        type="file"
-                        id="cover-image-input"
-                        onChange={handleCoverImageSelect}
-                        accept="image/*"
-                        className="file-input-button"
-                    />
-
-                    {selectedCoverImage && (
-                        <div className="file-name-display">
-                            {selectedCoverImage.name}
-                        </div>
-                    )}
-                </div>
-
                 <div className="add-overlay-buttons">
-                    <button onClick={handleBookUpload}>Upload Book</button>
+                    <button onClick={handleSampleAudioFileUpload}>Upload File</button>
                     <button onClick={() => setShowAddOverlay(false)}>Close</button>
                 </div>
             </div>
@@ -136,19 +81,14 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
 };
 
 export default function VoicesMyLibraryPage() {
-    const [showAddOverlay, setShowAddOverlay] = useState(false); // State for Add Overlay
-    const [records, setRecords] = useState<any[]>([]); // Records will be fetched
-    const [playingIndex, setPlayingIndex] = useState<number | null>(null); // Track currently playing audio
-    const [audioTime, setAudioTime] = useState(0); // Track current time of audio
-    const audioRefs = useRef<Record<number, HTMLAudioElement>>({}); // Refs for each audio file
-
-    // State for AddBookOverlay
+    const [showAddOverlay, setShowAddOverlay] = useState(false);            // State for Add Overlay
+    const [records, setRecords] = useState<any[]>([]);                      // Records will be fetched
+    const [playingIndex, setPlayingIndex] = useState<number | null>(null);  // Track currently playing audio
+    const [audioTime, setAudioTime] = useState(0);                          // Track current time of audio
+    const audioRefs = useRef<Record<number, HTMLAudioElement>>({});         // Refs for each audio file
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [bookName, setBookName] = useState("");
-    const [authorName, setAuthorName] = useState("");
-    const [releaseDate, setReleaseDate] = useState<string | null>(null);
-    const [genre, setGenre] = useState<string | null>(null);
-    const [summary, setSummary] = useState("");
+    const [fileName, setFileName] = useState("");
+    const [description, setDescription] = useState("");
     const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);
     
     const handleCoverImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,14 +104,12 @@ export default function VoicesMyLibraryPage() {
         }
     };
     
-    const handleBookUpload = async () => {
-        if (selectedFile && bookName && authorName) {
+    const handleSampleAudioFileUpload = async () => {
+        if (selectedFile && fileName) {
             // Prepare the book object
             const book = {
-                title: bookName,
-                author: authorName,
-                summary,
-                genre,
+                file_name: fileName,
+                description: description,
                 content: selectedFile,
                 image: selectedCoverImage || null, // Optional cover image
             };
@@ -180,16 +118,14 @@ export default function VoicesMyLibraryPage() {
 
             const server = await Server.getInstance();
 
-            await server.uploadBook(book);
+            //await server.uploadBook(book);
 
             // Update UI after successful upload
             console.log("Book uploaded successfully!");
 
             const renderedBook = {
-                title: bookName,
-                author: authorName,
-                summary,
-                genre,
+                file_name: fileName,
+                description: description,
                 content: selectedFile,
                 image: selectedCoverImage ? await IMAGES.convertImageFileToBase64(selectedCoverImage) : null, // Convert cover image to base64
             }
@@ -354,27 +290,17 @@ export default function VoicesMyLibraryPage() {
                 </div>
             </div>
 
-            {/* Render the AddBookOverlay */}
-            <AddBookOverlay
+            <AddSampleAudioFileOverlay
                 showAddOverlay={showAddOverlay}
                 setShowAddOverlay={setShowAddOverlay}
                 selectedFile={selectedFile}
                 setSelectedFile={setSelectedFile}
-                bookName={bookName}
-                setBookName={setBookName}
-                authorName={authorName}
-                setAuthorName={setAuthorName}
-                releaseDate={releaseDate}
-                setReleaseDate={setReleaseDate}
-                genre={genre}
-                setGenre={setGenre}
-                summary={summary}
-                setSummary={setSummary}
-                selectedCoverImage={selectedCoverImage}
-                setSelectedCoverImage={setSelectedCoverImage}
+                fileName={fileName}
+                setFileName={setFileName}
+                description={description}
+                setDescription={setDescription}
                 handleFileSelect={handleFileSelect}
-                handleCoverImageSelect={handleCoverImageSelect}
-                handleBookUpload={handleBookUpload}
+                handleSampleAudioFileUpload={handleSampleAudioFileUpload}
             />
         </div>
     );

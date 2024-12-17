@@ -16,8 +16,10 @@ import LEFT_ARROW_ICON from "./assets/images/left-arrow-icon.png";
 import EMPTY_STAR_ICON from "./assets/images/empty-star-icon.png";
 import FILLED_STAR_ICON from "./assets/images/filled-star-icon.png";
 import WHITE_TRASH_ICON from "./assets/images/white-trash-icon.png";
+import PLAY_BUTTON_ICON from "./assets/images/play-button-icon.png";
 import BLACK_PENCIL_ICON from "./assets/images/black-pencil-icon.png";
 import WHITE_PENCIL_ICON from "./assets/images/white-pencil-icon.png";
+import PAUSE_BUTTON_ICON from "./assets/images/pause-button-icon.png";
 import DEFAULT_BOOK_COVER from "./assets/images/default-book-cover.png";
 import DEFAULT_PROFILE_PICTURE from "./assets/images/default-profile-picture.png";
 import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom-left-corner.png";
@@ -52,6 +54,8 @@ const IMAGES = {
     WHITE_TRASH_ICON,
     RED_TRASH_ICON,
     WHITE_PENCIL_ICON,
+    PLAY_BUTTON_ICON,
+    PAUSE_BUTTON_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) 
