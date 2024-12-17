@@ -849,4 +849,56 @@ export default class Server {
             throw error; // Rethrow the error to be handled elsewhere in the app
         }
     }
+
+    public async uploadSampleAudioFile(record: any): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/sample_audio_file/upload`; // API endpoint for uploading files
+        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+    
+        const fileToBase64 = (file: File): Promise<string> => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file); // Read the file as a Data URL (base64)
+                reader.onload = () => resolve(reader.result as string); // Resolve the base64 string
+                reader.onerror = (error) => reject(error); // Handle errors during reading
+            });
+        }
+
+        try {
+            // Convert the file to base64
+            const base64Content = await fileToBase64(record.file);
+    
+            // Create the payload
+            const payload = {
+                file_name: record.file.name,
+                description: record.description,
+                content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
+            };
+    
+            // Send the POST request
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Attach the JWT token
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            // Check for errors
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error uploading sample audio file:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to upload sample audio file.");
+            }
+    
+            console.log("Sample audio file uploaded successfully.");
+    
+        } catch (error) {
+            console.error("Error during file upload:", error);
+            throw error; // Rethrow the error to propagate it to the caller
+        }
+    }
 }
