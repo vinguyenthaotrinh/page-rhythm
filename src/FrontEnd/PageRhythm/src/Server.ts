@@ -71,8 +71,7 @@ export default class Server {
             }
             return await response.json();
         } catch (error) {
-            console.error("Error sending request:", error);
-            throw error;
+            this.logAndThrowError("Error sending request:", error);
         }
     }
 
@@ -104,8 +103,7 @@ export default class Server {
     
             return response;    // Return the pure response object
         } catch (error) {
-            console.error("Error during login:", error);
-            throw error;        // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during login:", error);
         }
     }
 
@@ -159,8 +157,7 @@ export default class Server {
 
             return response;    // Return the pure response object
         } catch (error) {
-            console.error("Error during signup:", error);
-            throw error;        // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during signup:", error);
         }
     }
 
@@ -195,8 +192,7 @@ export default class Server {
     
             return books;  // Return the shuffled list of books
         } catch (error) {
-            console.error("Error fetching books:", error);
-            throw error;  // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error fetching books:", error);
         }
     }
 
@@ -225,8 +221,7 @@ export default class Server {
                 throw new Error("Profile fetch failed");
             }
         } catch (error) {
-            console.error("Error during profile fetch:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during profile fetch:", error);
         }
     }
 
@@ -268,8 +263,7 @@ export default class Server {
                 throw new Error(`Profile update failed with status: ${response.status}`);
             }
         } catch (error) {
-            console.error("Error during profile update:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during profile update:", error);
         }
     }
 
@@ -307,8 +301,7 @@ export default class Server {
                 throw new Error(data.message || "Failed to change password");
             }
         } catch (error) {
-            console.error("Error during password change:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during password change:", error);
         }
     }
 
@@ -329,16 +322,14 @@ export default class Server {
                 }
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch genres. Status: ${response.status}`);
-            }
     
             const genres = await response.json();
     
             return genres;
         } catch (error) {
-            console.error("Error fetching genres:", error);
-            throw error;
+            this.logAndThrowError("Error fetching genres:", error);
         }
     }
 
@@ -372,8 +363,7 @@ export default class Server {
             const books = await response.json();  // Expecting a JSON array of books
             return books;  // Return the array of books found
         } catch (error) {
-            console.error("Error during search:", error);
-            throw error;  // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during search:", error);
         }
     }
     
@@ -394,16 +384,14 @@ export default class Server {
                 }
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch book. Status: ${response.status}`);
-            }
     
             const book = await response.json();  // The response is expected to be a JSON object representing the book
     
             return book;  // Return the book object
         } catch (error) {
-            console.error("Error fetching book:", error);
-            throw error;  // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error fetching book:", error);
         }
     }
 
@@ -433,8 +421,7 @@ export default class Server {
     
             console.log(`Rating for book ${bookID} deleted successfully.`);
         } catch (error) {
-            console.error(`Error deleting rating for book ${bookID}:`, error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError(`Error deleting rating for book ${bookID}:`, error);
         }
     }
 
@@ -456,16 +443,14 @@ export default class Server {
                 }
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch rating for book ${bookID}. Status: ${response.status}`);
-            }
     
             const rating = await response.json(); // The response is expected to be a JSON object representing the rating
     
             return rating; // Return the rating object
         } catch (error) {
-            console.error(`Error fetching rating for book ${bookID}:`, error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError(`Error fetching rating for book ${bookID}:`, error);
         }
     }
 
@@ -499,9 +484,9 @@ export default class Server {
                 console.error("Error inserting rating:", data.message || "Failed to insert rating");
                 throw new Error(data.message || "Failed to insert rating");
             }
+
         } catch (error) {
-            console.error("Error during rating insertion:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during rating insertion:", error);
         }
     }
 
@@ -519,15 +504,13 @@ export default class Server {
                 },
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch comments for book ${bookID}. Status: ${response.status}`);
-            }
     
             const comments = await response.json(); // The response is expected to be a JSON array of comments
             return comments; // Return the array of comments
         } catch (error) {
-            console.error(`Error fetching comments for book ${bookID}:`, error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError(`Error fetching comments for book ${bookID}:`, error);
         }
     }
 
@@ -545,15 +528,13 @@ export default class Server {
                 },
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch comments for book ${bookID}. Status: ${response.status}`);
-            }
     
             const comments = await response.json(); // The response is expected to be a JSON array of comments
             return comments; // Return the array of comments
         } catch (error) {
-            console.error(`Error fetching comments for book ${bookID}:`, error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError(`Error fetching comments for book ${bookID}:`, error);
         }
     }
 
@@ -590,8 +571,7 @@ export default class Server {
             console.log("Comment created successfully:", result);
             return result; // Return the success result
         } catch (error) {
-            console.error("Error during comment creation:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during comment creation:", error);
         }
     }
 
@@ -629,8 +609,7 @@ export default class Server {
             console.log("Reply created successfully:", result);
             return result; // Return the success result
         } catch (error) {
-            console.error("Error during reply creation:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during reply creation:", error);
         }
     }
 
@@ -656,8 +635,7 @@ export default class Server {
             return data; // Return the fetched pages data
     
         } catch (error) {
-            console.error("Error fetching content pages:", error);
-            throw error;
+            this.logAndThrowError("Error fetching content pages:", error);
         }
     }
 
@@ -685,8 +663,7 @@ export default class Server {
             const books = await response.json(); // The response is expected to be a JSON array of books
             return books; // Return the array of user-uploaded books
         } catch (error) {
-            console.error("Error fetching user-uploaded books:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error fetching user-uploaded books:", error);
         }
     }
 
@@ -716,8 +693,7 @@ export default class Server {
     
             console.log(`Book ${bookID} deleted successfully.`);
         } catch (error) {
-            console.error(`Error deleting book ${bookID}:`, error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError(`Error deleting book ${bookID}:`, error);
         }
     }
 
@@ -763,8 +739,7 @@ export default class Server {
             const result = await response.json(); // Handle the response data if needed
             console.log("Book uploaded successfully:", result);
         } catch (error) {
-            console.error("Error during book upload:", error);
-            throw error; // Rethrow the error to handle it elsewhere
+            this.logAndThrowError("Error during book upload:", error);
         }
     }
 
@@ -813,8 +788,7 @@ export default class Server {
             const result = await response.json(); // Handle response if needed
             console.log("Book updated successfully:", result);
         } catch (error) {
-            console.error("Error during book update:", error);
-            throw error; // Rethrow the error for further handling if needed
+            this.logAndThrowError("Error during book update:", error);
         }
     }
 
@@ -822,7 +796,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/sample_audio_files/get_uploaded_files`; // The API endpoint for fetching uploaded files
+        const url = `${this.host}/sample_audio_file/uploaded_files`; 
         const sessionToken = this.findSessionToken(); // Get the session token (JWT)
     
         try {
@@ -845,8 +819,93 @@ export default class Server {
             return result; // Return the fetched sample audio files
     
         } catch (error) {
-            console.error("Error during fetching uploaded sample audio files:", error);
-            throw error; // Rethrow the error to be handled elsewhere in the app
+            this.logAndThrowError("Error during fetching uploaded sample audio files:", error);
         }
+    }
+
+    public async uploadSampleAudioFile(record: any): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/sample_audio_file/upload`; // API endpoint for uploading files
+        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+    
+        const fileToBase64 = (file: File): Promise<string> => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file); // Read the file as a Data URL (base64)
+                reader.onload = () => resolve(reader.result as string); // Resolve the base64 string
+                reader.onerror = (error) => reject(error); // Handle errors during reading
+            });
+        }
+
+        try {
+            // Convert the file to base64
+            const base64Content = await fileToBase64(record.file);
+    
+            // Create the payload
+            const payload = {
+                file_name: record.file.name,
+                description: record.description,
+                content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
+            };
+    
+            // Send the POST request
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Attach the JWT token
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            // Check for errors
+            if (!response.ok) {
+                const errorData = await response.json();
+                this.logAndThrowError("Error uploading sample audio file:", errorData.message || "Unknown error");
+            }
+    
+            console.log("Sample audio file uploaded successfully.");
+    
+        } catch (error) {
+            this.logAndThrowError("Error during file upload:", error);
+        }
+    }
+
+    public async deleteUploadedSampleAdudioFile(fileID: number): Promise<void> {
+        if (!this.host)
+            throw new Error("Host is not initialized.");
+        
+        const url = `${this.host}/sample_audio_file/delete`; // API endpoint for deleting a file
+        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}` // Pass the JWT token in the Authorization header
+                },
+                body: JSON.stringify({
+                    sample_audio_file_id: fileID // Include the file ID in the request body
+                }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                this.logAndThrowError("Error deleting sample audio file", errorData.message || "Unknown error");
+            }
+    
+            console.log(`Sample audio file with ID ${fileID} deleted successfully.`);
+    
+        } catch (error) {
+            this.logAndThrowError("Error during deleting sample audio file", error);
+        }
+    }
+
+    private logAndThrowError(contextMessage: string, error: any): never {
+        console.error(`${contextMessage}:`, error);
+        throw new Error(error.message || "An unexpected error occurred.");
     }
 }

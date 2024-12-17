@@ -35,7 +35,7 @@ nav {
 .navigation-bar-title {
     font-size: 28px;    /* Font size for the title */
     font-weight: bold;
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #333;
     margin: 0;          /* Remove default margin */
     padding: 16px;
@@ -81,6 +81,6 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #265073;
 }

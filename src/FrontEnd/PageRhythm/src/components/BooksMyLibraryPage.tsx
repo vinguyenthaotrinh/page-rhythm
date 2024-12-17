@@ -14,16 +14,14 @@ interface DeletionConfirmationBoxProps {
 }
 
 const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    title = "Delete your book", // Default title
-    message = "Are you sure you want to delete this book?", // Default message
     onConfirm,
     onCancel,
 }) => {
     return (
         <div className="books-my-library-page-deletion-confirmation-overlay">
             <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
-                <p>{message}</p>
+                <h1 id="books-my-library-page-deletion-confirmation-title">Delete your book</h1>
+                <p>Are you sure you want to delete this book?</p>
                 <div className="books-my-library-page-deletion-confirmation-buttons">
                     <button
                         className="books-my-library-page-deletion-confirmation-button confirm"
@@ -289,7 +287,7 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
 export default function BooksMyLibraryPage() {
     const [books, setBooks] = useState<any[]>([]);                                      // Books data state
     const [loading, setLoading] = useState(true);                                       // Loading state
-    const [showConfirmation, setShowConfirmation] = useState(false);                    // Confirmation box visibility
+    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);                    // Confirmation box visibility
     const [bookToDelete, setBookToDelete] = useState<any | null>(null);                 // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay] = useState(false);                        // State for Add Overlay
     const [selectedFile, setSelectedFile] = useState<File | null>(null);                // Track the selected file for upload
@@ -389,7 +387,7 @@ export default function BooksMyLibraryPage() {
 
     const handleDeleteClick = (book: any) => {
         setBookToDelete(book);      // Set the selected book
-        setShowConfirmation(true);  // Show the confirmation box
+        setShowDeletionConfirmation(true);  // Show the confirmation box
     };
 
     const handleConfirmDelete = async () => {
@@ -399,7 +397,7 @@ export default function BooksMyLibraryPage() {
                 await server.deleteBook(bookToDelete.book_id); 
                 setBooks(books.filter((b) => b.book_id !== bookToDelete.book_id)); // Remove book from state
                 setBookToDelete(null);
-                setShowConfirmation(false);
+                setShowDeletionConfirmation(false);
             } catch (error) {
                 console.error("Error deleting book:", error);
             }
@@ -408,7 +406,7 @@ export default function BooksMyLibraryPage() {
 
     const handleCancelDelete = () => {
         setBookToDelete(null);
-        setShowConfirmation(false); // Close the confirmation box
+        setShowDeletionConfirmation(false); // Close the confirmation box
     };
 
     const handleEditClick = (book: any) => {
@@ -510,7 +508,7 @@ export default function BooksMyLibraryPage() {
             </div>
 
             {/* Confirmation Box */}
-            {showConfirmation && (
+            {showDeletionConfirmation && (
                 <DeletionConfirmationBox
                     onConfirm={handleConfirmDelete}
                     onCancel={handleCancelDelete}

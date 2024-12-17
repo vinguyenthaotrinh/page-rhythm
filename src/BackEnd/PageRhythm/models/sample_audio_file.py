@@ -67,8 +67,8 @@ class SampleAudioFile(BaseEntity):
             "file_name": self.file_name,
             "description": self.description,
             "owner_id": self.owner_id,
-            "content": base64.b64encode(self.content).decode("utf-8"),
-            "upload_time": self.upload_time.strftime("%Y-%m-%d %H:%M:%S")
+            "content": base64.b64encode(self.content).decode("utf-8") if self.content else None,
+            "upload_time": self.upload_time.strftime("%Y-%m-%dT%H:%M:%S")
         }
     
     def from_serializable_JSON(self, dictionary: dict):
@@ -76,8 +76,11 @@ class SampleAudioFile(BaseEntity):
         self.set_file_name(dictionary["file_name"])
         self.set_description(dictionary["description"])
         self.set_owner_id(dictionary["owner_id"])
-        self.set_content(base64.b64decode(dictionary["content"]))
-        self.set_upload_time(datetime.strptime(dictionary["upload_time"], "%Y-%m-%d %H:%M:%S"))
+        try:
+            self.set_content(base64.b64decode(dictionary["content"]))
+        except:
+            self.set_content(None)
+        self.set_upload_time(datetime.strptime(dictionary["upload_time"], "%Y-%m-%dT%H:%M:%S"))
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "SampleAudioFile":

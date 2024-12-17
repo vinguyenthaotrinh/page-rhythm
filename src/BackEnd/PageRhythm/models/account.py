@@ -146,6 +146,7 @@ class Account(BaseEntity):
                 "day": self.birthday.day
             },
             "bio": self.bio,
+            "account_type": self.account_type.value,
             "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
     
