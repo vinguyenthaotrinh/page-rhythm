@@ -827,7 +827,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/sample_audio_file/upload`; // API endpoint for uploading files
+        const url = `${this.host}/sample_audio_file/upload`; 
         const sessionToken = this.findSessionToken(); // Get the session token (JWT)
     
         const fileToBase64 = (file: File): Promise<string> => {
@@ -841,11 +841,11 @@ export default class Server {
 
         try {
             // Convert the file to base64
-            const base64Content = await fileToBase64(record.file);
+            const base64Content = await fileToBase64(record.content);
     
             // Create the payload
             const payload = {
-                file_name: record.file.name,
+                file_name: record.file_name,
                 description: record.description,
                 content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
             };
