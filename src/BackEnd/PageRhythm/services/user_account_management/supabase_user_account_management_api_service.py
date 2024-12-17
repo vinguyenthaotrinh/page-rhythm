@@ -9,7 +9,7 @@ class SupabaseUserAccountManagementAPIService:
 
     def get_ban_account(self, banned_account_id: int) -> Optional[BannedAccount]:
         try:
-            response = self.client.table('BannedAccount').select('*').eq('banned_account_id', banned_account_id).execute()
+            response = self.client.table("BannedAccount").select("*").eq("banned_account_id", banned_account_id).execute()
             return BannedAccount.deserialize_JSON(response.data[0])
         except Exception as e:
             return None
@@ -21,7 +21,7 @@ class SupabaseUserAccountManagementAPIService:
             return False
 
         try:
-            self.client.table('BannedAccount').insert(banned_account.serialize_JSON()).execute()
+            self.client.table("BannedAccount").insert(banned_account.serialize_JSON()).execute()
             return True
         except Exception as e:
             return False
@@ -33,7 +33,7 @@ class SupabaseUserAccountManagementAPIService:
             return False
 
         try:
-            self.client.table('BannedAccount').update(banned_account.serialize_JSON()).eq('banned_account_id', banned_account.banned_account_id).execute()
+            self.client.table("BannedAccount").update(banned_account.serialize_JSON()).eq("banned_account_id", banned_account.banned_account_id).execute()
             return True
         except Exception as e:
             return False
@@ -45,7 +45,7 @@ class SupabaseUserAccountManagementAPIService:
             return False
     
         try:
-            self.client.table('BannedAccount').delete().eq('banned_account_id', banned_account_id).execute()
+            self.client.table("BannedAccount").delete().eq("banned_account_id", banned_account_id).execute()
             return True
         except Exception as e:
             return False

@@ -822,7 +822,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/sample_audio_file/uploaded_files`; // The API endpoint for fetching uploaded files
+        const url = `${this.host}/sample_audio_file/uploaded_files`; 
         const sessionToken = this.findSessionToken(); // Get the session token (JWT)
     
         try {
