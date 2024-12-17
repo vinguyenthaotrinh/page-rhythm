@@ -85,7 +85,7 @@ export default function VoicesMyLibraryPage() {
                         {records.map((record, index) => (
                             <div key={record.id} className="record-item">
                                 <div className="record-header">
-                                    <span className="audio-name">{record.name}</span>
+                                    <span className="audio-name">{record.file_name}</span>
                                 </div>
 
                                 <div className="record-body">

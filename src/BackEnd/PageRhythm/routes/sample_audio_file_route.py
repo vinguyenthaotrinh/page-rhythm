@@ -62,7 +62,7 @@ def update_sample_audio_file_meta_information():
     
     return jsonify({"message": "You do not have permission to update this sample audio file's meta information"}), 403
 
-@sample_audio_file_blueprint.route("/get_uploaded_files", methods=["GET"])
+@sample_audio_file_blueprint.route("/uploaded_files", methods=["GET"])
 @jwt_required()
 def get_uploaded_sample_audio_files():
     current_identity = json.loads(get_jwt_identity())
@@ -72,4 +72,4 @@ def get_uploaded_sample_audio_files():
 
     sample_audio_files = sample_audio_files_service.get_uploaded_sample_audio_files(owner_id)
 
-    return jsonify(sample_audio_files), 200
+    return jsonify([sample_audio_file.to_serializable_JSON() for sample_audio_file in sample_audio_files]), 200

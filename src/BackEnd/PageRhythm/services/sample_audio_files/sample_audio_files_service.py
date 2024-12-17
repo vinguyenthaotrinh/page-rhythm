@@ -45,9 +45,4 @@ class SampleAudioFilesService:
         return self.supabase.update_sample_audio_file(sample_audio_file)
     
     def get_uploaded_sample_audio_files(self, owner_id: int) -> list[SampleAudioFile]:
-        sample_audio_files = self.supabase.get_uploaded_sample_audio_files()
-
-        if sample_audio_files is None:
-            return []
-        
-        return [sample_audio_file for sample_audio_file in sample_audio_files if sample_audio_file.owner_id == owner_id]
+        return self.supabase.get_uploaded_sample_audio_files(owner_id)
