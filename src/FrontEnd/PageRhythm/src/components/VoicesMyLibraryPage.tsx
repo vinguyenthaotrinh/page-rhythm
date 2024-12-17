@@ -6,6 +6,43 @@ import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
 import React, { useState, useRef, useEffect } from "react";
 
+interface DeletionConfirmationBoxProps {
+    title?: string;             // Optional custom title
+    message?: string;           // Confirmation message
+    onConfirm: () => void;      // Function to call when confirmed
+    onCancel: () => void;       // Function to call when canceled
+}
+
+const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
+    title = "Delete your book", // Default title
+    message = "Are you sure you want to delete this book?", // Default message
+    onConfirm,
+    onCancel,
+}) => {
+    return (
+        <div className="books-my-library-page-deletion-confirmation-overlay">
+            <div className="books-my-library-page-deletion-confirmation-box">
+                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
+                <p>{message}</p>
+                <div className="books-my-library-page-deletion-confirmation-buttons">
+                    <button
+                        className="books-my-library-page-deletion-confirmation-button confirm"
+                        onClick={onConfirm}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="books-my-library-page-deletion-confirmation-button cancel"
+                        onClick={onCancel}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 interface AddSampleAudioFileOverlayProps {
     showAddOverlay: boolean;
     setShowAddOverlay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -89,32 +126,19 @@ export default function VoicesMyLibraryPage() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState("");
     const [description, setDescription] = useState("");
-    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);
-    
-    const handleCoverImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setSelectedCoverImage(file); // Track the selected cover image
-    
-            // Optionally, create a preview of the image
-            const reader = new FileReader();
-            reader.onloadend = () => {
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
+    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);
+    const [selectedRecord, setSelectedRecord] = useState<any | null>(null);
+    const [showEditOverlay, setShowEditOverlay] = useState(false);
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
-            // Prepare the book object
-            const book = {
+            
+            const record = {
                 file_name: fileName,
                 description: description,
-                content: selectedFile,
-                image: selectedCoverImage || null, // Optional cover image
+                content: selectedFile
             };
-
-            console.log("Uploading book with details:", book);
 
             const server = await Server.getInstance();
 
@@ -123,11 +147,10 @@ export default function VoicesMyLibraryPage() {
             // Update UI after successful upload
             console.log("Book uploaded successfully!");
 
-            const renderedBook = {
+            const renderedRecord = {
                 file_name: fileName,
                 description: description,
                 content: selectedFile,
-                image: selectedCoverImage ? await IMAGES.convertImageFileToBase64(selectedCoverImage) : null, // Convert cover image to base64
             }
 
             //setBooks((previousBooks) => [...previousBooks, renderedBook]); // Add the new book to the list
@@ -190,13 +213,50 @@ export default function VoicesMyLibraryPage() {
         }
     };
 
-    const handleDelete = (id: number) => {
-        const updatedRecords = records.filter((record) => record.id !== id);
-        setRecords(updatedRecords);
+    const handleDeleteClick = (record: any) => {
+        setRecordToDelete(record);                  
+        setShowDeletionConfirmation(true);      
     };
 
-    const handleEdit = (id: number) => {
-        console.log("Edit record", id);
+    const handleConfirmDelete = async () => {
+        if (recordToDelete) {
+            try {
+                const server = await Server.getInstance();
+                //...
+                setRecords(records.filter((record) => record.id !== recordToDelete.id)); // Remove the deleted record from the list
+                setRecordToDelete(null);
+                setShowDeletionConfirmation(false);
+            } catch (error) {
+                console.error("Error deleting record:", error);
+            }
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setRecordToDelete(null);
+        setShowDeletionConfirmation(false); // Close the confirmation box
+    };
+
+    const handleEditClick = (record: any) => {
+        setSelectedRecord(record);
+        setShowEditOverlay(true);  // Show the edit overlay
+    };
+
+    const handleEditRecord = async (updatedRecord: any) => {
+        try {
+            const server = await Server.getInstance();
+            //...
+            setRecords((previousRecords) => {
+                const updatedRecords = [...previousRecords];
+                const index = updatedRecords.findIndex((record) => record.id === updatedRecord.id);
+                updatedRecords[index] = updatedRecord;
+                return updatedRecords;
+            });
+            setSelectedRecord(null);
+            setShowEditOverlay(false);
+        } catch (error) {
+            console.error("Error updating book:", error);
+        }
     };
 
     return (
@@ -255,7 +315,7 @@ export default function VoicesMyLibraryPage() {
                                     <div className="record-right-column">
                                         <button
                                             className="book-item-edit-button"
-                                            onClick={() => handleEdit(record.id)}
+                                            onClick={() => handleEditClick(record)}
                                         >
                                             Edit
                                             <img
@@ -266,7 +326,7 @@ export default function VoicesMyLibraryPage() {
                                         </button>
                                         <button
                                             className="book-item-delete-button"
-                                            onClick={() => handleDelete(record.id)}
+                                            onClick={() => handleDeleteClick(record)}
                                         >
                                             Delete
                                             <div className="book-item-button-icon">
@@ -289,6 +349,14 @@ export default function VoicesMyLibraryPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Box */}
+            {showDeletionConfirmation && (
+                <DeletionConfirmationBox
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                />
+            )}
 
             <AddSampleAudioFileOverlay
                 showAddOverlay={showAddOverlay}
