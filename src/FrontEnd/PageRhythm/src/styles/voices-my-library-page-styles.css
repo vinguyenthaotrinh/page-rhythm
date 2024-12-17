@@ -62,6 +62,12 @@
     padding-right: 20px;
 }
 
+.voices-my-library-page-add-icon {
+    width: 20px;        /* Adjust the size of the icon */
+    height: 20px;       /* Adjust the size of the icon */
+    margin-left: 8px;   /* Space between the icon and the text */
+}
+
 /* For Webkit-based browsers (Chrome, Edge, etc.) */
 #voices-my-library-page-record-list-container::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar */
