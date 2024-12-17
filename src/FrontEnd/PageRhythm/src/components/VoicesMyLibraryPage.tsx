@@ -140,10 +140,7 @@ export default function VoicesMyLibraryPage() {
 
             const server = await Server.getInstance();
 
-            //await server.uploadBook(book);
-
-            // Update UI after successful upload
-            console.log("Book uploaded successfully!");
+            await server.uploadSampleAudioFile(record);
 
             const renderedRecord = {
                 file_name: fileName,
@@ -151,9 +148,9 @@ export default function VoicesMyLibraryPage() {
                 content: selectedFile,
             }
 
-            //setBooks((previousBooks) => [...previousBooks, renderedBook]); // Add the new book to the list
-            
-            setShowAddOverlay(false); // Close the overlay
+            setRecords([...records, renderedRecord]);
+
+            setShowAddOverlay(false); 
         } else {
             console.log("Please fill in all required fields.");
         }
