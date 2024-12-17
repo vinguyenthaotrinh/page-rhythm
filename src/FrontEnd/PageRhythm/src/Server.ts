@@ -873,7 +873,7 @@ export default class Server {
         }
     }
 
-    public async deleteSampleAdudioFile(fileID: number): Promise<void> {
+    public async deleteUploadedSampleAdudioFile(fileID: number): Promise<void> {
         if (!this.host)
             throw new Error("Host is not initialized.");
         

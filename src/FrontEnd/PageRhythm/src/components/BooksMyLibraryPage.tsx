@@ -14,16 +14,14 @@ interface DeletionConfirmationBoxProps {
 }
 
 const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    title = "Delete your book", // Default title
-    message = "Are you sure you want to delete this book?", // Default message
     onConfirm,
     onCancel,
 }) => {
     return (
         <div className="books-my-library-page-deletion-confirmation-overlay">
             <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
-                <p>{message}</p>
+                <h1 id="books-my-library-page-deletion-confirmation-title">Delete your book</h1>
+                <p>Are you sure you want to delete this book?</p>
                 <div className="books-my-library-page-deletion-confirmation-buttons">
                     <button
                         className="books-my-library-page-deletion-confirmation-button confirm"

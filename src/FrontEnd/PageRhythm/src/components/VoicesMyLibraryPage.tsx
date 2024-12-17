@@ -14,16 +14,14 @@ interface DeletionConfirmationBoxProps {
 }
 
 const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    title = "Delete your book", // Default title
-    message = "Are you sure you want to delete this book?", // Default message
     onConfirm,
     onCancel,
 }) => {
     return (
         <div className="books-my-library-page-deletion-confirmation-overlay">
             <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
-                <p>{message}</p>
+                <h1 id="books-my-library-page-deletion-confirmation-title">Delete your sample audio file</h1>
+                <p>Are you sure you want to delete this file?</p>
                 <div className="books-my-library-page-deletion-confirmation-buttons">
                     <button
                         className="books-my-library-page-deletion-confirmation-button confirm"
@@ -222,7 +220,9 @@ export default function VoicesMyLibraryPage() {
         if (recordToDelete) {
             try {
                 const server = await Server.getInstance();
-                //...
+                
+                await server.deleteUploadedSampleAdudioFile(recordToDelete.sample_audio_file_id);
+
                 setRecords(records.filter((record) => record.id !== recordToDelete.id)); // Remove the deleted record from the list
                 setRecordToDelete(null);
                 setShowDeletionConfirmation(false);
