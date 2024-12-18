@@ -1,4 +1,5 @@
 import json
+import base64
 from flask import Blueprint, jsonify, request
 from services.account.account_service import AccountService
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -18,6 +19,11 @@ def upload_sample_audio_file():
     content = data.get("content")
 
     sample_audio_files_service = SampleAudioFilesService()
+
+    try:
+        content = base64.b64decode(content)
+    except Exception as e:
+        return jsonify({"message": f"Failed to decode content: {str(e)}"}), 400
 
     if sample_audio_files_service.add_new_sample_audio_file(file_name, description, owner_id, content):
         return jsonify({"status": "Sample audio file was successfully uploaded"}), 200

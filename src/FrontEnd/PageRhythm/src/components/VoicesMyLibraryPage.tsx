@@ -131,6 +131,8 @@ export default function VoicesMyLibraryPage() {
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
+
+            //console.log(selectedFile);
             
             const record = {
                 file_name: fileName,
@@ -162,8 +164,19 @@ export default function VoicesMyLibraryPage() {
             setSelectedFile(file);
 
             const reader = new FileReader();
+            
+            // Define onload event handler
             reader.onloadend = () => {
+                // Log the result once the file is read
+                //console.log("File successfully read as base64:", reader.result);
+                // Optionally, use reader.result here if you want to do something with the base64 data.
             };
+
+            // Define error handler
+            reader.onerror = (error) => {
+                console.error("Error reading the file:", error);
+            };
+
             reader.readAsDataURL(file); // Read the file as a data URL
         }
     };
@@ -277,7 +290,10 @@ export default function VoicesMyLibraryPage() {
                     {/* Scrollable section for records */}
                     <div id="voices-my-library-page-record-list-container">
                         {records.map((record, index) => (
-                            <div key={record.id} className="record-item">
+                            <div 
+                                key={record.sample_audio_file_id} 
+                                className="record-item"
+                            >
                                 <div className="record-header">
                                     <span className="audio-name">{record.file_name}</span>
                                 </div>
