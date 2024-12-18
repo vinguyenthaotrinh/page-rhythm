@@ -29,6 +29,7 @@ class SupabaseSampleAudioFilesAPIService:
             response = self.client.table('SampleAudioFile').insert(sample_audio_file.to_serializable_JSON()).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
     

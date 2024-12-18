@@ -172,8 +172,6 @@ export default function VoicesMyLibraryPage() {
                 // Optionally, use reader.result here if you want to do something with the base64 data.
             };
 
-            //console.log((file instanceof Blob));
-
             // Define error handler
             reader.onerror = (error) => {
                 console.error("Error reading the file:", error);
@@ -292,7 +290,10 @@ export default function VoicesMyLibraryPage() {
                     {/* Scrollable section for records */}
                     <div id="voices-my-library-page-record-list-container">
                         {records.map((record, index) => (
-                            <div key={record.id} className="record-item">
+                            <div 
+                                key={record.sample_audio_file_id} 
+                                className="record-item"
+                            >
                                 <div className="record-header">
                                     <span className="audio-name">{record.file_name}</span>
                                 </div>

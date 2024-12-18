@@ -842,7 +842,7 @@ export default class Server {
         try {
             // Convert the file to base64
             const base64Content = await fileToBase64(record.content);
-    
+
             // Create the payload
             const payload = {
                 file_name: record.file_name,
