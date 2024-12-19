@@ -17,13 +17,11 @@ export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionB
     // Determine if the current option should have hover effect
     const getButtonClass = (option: string) => {
         // If hoveredOption is set to this option, apply hover effect
-        if (hoveredOption === option) {
+        if (hoveredOption === option) 
             return "hover-effect";
-        }
         // If no option is hovered, apply hover effect to the current option
-        if (!hoveredOption && currentOption === option) {
+        if (!hoveredOption && currentOption === option) 
             return "hover-effect";
-        }
         return "";
     };
 

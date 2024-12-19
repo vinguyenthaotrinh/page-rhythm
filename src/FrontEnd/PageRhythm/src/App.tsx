@@ -8,8 +8,8 @@ import ReadBookPage from "./components/ReadBookPage";
 import PageNotFound from "./components/PageNotFound";
 import BooksAdminPage from "./components/BooksAdminPage";
 import BookDetailsPage from "./components/BookDetailsPage";
-import AccountAdminPage from "./components/AccountAdminPage";
 import ListenToBookPage from "./components/ListenToBookPage";
+import AccountsAdminPage from "./components/AccountsAdminPage";
 import BooksMyLibraryPage from "./components/BooksMyLibraryPage";
 import GeneralProfilePage from "./components/GeneralProfilePage";
 import VoicesMyLibraryPage from "./components/VoicesMyLibraryPage";
@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/my-library-page" element={<Navigate to="/my-library-page/books" />} />
       
         <Route path="/admin-page/books" element={<BooksAdminPage />} />
-        <Route path="/admin-page/account" element={<AccountAdminPage />} />
+        <Route path="/admin-page/accounts" element={<AccountsAdminPage />} />
         <Route path="/admin-page" element={<Navigate to="/admin-page/books" />} />    
       </Routes>
     </Router>
