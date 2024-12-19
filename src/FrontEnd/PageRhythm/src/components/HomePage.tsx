@@ -8,7 +8,14 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function HomePage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGenre, setSelectedGenre] = useState("All");
-    const [genres, setGenres] = useState<string[]>([]);
+    const [genres, setGenres] = useState<string[]>([
+        "Science Fiction",
+        "Fantasy",
+        "Non-Fiction",
+        "Mystery",
+        "Romance",
+        "Horror"
+    ]);
     const [books, setBooks] = useState<any[]>([]);
     const navigate = useNavigate();
 
@@ -31,8 +38,11 @@ export default function HomePage() {
         const fetchGenres = async () => {
             try {
                 const server = await Server.getInstance();
-                const genresList = await server.getAllGenres();
-                setGenres(genresList);
+                const fetchedGenres = await server.getAllGenres();
+
+                // Combine hardcoded genres and fetched genres, and remove duplicates
+                const combinedGenres = new Set([...genres, ...fetchedGenres]);
+                setGenres(Array.from(combinedGenres));
             } catch (error) {
                 console.error("Error fetching genres:", error);
             }
@@ -86,12 +96,6 @@ export default function HomePage() {
                         {genres.map((genre) => (
                             <option key={genre} value={genre}>{genre}</option>
                         ))}
-                        <option value="Science Fiction">Science Fiction</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Non-Fiction">Non-Fiction</option>
-                        <option value="Mystery">Mystery</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Horror">Horror</option>
                     </select>
                 </div>
                 <button onClick={handleSearch}>Search</button>

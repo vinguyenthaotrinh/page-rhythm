@@ -1,10 +1,12 @@
 import "./App.css";
 import React from "react";
 import HomePage from "./components/HomePage";
+import AdminPage from "./components/AdminPage";
 import CommentPage from "./components/CommentPage";
 import LandingPage from "./components/LandingPage";
 import RegisterPage from "./components/RegisterPage";
 import ReadBookPage from "./components/ReadBookPage";
+import PageNotFound from "./components/PageNotFound";
 import BookDetailsPage from "./components/BookDetailsPage";
 import ListenToBookPage from "./components/ListenToBookPage";
 import BooksMyLibraryPage from "./components/BooksMyLibraryPage";
@@ -20,6 +22,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/home-page" element={<HomePage />} />
+        <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
         <Route path="/read-book-page/:bookID" element={<ReadBookPage />} />    
@@ -28,7 +31,7 @@ export default function App() {
         <Route path="/comment-page/:bookID/:repliedCommentID" element={<CommentPage />} />
         <Route path="/request-password-reset-page" element={<RequestPasswordResetPage />} />
         <Route path="/" element={<Navigate to="/landing-page" />} />
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        <Route path="*" element={<PageNotFound/>} />
 
         <Route path="/profile-page/general" element={<GeneralProfilePage />} />
         <Route path="/profile-page/password" element={<PasswordProfilePage />} />
