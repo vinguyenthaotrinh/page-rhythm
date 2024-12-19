@@ -517,40 +517,40 @@ export default function BooksMyLibraryPage() {
             {/* Confirmation Box */}
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
-                    onConfirm={handleConfirmDelete}
-                    onCancel={handleCancelDelete}
+                    onConfirm   =   {handleConfirmDelete}
+                    onCancel    =   {handleCancelDelete}
                 />
             )}
 
             {/* Render the AddBookOverlay */}
             <AddBookOverlay
-                showAddOverlay={showAddOverlay}
-                setShowAddOverlay={setShowAddOverlay}
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
-                bookName={bookName}
-                setBookName={setBookName}
-                authorName={authorName}
-                setAuthorName={setAuthorName}
-                releaseDate={releaseDate}
-                setReleaseDate={setReleaseDate}
-                genre={genre}
-                setGenre={setGenre}
-                summary={summary}
-                setSummary={setSummary}
-                selectedCoverImage={selectedCoverImage}
-                setSelectedCoverImage={setSelectedCoverImage}
-                handleFileSelect={handleFileSelect}
-                handleCoverImageSelect={handleCoverImageSelect}
-                handleBookUpload={handleBookUpload}
+                showAddOverlay          =   {showAddOverlay}
+                setShowAddOverlay       =   {setShowAddOverlay}
+                selectedFile            =   {selectedFile}
+                setSelectedFile         =   {setSelectedFile}
+                bookName                =   {bookName}
+                setBookName             =   {setBookName}
+                authorName              =   {authorName}
+                setAuthorName           =   {setAuthorName}
+                releaseDate             =   {releaseDate}
+                setReleaseDate          =   {setReleaseDate}
+                genre                   =   {genre}
+                setGenre                =   {setGenre}
+                summary                 =   {summary}
+                setSummary              =   {setSummary}
+                selectedCoverImage      =   {selectedCoverImage}
+                setSelectedCoverImage   =   {setSelectedCoverImage}
+                handleFileSelect        =   {handleFileSelect}
+                handleCoverImageSelect  =   {handleCoverImageSelect}
+                handleBookUpload        =   {handleBookUpload}
             />
 
             <EditBookOverlay
-                showEditOverlay={showEditOverlay}
-                setShowEditOverlay={setShowEditOverlay}
-                selectedBook={selectedBook}
-                setSelectedBook={setSelectedBook}
-                handleEditBook={handleEditBook}
+                showEditOverlay     =   {showEditOverlay}
+                setShowEditOverlay  =   {setShowEditOverlay}
+                selectedBook        =   {selectedBook}
+                setSelectedBook     =   {setSelectedBook}
+                handleEditBook      =   {handleEditBook}
             />
         </div>
     );

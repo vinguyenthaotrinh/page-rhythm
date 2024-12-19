@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 from models.base_entity import BaseEntity
 
 class Book(BaseEntity):
@@ -13,7 +14,8 @@ class Book(BaseEntity):
                  released_date: str,
                  book_id: int = None,
                  book_rating: float = 0.0,
-                 image: str = None):
+                 image: Optional[str] = None,
+                 hidden: bool = False):
         super().__init__()
         self.book_id = book_id
         self.title = title
@@ -25,12 +27,13 @@ class Book(BaseEntity):
         self.released_date = released_date 
         self.book_rating = book_rating  
         self.image = image 
+        self.hidden = hidden
 
     def __str__(self) -> str:
         return (f"Book(book_id={self.book_id}, title={self.title}, author={self.author}, "
                 f"summary={self.summary}, content={self.content}, genre={self.genre}, "
                 f"owner_id={self.owner_id}, released_date={self.released_date}, "
-                f"book_rating={self.book_rating}, image={'Yes' if self.image else 'No'})")
+                f"book_rating={self.book_rating}, image={'Yes' if self.image else 'No'}), hidden={self.hidden}")
     
     # Getter methods
     def get_book_id(self) -> int:
@@ -62,6 +65,9 @@ class Book(BaseEntity):
 
     def get_image(self) -> str:
         return self.image
+    
+    def is_hidden(self) -> bool:
+        return self.hidden
     
     def set_book_id(self, book_id: int):
         self.book_id = book_id
@@ -95,7 +101,10 @@ class Book(BaseEntity):
 
     def set_image(self, image: str):
         self.image = image
-    
+
+    def set_visibility(self, hidden: bool):
+        self.hidden = hidden
+
     def to_serializable_JSON(self) -> dict:
         return {
             "book_id": self.book_id,
@@ -107,7 +116,8 @@ class Book(BaseEntity):
             "owner_id": self.owner_id,
             "released_date": self.released_date,
             "book_rating": self.book_rating,
-            "image": self.image
+            "image": self.image,
+            "hidden": self.hidden
         }
     
     def from_serializable_JSON(self, dictionary: dict):
@@ -121,9 +131,10 @@ class Book(BaseEntity):
         self.set_released_date(dictionary.get("released_date"))
         self.set_book_rating(dictionary.get("book_rating", 0.0))
         self.set_image(dictionary.get("image"))
+        self.set_visibility(dictionary.get("hidden", False))
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "Book":
-        book = Book(None, None, None, None, None, None, None)
+        book = Book(None, None, None, None, None, None, None, False)
         book.from_serializable_JSON(dictionary)
         return book
