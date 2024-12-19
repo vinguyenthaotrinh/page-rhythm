@@ -23,13 +23,13 @@
     cursor: pointer;
     margin: 1px 20px;
     text-align: left;
-    font-family: 'Poppins-Regular', sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
     transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
     position: relative; /* Required for pseudo-element */
 }
 
 .my-library-page-my-library-section-button:hover {
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #265073; /* Slightly darker text color on hover */
 }
 
@@ -46,7 +46,7 @@
 
 /* Hover effect for all buttons (applies underline with orange color) */
 .my-library-page-my-library-section-button.hover-effect {
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #265073; /* Slightly darker text color on hover */
 }
 

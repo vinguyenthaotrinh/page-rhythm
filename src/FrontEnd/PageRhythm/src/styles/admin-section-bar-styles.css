@@ -1,39 +1,37 @@
 @import url("fonts.css");
 
-/* Sidebar layout */
-.my-library-page-my-library-section-bar {
+.admin-page-admin-section-bar {
     background-color: #F6FFDE;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align buttons at the top */
+    justify-content: flex-start; 
     align-items: stretch;
-    width: 200px; /* Fixed width for the sidebar */
-    padding: 60px 0; /* Spacing at the top */
+    width: 200px; 
+    padding: 60px 0;
     border-right: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Sidebar buttons without background */
-.my-library-page-my-library-section-button {
+.admin-page-admin-section-button {
     padding: 15px;
-    background-color: transparent; /* No background */
-    color: black; /* Text color */
-    border: none; /* Remove border */
+    background-color: transparent; 
+    color: black;
+    border: none;
     font-size: 16px;
     cursor: pointer;
     margin: 1px 20px;
     text-align: left;
-    font-family: 'Poppins-Regular', sans-serif;
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
-    position: relative; /* Required for pseudo-element */
+    font-family: "Poppins-Regular", sans-serif;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    position: relative;
 }
 
-.my-library-page-my-library-section-button:hover {
-    font-family: 'Poppins-Bold', sans-serif;
+.admin-page-admin-section-button:hover {
+    font-family: "Poppins-Bold", sans-serif;
     color: #265073; /* Slightly darker text color on hover */
 }
 
-.my-library-page-my-library-section-button:hover::after {
+.admin-page-admin-section-button:hover::after {
     content: "";                    /* Required to display the pseudo-element */
     position: absolute;
     left: 0;                        /* Position it to the left of the button */
@@ -44,13 +42,12 @@
     background-color: orange;       /* Color of the vertical bar */
 }
 
-/* Hover effect for all buttons (applies underline with orange color) */
-.my-library-page-my-library-section-button.hover-effect {
-    font-family: 'Poppins-Bold', sans-serif;
-    color: #265073; /* Slightly darker text color on hover */
+.admin-page-admin-section-button.hover-effect {
+    font-family: "Poppins-Bold", sans-serif;
+    color: #265073; 
 }
 
-.my-library-page-my-library-section-button.hover-effect::after {
+.admin-page-admin-section-button.hover-effect::after {
     content: "";                      /* Required to display the pseudo-element */
     position: absolute;
     left: 0;                           /* Position it to the left of the button */
@@ -62,9 +59,8 @@
     transition: all 1s ease;            /* Smooth transition */
 }
 
-/* Active section (current option) will have the same effect as hovered option when no other button is hovered */
-.my-library-page-my-library-section-button.active::after {
-    content: "";                      /* Required to display the pseudo-element */
+.admin-page-admin-section-button.active::after {
+    content: "";                     
     position: absolute;
     left: 0;                           /* Position it to the left of the button */
     top: 50%;                          /* Align it vertically in the middle */

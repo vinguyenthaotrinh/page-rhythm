@@ -38,7 +38,7 @@ export default function AdminSectionBar({ currentOption }: AdminSectionBarProps)
                 onMouseEnter={() => setHoveredOption("accounts")}
                 onMouseLeave={() => setHoveredOption(null)}
             >
-                Voices
+                Accounts
             </button>
         </div>
     );

@@ -1,10 +1,10 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import NavigationBar from "./NavigationBar";
+import "../styles/books-admin-page-styles.css";
+import AdminSectionBar from "./AdminSectionBar";
 import React, { useState, useEffect } from "react";
-import "../styles/books-my-library-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
-import MyLibrarySectionBar from "./MyLibrarySectionBar";
 
 interface DeletionConfirmationBoxProps {
     title?: string;             // Optional custom title
@@ -439,8 +439,9 @@ export default function BooksAdminPage() {
     return (
         <div id="books-my-library-page">
             <NavigationBar />
+
             <div id="books-my-library-page-container">
-                <MyLibrarySectionBar currentOption="books" />
+                <AdminSectionBar currentOption="books" />
                 <div id="books-my-library-page-content">
                     <button
                         id="books-my-library-page-add-book-button"
