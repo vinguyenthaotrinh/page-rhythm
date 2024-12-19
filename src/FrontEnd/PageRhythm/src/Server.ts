@@ -915,4 +915,41 @@ export default class Server {
         console.error(`${contextMessage}:`, error);
         throw new Error(error.message || "An unexpected error occurred.");
     }
+
+    public async updateSampleAudioFile(record: any): Promise<void> {
+        if (!this.host) {
+            throw new Error("Host is not initialized.");
+        }
+    
+        const url = `${this.host}/sample_audio_file/update/meta_information`;
+        const sessionToken = this.findSessionToken();
+    
+        const body = {
+            sample_audio_file_id: record.sample_audio_file_id,
+            file_name: record.file_name,
+            description: record.description,
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionToken}`, // Add JWT authorization header
+                },
+                body: JSON.stringify(body), // Send JSON data
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error updating sample audio file:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to update sample audio file.");
+            }
+    
+            const result = await response.json(); // Handle response if needed
+            console.log("Sample audio file updated successfully:", result);
+        } catch (error) {
+            this.logAndThrowError("Error during sample audio file update:", error);
+        }
+    }
 }

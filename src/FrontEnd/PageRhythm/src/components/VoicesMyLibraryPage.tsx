@@ -144,9 +144,9 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
     if (!showEditOverlay) return null;
 
     return (
-        <div className="edit-overlay">
-            <div className="edit-overlay-content">
-                <h1 id="edit-overlay-title">Edit your sample audio file</h1>
+        <div className="add-overlay">
+            <div className="add-overlay-content">
+                <h1 id="add-overlay-title">Edit your sample audio file</h1>
                 <p>Please enter the updated file information</p>
 
                 <input
@@ -162,7 +162,7 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
                     onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <div className="edit-overlay-buttons">
+                <div className="add-overlay-buttons">
                     <button onClick={handleEditClick}>Save Changes</button>
                     <button onClick={() => setShowEditOverlay(false)}>Close</button>
                 </div>
@@ -182,18 +182,18 @@ function LoadingText() {
 }
 
 export default function VoicesMyLibraryPage() {
-    const [showAddOverlay, setShowAddOverlay] = useState(false);            // State for Add Overlay
-    const [records, setRecords] = useState<any[]>([]);                      // Records will be fetched
-    const [playingIndex, setPlayingIndex] = useState<number | null>(null);  // Track currently playing audio
-    const [audioTime, setAudioTime] = useState(0);                          // Track current time of audio
-    const audioRefs = useRef<Record<number, HTMLAudioElement>>({});         // Refs for each audio file
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [fileName, setFileName] = useState("");
-    const [description, setDescription] = useState("");
-    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
-    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);
-    const [selectedRecord, setSelectedRecord] = useState<any | null>(null);
-    const [showEditOverlay, setShowEditOverlay] = useState(false);
+    const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
+    const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
+    const [playingIndex, setPlayingIndex]                           = useState<number | null>(null);                    // Track currently playing audio
+    const [audioTime, setAudioTime]                                 = useState(0);                                      // Track current time of audio
+    const audioRefs                                                 = useRef<Record<number, HTMLAudioElement>>({});     // Refs for each audio file
+    const [selectedFile, setSelectedFile]                           = useState<File | null>(null);
+    const [fileName, setFileName]                                   = useState("");
+    const [description, setDescription]                             = useState("");
+    const [recordToDelete, setRecordToDelete]                       = useState<any | null>(null);
+    const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);
+    const [selectedRecord, setSelectedRecord]                       = useState<any | null>(null);
+    const [showEditOverlay, setShowEditOverlay]                     = useState(false);
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
@@ -314,13 +314,16 @@ export default function VoicesMyLibraryPage() {
     const handleEditRecord = async (updatedRecord: any) => {
         try {
             const server = await Server.getInstance();
-            //...
+
+            await server.updateSampleAudioFile(updatedRecord);
+            
             setRecords((previousRecords) => {
                 const updatedRecords = [...previousRecords];
                 const index = updatedRecords.findIndex((record) => record.id === updatedRecord.id);
                 updatedRecords[index] = updatedRecord;
                 return updatedRecords;
             });
+            
             setSelectedRecord(null);
             setShowEditOverlay(false);
         } catch (error) {
@@ -424,33 +427,32 @@ export default function VoicesMyLibraryPage() {
                 </div>
             </div>
 
-            {/* Confirmation Box */}
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
-                    onConfirm={handleConfirmDelete}
-                    onCancel={handleCancelDelete}
+                    onConfirm   =   {handleConfirmDelete}
+                    onCancel    =   {handleCancelDelete}
                 />
             )}
 
             <AddSampleAudioFileOverlay
-                showAddOverlay={showAddOverlay}
-                setShowAddOverlay={setShowAddOverlay}
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
-                fileName={fileName}
-                setFileName={setFileName}
-                description={description}
-                setDescription={setDescription}
-                handleFileSelect={handleFileSelect}
-                handleSampleAudioFileUpload={handleSampleAudioFileUpload}
+                showAddOverlay              =   {showAddOverlay}
+                setShowAddOverlay           =   {setShowAddOverlay}
+                selectedFile                =   {selectedFile}
+                setSelectedFile             =   {setSelectedFile}
+                fileName                    =   {fileName}
+                setFileName                 =   {setFileName}
+                description                 =   {description}
+                setDescription              =   {setDescription}
+                handleFileSelect            =   {handleFileSelect}
+                handleSampleAudioFileUpload =   {handleSampleAudioFileUpload}
             />
 
             <EditSampleAudioFileOverlay
-                showEditOverlay={showEditOverlay}
-                setShowEditOverlay={setShowEditOverlay}
-                selectedRecord={selectedRecord}
-                setSelectedRecord={setSelectedRecord}
-                handleEditRecord={handleEditRecord}
+                showEditOverlay     =   {showEditOverlay}
+                setShowEditOverlay  =   {setShowEditOverlay}
+                selectedRecord      =   {selectedRecord}
+                setSelectedRecord   =   {setSelectedRecord}
+                handleEditRecord    =   {handleEditRecord}
             />
         </div>
     );
