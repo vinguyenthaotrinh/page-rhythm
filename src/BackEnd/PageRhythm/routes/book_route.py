@@ -174,3 +174,21 @@ def get_all_public_books_in_random_order():
 @book_blueprint.route("/get_all_book_pages/<int:book_id>/<int:page_capacity>/<int:maximum_line_length>", methods=["GET"])
 def get_all_book_pages(book_id, page_capacity, maximum_line_length):
     return jsonify(book_service.get_all_book_pages(book_id, page_capacity, maximum_line_length)), 200
+
+@book_blueprint.route("/visibility/toggle/<string:book_id>", methods=["PATCH"])
+@jwt_required()
+def toggle_book_visibility(book_id):
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"]
+    account_service = AccountService()
+    account = account_service.get_account_by_id(owner_id)
+
+    if account.account_type != AccountType.ADMIN:
+        return jsonify({"message": "You do not have permission to update book visibility"}), 403
+
+    result = book_service.toggle_book_visibility(book_id)
+
+    if result:
+        return jsonify({"message": "Book visibility updated successfully"}), 200
+    
+    return jsonify({"message": "Failed to update book visibility"}), 400

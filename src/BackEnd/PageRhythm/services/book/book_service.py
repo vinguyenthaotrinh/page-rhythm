@@ -42,7 +42,7 @@ class BookService:
     # 5. Update book information
     def update_book(self, book_id: int, book_data: dict) -> bool:
         existing_book = self.supabase.get_book_by_id(book_id)
-        
+
         if not existing_book:
             return False
 
@@ -110,3 +110,13 @@ class BookService:
             pages.append(current_page)
 
         return pages
+    
+    def toggle_book_visibility(self, book_id: int) -> bool:
+        existing_book = self.supabase.get_book_by_id(book_id)
+
+        if not existing_book:
+            return False
+
+        existing_book.hidden = not existing_book.hidden
+
+        return self.supabase.update_book(existing_book)
