@@ -36,9 +36,8 @@ export default class Server {
             if (response.ok) {
                 this.host = deployedUrl;
                 console.log("Server host set to deployed URL:", deployedUrl);
-            } else {
+            } else 
                 throw new Error("Deployed server health check failed");
-            }
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : String(error);
             this.host = localUrl;
@@ -66,9 +65,8 @@ export default class Server {
 
         try {
             const response = await fetch(url, options);
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Request failed with status: ${response.status}`);
-            }
             return await response.json();
         } catch (error) {
             this.logAndThrowError("Error sending request:", error);
@@ -221,9 +219,8 @@ export default class Server {
                 const data = await response.json();
                 console.log("Profile fetched successfully:", data);
                 return data;  // Returns the profile data
-            } else {
+            } else 
                 throw new Error("Profile fetch failed");
-            }
         } catch (error) {
             this.logAndThrowError("Error during profile fetch:", error);
         }
@@ -256,11 +253,10 @@ export default class Server {
                 body: JSON.stringify(body), // Send the updated profile data as the body
             });
     
-            if (response.ok) {
+            if (response.ok) 
                 console.log("Profile updated successfully.");
-            } else {
+            else 
                 throw new Error(`Profile update failed with status: ${response.status}`);
-            }
         } catch (error) {
             this.logAndThrowError("Error during profile update:", error);
         }
@@ -652,11 +648,10 @@ export default class Server {
         formData.append("summary", book.summary);
         formData.append("genre", book.genre);
         
-        if (book.content instanceof File) {
+        if (book.content instanceof File) 
             formData.append("content", book.content); // Attach the book's content file
-        } else {
+        else 
             throw new Error("Invalid content file. Ensure the content is a valid file.");
-        }
         
         if (book.image instanceof File) 
             formData.append("image", book.image); 

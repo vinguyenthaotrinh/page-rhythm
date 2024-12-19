@@ -89,57 +89,72 @@
 
 .record-item {
     display: flex;
+    flex-direction: column; /* Stack header and body vertically */
     background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    justify-content: space-between;
-    gap: 20px;                 /* Spacing between the two columns */
+    gap: 10px; /* Space between the header and body */
     transition: transform 0.3s ease;
-    align-items: center;       /* Vertically center the content */
 }
 
+/* Position the audio name at the top-left */
 .record-header {
     display: flex;
     justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
 }
 
 .audio-name {
     font-weight: bold;
-    margin-right: 10px;
+    margin: 0; /* Remove unnecessary margins */
+    font-size: 16px;
+    color: #333; /* Darker color for better contrast */
 }
 
+/* Record body layout */
 .record-body {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
+/* Left column layout for audio controls */
 .record-left-column {
     flex: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Center elements horizontally */
     justify-content: center;
+    gap: 10px; /* Space between progress bar and play button */
 }
 
+.audio-slider {
+    width: 80%; /* Reduce width slightly to center it */
+}
+
+/* Center the play button below the progress bar */
+.play-pause-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto; /* Center the button */
+}
+
+.play-pause-button:hover {
+    background-color: #45a049; /* Slightly darker on hover */
+}
+
+/* Right column layout for edit and delete buttons */
 .record-right-column {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.play-pause-button {
-    margin-bottom: 10px;
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.audio-slider {
-    width: 100%;
+    gap: 10px; /* Space between buttons */
 }

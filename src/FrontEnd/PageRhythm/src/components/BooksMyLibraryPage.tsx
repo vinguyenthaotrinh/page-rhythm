@@ -346,7 +346,7 @@ export default function BooksMyLibraryPage() {
     
     const handleBookUpload = async () => {
         if (selectedFile && bookName && authorName) {
-            // Prepare the book object
+            
             const book = {
                 title: bookName,
                 author: authorName,
@@ -362,7 +362,6 @@ export default function BooksMyLibraryPage() {
 
             await server.uploadBook(book);
 
-            // Update UI after successful upload
             console.log("Book uploaded successfully!");
 
             const renderedBook = {

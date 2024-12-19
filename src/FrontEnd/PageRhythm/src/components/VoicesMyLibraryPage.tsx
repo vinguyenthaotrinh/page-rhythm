@@ -372,12 +372,6 @@ export default function VoicesMyLibraryPage() {
                                                 setAudioTime(audioRefs.current[index].currentTime)
                                             }
                                         />
-                                        <button
-                                            className="play-pause-button"
-                                            onClick={() => handlePlayPause(index)}
-                                        >
-                                            {playingIndex === index ? "Pause" : "Play"}
-                                        </button>
                                         <input
                                             type="range"
                                             min="0"
@@ -386,6 +380,12 @@ export default function VoicesMyLibraryPage() {
                                             onChange={(event) => handleSeek(event, index)}
                                             className="audio-slider"
                                         />
+                                        <button
+                                            className="play-pause-button"
+                                            onClick={() => handlePlayPause(index)}
+                                        >
+                                            {playingIndex === index ? "Pause" : "Play"}
+                                        </button>
                                     </div>
 
                                     {/* Right Column */}
