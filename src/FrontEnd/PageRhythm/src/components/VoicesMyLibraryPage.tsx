@@ -113,6 +113,64 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
     );
 };
 
+interface EditSampleAudioFileOverlayProps {
+    showEditOverlay:                boolean;
+    setShowEditOverlay:             React.Dispatch<React.SetStateAction<boolean>>;
+    selectedRecord:                 any | null;
+    setSelectedRecord:              React.Dispatch<React.SetStateAction<any | null>>;
+    handleEditRecord:               (record: any) => void;
+}
+
+const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
+    showEditOverlay,
+    setShowEditOverlay,
+    selectedRecord,
+    setSelectedRecord,
+    handleEditRecord,
+}) => {
+    const [fileName, setFileName] = useState(selectedRecord?.file_name || "");
+    const [description, setDescription] = useState(selectedRecord?.description || "");
+
+    const handleEditClick = () => {
+        if (selectedRecord) {
+            handleEditRecord({
+                ...selectedRecord,
+                file_name: fileName,
+                description: description,
+            });
+        }
+    };
+
+    if (!showEditOverlay) return null;
+
+    return (
+        <div className="edit-overlay">
+            <div className="edit-overlay-content">
+                <h1 id="edit-overlay-title">Edit your sample audio file</h1>
+                <p>Please enter the updated file information</p>
+
+                <input
+                    type="text"
+                    placeholder="File Name"
+                    value={fileName}
+                    onChange={(e) => setFileName(e.target.value)}
+                />
+
+                <textarea
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <div className="edit-overlay-buttons">
+                    <button onClick={handleEditClick}>Save Changes</button>
+                    <button onClick={() => setShowEditOverlay(false)}>Close</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 function LoadingText() {
     return (
         <p
@@ -385,6 +443,14 @@ export default function VoicesMyLibraryPage() {
                 setDescription={setDescription}
                 handleFileSelect={handleFileSelect}
                 handleSampleAudioFileUpload={handleSampleAudioFileUpload}
+            />
+
+            <EditSampleAudioFileOverlay
+                showEditOverlay={showEditOverlay}
+                setShowEditOverlay={setShowEditOverlay}
+                selectedRecord={selectedRecord}
+                setSelectedRecord={setSelectedRecord}
+                handleEditRecord={handleEditRecord}
             />
         </div>
     );
