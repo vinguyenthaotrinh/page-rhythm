@@ -197,3 +197,36 @@
     background-color: #e74c3c;
     color: white;
 }
+
+/* Container for the slider and time labels */
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px; /* Space between the slider and play button */
+}
+
+/* Time labels (00:00, current time, duration) */
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px; /* Space between labels and slider */
+    font-size: 12px;
+    color: #333;
+    width: 100%;
+}
+
+.start-time, .current-time, .end-time {
+    text-align: center;
+}
+
+/* Center the current time below the slider */
+.current-time {
+    position: absolute;
+    bottom: -20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: #4CAF50;
+}

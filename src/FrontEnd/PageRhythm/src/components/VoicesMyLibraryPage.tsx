@@ -372,14 +372,33 @@ export default function VoicesMyLibraryPage() {
                                                 setAudioTime(audioRefs.current[index].currentTime)
                                             }
                                         />
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="100"
-                                            value={(audioTime / audioRefs.current[index]?.duration) * 100 || 0}
-                                            onChange={(event) => handleSeek(event, index)}
-                                            className="audio-slider"
-                                        />
+
+                                        <div className="slider-container">
+                                            <div className="time-labels">
+                                                <span className="start-time">00:00</span>
+                                                <span className="current-time">
+                                                    {new Date(audioTime * 1000).toISOString().substring(14, 19)}
+                                                </span>
+                                                <span className="end-time">
+                                                    {audioRefs.current[index]?.duration
+                                                        ? new Date(audioRefs.current[index].duration * 1000)
+                                                            .toISOString()
+                                                            .substring(14, 19)
+                                                        : "00:00"}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0"
+                                                max="100"
+                                                value={
+                                                    (audioTime / audioRefs.current[index]?.duration) * 100 || 0
+                                                }
+                                                onChange={(event) => handleSeek(event, index)}
+                                                className="audio-slider"
+                                            />
+                                        </div>
+                                        
                                         <button
                                             className="play-pause-button"
                                             onClick={() => handlePlayPause(index)}
