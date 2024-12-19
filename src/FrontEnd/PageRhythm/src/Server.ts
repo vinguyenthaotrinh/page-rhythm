@@ -795,11 +795,6 @@ export default class Server {
     
         const url = `${this.host}/sample_audio_file/uploaded_files`; 
         const sessionToken = this.findSessionToken(); // Get the session token (JWT)
-
-        const getFileExtension = (fileName: string): string => {
-            const extension = fileName.split('.').pop();
-            return extension ? extension : 'mpeg'; // Default to 'mpeg' for unknown extensions
-        }
     
         try {
             const response = await fetch(url, {
@@ -821,9 +816,11 @@ export default class Server {
             const finalResult = result.map((file: any) => ({
                 ...file,
                 content: file.content 
-                    ? `data:audio/${getFileExtension(file.file_name)};base64,${file.content}`
+                    ? `data:audio/${file.file_extension};base64,${file.content}`
                     : null,
             }));
+
+            console.log(finalResult);
     
             return finalResult; // Return the list of uploaded sample audio files
     
@@ -857,6 +854,7 @@ export default class Server {
                 file_name: record.file_name,
                 description: record.description,
                 content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
+                file_extension: record.content.type.split("/")[1], // Extract the file extension
             };
     
             // Send the POST request
