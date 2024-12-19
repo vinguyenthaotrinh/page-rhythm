@@ -126,7 +126,7 @@
     background-color: transparent;  /* Slightly different background for the headers */
     border-right: 1px solid transparent;  /* Border between columns */
     color: black;
-    font-family: 'Poppins-Regular', sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 .home-page-book-list-header:last-child {

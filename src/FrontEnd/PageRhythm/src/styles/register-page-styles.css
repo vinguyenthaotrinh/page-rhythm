@@ -11,7 +11,7 @@ html, body {
     background-color: #F6FFDE;
     padding: 0;
     margin: 0;
-    font-family: 'Poppins-Regular', sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
     min-height: 100vh;  /* Full viewport height */
     width: 100vw;       /* Full viewport width */
     display: flex;
@@ -37,7 +37,7 @@ html, body {
 #register-page-title {
     font-size: 24px;        /* Font size for the title */
     font-weight: bold;
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #333;
     margin: 0;              /* Remove default margin */
 }
@@ -238,7 +238,7 @@ html, body {
 #register-page-login-title {
     font-size: 16px;          /* Match the text size with "Sign Up" */
     font-weight: normal;      /* Ensure consistency with the link */
-    font-family: 'Poppins-Regular', sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
     color: #333;
     margin: 0;                /* Remove default margin */
 }
@@ -246,7 +246,7 @@ html, body {
 #register-page-login-link {
     font-size: 16px;
     font-weight: bold;          /* Emphasize the link */
-    font-family: 'Poppins-Bold', sans-serif;
+    font-family: "Poppins-Bold", sans-serif;
     color: #265073;           /* Green for the link */
     text-decoration: none;      /* Remove underline */
     cursor: pointer;
@@ -273,7 +273,7 @@ html, body {
 
 /* Optional: Style the label text */
 .register-page-terms-label {
-    font-family: 'Poppins-Regular', sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
     font-size: 16px;
     color: #333;
     display: flex;

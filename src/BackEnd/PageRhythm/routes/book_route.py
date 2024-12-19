@@ -1,8 +1,10 @@
 import json
 import base64
 import datetime
+from models.account import AccountType
 from flask import Blueprint, jsonify, request
 from services.book.book_service import BookService
+from services.account.account_service import AccountService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 book_blueprint = Blueprint("book", __name__)
@@ -89,7 +91,7 @@ def get_my_lib():
 def update_book(book_id):
     current_identity = json.loads(get_jwt_identity())
     owner_id = current_identity["account_id"]
-
+    
     if not book_service.check_ownership(book_id, owner_id):
         return jsonify({"message": "You do not have permission to update this book."}), 403
 
@@ -138,8 +140,9 @@ def update_book(book_id):
 def delete_book(book_id):
     current_identity = json.loads(get_jwt_identity())
     owner_id = current_identity["account_id"]  
+    account = AccountService().get_account_by_id(owner_id)
     
-    if not book_service.check_ownership(book_id, owner_id):
+    if (not book_service.check_ownership(book_id, owner_id)) and (account.account_type != AccountType.ADMIN):
         return jsonify({"message": "You do not have permission to delete this book"}), 403
 
     result = book_service.delete_book(book_id)

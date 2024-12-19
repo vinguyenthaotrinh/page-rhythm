@@ -1,5 +1,6 @@
 from services.supabase_client_service import SupabaseClientService
 from models.book_rating import BookRating
+from typing import Optional
 
 class SupabaseBookRatingAPIService:
 
@@ -14,6 +15,7 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False
+        return False
 
     # 2. Calculate average rating for a book
     def calculate_average_rating(self, book_id: int) -> float:
@@ -23,6 +25,7 @@ class SupabaseBookRatingAPIService:
             return sum(ratings) / len(ratings) if ratings else 0.0
         except Exception as e:
             return 0.0
+        return 0.0
 
     # 3. Get all ratings for a specific book
     def get_book_ratings(self, book_id: int) -> list:
@@ -31,9 +34,10 @@ class SupabaseBookRatingAPIService:
             return response.data if response.data else []
         except Exception as e:
             return []
+        return []
 
     # 4. Get a specific user's rating for a specific book
-    def get_user_rating(self, user_id: int, book_id: int) -> dict:
+    def get_user_rating(self, user_id: int, book_id: int) -> Optional[dict]:
         try:
             response = self.client.table("BookRating").select("*") \
                                    .eq("user_id", user_id) \
@@ -41,6 +45,7 @@ class SupabaseBookRatingAPIService:
             return response.data[0] if response.data else None
         except Exception as e:
             return None
+        return None
 
     # 5. Update average rating for a book
     def update_book_rating(self, book_id: int, average_rating: float) -> bool:
@@ -49,6 +54,7 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False
+        return False
         
     # 6. Update an existing rating
     def update_rating(self, rating: BookRating) -> bool:
@@ -62,6 +68,7 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False
+        return False
 
     # 7. Delete a rating
     def delete_rating(self, user_id: int, book_id: int) -> bool:
@@ -72,6 +79,7 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False
+        return False
         
     def delete_all_ratings_for_book(self, book_id: int) -> bool:
         try:
@@ -79,3 +87,4 @@ class SupabaseBookRatingAPIService:
             return response.data 
         except Exception as e:
             return False    
+        return False

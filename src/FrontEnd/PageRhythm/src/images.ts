@@ -11,9 +11,11 @@ import SEARCH_ICON from "./assets/images/search-icon.png";
 import SLIDERS_ICON from "./assets/images/sliders-icon.png";
 import EYE_OFF_ICON from "./assets/images/eye-off-icon.png";
 import CALENDAR_ICON from "./assets/images/calendar-icon.png";
+import EYE_OPEN_ICON from "./assets/images/eye-open-icon.png";
 import RED_TRASH_ICON from "./assets/images/red-trash-icon.png";
 import LEFT_ARROW_ICON from "./assets/images/left-arrow-icon.png";
 import EMPTY_STAR_ICON from "./assets/images/empty-star-icon.png";
+import EYE_CLOSED_ICON from "./assets/images/eye-closed-icon.png";
 import FILLED_STAR_ICON from "./assets/images/filled-star-icon.png";
 import WHITE_TRASH_ICON from "./assets/images/white-trash-icon.png";
 import PLAY_BUTTON_ICON from "./assets/images/play-button-icon.png";
@@ -56,6 +58,8 @@ const IMAGES = {
     WHITE_PENCIL_ICON,
     PLAY_BUTTON_ICON,
     PAUSE_BUTTON_ICON,
+    EYE_CLOSED_ICON,
+    EYE_OPEN_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) 
