@@ -158,3 +158,42 @@
     align-items: center;
     gap: 10px; /* Space between buttons */
 }
+
+/* Common Styles for Buttons */
+.record-item-edit-button,
+.record-item-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures space between text and icon */
+    gap: 5px; /* Space between text and icon */
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    max-width: 120px; /* Set a maximum width */
+    width: 100%; /* Ensure both buttons stretch equally */
+}
+
+/* Edit Button Specific Styles */
+.record-item-edit-button {
+    background-color: #265073;
+    color: white;
+    border: none;
+}
+
+.record-item-edit-button:hover {
+    background-color: #0f4ba3;
+}
+
+/* Delete Button Specific Styles */
+.record-item-delete-button {
+    background-color: white;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+}
+
+.record-item-delete-button:hover {
+    background-color: #e74c3c;
+    color: white;
+}

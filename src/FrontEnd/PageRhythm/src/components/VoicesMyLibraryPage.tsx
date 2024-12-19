@@ -391,22 +391,23 @@ export default function VoicesMyLibraryPage() {
                                     {/* Right Column */}
                                     <div className="record-right-column">
                                         <button
-                                            className="book-item-edit-button"
+                                            className="record-item-edit-button"
                                             onClick={() => handleEditClick(record)}
                                         >
                                             Edit
                                             <img
                                                 src={IMAGES.WHITE_PENCIL_ICON}
                                                 alt="Edit Icon"
-                                                className="book-item-button-icon"
+                                                className="record-item-button-icon"
                                             />
                                         </button>
+
                                         <button
-                                            className="book-item-delete-button"
+                                            className="record-item-delete-button"
                                             onClick={() => handleDeleteClick(record)}
                                         >
                                             Delete
-                                            <div className="book-item-button-icon">
+                                            <div className="record-item-button-icon">
                                                 <img
                                                     src={IMAGES.RED_TRASH_ICON}
                                                     alt="Delete Icon"
