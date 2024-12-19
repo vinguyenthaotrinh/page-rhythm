@@ -32,9 +32,9 @@ class SupabaseCommentAPIService:
             return False
         return False
     
-    def insert_comment(self, comment: Comment) -> bool:
+    def insert_comment(self, comment_JSON: dict) -> bool:
         try:
-            response = self.client.table("Comment").insert(comment.to_serializable_JSON()).execute()
+            response = self.client.table("Comment").insert(comment_JSON()).execute()
             return True
         except Exception as e:
             print(e)

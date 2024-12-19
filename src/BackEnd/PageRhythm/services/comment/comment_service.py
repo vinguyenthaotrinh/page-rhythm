@@ -29,8 +29,10 @@ class CommentService:
             replied_comment_id  =   replied_comment_id,
             create_time         =   datetime.datetime.now()
         )
+
+        comment_JSON = comment.to_serializable_JSON().pop("comment_id")
       
-        return self.supabase.insert_comment(comment)
+        return self.supabase.insert_comment(comment_JSON)
     
     def get_all_comments(self, book_id: int) -> list[Comment]:
         return self.supabase.get_all_comments(book_id)

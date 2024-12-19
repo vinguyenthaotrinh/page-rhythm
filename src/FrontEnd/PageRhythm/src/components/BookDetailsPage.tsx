@@ -66,7 +66,7 @@ export default function BookDetailsPage() {
 
                 const server = await Server.getInstance();  // Get the server instance
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
-                setBook(book);  // Set the book details in state
+                setBook(book);                              // Set the book details in state
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
@@ -114,7 +114,13 @@ export default function BookDetailsPage() {
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 
     if (!book) {
-        return <div>Loading...</div>; // Placeholder while waiting for data
+        return (
+            <div
+                id = "book-details-page-loading"
+            >
+                Loading...
+            </div>
+        );
     }
 
     // Recursively render comments and their replies

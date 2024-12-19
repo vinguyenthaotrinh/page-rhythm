@@ -42,25 +42,25 @@ const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
 };
 
 interface AddBookOverlayProps {
-    showAddOverlay: boolean;
-    setShowAddOverlay: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedFile: File | null;
-    setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
-    bookName: string;
-    setBookName: React.Dispatch<React.SetStateAction<string>>;
-    authorName: string;
-    setAuthorName: React.Dispatch<React.SetStateAction<string>>;
-    releaseDate: string | null;
-    setReleaseDate: React.Dispatch<React.SetStateAction<string | null>>;
-    genre: string | null;
-    setGenre: React.Dispatch<React.SetStateAction<string | null>>;
-    summary: string;
-    setSummary: React.Dispatch<React.SetStateAction<string>>;
-    selectedCoverImage: File | null;
-    setSelectedCoverImage: React.Dispatch<React.SetStateAction<File | null>>;
-    handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    showAddOverlay:         boolean;
+    setShowAddOverlay:      React.Dispatch<React.SetStateAction<boolean>>;
+    selectedFile:           File | null;
+    setSelectedFile:        React.Dispatch<React.SetStateAction<File | null>>;
+    bookName:               string;
+    setBookName:            React.Dispatch<React.SetStateAction<string>>;
+    authorName:             string;
+    setAuthorName:          React.Dispatch<React.SetStateAction<string>>;
+    releaseDate:            string | null;
+    setReleaseDate:         React.Dispatch<React.SetStateAction<string | null>>;
+    genre:                  string | null;
+    setGenre:               React.Dispatch<React.SetStateAction<string | null>>;
+    summary:                string;
+    setSummary:             React.Dispatch<React.SetStateAction<string>>;
+    selectedCoverImage:     File | null;
+    setSelectedCoverImage:  React.Dispatch<React.SetStateAction<File | null>>;
+    handleFileSelect:       (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleCoverImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleBookUpload: () => void;
+    handleBookUpload:       () => void;
 }
 
 const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
@@ -171,11 +171,11 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
 };
 
 interface EditBookOverlayProps {
-    showEditOverlay: boolean;
+    showEditOverlay:    boolean;
     setShowEditOverlay: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedBook: any | null;
-    setSelectedBook: React.Dispatch<React.SetStateAction<any | null>>;
-    handleEditBook: (updatedBook: any) => void;
+    selectedBook:       any | null;
+    setSelectedBook:    React.Dispatch<React.SetStateAction<any | null>>;
+    handleEditBook:     (updatedBook: any) => void;
 }
 
 const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
@@ -185,12 +185,12 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
     setSelectedBook,
     handleEditBook,
 }) => {
-    const [bookName, setBookName] = useState(selectedBook?.title || "");
-    const [authorName, setAuthorName] = useState(selectedBook?.author || "");
-    const [releaseDate, setReleaseDate] = useState<string | null>(selectedBook?.release_date || "");
-    const [genre, setGenre] = useState<string | null>(selectedBook?.genre || "");
-    const [summary, setSummary] = useState(selectedBook?.summary || "");
-    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null); // Add cover image upload if necessary
+    const [bookName, setBookName]                       = useState(selectedBook?.title || "");
+    const [authorName, setAuthorName]                   = useState(selectedBook?.author || "");
+    const [releaseDate, setReleaseDate]                 = useState<string | null>(selectedBook?.release_date || "");
+    const [genre, setGenre]                             = useState<string | null>(selectedBook?.genre || "");
+    const [summary, setSummary]                         = useState(selectedBook?.summary || "");
+    const [selectedCoverImage, setSelectedCoverImage]   = useState<File | null>(null); // Add cover image upload if necessary
 
     useEffect(() => {
         // Reset form values when selectedBook changes
@@ -284,6 +284,16 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
     );
 };
 
+function LoadingText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            Loading...
+        </p>
+    );
+}
+
 export default function BooksMyLibraryPage() {
     const [books, setBooks] = useState<any[]>([]);                                      // Books data state
     const [loading, setLoading] = useState(true);                                       // Loading state
@@ -327,7 +337,6 @@ export default function BooksMyLibraryPage() {
         if (file) {
             setSelectedCoverImage(file); // Track the selected cover image
     
-            // Optionally, create a preview of the image
             const reader = new FileReader();
             reader.onloadend = () => {
             };
@@ -417,7 +426,7 @@ export default function BooksMyLibraryPage() {
     const handleEditBook = async (updatedBook: any) => {
         try {
             const server = await Server.getInstance();
-            await server.updateBook(updatedBook); // Assuming `updateBook` is a method in your server class
+            await server.updateBook(updatedBook);
             setBooks(books.map((book) =>
                 book.book_id === updatedBook.book_id ? updatedBook : book
             )); // Update book list with the new details
@@ -448,9 +457,7 @@ export default function BooksMyLibraryPage() {
 
                     {/* Scrollable section for books */}
                     <div id="books-my-library-page-books-list-container">
-                        {loading ? (
-                            <p>Loading...</p>
-                        ) : (
+                        {loading ? (<LoadingText />) : (
                             <div id="books-my-library-page-books-grid">
                                 {books.map((book, index) => (
                                     <div key={index} className="books-my-library-page-book-item">

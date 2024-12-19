@@ -40,16 +40,16 @@ const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
 };
 
 interface AddSampleAudioFileOverlayProps {
-    showAddOverlay: boolean;
-    setShowAddOverlay: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedFile: File | null;
-    setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
-    fileName: string;
-    setFileName: React.Dispatch<React.SetStateAction<string>>;
-    description: string;
-    setDescription: React.Dispatch<React.SetStateAction<string>>;
-    handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleSampleAudioFileUpload: () => void;
+    showAddOverlay:                 boolean;
+    setShowAddOverlay:              React.Dispatch<React.SetStateAction<boolean>>;
+    selectedFile:                   File | null;
+    setSelectedFile:                React.Dispatch<React.SetStateAction<File | null>>;
+    fileName:                       string;
+    setFileName:                    React.Dispatch<React.SetStateAction<string>>;
+    description:                    string;
+    setDescription:                 React.Dispatch<React.SetStateAction<string>>;
+    handleFileSelect:               (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSampleAudioFileUpload:    () => void;
 }
 
 const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
@@ -112,6 +112,16 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
         </div>
     );
 };
+
+function LoadingText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            Loading...
+        </p>
+    );
+}
 
 export default function VoicesMyLibraryPage() {
     const [showAddOverlay, setShowAddOverlay] = useState(false);            // State for Add Overlay
@@ -302,7 +312,7 @@ export default function VoicesMyLibraryPage() {
                                             }
                                         />
                                         <button
-                                            className="play-pause-btn"
+                                            className="play-pause-button"
                                             onClick={() => handlePlayPause(index)}
                                         >
                                             {playingIndex === index ? "Pause" : "Play"}
