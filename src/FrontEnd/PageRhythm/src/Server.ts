@@ -196,21 +196,25 @@ export default class Server {
         }
     }
 
+    private getSimpleHeadersWithSessionToken(): Record<string, string> {
+        const sessionToken = this.getSessionToken();
+
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+        };
+    }
+
     public async getProfile(): Promise<any> {
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
         const url = `${this.host}/account/profile`;
 
-        const sessionToken = this.getSessionToken();
-
         try {
             const response = await fetch(url, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
 
             if (response.ok) {
@@ -231,8 +235,6 @@ export default class Server {
     
         const url = `${this.host}/account/update_account_profile_information`;
     
-        const sessionToken = this.getSessionToken();
-    
         const body = {
             full_name: profile.fullName,
             email: profile.email,
@@ -250,10 +252,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send the updated profile data as the body
             });
     
@@ -272,9 +271,7 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `${this.host}/authentication/change_password`;  
-    
-        const sessionToken = this.getSessionToken();
-    
+
         const body = {
             old_password: passwords.currentPassword,
             new_password: passwords.newPassword,
@@ -284,16 +281,12 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send the password data as the body
             });
     
             if (response.ok) {
                 console.log("Password changed successfully.");
-                // You can add further success handling here, e.g., notify the user.
             } else {
                 const data = await response.json();
                 console.error("Error changing password:", data.message);
@@ -311,15 +304,10 @@ export default class Server {
     
         const url = `${this.host}/book/genres`;
     
-        const sessionToken = this.getSessionToken();
-    
         try {
             const response = await fetch(url, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}` 
-                }
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -346,15 +334,10 @@ export default class Server {
         if (genre) 
             url.searchParams.append('genre', genre);
     
-        const sessionToken = this.getSessionToken();
-    
         try {
             const response = await fetch(url.toString(), {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Include session token if required for authorization
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -373,15 +356,10 @@ export default class Server {
     
         const url = `${this.host}/book/${bookID}`; 
     
-        const sessionToken = this.getSessionToken();
-    
         try {
             const response = await fetch(url, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`  // Include the session token if required for authorization
-                }
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -400,16 +378,11 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `/book_rating/${bookID}`;
-        
-        const sessionToken = this.findSessionToken();
     
         try {
             const response = await fetch(`${this.host}${url}`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Ensure the token is included
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {
@@ -432,15 +405,10 @@ export default class Server {
     
         const url = `${this.host}/book_rating/${bookID}/my_rating`; 
     
-        const sessionToken = this.getSessionToken();
-    
         try {
             const response = await fetch(url, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}` // Include the session token if required for authorization
-                }
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -460,8 +428,6 @@ export default class Server {
     
         const url = `${this.host}/book_rating/create`; 
     
-        const sessionToken = this.getSessionToken();
-    
         const body = {
             book_id: bookID,
             rating: rating,
@@ -470,10 +436,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send the rating data as the body
             });
     
@@ -544,8 +507,6 @@ export default class Server {
     
         const url = `${this.host}/comment/create`;
     
-        const sessionToken = this.findSessionToken();
-    
         const body = {
             book_id: bookID,        // The book ID the comment is associated with
             content: content,       // The content of the comment
@@ -554,10 +515,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send the comment data as the body
             });
     
@@ -581,8 +539,6 @@ export default class Server {
     
         const url = `${this.host}/comment/reply`; 
     
-        const sessionToken = this.findSessionToken();
-    
         const body = {
             book_id: bookID,                        // The book ID associated with the reply
             content: content,                       // The content of the reply
@@ -592,10 +548,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Include JWT token for authorization
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send the reply data as the body
             });
     
@@ -645,15 +598,10 @@ export default class Server {
     
         const url = `${this.host}/book/mylib`;
     
-        const sessionToken = this.findSessionToken();
-    
         try {
             const response = await fetch(url, {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Include the session token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -671,16 +619,11 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `/book/${bookID}`;
-        
-        const sessionToken = this.findSessionToken();
     
         try {
             const response = await fetch(`${this.host}${url}`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Ensure the token is included
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {
@@ -833,8 +776,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/sample_audio_file/upload`; 
-        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+        const url = `${this.host}/sample_audio_file/upload`;
     
         const fileToBase64 = (file: File): Promise<string> => {
             return new Promise((resolve, reject) => {
@@ -860,10 +802,7 @@ export default class Server {
             // Send the POST request
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Attach the JWT token
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(payload),
             });
     
@@ -884,16 +823,12 @@ export default class Server {
         if (!this.host)
             throw new Error("Host is not initialized.");
         
-        const url = `${this.host}/sample_audio_file/delete`; // API endpoint for deleting a file
-        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
+        const url = `${this.host}/sample_audio_file/delete`;
     
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}` // Pass the JWT token in the Authorization header
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify({
                     sample_audio_file_id: fileID // Include the file ID in the request body
                 }),
@@ -917,12 +852,10 @@ export default class Server {
     }
 
     public async updateSampleAudioFile(record: any): Promise<void> {
-        if (!this.host) {
+        if (!this.host) 
             throw new Error("Host is not initialized.");
-        }
     
         const url = `${this.host}/sample_audio_file/update/meta_information`;
-        const sessionToken = this.findSessionToken();
     
         const body = {
             sample_audio_file_id: record.sample_audio_file_id,
@@ -933,10 +866,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionToken}`, // Add JWT authorization header
-                },
+                headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body), // Send JSON data
             });
     
