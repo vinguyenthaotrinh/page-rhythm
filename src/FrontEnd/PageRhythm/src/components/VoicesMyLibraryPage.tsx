@@ -357,7 +357,7 @@ export default function VoicesMyLibraryPage() {
                                 className="record-item"
                             >
                                 <div className="record-header">
-                                    <span className="audio-name">{record.file_name}</span>
+                                    <span className="sample-audio-file-name">{record.file_name}</span>
                                 </div>
 
                                 <div className="record-body">
@@ -371,6 +371,17 @@ export default function VoicesMyLibraryPage() {
                                             onTimeUpdate={() =>
                                                 setAudioTime(audioRefs.current[index].currentTime)
                                             }
+                                        />
+
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={
+                                                (audioTime / audioRefs.current[index]?.duration) * 100 || 0
+                                            }
+                                            onChange={(event) => handleSeek(event, index)}
+                                            className="audio-slider"
                                         />
 
                                         <div className="slider-container">
@@ -387,23 +398,18 @@ export default function VoicesMyLibraryPage() {
                                                         : "00:00"}
                                                 </span>
                                             </div>
-                                            <input
-                                                type="range"
-                                                min="0"
-                                                max="100"
-                                                value={
-                                                    (audioTime / audioRefs.current[index]?.duration) * 100 || 0
-                                                }
-                                                onChange={(event) => handleSeek(event, index)}
-                                                className="audio-slider"
-                                            />
+                                            
                                         </div>
                                         
                                         <button
                                             className="play-pause-button"
                                             onClick={() => handlePlayPause(index)}
                                         >
-                                            {playingIndex === index ? "Pause" : "Play"}
+                                            <img
+                                                src={playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}
+                                                alt={playingIndex === index ? "Pause Icon" : "Play Icon"}
+                                                className="play-pause-icon"
+                                            />
                                         </button>
                                     </div>
 
