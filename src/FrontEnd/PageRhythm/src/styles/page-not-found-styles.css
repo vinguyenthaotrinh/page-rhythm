@@ -1,0 +1,16 @@
+@import url("fonts.css");
+
+.page-not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.page-not-found-content {
+    color: black;
+    text-align: center;
+    font-family: "Poppins-Regular", sans-serif;
+}

@@ -17,7 +17,7 @@ class SampleAudioFilesService:
     def check_ownership(self, sample_audio_file_id: int, owner_id: int) -> bool:
         return self.supabase.check_ownership(sample_audio_file_id, owner_id)
 
-    def add_new_sample_audio_file(self, file_name: str, description: str, owner_id: int, content: bytes) -> bool:
+    def add_new_sample_audio_file(self, file_name: str, description: str, owner_id: int, content: bytes, file_extension: str) -> bool:
 
         sample_audio_file = SampleAudioFile(
             sample_audio_file_id    =   self.get_number_of_sample_audio_files() + 1,
@@ -25,7 +25,8 @@ class SampleAudioFilesService:
             description             =   description,
             owner_id                =   owner_id,
             content                 =   content,
-            upload_time             =   datetime.datetime.now()
+            upload_time             =   datetime.datetime.now(),
+            file_extension          =   file_extension
         )
         
         return self.supabase.insert_sample_audio_file(sample_audio_file)

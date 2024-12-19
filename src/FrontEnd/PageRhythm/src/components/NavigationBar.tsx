@@ -89,7 +89,7 @@ export default function NavigationBar() {
                             <NavLink to="/my-library-page">My Library</NavLink>
                         </li>
                         {
-                            accountType === "admin" && (
+                            (accountType === "admin") && (
                                 <li>
                                     <NavLink to="/admin-page">Admin</NavLink>
                                 </li>
