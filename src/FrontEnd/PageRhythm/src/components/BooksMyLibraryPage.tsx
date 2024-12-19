@@ -464,6 +464,7 @@ export default function BooksMyLibraryPage() {
                                             <img
                                                 src={IMAGES.decodeBookCoverImage(book.image)}
                                                 alt={book.title}
+                                                onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
                                                 className="book-item-cover"
                                             />
                                         </div>
