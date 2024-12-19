@@ -40,16 +40,16 @@ const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
 };
 
 interface AddSampleAudioFileOverlayProps {
-    showAddOverlay: boolean;
-    setShowAddOverlay: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedFile: File | null;
-    setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
-    fileName: string;
-    setFileName: React.Dispatch<React.SetStateAction<string>>;
-    description: string;
-    setDescription: React.Dispatch<React.SetStateAction<string>>;
-    handleFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleSampleAudioFileUpload: () => void;
+    showAddOverlay:                 boolean;
+    setShowAddOverlay:              React.Dispatch<React.SetStateAction<boolean>>;
+    selectedFile:                   File | null;
+    setSelectedFile:                React.Dispatch<React.SetStateAction<File | null>>;
+    fileName:                       string;
+    setFileName:                    React.Dispatch<React.SetStateAction<string>>;
+    description:                    string;
+    setDescription:                 React.Dispatch<React.SetStateAction<string>>;
+    handleFileSelect:               (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSampleAudioFileUpload:    () => void;
 }
 
 const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
@@ -113,19 +113,87 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
     );
 };
 
+interface EditSampleAudioFileOverlayProps {
+    showEditOverlay:                boolean;
+    setShowEditOverlay:             React.Dispatch<React.SetStateAction<boolean>>;
+    selectedRecord:                 any | null;
+    setSelectedRecord:              React.Dispatch<React.SetStateAction<any | null>>;
+    handleEditRecord:               (record: any) => void;
+}
+
+const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
+    showEditOverlay,
+    setShowEditOverlay,
+    selectedRecord,
+    setSelectedRecord,
+    handleEditRecord,
+}) => {
+    const [fileName, setFileName] = useState(selectedRecord?.file_name || "");
+    const [description, setDescription] = useState(selectedRecord?.description || "");
+
+    const handleEditClick = () => {
+        if (selectedRecord) {
+            handleEditRecord({
+                ...selectedRecord,
+                file_name: fileName,
+                description: description,
+            });
+        }
+    };
+
+    if (!showEditOverlay) return null;
+
+    return (
+        <div className="add-overlay">
+            <div className="add-overlay-content">
+                <h1 id="add-overlay-title">Edit your sample audio file</h1>
+                <p>Please enter the updated file information</p>
+
+                <input
+                    type="text"
+                    placeholder="File Name"
+                    value={fileName}
+                    onChange={(e) => setFileName(e.target.value)}
+                />
+
+                <textarea
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <div className="add-overlay-buttons">
+                    <button onClick={handleEditClick}>Save Changes</button>
+                    <button onClick={() => setShowEditOverlay(false)}>Close</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+function LoadingText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            Loading...
+        </p>
+    );
+}
+
 export default function VoicesMyLibraryPage() {
-    const [showAddOverlay, setShowAddOverlay] = useState(false);            // State for Add Overlay
-    const [records, setRecords] = useState<any[]>([]);                      // Records will be fetched
-    const [playingIndex, setPlayingIndex] = useState<number | null>(null);  // Track currently playing audio
-    const [audioTime, setAudioTime] = useState(0);                          // Track current time of audio
-    const audioRefs = useRef<Record<number, HTMLAudioElement>>({});         // Refs for each audio file
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [fileName, setFileName] = useState("");
-    const [description, setDescription] = useState("");
-    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
-    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);
-    const [selectedRecord, setSelectedRecord] = useState<any | null>(null);
-    const [showEditOverlay, setShowEditOverlay] = useState(false);
+    const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
+    const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
+    const [playingIndex, setPlayingIndex]                           = useState<number | null>(null);                    // Track currently playing audio
+    const [audioTime, setAudioTime]                                 = useState(0);                                      // Track current time of audio
+    const audioRefs                                                 = useRef<Record<number, HTMLAudioElement>>({});     // Refs for each audio file
+    const [selectedFile, setSelectedFile]                           = useState<File | null>(null);
+    const [fileName, setFileName]                                   = useState("");
+    const [description, setDescription]                             = useState("");
+    const [recordToDelete, setRecordToDelete]                       = useState<any | null>(null);
+    const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);
+    const [selectedRecord, setSelectedRecord]                       = useState<any | null>(null);
+    const [showEditOverlay, setShowEditOverlay]                     = useState(false);
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
@@ -246,13 +314,16 @@ export default function VoicesMyLibraryPage() {
     const handleEditRecord = async (updatedRecord: any) => {
         try {
             const server = await Server.getInstance();
-            //...
+
+            await server.updateSampleAudioFile(updatedRecord);
+            
             setRecords((previousRecords) => {
                 const updatedRecords = [...previousRecords];
                 const index = updatedRecords.findIndex((record) => record.id === updatedRecord.id);
                 updatedRecords[index] = updatedRecord;
                 return updatedRecords;
             });
+            
             setSelectedRecord(null);
             setShowEditOverlay(false);
         } catch (error) {
@@ -301,41 +372,61 @@ export default function VoicesMyLibraryPage() {
                                                 setAudioTime(audioRefs.current[index].currentTime)
                                             }
                                         />
+
+                                        <div className="slider-container">
+                                            <div className="time-labels">
+                                                <span className="start-time">00:00</span>
+                                                <span className="current-time">
+                                                    {new Date(audioTime * 1000).toISOString().substring(14, 19)}
+                                                </span>
+                                                <span className="end-time">
+                                                    {audioRefs.current[index]?.duration
+                                                        ? new Date(audioRefs.current[index].duration * 1000)
+                                                            .toISOString()
+                                                            .substring(14, 19)
+                                                        : "00:00"}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0"
+                                                max="100"
+                                                value={
+                                                    (audioTime / audioRefs.current[index]?.duration) * 100 || 0
+                                                }
+                                                onChange={(event) => handleSeek(event, index)}
+                                                className="audio-slider"
+                                            />
+                                        </div>
+                                        
                                         <button
-                                            className="play-pause-btn"
+                                            className="play-pause-button"
                                             onClick={() => handlePlayPause(index)}
                                         >
                                             {playingIndex === index ? "Pause" : "Play"}
                                         </button>
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="100"
-                                            value={(audioTime / audioRefs.current[index]?.duration) * 100 || 0}
-                                            onChange={(event) => handleSeek(event, index)}
-                                            className="audio-slider"
-                                        />
                                     </div>
 
                                     {/* Right Column */}
                                     <div className="record-right-column">
                                         <button
-                                            className="book-item-edit-button"
+                                            className="record-item-edit-button"
                                             onClick={() => handleEditClick(record)}
                                         >
                                             Edit
                                             <img
                                                 src={IMAGES.WHITE_PENCIL_ICON}
                                                 alt="Edit Icon"
-                                                className="book-item-button-icon"
+                                                className="record-item-button-icon"
                                             />
                                         </button>
+
                                         <button
-                                            className="book-item-delete-button"
+                                            className="record-item-delete-button"
                                             onClick={() => handleDeleteClick(record)}
                                         >
                                             Delete
-                                            <div className="book-item-button-icon">
+                                            <div className="record-item-button-icon">
                                                 <img
                                                     src={IMAGES.RED_TRASH_ICON}
                                                     alt="Delete Icon"
@@ -356,25 +447,32 @@ export default function VoicesMyLibraryPage() {
                 </div>
             </div>
 
-            {/* Confirmation Box */}
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
-                    onConfirm={handleConfirmDelete}
-                    onCancel={handleCancelDelete}
+                    onConfirm   =   {handleConfirmDelete}
+                    onCancel    =   {handleCancelDelete}
                 />
             )}
 
             <AddSampleAudioFileOverlay
-                showAddOverlay={showAddOverlay}
-                setShowAddOverlay={setShowAddOverlay}
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
-                fileName={fileName}
-                setFileName={setFileName}
-                description={description}
-                setDescription={setDescription}
-                handleFileSelect={handleFileSelect}
-                handleSampleAudioFileUpload={handleSampleAudioFileUpload}
+                showAddOverlay              =   {showAddOverlay}
+                setShowAddOverlay           =   {setShowAddOverlay}
+                selectedFile                =   {selectedFile}
+                setSelectedFile             =   {setSelectedFile}
+                fileName                    =   {fileName}
+                setFileName                 =   {setFileName}
+                description                 =   {description}
+                setDescription              =   {setDescription}
+                handleFileSelect            =   {handleFileSelect}
+                handleSampleAudioFileUpload =   {handleSampleAudioFileUpload}
+            />
+
+            <EditSampleAudioFileOverlay
+                showEditOverlay     =   {showEditOverlay}
+                setShowEditOverlay  =   {setShowEditOverlay}
+                selectedRecord      =   {selectedRecord}
+                setSelectedRecord   =   {setSelectedRecord}
+                handleEditRecord    =   {handleEditRecord}
             />
         </div>
     );
