@@ -28,8 +28,10 @@ class SampleAudioFilesService:
             upload_time             =   datetime.datetime.now(),
             file_extension          =   file_extension
         )
+
+        sample_audio_file_JSON = sample_audio_file.to_serializable_JSON().pop("sample_audio_file_id")
         
-        return self.supabase.insert_sample_audio_file(sample_audio_file)
+        return self.supabase.insert_sample_audio_file(sample_audio_file_JSON)
     
     def delete_sample_audio_file(self, sample_audio_file_id: int) -> bool:
         return self.supabase.delete_sample_audio_file(sample_audio_file_id)

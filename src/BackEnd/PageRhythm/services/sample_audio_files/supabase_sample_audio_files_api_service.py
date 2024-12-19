@@ -24,9 +24,9 @@ class SupabaseSampleAudioFilesAPIService:
             return None
         return None
     
-    def insert_sample_audio_file(self, sample_audio_file: SampleAudioFile) -> bool:
+    def insert_sample_audio_file(self, sample_audio_file_JSON: dict) -> bool:
         try:
-            response = self.client.table('SampleAudioFile').insert(sample_audio_file.to_serializable_JSON()).execute()
+            response = self.client.table('SampleAudioFile').insert(sample_audio_file_JSON).execute()
             return True
         except Exception as e:
             print(e)

@@ -6,9 +6,9 @@ class SupabaseAuthenticationAPIService:
     def __init__(self):
         self.client = SupabaseClientService()
 
-    def register_account(self, account: Account) -> bool:
+    def register_account(self, account_JSON: dict) -> bool:
         try:
-            response = self.client.table("Account").insert(account.to_serializable_JSON()).execute()
+            response = self.client.table("Account").insert(account_JSON).execute()
             return True
         except Exception as e:
             print(e)
