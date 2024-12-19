@@ -254,6 +254,7 @@ export default function BooksAdminPage() {
                                             <img
                                                 src={IMAGES.decodeBookCoverImage(book.image)}
                                                 alt={book.title}
+                                                onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
                                                 className="book-item-cover"
                                             />
                                         </div>
@@ -306,8 +307,8 @@ export default function BooksAdminPage() {
             {/* Confirmation Box */}
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
-                    onConfirm={handleConfirmDelete}
-                    onCancel={handleCancelDelete}
+                    onConfirm   =   {handleConfirmDelete}
+                    onCancel    =   {handleCancelDelete}
                 />
             )}
 

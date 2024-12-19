@@ -47,7 +47,8 @@ def create_book():
         "content": content,
         "image": image_data,
         "book_rating": 0.0,
-        "released_date": datetime.datetime.today().strftime("%Y-%m-%d")
+        "released_date": datetime.datetime.today().strftime("%Y-%m-%d"),
+        "hidden": False
     }
 
     book_id = book_service.create_book(book_data)
@@ -153,8 +154,21 @@ def delete_book(book_id):
     return jsonify({"message": "Failed to delete book"}), 400
 
 @book_blueprint.route("/all/random", methods=["GET"])
+@jwt_required()
 def get_all_books_in_random_order():
+    current_identity = json.loads(get_jwt_identity())
+    owner_id = current_identity["account_id"]  
+    account = AccountService().get_account_by_id(owner_id)
+
+    if account.account_type != AccountType.ADMIN:
+        return jsonify({"message": "You do not have permission to view all books"}), 403
+   
     books = book_service.get_all_books_in_random_order()
+    return jsonify([book.to_serializable_JSON() for book in books]), 200
+
+@book_blueprint.route("/public/all/random", methods=["GET"])
+def get_all_public_books_in_random_order():
+    books = book_service.get_all_public_books_in_random_order()
     return jsonify([book.to_serializable_JSON() for book in books]), 200
 
 @book_blueprint.route("/get_all_book_pages/<int:book_id>/<int:page_capacity>/<int:maximum_line_length>", methods=["GET"])

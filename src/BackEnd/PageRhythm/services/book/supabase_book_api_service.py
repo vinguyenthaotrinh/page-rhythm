@@ -106,3 +106,11 @@ class SupabaseBookAPIService:
         except Exception as e:
             return []
         return []
+    
+    def get_all_public_books(self) -> list[Book]:
+        try:
+            response = self.client.table("Book").select("*").eq("hidden", False).execute()
+            return [Book.deserialize_JSON(book) for book in response.data]
+        except Exception as e:
+            return []
+        return []

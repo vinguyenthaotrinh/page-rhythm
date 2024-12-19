@@ -24,7 +24,7 @@ export default function HomePage() {
         const fetchBooks = async () => {
             try {
                 const server = await Server.getInstance();  // Get the server instance
-                const randomBooks = await server.getAllBooksInRandomOrder();  // Fetch random books
+                const randomBooks = await server.getAllPublicBooksInRandomOrder();  // Fetch random books
                 setBooks(randomBooks);  // Set the fetched books into the state
             } catch (error) {
                 console.error("Error fetching books:", error);
