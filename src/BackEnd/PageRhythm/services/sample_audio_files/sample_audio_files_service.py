@@ -17,7 +17,7 @@ class SampleAudioFilesService:
     def check_ownership(self, sample_audio_file_id: int, owner_id: int) -> bool:
         return self.supabase.check_ownership(sample_audio_file_id, owner_id)
 
-    def add_new_sample_audio_file(self, file_name: str, description: str, owner_id: int, content: bytes, file_extension: str) -> bool:
+    def add_new_sample_audio_file(self, file_name: str, description: str, owner_id: int, content: bytes, file_extension: str) -> Optional[dict]:
 
         sample_audio_file = SampleAudioFile(
             sample_audio_file_id    =   self.get_number_of_sample_audio_files() + 1,
@@ -29,9 +29,16 @@ class SampleAudioFilesService:
             file_extension          =   file_extension
         )
 
-        sample_audio_file_JSON = sample_audio_file.to_serializable_JSON().pop("sample_audio_file_id")
+        sample_audio_file_JSON = sample_audio_file.to_serializable_JSON()
+
+        sample_audio_file_JSON.pop("sample_audio_file_id", None)
         
-        return self.supabase.insert_sample_audio_file(sample_audio_file_JSON)
+        result = self.supabase.insert_sample_audio_file(sample_audio_file_JSON)
+
+        if result is None:
+            return None
+        
+        return result.to_serializable_JSON()
     
     def delete_sample_audio_file(self, sample_audio_file_id: int) -> bool:
         return self.supabase.delete_sample_audio_file(sample_audio_file_id)

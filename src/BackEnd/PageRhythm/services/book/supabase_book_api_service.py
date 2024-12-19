@@ -1,3 +1,4 @@
+from typing import Optional
 from models.book import Book
 from services.supabase_client_service import SupabaseClientService
 
@@ -7,7 +8,7 @@ class SupabaseBookAPIService:
         self.client = SupabaseClientService()
 
     # 1. Create a new book
-    def create_book(self, book: Book) -> int:
+    def create_book(self, book: Book) -> Optional[int]:
         try:
             book_data = book.to_serializable_JSON()
             book_data.pop("book_id", None)
@@ -17,6 +18,7 @@ class SupabaseBookAPIService:
             return None
         except Exception as e:
             return None
+        return None
     
     # 2. Retrieve book information
     def get_book_information(self, book_id: int) -> dict:

@@ -185,7 +185,7 @@ export default function VoicesMyLibraryPage() {
     const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
     const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
     const [playingIndex, setPlayingIndex]                           = useState<number | null>(null);                    // Track currently playing audio
-    const [audioTime, setAudioTime]                                 = useState(0);                                      // Track current time of audio
+    const [audioTimes, setAudioTimes]                               = useState<Record<number, number>>({});  // Track current time for each audio                                 // Track current time of audio
     const audioRefs                                                 = useRef<Record<number, HTMLAudioElement>>({});     // Refs for each audio file
     const [selectedFile, setSelectedFile]                           = useState<File | null>(null);
     const [fileName, setFileName]                                   = useState("");
@@ -204,19 +204,22 @@ export default function VoicesMyLibraryPage() {
                 content: selectedFile
             };
 
-            const server = await Server.getInstance();
-
-            await server.uploadSampleAudioFile(record);
-
-            const renderedRecord = {
-                file_name: fileName,
-                description: description,
-                content: selectedFile,
+            try {
+                const server = await Server.getInstance();
+    
+                // Upload the file and receive the full record including sample_audio_file_id
+                const uploadedRecord = await server.uploadSampleAudioFile(record);
+    
+                // Update the state with the new record containing sample_audio_file_id
+                setRecords([...records, uploadedRecord]);
+    
+                setShowAddOverlay(false); // Close the overlay
+                setSelectedFile(null);    // Clear selected file
+                setFileName("");          // Clear file name
+                setDescription("");       // Clear description
+            } catch (error) {
+                console.error("Error uploading audio file:", error);
             }
-
-            setRecords([...records, renderedRecord]);
-
-            setShowAddOverlay(false); 
         } else {
             console.log("Please fill in all required fields.");
         }
@@ -262,6 +265,17 @@ export default function VoicesMyLibraryPage() {
 
     const handlePlayPause = (index: number) => {
         const audio = audioRefs.current[index];
+
+        if (playingIndex !== null && playingIndex !== index) {
+            const currentAudio = audioRefs.current[playingIndex];
+            currentAudio.pause();
+            currentAudio.currentTime = 0; // Reset to 00:00
+            setAudioTimes((prev) => ({
+                ...prev,
+                [playingIndex]: 0, // Reset current time for the paused audio
+            }));
+        }
+
         if (audio.paused) {
             audio.play();
             setPlayingIndex(index);
@@ -276,7 +290,12 @@ export default function VoicesMyLibraryPage() {
         if (audio && audio.duration) {
             const seekTime = (event.target.valueAsNumber / 100) * audio.duration;
             audio.currentTime = seekTime;
-            setAudioTime(seekTime);
+
+            // Update the specific audio's time in the state
+            setAudioTimes((prev) => ({
+                ...prev,
+                [index]: seekTime,
+            }));
         }
     };
 
@@ -369,17 +388,19 @@ export default function VoicesMyLibraryPage() {
                                                 record.content
                                             }
                                             onTimeUpdate={() =>
-                                                setAudioTime(audioRefs.current[index].currentTime)
+                                                setAudioTimes((prev) => ({
+                                                    ...prev,
+                                                    [index]: audioRefs.current[index].currentTime,
+                                                }))
                                             }
+                                            onEnded={() => setPlayingIndex(null)}
                                         />
 
                                         <input
                                             type="range"
                                             min="0"
                                             max="100"
-                                            value={
-                                                (audioTime / audioRefs.current[index]?.duration) * 100 || 0
-                                            }
+                                            value={(audioTimes[index] / audioRefs.current[index]?.duration) * 100 || 0}
                                             onChange={(event) => handleSeek(event, index)}
                                             className="audio-slider"
                                         />
@@ -388,7 +409,9 @@ export default function VoicesMyLibraryPage() {
                                             <div className="time-labels">
                                                 <span className="start-time">00:00</span>
                                                 <span className="current-time">
-                                                    {new Date(audioTime * 1000).toISOString().substring(14, 19)}
+                                                    {isNaN(audioTimes[index]) || audioTimes[index] === null
+                                                    ? "00:00"  // Fallback in case of invalid value
+                                                    : new Date(audioTimes[index] * 1000).toISOString().substring(14, 19)}
                                                 </span>
                                                 <span className="end-time">
                                                     {audioRefs.current[index]?.duration

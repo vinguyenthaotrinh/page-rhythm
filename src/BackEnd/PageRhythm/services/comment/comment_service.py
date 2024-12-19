@@ -30,7 +30,9 @@ class CommentService:
             create_time         =   datetime.datetime.now()
         )
 
-        comment_JSON = comment.to_serializable_JSON().pop("comment_id")
+        comment_JSON = comment.to_serializable_JSON()
+
+        comment_JSON.pop("comment_id", None)
       
         return self.supabase.insert_comment(comment_JSON)
     
