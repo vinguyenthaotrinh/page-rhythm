@@ -1,13 +1,14 @@
 import "./App.css";
 import React from "react";
 import HomePage from "./components/HomePage";
-import AdminPage from "./components/AdminPage";
 import CommentPage from "./components/CommentPage";
 import LandingPage from "./components/LandingPage";
 import RegisterPage from "./components/RegisterPage";
 import ReadBookPage from "./components/ReadBookPage";
 import PageNotFound from "./components/PageNotFound";
+import BooksAdminPage from "./components/BooksAdminPage";
 import BookDetailsPage from "./components/BookDetailsPage";
+import AccountAdminPage from "./components/AccountAdminPage";
 import ListenToBookPage from "./components/ListenToBookPage";
 import BooksMyLibraryPage from "./components/BooksMyLibraryPage";
 import GeneralProfilePage from "./components/GeneralProfilePage";
@@ -22,7 +23,6 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/home-page" element={<HomePage />} />
-        <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
         <Route path="/read-book-page/:bookID" element={<ReadBookPage />} />    
@@ -41,6 +41,10 @@ export default function App() {
         <Route path="/my-library-page/books" element={<BooksMyLibraryPage />} />
         <Route path="/my-library-page/voices" element={<VoicesMyLibraryPage />} />
         <Route path="/my-library-page" element={<Navigate to="/my-library-page/books" />} />
+      
+        <Route path="/admin-page/books" element={<BooksAdminPage />} />
+        <Route path="/admin-page/account" element={<AccountAdminPage />} />
+        <Route path="/admin-page" element={<Navigate to="/admin-page/books" />} />    
       </Routes>
     </Router>
   );
