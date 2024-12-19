@@ -7,8 +7,6 @@ import MyLibrarySectionBar from "./MyLibrarySectionBar";
 import React, { useState, useRef, useEffect } from "react";
 
 interface DeletionConfirmationBoxProps {
-    title?: string;             // Optional custom title
-    message?: string;           // Confirmation message
     onConfirm: () => void;      // Function to call when confirmed
     onCancel: () => void;       // Function to call when canceled
 }
@@ -131,8 +129,6 @@ export default function VoicesMyLibraryPage() {
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
-
-            //console.log(selectedFile);
             
             const record = {
                 file_name: fileName,
@@ -165,14 +161,9 @@ export default function VoicesMyLibraryPage() {
 
             const reader = new FileReader();
             
-            // Define onload event handler
             reader.onloadend = () => {
-                // Log the result once the file is read
-                //console.log("File successfully read as base64:", reader.result);
-                // Optionally, use reader.result here if you want to do something with the base64 data.
             };
 
-            // Define error handler
             reader.onerror = (error) => {
                 console.error("Error reading the file:", error);
             };
@@ -233,7 +224,7 @@ export default function VoicesMyLibraryPage() {
                 
                 await server.deleteUploadedSampleAdudioFile(recordToDelete.sample_audio_file_id);
 
-                setRecords(records.filter((record) => record.id !== recordToDelete.id)); // Remove the deleted record from the list
+                setRecords(records.filter((record) => record.sample_audio_file_id !== recordToDelete.sample_audio_file_id));
                 setRecordToDelete(null);
                 setShowDeletionConfirmation(false);
             } catch (error) {
@@ -303,7 +294,9 @@ export default function VoicesMyLibraryPage() {
                                     <div className="record-left-column">
                                         <audio
                                             ref={(el) => (audioRefs.current[index] = el!)}
-                                            src={record.file_url}
+                                            src={
+                                                record.content
+                                            }
                                             onTimeUpdate={() =>
                                                 setAudioTime(audioRefs.current[index].currentTime)
                                             }

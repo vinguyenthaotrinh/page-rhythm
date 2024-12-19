@@ -656,9 +656,8 @@ export default class Server {
                 },
             });
     
-            if (!response.ok) {
+            if (!response.ok) 
                 throw new Error(`Failed to fetch user-uploaded books. Status: ${response.status}`);
-            }
     
             const books = await response.json(); // The response is expected to be a JSON array of books
             return books; // Return the array of user-uploaded books
@@ -704,7 +703,6 @@ export default class Server {
         const url = `${this.host}/book/create`; 
         const sessionToken = this.findSessionToken();
     
-        // Prepare the form data
         const formData = new FormData();
         formData.append("title", book.title);
         formData.append("author", book.author);
@@ -717,9 +715,8 @@ export default class Server {
             throw new Error("Invalid content file. Ensure the content is a valid file.");
         }
         
-        if (book.image instanceof File) {
-            formData.append("image", book.image); // Attach the book's image file if provided
-        }
+        if (book.image instanceof File) 
+            formData.append("image", book.image); 
     
         try {
             const response = await fetch(url, {
@@ -815,8 +812,17 @@ export default class Server {
     
             const result = await response.json(); // Parse the response body as JSON
             console.log("Fetched uploaded sample audio files:", result);
+
+            const finalResult = result.map((file: any) => ({
+                ...file,
+                content: file.content 
+                    ? `data:audio/${file.file_extension};base64,${file.content}`
+                    : null,
+            }));
+
+            console.log(finalResult);
     
-            return result; // Return the fetched sample audio files
+            return finalResult; // Return the list of uploaded sample audio files
     
         } catch (error) {
             this.logAndThrowError("Error during fetching uploaded sample audio files:", error);
@@ -848,6 +854,7 @@ export default class Server {
                 file_name: record.file_name,
                 description: record.description,
                 content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
+                file_extension: record.content.type.split("/")[1], // Extract the file extension
             };
     
             // Send the POST request

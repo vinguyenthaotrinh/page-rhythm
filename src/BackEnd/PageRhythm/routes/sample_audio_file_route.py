@@ -17,6 +17,7 @@ def upload_sample_audio_file():
     file_name = data.get("file_name")
     description = data.get("description")
     content = data.get("content")
+    file_extension = data.get("file_extension")
 
     sample_audio_files_service = SampleAudioFilesService()
 
@@ -25,7 +26,7 @@ def upload_sample_audio_file():
     except Exception as e:
         return jsonify({"message": f"Failed to decode content: {str(e)}"}), 400
 
-    if sample_audio_files_service.add_new_sample_audio_file(file_name, description, owner_id, content):
+    if sample_audio_files_service.add_new_sample_audio_file(file_name, description, owner_id, content, file_extension):
         return jsonify({"status": "Sample audio file was successfully uploaded"}), 200
     
     return jsonify({"message": "Failed to upload sample audio file"}), 500

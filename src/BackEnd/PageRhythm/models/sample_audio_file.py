@@ -10,7 +10,8 @@ class SampleAudioFile(BaseEntity):
                  description: str,
                  owner_id: int,
                  content: bytes,
-                 upload_time: datetime):
+                 upload_time: datetime,
+                 file_extension: str):
         super().__init__()
         self.sample_audio_file_id = sample_audio_file_id
         self.file_name = file_name
@@ -18,9 +19,10 @@ class SampleAudioFile(BaseEntity):
         self.owner_id = owner_id
         self.content = content
         self.upload_time = upload_time
+        self.file_extension = file_extension
 
     def __str__(self) -> str:  
-        return f"SampleAudioFile(sample_audio_file_id={self.sample_audio_file_id}, file_name={self.file_name}, description={self.description}, owner_id={self.owner_id}, content={self.content}, upload_time={self.upload_time})"
+        return f"SampleAudioFile(sample_audio_file_id={self.sample_audio_file_id}, file_name={self.file_name}, description={self.description}, owner_id={self.owner_id}, content={self.content}, upload_time={self.upload_time}, file_extension={self.file_extension})"
     
     def get_sample_audio_file_id(self) -> int:
         return self.sample_audio_file_id
@@ -39,6 +41,9 @@ class SampleAudioFile(BaseEntity):
     
     def get_upload_time(self) -> datetime:
         return self.upload_time
+    
+    def get_file_extension(self) -> str:
+        return self.file_extension
     
     def set_sample_audio_file_id(self, sample_audio_file_id: int):
         self.sample_audio_file_id = sample_audio_file_id
@@ -61,6 +66,9 @@ class SampleAudioFile(BaseEntity):
     def set_upload_time(self, upload_time: datetime):
         self.upload_time = upload_time
 
+    def set_file_extension(self, file_extension: str):
+        self.file_extension = file_extension
+
     def to_serializable_JSON(self) -> dict:
         return {
             "sample_audio_file_id": self.sample_audio_file_id,
@@ -68,7 +76,8 @@ class SampleAudioFile(BaseEntity):
             "description": self.description,
             "owner_id": self.owner_id,
             "content": base64.b64encode(self.content).decode("utf-8") if self.content else None,
-            "upload_time": self.upload_time.strftime("%Y-%m-%dT%H:%M:%S")
+            "upload_time": self.upload_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "file_extension": self.file_extension
         }
     
     def from_serializable_JSON(self, dictionary: dict):
@@ -76,14 +85,12 @@ class SampleAudioFile(BaseEntity):
         self.set_file_name(dictionary["file_name"])
         self.set_description(dictionary["description"])
         self.set_owner_id(dictionary["owner_id"])
-        try:
-            self.set_content(base64.b64decode(dictionary["content"]))
-        except:
-            self.set_content(None)
+        self.set_file_extension(dictionary["file_extension"])
+        self.set_content(base64.b64decode(dictionary["content"]))
         self.set_upload_time(datetime.strptime(dictionary["upload_time"], "%Y-%m-%dT%H:%M:%S"))
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "SampleAudioFile":
-        sample_audio_file = SampleAudioFile("", "", "", 0, b"", datetime.now())
+        sample_audio_file = SampleAudioFile("", "", "", 0, b"", datetime.now(), "")
         sample_audio_file.from_serializable_JSON(dictionary)
         return sample_audio_file
