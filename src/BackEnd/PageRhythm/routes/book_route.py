@@ -92,7 +92,7 @@ def update_book(book_id):
     current_identity = json.loads(get_jwt_identity())
     owner_id = current_identity["account_id"]
     
-    if book_service.check_ownership(book_id, owner_id):
+    if not book_service.check_ownership(book_id, owner_id):
         return jsonify({"message": "You do not have permission to update this book."}), 403
 
     data = request.form
