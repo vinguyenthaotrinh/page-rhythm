@@ -93,6 +93,8 @@
     background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
+    margin-left: 64px;
+    margin-right: 64px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     gap: 10px; /* Space between the header and body */
     transition: transform 0.3s ease;
@@ -106,11 +108,12 @@
     width: 100%;
 }
 
-.audio-name {
+.sample-audio-file-name {
     font-weight: bold;
     margin: 0; /* Remove unnecessary margins */
-    font-size: 16px;
+    font-size: 24px;
     color: #333; /* Darker color for better contrast */
+    font-family: "Poppins-Bold", sans-serif;
 }
 
 /* Record body layout */
@@ -131,23 +134,83 @@
 }
 
 .audio-slider {
-    width: 100%; /* Reduce width slightly to center it */
+    -webkit-appearance: none; /* Remove default styles for WebKit browsers */
+    appearance: none; /* Remove default styles for modern browsers */
+    width: 100%;
+    height: 6px; /* Thickness of the slider track */
+    background: #A4C0ED; /* Light blue track color */
+    border-radius: 3px; /* Rounded track corners */
+    outline: none; /* Remove the outline */
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+/* Custom handle (thumb) styles */
+.audio-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles */
+    appearance: none; /* Remove default styles */
+    width: 12px; /* Width of the thumb */
+    height: 12px; /* Height of the thumb */
+    background: #265073; /* Dark blue thumb color */
+    border-radius: 50%; /* Make thumb circular */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.audio-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #265073;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.audio-slider::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    background: #265073;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Change track color on hover */
+.audio-slider:hover {
+    background: #A4C0ED;
+}
+
+/* Thumb hover effect */
+.audio-slider::-webkit-slider-thumb:hover {
+    background: #0f4ba3; /* Slightly darker blue */
+    transform: scale(1.2); /* Enlarge thumb on hover */
+}
+
+.audio-slider::-moz-range-thumb:hover {
+    background: #0f4ba3;
+    transform: scale(1.2);
+}
+
+.audio-slider::-ms-thumb:hover {
+    background: #0f4ba3;
+    transform: scale(1.2);
 }
 
 /* Center the play button below the progress bar */
 .play-pause-button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
+    background: none;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    margin: 0 auto; /* Center the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.play-pause-button:hover {
-    background-color: #45a049; /* Slightly darker on hover */
+.play-pause-icon {
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
 }
 
 /* Right column layout for edit and delete buttons */
@@ -211,23 +274,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px; /* Space between labels and slider */
     font-size: 12px;
     color: #333;
     width: 100%;
+    position: relative;
 }
 
-.start-time, .current-time, .end-time {
-    text-align: center;
+/* Position all time labels below the slider */
+.time-labels span {
+    position: relative;
+    top: 5px; /* Move labels slightly below */
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Center the current time below the slider */
 .current-time {
-    position: absolute;
-    bottom: -20px; /* Adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
+    text-align: center;
+    font-size: 12px;
     font-weight: bold;
-    color: #4CAF50;
+    color: #265073;
 }

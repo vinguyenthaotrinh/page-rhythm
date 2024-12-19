@@ -767,7 +767,7 @@ export default class Server {
         }
     }
 
-    public async uploadSampleAudioFile(record: any): Promise<void> {
+    public async uploadSampleAudioFile(record: any): Promise<any> {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
@@ -809,6 +809,7 @@ export default class Server {
     
             console.log("Sample audio file uploaded successfully.");
     
+            return await response.json(); // Return the response data if needed
         } catch (error) {
             this.logAndThrowError("Error during file upload:", error);
         }

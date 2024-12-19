@@ -37,7 +37,8 @@ class AuthenticationService:
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
         account_type = AccountType(account_type)
         account = Account(account_id, email, full_name, first_name, last_name, birthday, bio, salt, hashed_password, account_type, profile_picture)
-        account_JSON = account.to_serializable_JSON().pop("account_id")
+        account_JSON = account.to_serializable_JSON()
+        account_JSON.pop("account_id", None)
         return self.supabase.register_account(account_JSON)
     
     def change_password(self,
