@@ -95,8 +95,14 @@
 }
 
 .status-dropdown {
+    color: white;
     background-color: #265073;
     font-family: "Poppins-Regular", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.status-dropdown:hover {
+    background-color: #0f4ba3;
 }
 
 .account-item-row.disabled {

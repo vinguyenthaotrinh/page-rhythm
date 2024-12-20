@@ -30,12 +30,54 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
     const [status, setStatus]       = useState(userAccount.account_status);
     const [fromDate, setFromDate]   = useState("");
     const [toDate, setToDate]       = useState("");
-    const [isChanged, setIsChanged] = useState(false); // To track if any field changed
+    const [isChanged, setIsChanged] = useState(false); 
 
-    // Check if "Save" button should be enabled
+    const isValidDate = (date: string) => {
+        return date && !isNaN(Date.parse(date));
+    };
+
+    const areDatesValid = (from: string, to: string) => {
+        if (!isValidDate(from) || !isValidDate(to)) return false;
+        const fromParsed = new Date(from);
+        const toParsed = new Date(to);
+        return fromParsed < toParsed && toParsed > new Date();
+    };
+
     useEffect(() => {
-        setIsChanged((status !== userAccount.account_status) || (fromDate !== "") || (toDate !== ""));
-    }, [status, fromDate, toDate]);
+        if (userAccount.ban_information) {
+            const { start_time, end_time } = userAccount.ban_information;
+            setFromDate(start_time.split("T")[0]);  // Extract date only
+            setToDate(end_time.split("T")[0]);      // Extract date only
+        }
+    }, [userAccount]);
+
+    useEffect(() => {
+        let changed = false;
+
+        // Condition 1: If the status is changed, and it's not "temporarily_banned"
+        if (status !== userAccount.account_status && status !== "temporarily_banned") {
+            changed = true;
+        }
+
+        // Condition 2: If the status is not changed but status is "temporarily_banned", check the dates
+        if (status === "temporarily_banned" && userAccount.account_status === status) {
+            const oldFromDate = userAccount.ban_information.start_time.split("T")[0]; // Extract date only
+            const oldToDate = userAccount.ban_information.end_time.split("T")[0]; // Extract date only
+
+            if (areDatesValid(fromDate, toDate) && (fromDate !== oldFromDate || toDate !== oldToDate)) {
+                changed = true;
+            }
+        }
+
+        // Condition 3: If the status changes to "temporarily_banned", check the dates
+        if (status === "temporarily_banned" && userAccount.account_status !== status) {
+            if (areDatesValid(fromDate, toDate)) {
+                changed = true;
+            }
+        }
+
+        setIsChanged(changed);
+    }, [status, fromDate, toDate, userAccount]);
 
     return (
         <div className="accounts-admin-page-account-item">
