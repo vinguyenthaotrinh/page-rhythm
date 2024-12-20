@@ -1,3 +1,4 @@
+import json
 from models.account import Account
 from services.supabase_client_service import SupabaseClientService
 
@@ -7,12 +8,14 @@ class SupabaseAuthenticationAPIService:
         self.client = SupabaseClientService()
 
     def register_account(self, account_JSON: dict) -> bool:
-        try:
-            response = self.client.table("Account").insert(account_JSON).execute()
-            return True
-        except Exception as e:
-            print(e)
-            return False
+        while True:
+            try:
+                response = self.client.table("Account").insert(account_JSON).execute()
+                return True
+            except Exception as e:
+                print(e)
+                if e.code != "23505":
+                    return False
         return False
     
     def change_password(self, account_id: int, hashed_new_password: str) -> bool:
