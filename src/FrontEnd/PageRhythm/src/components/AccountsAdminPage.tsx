@@ -43,6 +43,10 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
         return fromParsed < toParsed && toParsed > new Date();
     };
 
+    const handleSaveButtonClicked = () => {
+        console.log("Saving user:", userAccount.email, { status, fromDate, toDate });
+    }
+
     useEffect(() => {
         if (userAccount.ban_information) {
             const { start_time, end_time } = userAccount.ban_information;
@@ -133,9 +137,7 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                 />
                 <button 
                     className="save-button" 
-                    onClick={() => {
-                        console.log("Saving user:", userAccount.email, { status, fromDate, toDate });
-                    }} 
+                    onClick={handleSaveButtonClicked} 
                     disabled={!isChanged}
                 >
                     Save

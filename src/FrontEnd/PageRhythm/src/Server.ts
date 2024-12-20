@@ -967,4 +967,33 @@ export default class Server {
             this.logAndThrowError("Error fetching user accounts:", error);
         }
     }
+
+    public async banUserAccountPermanently(banned_account_id: number): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/user_account_management/ban/permanently`;
+    
+        const body = {
+            banned_account_id,
+        };
+    
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error permanently banning user account:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to permanently ban user account.");
+            }
+    
+            console.log("User account permanently banned successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during permanent ban of user account:", error);
+        }
+    }
 }
