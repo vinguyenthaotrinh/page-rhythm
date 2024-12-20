@@ -43,6 +43,35 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
         return fromParsed < toParsed && toParsed > new Date();
     };
 
+    const handleSaveButtonClicked = async () => {
+        const server = await Server.getInstance();
+
+        if (status === "permanently_banned") {
+            try {
+                await server.banUserAccountPermanently(userAccount.account_id);
+                setIsChanged(false);
+            } catch (error) {
+                console.error("Error banning user account permanently:", error);
+            }
+        } else if (status === "temporarily_banned") {
+            if (areDatesValid(fromDate, toDate)) {
+                try {
+                    await server.banUserAccountTemporarily(userAccount.account_id, fromDate, toDate);
+                    setIsChanged(false);
+                } catch (error) {
+                    console.error("Error banning user account temporarily:", error);
+                }
+            }
+        } else if (status === "active") {
+            try {
+                await server.unbanUserAccount(userAccount.account_id);
+                setIsChanged(false);
+            } catch (error) {
+                console.error("Error unbanning user account:", error);
+            }
+        }
+    }
+
     useEffect(() => {
         if (userAccount.ban_information) {
             const { start_time, end_time } = userAccount.ban_information;
@@ -133,9 +162,7 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                 />
                 <button 
                     className="save-button" 
-                    onClick={() => {
-                        console.log("Saving user:", userAccount.email, { status, fromDate, toDate });
-                    }} 
+                    onClick={handleSaveButtonClicked} 
                     disabled={!isChanged}
                 >
                     Save

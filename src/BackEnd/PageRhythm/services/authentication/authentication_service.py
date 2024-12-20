@@ -4,6 +4,7 @@ from models.account import Account, AccountType
 from typing import Optional
 import datetime
 import bcrypt
+import re
 
 class AuthenticationService:
     
@@ -32,6 +33,10 @@ class AuthenticationService:
                         password: str,
                         account_type: str,
                         profile_picture: Optional[bytes]) -> bool:
+        
+        if not self.verify_email_format_valid(email):
+            return False
+
         account_id = AccountService().get_number_of_accounts() + 1
         salt = AuthenticationService.generate_salt()
         hashed_password = AuthenticationService.generate_hashed_password(password, salt)
@@ -64,3 +69,8 @@ class AuthenticationService:
             return False
         hashed_password = AuthenticationService.generate_hashed_password(password, account.salt)
         return account.hashed_password == hashed_password
+    
+    @staticmethod
+    def verify_email_format_valid(email: str) -> bool:
+        email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$'
+        return re.match(email_regex, email) is not None

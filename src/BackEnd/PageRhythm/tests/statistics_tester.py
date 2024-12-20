@@ -9,8 +9,5 @@ class StatisticsTester(unittest.TestCase):
         super(StatisticsTester, self).__init__(*args, **kwargs)
         self.url = HomeTester.get_url()
 
-    
-
-
 if __name__ == "__main__":
     unittest.main()

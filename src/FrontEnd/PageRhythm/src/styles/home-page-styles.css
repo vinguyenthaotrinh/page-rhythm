@@ -138,7 +138,7 @@
     flex-direction: column;
     gap: 12px;
     padding: 32px;
-    margin-top: 60px;
+    margin-top: 72px;
     max-height: calc(100vh - 0px); /* Make the book list scrollable by reducing the height */
     overflow-y: auto; /* Enable vertical scrolling */
 }
@@ -166,7 +166,8 @@
 
 /* Book Cover */
 .home-page-book-cover img {
-    width: auto;   /* Let the width adjust to maintain aspect ratio */
+    max-width: 80px;
+    width: auto;
     height: 100px; /* Set a fixed height for the cover image */
     object-fit: cover; /* Ensures image fills the container without distortion */
     border-radius: 8px;

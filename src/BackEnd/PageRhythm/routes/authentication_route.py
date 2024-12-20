@@ -23,6 +23,9 @@ def register():
     if profile_picutre is not None:
         profile_picutre = base64.b64decode(profile_picutre)
 
+    if not AuthenticationService.verify_email_format_valid(data["email"]):
+        return jsonify({"message": "Invalid email format"}), 400
+
     if AuthenticationService().register_account(
         email = data["email"],
         full_name = data["full_name"],

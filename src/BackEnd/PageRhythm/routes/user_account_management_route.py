@@ -37,7 +37,7 @@ def ban_user_permanently():
     
     user_account_management_service = UserAccountManagementService()
 
-    if user_account_management_service.ban_permanently(banned_account_id):
+    if user_account_management_service.ban_account_permanently(banned_account_id, account_id):
         return jsonify({"message": "Account banned"}), 200
     
     return jsonify({"message": "Account could not be banned"}), 500
@@ -68,7 +68,7 @@ def unban_user():
     
     user_account_management_service = UserAccountManagementService()
 
-    if user_account_management_service.unban(banned_account_id):
+    if user_account_management_service.unban_account(banned_account_id):
         return jsonify({"message": "Requested account was successfully unbanned"}), 200
     
     return jsonify({"message": "Account could not be unbanned"}), 500
@@ -238,7 +238,7 @@ def ban_user_temporarily_for_specific_period():
     if end_time < start_time:
         return jsonify({"message": "End time cannot be before start time"}), 400
 
-    if user_account_management_service.ban_temporarily_for_specific_period(banned_account_id, start_time, end_time):
+    if user_account_management_service.ban_account_temporarily_for_specific_period(banned_account_id, account_id, start_time, end_time):
         return jsonify({"message": "A temporary ban was successfully placed on the requested account"}), 200
     
     return jsonify({"message": "Account could not be banned"}), 500
