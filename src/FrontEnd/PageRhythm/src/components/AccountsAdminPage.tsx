@@ -6,111 +6,104 @@ import "../styles/accounts-admin-page-styles.css";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-interface DeletionConfirmationBoxProps {
-    title?: string;             // Optional custom title
-    message?: string;           // Confirmation message
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
-}
-
-const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    onConfirm,
-    onCancel,
-}) => {
-    return (
-        <div className="books-admin-page-deletion-confirmation-overlay">
-            <div className="books-admin-page-deletion-confirmation-box">
-                <h1 id="books-admin-page-deletion-confirmation-title">Delete your book</h1>
-                <p>Are you sure you want to delete this book?</p>
-                <div className="books-admin-page-deletion-confirmation-buttons">
-                    <button
-                        className="books-admin-page-deletion-confirmation-button confirm"
-                        onClick={onConfirm}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="books-admin-page-deletion-confirmation-button cancel"
-                        onClick={onCancel}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-interface VisibilityConfirmationBoxProps {
-    message?: string;           // Confirmation message
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
-}
-
-const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
-    message,
-    onConfirm,
-    onCancel,
-}) => {
-    return (
-        <div className="books-admin-page-visibility-confirmation-overlay">
-            <div className="books-admin-page-visibility-confirmation-box">
-                <h1 id="books-admin-page-visibility-confirmation-title">Confirm Action</h1>
-                <p>{message}</p>
-                <div className="books-admin-page-visibility-confirmation-buttons">
-                    <button
-                        className="books-admin-page-visibility-confirmation-button confirm"
-                        onClick={onConfirm}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="books-admin-page-visibility-confirmation-button cancel"
-                        onClick={onCancel}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 function LoadingText() {
     return (
         <p
-            id = "books-admin-page-loading-text"
+            id = "accounts-admin-page-loading-text"
         >
             Loading...
         </p>
     );
 }
 
+function NoUserAccountText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            There is no user account to display.
+        </p>
+    );
+}
+
+function UserAccountItem({ userAccount }: { userAccount: any }) {
+    const [status, setStatus] = useState("Normal"); // Default status
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
+    const [isChanged, setIsChanged] = useState(false); // To track if any field changed
+
+    // Check if "Save" button should be enabled
+    useEffect(() => {
+        setIsChanged(status !== "Normal" || fromDate !== "" || toDate !== "");
+    }, [status, fromDate, toDate]);
+
+    return (
+        <div className="accounts-admin-page-account-item">
+            {/* Row 1: Profile picture, full name, email */}
+            <div className="account-item-row">
+                <img 
+                    src={IMAGES.decodeProfilePicture(userAccount.profile_picture)}
+                    alt="Profile" 
+                    className="profile-picture-circle" 
+                />
+                <div className="account-info">
+                    <p className="full-name">{userAccount.full_name}</p>
+                    <p className="email">{userAccount.email}</p>
+                </div>
+            </div>
+
+            {/* Row 2: Status dropdown */}
+            <div className="account-item-row">
+                <label className="status-label">Status:</label>
+                <select 
+                    value={status} 
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="status-dropdown"
+                >
+                    <option value="Normal">Normal</option>
+                    <option value="Temporarily banned">Temporarily banned</option>
+                    <option value="Permanently banned">Permanently banned</option>
+                </select>
+            </div>
+
+            {/* Row 3: From date, to date, Save button */}
+            <div 
+                className={`account-item-row ${status !== "Temporarily banned" ? "disabled" : ""}`}
+            >
+                <label>From:</label>
+                <input 
+                    type="date" 
+                    value={fromDate} 
+                    onChange={(e) => setFromDate(e.target.value)}
+                    disabled={status !== "Temporarily banned"}
+                />
+                <label>to:</label>
+                <input 
+                    type="date" 
+                    value={toDate} 
+                    onChange={(e) => setToDate(e.target.value)}
+                    disabled={status !== "Temporarily banned"}
+                />
+                <button 
+                    className="save-button" 
+                    onClick={() => {
+                        console.log("Saving user:", userAccount.email, { status, fromDate, toDate });
+                    }} 
+                    disabled={!isChanged || status !== "Temporarily banned"}
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    );
+}
+
 export default function AccountsAdminPage() {
-    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
     const [userAccounts, setUserAccounts]                               = useState<any[]>([]);              // User accounts data state
     const [loading, setLoading]                                         = useState(true);                   // Loading state
-    const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
-    const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);       // Track the selected book for deletion
-    const [showVisibilityConfirmation, setShowVisibilityConfirmation]   = useState(false);
-    const [visibilityMessage, setVisibilityMessage]                     = useState("");
-    const [bookToToggle, setBookToToggle]                               = useState<any | null>(null);
     const navigate                                                      = useNavigate();
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                //setLoading(true);
-                const server = await Server.getInstance();
-                const response = await server.getAllBooksInRandomOrder();
-                setBooks(response);
-            } catch (error) {
-                console.error("Error fetching books:", error);
-            } finally {
-                //setLoading(false);
-            }
-        };
-
         const fetchUserAccounts = async () => {
             try {
                 setLoading(true);
@@ -121,156 +114,36 @@ export default function AccountsAdminPage() {
                 console.error("Error fetching user accounts:", error);
             } finally {
                 setLoading(false);
-                console.log(userAccounts);
             }
         }
 
-        fetchBooks();
         fetchUserAccounts();
     }, []);
 
-    const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);              // Set the selected book
-        setShowDeletionConfirmation(true);  // Show the confirmation box
-    };
-
-    const handleConfirmDelete = async () => {
-        if (bookToDelete) {
-            try {
-                const server = await Server.getInstance();
-                await server.deleteBook(bookToDelete.book_id); 
-                setBooks(books.filter((b) => b.book_id !== bookToDelete.book_id)); // Remove book from state
-                setBookToDelete(null);
-                setShowDeletionConfirmation(false);
-            } catch (error) {
-                console.error("Error deleting book:", error);
-            }
-        }
-    };
-
-    const handleCancelDelete = () => {
-        setBookToDelete(null);
-        setShowDeletionConfirmation(false); // Close the confirmation box
-    };
-
-    const handleVisibilityClick = (book: any) => {
-        setBookToToggle(book);
-        const action = book.hidden ? "Unhide" : "Hide";
-        setVisibilityMessage(`Are you sure you want to ${action} this book?`);
-        setShowVisibilityConfirmation(true);
-    };
-
-    const handleConfirmToggleVisibility = async () => {
-        if (bookToToggle) {
-            try {
-                const server = await Server.getInstance();
-                const updatedBook = {
-                    ...bookToToggle,
-                    hidden: !bookToToggle.hidden,
-                };
-                await server.toggleBookVisibility(bookToToggle.book_id);
-                setBooks(books.map((book) =>
-                    book.book_id === bookToToggle.book_id ? updatedBook : book
-                ));
-                setBookToToggle(null);
-                setShowVisibilityConfirmation(false);
-            } catch (error) {
-                console.error("Error toggling book visibility:", error);
-            }
-        }
-    };
-
-    const handleCancelToggleVisibility = () => {
-        setBookToToggle(null);
-        setShowVisibilityConfirmation(false);
-    };
-
     return (
-        <div id="books-admin-page">
+        <div id="accounts-admin-page">
             <NavigationBar />
 
-            <div id="books-admin-page-container">
+            <div id="accounts-admin-page-container">
                 <AdminSectionBar currentOption="accounts" />
-                <div id="books-admin-page-content">
+                <div id="accounts-admin-page-content">
                     
-                    {/* Scrollable section for books */}
-                    <div id="books-admin-page-books-list-container">
-                        {loading ? (<LoadingText />) : (
-                            <div id="books-admin-page-books-grid">
-                                {books.map((book, index) => (
-                                    <div key={index} className="books-admin-page-book-item">
-                                        <div className="book-item-left-column">
-                                            <img
-                                                src={IMAGES.decodeBookCoverImage(book.image)}
-                                                alt={book.title}
-                                                onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
-                                                className="book-item-cover"
-                                            />
-                                        </div>
-                                        <div className="book-item-right-column">
-                                            <p className="book-item-title">{book.title}</p>
-                                            <p className="book-item-author">Author: {book.author}</p>
-                                            <p className="book-item-release-date">
-                                                Release Date: {book.released_date || "Unknown"}
-                                            </p>
-                                            <div className="book-item-buttons">
-                                                <button
-                                                    className="book-item-visibility-button"
-                                                    onClick={() => handleVisibilityClick(book)}
-                                                >
-                                                    {book.hidden ? "Unhide" : "Hide"}
-                                                    <img
-                                                        src={
-                                                            book.hidden
-                                                                ? IMAGES.EYE_OPEN_ICON
-                                                                : IMAGES.EYE_CLOSED_ICON
-                                                        }
-                                                        alt="Visibility Icon"
-                                                        className="book-item-button-icon"
-                                                    />
-                                                </button>
-                                                <button
-                                                    className="book-item-delete-button"
-                                                    onClick={() => handleDeleteClick(book)}
-                                                >
-                                                    Delete
-                                                    <div className="book-item-button-icon">
-                                                        <img
-                                                            src={IMAGES.RED_TRASH_ICON}
-                                                            alt="Delete Icon"
-                                                            className="icon-normal"
-                                                        />
-                                                        <img
-                                                            src={IMAGES.WHITE_TRASH_ICON}
-                                                            alt="Delete Hover Icon"
-                                                            className="icon-hover"
-                                                        />
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                    <div id="accounts-admin-page-accounts-list-container">
+                        {loading ? (<LoadingText />) : (userAccounts.length === 0 ? (<NoUserAccountText />) : 
+                            (
+                                <div id="accounts-admin-page-accounts-grid">
+                                    {userAccounts.map((userAccount, index) => (
+                                        <UserAccountItem 
+                                            key={index} 
+                                            userAccount={userAccount} 
+                                        />
+                                    ))}
+                                </div>
+                            )
                         )}
                     </div>
                 </div>
             </div>
-
-            {showVisibilityConfirmation && (
-                <VisibilityConfirmationBox
-                    message={visibilityMessage}
-                    onConfirm={handleConfirmToggleVisibility}
-                    onCancel={handleCancelToggleVisibility}
-                />
-            )}
-
-            {showDeletionConfirmation && (
-                <DeletionConfirmationBox
-                    onConfirm   =   {handleConfirmDelete}
-                    onCancel    =   {handleCancelDelete}
-                />
-            )}
 
         </div>
     );

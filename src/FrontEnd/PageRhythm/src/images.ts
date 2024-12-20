@@ -28,6 +28,7 @@ import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER from "./assets/images/landing-page-bottom-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER from "./assets/images/landing-page-login-section-top-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-login-section-bottom-left-corner.png";
+import { decode } from "punycode";
 
 const IMAGES = {
     LOGO,
@@ -72,6 +73,19 @@ const IMAGES = {
                 return bookCover;
 
         return `data:image/jpeg;base64,${bookCover}`;
+    },
+
+    decodeProfilePicture: (profilePicture: string | null) => {
+        if (!profilePicture) 
+            return DEFAULT_PROFILE_PICTURE;
+
+        const imageExtensions = ["jpeg", "jpg", "png", "gif", "bmp", "webp"];
+
+        for (const extension of imageExtensions) 
+            if (profilePicture.includes(`data:image/${extension}`)) 
+                return profilePicture;
+
+        return `data:image/jpeg;base64,${profilePicture}`;
     },
 
     convertImageFileToBase64 : (file: File): Promise<string> => {

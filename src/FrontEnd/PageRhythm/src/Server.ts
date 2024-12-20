@@ -171,8 +171,6 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `${this.host}/book/all/random`;  
-    
-        const sessionToken = this.getSessionToken();
 
         try {
             const response = await fetch(url, {
@@ -940,7 +938,8 @@ export default class Server {
                 throw new Error(`Failed to fetch user accounts. Status: ${response.status}`);
     
             const accounts = await response.json(); // The response is expected to be a JSON array of accounts
-            return accounts; // Return the array of user accounts
+      
+            return accounts.data; 
         } catch (error) {
             this.logAndThrowError("Error fetching user accounts:", error);
         }
