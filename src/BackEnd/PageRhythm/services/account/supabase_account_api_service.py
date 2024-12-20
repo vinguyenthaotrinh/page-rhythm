@@ -47,3 +47,11 @@ class SupabaseAccountAPIService:
         except Exception as e:
             return False
         return False
+    
+    def get_all_user_accounts(self) -> list[Account]:
+        try:
+            response = self.client.table("Account").select("*").eq("account_type", "user").execute()
+            return [Account.deserialize_JSON(account) for account in response.data]
+        except Exception as e:
+            return []
+        return []

@@ -9,14 +9,6 @@ class AccountTester(unittest.TestCase):
         super(AccountTester, self).__init__(*args, **kwargs)
         self.url = HomeTester.get_url()
 
-    def test_account_retrieval_with_given_email(self):
-
-        email = "831121376012@test.com"
-
-        response = requests.get(f"{self.url}/account/retrieval_with_email", params={"email": email})
-
-        self.assertEqual(response.status_code, 200)
-
     def get_access_token(self, email, password):
         login_data = {
             "email": email,

@@ -88,6 +88,7 @@ function LoadingText() {
 
 export default function AccountsAdminPage() {
     const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
+    const [userAccounts, setUserAccounts]                               = useState<any[]>([]);              // User accounts data state
     const [loading, setLoading]                                         = useState(true);                   // Loading state
     const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);       // Track the selected book for deletion
@@ -99,18 +100,33 @@ export default function AccountsAdminPage() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                setLoading(true);
+                //setLoading(true);
                 const server = await Server.getInstance();
                 const response = await server.getAllBooksInRandomOrder();
                 setBooks(response);
             } catch (error) {
                 console.error("Error fetching books:", error);
             } finally {
-                setLoading(false);
+                //setLoading(false);
             }
         };
 
+        const fetchUserAccounts = async () => {
+            try {
+                setLoading(true);
+                const server = await Server.getInstance();
+                const response = await server.getAllUserAccounts();
+                setUserAccounts(response);
+            } catch (error) {
+                console.error("Error fetching user accounts:", error);
+            } finally {
+                setLoading(false);
+                console.log(userAccounts);
+            }
+        }
+
         fetchBooks();
+        fetchUserAccounts();
     }, []);
 
     const handleDeleteClick = (book: any) => {

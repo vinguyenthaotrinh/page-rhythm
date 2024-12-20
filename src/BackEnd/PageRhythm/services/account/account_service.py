@@ -20,6 +20,9 @@ class AccountService:
     def get_account_by_id(self, account_id: int) -> Optional[Account]:
         return self.supabase.get_account_by_id(account_id)
     
+    def get_all_user_accounts(self) -> list[Account]:
+        return self.supabase.get_all_user_accounts()
+    
     def check_email_exists(self, email: str) -> bool:
         return self.get_account_by_email(email) is not None
     
