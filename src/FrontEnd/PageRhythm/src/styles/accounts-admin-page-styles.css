@@ -50,15 +50,72 @@
     margin: 0 auto;
 }
 
+/* Ensure rows within an account item are displayed in a column */
 .accounts-admin-page-account-item {
-    display: flex;             
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    align-items: flex-start; /* Align content to the left */
+    gap: 12px; /* Space between rows */
     background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    gap: 20px;                
     transition: transform 0.3s ease;
-    align-items: center;      
+}
+
+.accounts-admin-page-account-item .account-item-row {
+    display: flex;
+    align-items: center; /* Vertically center items within a row */
+    gap: 8px; /* Space between items in a row */
+    width: 100%; /* Make rows span the full width of the container */
+}
+
+.accounts-admin-page-account-item .account-info {
+    display: flex;
+    flex-direction: column; /* Stack full name and email vertically */
+}
+
+.accounts-admin-page-account-item .account-info .full-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.accounts-admin-page-account-item .account-info .email {
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+}
+
+.account-item-row .status-dropdown {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.account-item-row.disabled {
+    color: gray;
+}
+
+.account-item-row.disabled input,
+.account-item-row.disabled button {
+    background-color: #f0f0f0;
+    pointer-events: none;
+}
+
+.save-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.save-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .accounts-admin-page-account-item:hover {
