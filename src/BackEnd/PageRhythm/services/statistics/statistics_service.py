@@ -43,7 +43,7 @@ class StatisticsService:
             most_recent_update_date = datetime.datetime.now()
         )
 
-        return self.supabase.adjust_tracked_progress(tracked_progress)
+        return self.adjust_tracked_progress(tracked_progress)
     
     def get_finished_books(self, user_id: int) -> list[TrackedProgress]:
         books = self.supabase.get_finished_books(user_id)

@@ -47,14 +47,38 @@ export default function ReadBookPage() {
             }
         };
 
-        if (bookID) {
+        if (bookID) 
             fetchBookDetails(); 
-        }
+        
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 
-    if (!book) {
-        return <div>Loading...</div>; // Placeholder while waiting for data
-    }
+    useEffect(() => {
+        
+        const updateProgress = async () => {
+            try {
+                if (!bookID) {
+                    console.error("Book ID is not available.");
+                    return;
+                }
+
+                const server = await Server.getInstance();  // Get the server instance
+
+                if (currentLeftPage === contentPages.length) {
+                    await server.trackProgressOfReadingBook(parseInt(bookID), currentLeftPage, "finished");  // Update the progress of reading the book
+                } else {
+                    await server.trackProgressOfReadingBook(parseInt(bookID), currentLeftPage, "in_progress");  // Update the progress of reading the book
+                }
+            } catch (error) {
+                console.error("Error updating progress:", error);
+            }
+        }
+
+        updateProgress();  // Update the progress whenever the currentLeftPage
+
+    }, [currentLeftPage]);
+
+    if (!book) 
+        return <div>Loading...</div>;
 
     const onLeftButtonClick = () => {
         if (currentLeftPage > 1) {

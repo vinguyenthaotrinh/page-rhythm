@@ -36,7 +36,7 @@ class SupabaseStatisticsAPIService:
     
     def get_finished_books(self, user_id: int) -> list:
         try:
-            response = self.client.table("TrackedProgress").select("*").eq("user_id", user_id).eq("status", "FINISHED").execute()
+            response = self.client.table("TrackedProgress").select("*").eq("user_id", user_id).eq("status", "finished").execute()
             return response.data
         except Exception as e:
             print(e)

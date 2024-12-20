@@ -1070,4 +1070,35 @@ export default class Server {
             this.logAndThrowError("Error during unban of user account:", error);
         }
     }
+
+    public async trackProgressOfReadingBook(bookID: number, pageNumber: number | null, status: string): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/track_progress`;
+
+        const body = {
+            book_id: bookID,
+            page_number: pageNumber,
+            status: status,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error tracking reading progress:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to track reading progress.");
+            }
+
+            console.log("Reading progress tracked successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during tracking reading progress:", error);
+        }
+    }
 }
