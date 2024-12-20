@@ -29,34 +29,6 @@
     position: relative;             /* Ensures that the "Add" button can be absolutely positioned */
 }
 
-#books-admin-page-add-book-button {
-    position: absolute;             /* Fixed position within the container */
-    top: 20px;                      /* Space from the top */
-    left: 20px;                     /* Space from the left */
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #265073;
-    margin: 12px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1;                     /* Ensure the button is above other content */
-    transition: background-color 0.3s ease;
-    display: flex;                  /* Use flexbox to align icon and text */
-    align-items: center;            /* Vertically center the items */
-}
-
-#books-admin-page-add-book-button:hover {
-    background-color: #0f4ba3;
-}
-
-.books-admin-page-add-icon {
-    width: 20px;        /* Adjust the size of the icon */
-    height: 20px;       /* Adjust the size of the icon */
-    margin-left: 8px;   /* Space between the icon and the text */
-}
-
 #books-admin-page-books-list-container {
     flex-grow: 1;           /* Allows this container to take up the remaining space */
     overflow-y: auto;       /* Enables scrolling if there are too many books */
@@ -392,72 +364,6 @@
     100% {
         opacity: 1;
     }
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-    .add-overlay-content {
-        width: 85%;  /* Take more width on smaller screens */
-        padding: 15px;
-    }
-
-    #add-overlay-title {
-        font-size: 20px;
-    }
-
-    .add-overlay p {
-        font-size: 14px;
-    }
-
-    .add-overlay-buttons button {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
-
-/* Container for input and file name */
-.file-input-container {
-    display: flex;
-    align-items: center; /* Vertically center the elements */
-    margin-top: 12px;
-    gap: 10px; /* Space between input and file name */
-}
-
-/* Hide the default file input */
-.file-input-button {
-    display: none;
-}
-
-/* Custom label button for uploading content */
-.file-input-label {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #265073;  /* Custom background */
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-/* Hover effect for the custom file input button */
-.file-input-label:hover {
-    background-color: #0f4ba3;
-}
-
-/* Optional: Style the text inside the label */
-.file-input-label span {
-    font-size: 14px;
-}
-
-.file-name-display {
-    font-size: 14px;
-    color: #555;
-    max-width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 #books-admin-page-loading-text {

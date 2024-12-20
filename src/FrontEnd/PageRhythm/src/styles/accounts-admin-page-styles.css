@@ -29,28 +29,6 @@
     position: relative;             /* Ensures that the "Add" button can be absolutely positioned */
 }
 
-#accounts-admin-page-add-book-button {
-    position: absolute;             /* Fixed position within the container */
-    top: 20px;                      /* Space from the top */
-    left: 20px;                     /* Space from the left */
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #265073;
-    margin: 12px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1;                     /* Ensure the button is above other content */
-    transition: background-color 0.3s ease;
-    display: flex;                  /* Use flexbox to align icon and text */
-    align-items: center;            /* Vertically center the items */
-}
-
-#accounts-admin-page-add-book-button:hover {
-    background-color: #0f4ba3;
-}
-
 .accounts-admin-page-add-icon {
     width: 20px;        /* Adjust the size of the icon */
     height: 20px;       /* Adjust the size of the icon */
@@ -72,8 +50,8 @@
     margin: 0 auto; /* Center the grid horizontally */
 }
 
-/* Book item container: two-column layout */
-.accounts-admin-page-book-item {
+/* account item container: two-column layout */
+.accounts-admin-page-account-item {
     display: flex;             /* Flexbox for the two-column layout */
     background-color: #EFEAD3;
     padding: 16px;
@@ -84,151 +62,19 @@
     align-items: center;       /* Vertically center the content */
 }
 
-.accounts-admin-page-book-item:hover {
+.accounts-admin-page-account-item:hover {
     transform: translateY(-5px);  /* Adds a hover effect to lift the item */
 }
 
-/* Left column: book cover */
-.book-item-left-column {
-    flex: 0 0 120px; /* Fixed width for the book cover */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.book-item-cover {
-    width: 180px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 8px;
-    gap: 4px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a black shadow */
-}
-
-/* Right column: book details */
-.book-item-right-column {
-    flex: 1;                 /* Takes up the remaining space */
-    display: flex;
-    flex-direction: column;  /* Stacks text and buttons vertically */
-    justify-content: flex-start;
-}
-
-/* Book details */
-.book-item-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    font-family: "Poppins-SemiBold", sans-serif;
-}
-
-.book-item-author,
-.book-item-release-date {
-    font-size: 14px;
-    color: #555;
-    margin-top: 0px;
-}
-
-/* Button container (this was adjusted to ensure buttons are stacked vertically) */
-.book-item-buttons {
-    display: flex;
-    flex-direction: column; /* Stack the buttons vertically */
-    gap: 8px; /* Space between buttons */
-    margin-top: 0px;
-}
-
-/* Visibility Button */
-.book-item-visibility-button {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between text and icon */
-    background-color: #265073;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    max-width: 120px; /* Limit the width of the button */
-    width: 100%; /* Make it responsive */
-    justify-content: space-between;
-}
-
-.book-item-visibility-button:hover {
-    background-color: #0f4ba3;
-}
-
-/* Delete Button */
-.book-item-delete-button {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    color: #FF0000;
-    border: 1px solid #FF0000;
-    border-radius: 12px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    gap: 5px; /* Space between text and icon */
-    /* Remove the width 100% to prevent it from expanding */
-    max-width: 120px;
-    width: auto; /* Ensure the width adapts to the content */
-    justify-content: space-between;
-}
-
-.book-item-delete-button:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.book-item-button-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-
-.icon-normal {
-    display: block; /* Default icon */
-}
-
-.icon-hover {
-    display: none; /* Initially hide the hover icon */
-}
-
-.book-item-delete-button:hover .icon-normal {
-    display: none; /* Hide the default icon when hovering */
-}
-
-.book-item-delete-button:hover .icon-hover {
-    display: block; /* Show the hover icon when hovering */
-}
-
 @media (max-width: 768px) {
-    .accounts-admin-page-book-item {
+    .accounts-admin-page-account-item {
         flex-direction: column; /* Stack the columns vertically */
         align-items: flex-start;
     }
-
-    .book-item-left-column {
-        flex: none;
-        margin-bottom: 10px; /* Add spacing between the image and details */
-    }
-
-    .book-item-cover {
-        width: 100%; /* Make the cover full-width for smaller screens */
-        height: auto;
-    }
-
-    .book-item-right-column {
-        align-items: flex-start; /* Align content to the left */
-    }
 }
 
-/* For Webkit-based browsers (Chrome, Edge, etc.) */
 #accounts-admin-page-accounts-list-container::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+    width: 10px; 
 }
 
 #accounts-admin-page-accounts-list-container::-webkit-scrollbar-track {
@@ -242,7 +88,7 @@
 }
 
 #accounts-admin-page-accounts-list-container::-webkit-scrollbar-thumb:hover {
-    background-color: #0f4ba3; /* Thumb hover color */
+    background-color: #0f4ba3;
 }
 
 /* Confirmation Box Overlay */
@@ -299,91 +145,6 @@
     width: 100%;
 }
 
-/* Confirmation Buttons */
-.accounts-admin-page-deletion-confirmation-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.accounts-admin-page-deletion-confirmation-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.accounts-admin-page-deletion-confirmation-button.confirm {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.accounts-admin-page-deletion-confirmation-button.cancel {
-    background-color: #ccc;
-    color: black;
-}
-
-.accounts-admin-page-deletion-confirmation-button.confirm:hover {
-    background-color: #d43e2d;
-    color: white;
-}
-
-.accounts-admin-page-deletion-confirmation-button.cancel:hover {
-    background-color: #ececec;
-    color: black;
-}
-
-#accounts-admin-page-deletion-confirmation-title {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
-}
-
-.accounts-admin-page-visibility-confirmation-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.accounts-admin-page-visibility-confirmation-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.accounts-admin-page-visibility-confirmation-button.confirm {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.accounts-admin-page-visibility-confirmation-button.cancel {
-    background-color: #ccc;
-    color: black;
-}
-
-.accounts-admin-page-visibility-confirmation-button.confirm:hover {
-    background-color: #d43e2d;
-    color: white;
-}
-
-.accounts-admin-page-visibility-confirmation-button.cancel:hover {
-    background-color: #ececec;
-    color: black;
-}
-
-#accounts-admin-page-visibility-confirmation-title {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
-}
-
 /* Smooth fade-in animation */
 @keyframes fadeIn {
     0% {
@@ -394,70 +155,12 @@
     }
 }
 
-/* Responsiveness */
-@media (max-width: 600px) {
-    .add-overlay-content {
-        width: 85%;  /* Take more width on smaller screens */
-        padding: 15px;
-    }
-
-    #add-overlay-title {
-        font-size: 20px;
-    }
-
-    .add-overlay p {
-        font-size: 14px;
-    }
-
-    .add-overlay-buttons button {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
-
 /* Container for input and file name */
 .file-input-container {
     display: flex;
     align-items: center; /* Vertically center the elements */
     margin-top: 12px;
     gap: 10px; /* Space between input and file name */
-}
-
-/* Hide the default file input */
-.file-input-button {
-    display: none;
-}
-
-/* Custom label button for uploading content */
-.file-input-label {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #265073;  /* Custom background */
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-/* Hover effect for the custom file input button */
-.file-input-label:hover {
-    background-color: #0f4ba3;
-}
-
-/* Optional: Style the text inside the label */
-.file-input-label span {
-    font-size: 14px;
-}
-
-.file-name-display {
-    font-size: 14px;
-    color: #555;
-    max-width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 #accounts-admin-page-loading-text {
