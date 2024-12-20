@@ -1,7 +1,7 @@
 @import url("fonts.css");
 
 /* Full page layout */
-#books-admin-page {
+#accounts-admin-page {
     display: flex;
     flex-direction: column;
     height: 100vh;  /* Makes the page take up the full viewport height */
@@ -9,14 +9,14 @@
 }
 
 /* Container for both sidebar and content */
-#books-admin-page-container {
+#accounts-admin-page-container {
     display: flex;
     flex-grow: 1;                   /* Ensure content grows to fill the available space */
     margin-top: 60px;               /* Adjust for navigation bar height */
     height: calc(100vh - 60px);     /* Adjust container height to fill remaining space after navigation bar */
 }
 
-#books-admin-page-content {
+#accounts-admin-page-content {
     flex-grow: 1;                   /* Ensures the content fills the available space */
     display: flex;
     flex-direction: column;         /* Stacks title and information section vertically */
@@ -29,7 +29,7 @@
     position: relative;             /* Ensures that the "Add" button can be absolutely positioned */
 }
 
-#books-admin-page-add-book-button {
+#accounts-admin-page-add-book-button {
     position: absolute;             /* Fixed position within the container */
     top: 20px;                      /* Space from the top */
     left: 20px;                     /* Space from the left */
@@ -47,22 +47,22 @@
     align-items: center;            /* Vertically center the items */
 }
 
-#books-admin-page-add-book-button:hover {
+#accounts-admin-page-add-book-button:hover {
     background-color: #0f4ba3;
 }
 
-.books-admin-page-add-icon {
+.accounts-admin-page-add-icon {
     width: 20px;        /* Adjust the size of the icon */
     height: 20px;       /* Adjust the size of the icon */
     margin-left: 8px;   /* Space between the icon and the text */
 }
 
-#books-admin-page-books-list-container {
+#accounts-admin-page-accounts-list-container {
     flex-grow: 1;           /* Allows this container to take up the remaining space */
-    overflow-y: auto;       /* Enables scrolling if there are too many books */
+    overflow-y: auto;       /* Enables scrolling if there are too many accounts */
 }
 
-#books-admin-page-books-grid {
+#accounts-admin-page-accounts-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
     gap: 20px;
@@ -73,7 +73,7 @@
 }
 
 /* Book item container: two-column layout */
-.books-admin-page-book-item {
+.accounts-admin-page-book-item {
     display: flex;             /* Flexbox for the two-column layout */
     background-color: #EFEAD3;
     padding: 16px;
@@ -84,7 +84,7 @@
     align-items: center;       /* Vertically center the content */
 }
 
-.books-admin-page-book-item:hover {
+.accounts-admin-page-book-item:hover {
     transform: translateY(-5px);  /* Adds a hover effect to lift the item */
 }
 
@@ -206,7 +206,7 @@
 }
 
 @media (max-width: 768px) {
-    .books-admin-page-book-item {
+    .accounts-admin-page-book-item {
         flex-direction: column; /* Stack the columns vertically */
         align-items: flex-start;
     }
@@ -227,26 +227,26 @@
 }
 
 /* For Webkit-based browsers (Chrome, Edge, etc.) */
-#books-admin-page-books-list-container::-webkit-scrollbar {
+#accounts-admin-page-accounts-list-container::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar */
 }
 
-#books-admin-page-books-list-container::-webkit-scrollbar-track {
+#accounts-admin-page-accounts-list-container::-webkit-scrollbar-track {
     background: rgba(241, 241, 241, 0.5); /* Track color */
 }
 
-#books-admin-page-books-list-container::-webkit-scrollbar-thumb {
-    background-color: #265073;          /* Thumb color */
-    border-radius: 4px;                     /* Rounded corners for the thumb */
-    border: 2px solid #f1f1f1;              /* Optional: Create spacing around the thumb */
+#accounts-admin-page-accounts-list-container::-webkit-scrollbar-thumb {
+    background-color: #265073;          
+    border-radius: 4px;                  
+    border: 2px solid #f1f1f1;          
 }
 
-#books-admin-page-books-list-container::-webkit-scrollbar-thumb:hover {
+#accounts-admin-page-accounts-list-container::-webkit-scrollbar-thumb:hover {
     background-color: #0f4ba3; /* Thumb hover color */
 }
 
 /* Confirmation Box Overlay */
-.books-admin-page-deletion-confirmation-overlay {
+.accounts-admin-page-deletion-confirmation-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -260,7 +260,7 @@
 }
 
 /* Confirmation Box */
-.books-admin-page-deletion-confirmation-box {
+.accounts-admin-page-deletion-confirmation-box {
     background-color: #EFEAD3;
     color: black;
     font-family: "Poppins-Regular", sans-serif;
@@ -273,7 +273,7 @@
 }
 
 /* Confirmation Box Overlay */
-.books-admin-page-visibility-confirmation-overlay {
+.accounts-admin-page-visibility-confirmation-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -287,7 +287,7 @@
 }
 
 /* Confirmation Box */
-.books-admin-page-visibility-confirmation-box {
+.accounts-admin-page-visibility-confirmation-box {
     background-color: #EFEAD3;
     color: black;
     font-family: "Poppins-Regular", sans-serif;
@@ -300,14 +300,14 @@
 }
 
 /* Confirmation Buttons */
-.books-admin-page-deletion-confirmation-buttons {
+.accounts-admin-page-deletion-confirmation-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.books-admin-page-deletion-confirmation-button {
+.accounts-admin-page-deletion-confirmation-button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -316,40 +316,40 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.books-admin-page-deletion-confirmation-button.confirm {
+.accounts-admin-page-deletion-confirmation-button.confirm {
     background-color: #e74c3c;
     color: white;
 }
 
-.books-admin-page-deletion-confirmation-button.cancel {
+.accounts-admin-page-deletion-confirmation-button.cancel {
     background-color: #ccc;
     color: black;
 }
 
-.books-admin-page-deletion-confirmation-button.confirm:hover {
+.accounts-admin-page-deletion-confirmation-button.confirm:hover {
     background-color: #d43e2d;
     color: white;
 }
 
-.books-admin-page-deletion-confirmation-button.cancel:hover {
+.accounts-admin-page-deletion-confirmation-button.cancel:hover {
     background-color: #ececec;
     color: black;
 }
 
-#books-admin-page-deletion-confirmation-title {
+#accounts-admin-page-deletion-confirmation-title {
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
 }
 
-.books-admin-page-visibility-confirmation-buttons {
+.accounts-admin-page-visibility-confirmation-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.books-admin-page-visibility-confirmation-button {
+.accounts-admin-page-visibility-confirmation-button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -358,27 +358,27 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.books-admin-page-visibility-confirmation-button.confirm {
+.accounts-admin-page-visibility-confirmation-button.confirm {
     background-color: #e74c3c;
     color: white;
 }
 
-.books-admin-page-visibility-confirmation-button.cancel {
+.accounts-admin-page-visibility-confirmation-button.cancel {
     background-color: #ccc;
     color: black;
 }
 
-.books-admin-page-visibility-confirmation-button.confirm:hover {
+.accounts-admin-page-visibility-confirmation-button.confirm:hover {
     background-color: #d43e2d;
     color: white;
 }
 
-.books-admin-page-visibility-confirmation-button.cancel:hover {
+.accounts-admin-page-visibility-confirmation-button.cancel:hover {
     background-color: #ececec;
     color: black;
 }
 
-#books-admin-page-visibility-confirmation-title {
+#accounts-admin-page-visibility-confirmation-title {
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
@@ -460,7 +460,7 @@
     overflow: hidden;
 }
 
-#books-admin-page-loading-text {
+#accounts-admin-page-loading-text {
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;

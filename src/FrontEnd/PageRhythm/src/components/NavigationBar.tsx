@@ -66,7 +66,7 @@ export default function NavigationBar() {
                     if (profile.data.account_type) 
                         setAccountType(profile.data.account_type);
                     if (profile.data.profile_picture)
-                        setProfilePicture(`data:image/jpeg;base64,${profile.data.profile_picture}`);
+                        setProfilePicture(IMAGES.decodeProfilePicture(profile.data.profile_picture));
                 }
             } catch (error) {
                 console.error("Failed to fetch profile:", error);

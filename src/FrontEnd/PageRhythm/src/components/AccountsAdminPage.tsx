@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 function LoadingText() {
     return (
         <p
-            id = "books-admin-page-loading-text"
+            id = "accounts-admin-page-loading-text"
         >
             Loading...
         </p>
@@ -27,7 +27,6 @@ function NoUserAccountText() {
 }
 
 export default function AccountsAdminPage() {
-    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
     const [userAccounts, setUserAccounts]                               = useState<any[]>([]);              // User accounts data state
     const [loading, setLoading]                                         = useState(true);                   // Loading state
     const navigate                                                      = useNavigate();
@@ -43,7 +42,6 @@ export default function AccountsAdminPage() {
                 console.error("Error fetching user accounts:", error);
             } finally {
                 setLoading(false);
-                console.log(userAccounts);
             }
         }
 
@@ -51,68 +49,23 @@ export default function AccountsAdminPage() {
     }, []);
 
     return (
-        <div id="books-admin-page">
+        <div id="accounts-admin-page">
             <NavigationBar />
 
-            <div id="books-admin-page-container">
+            <div id="accounts-admin-page-container">
                 <AdminSectionBar currentOption="accounts" />
-                <div id="books-admin-page-content">
+                <div id="accounts-admin-page-content">
                     
-                    {/* Scrollable section for books */}
-                    <div id="books-admin-page-books-list-container">
-                        {loading ? (<LoadingText />) : (books.length === 0 ? (<NoUserAccountText />) : 
+                    <div id="accounts-admin-page-accounts-list-container">
+                        {loading ? (<LoadingText />) : (userAccounts.length === 0 ? (<NoUserAccountText />) : 
                             (
-                                <div id="books-admin-page-books-grid">
-                                    {books.map((book, index) => (
-                                        <div key={index} className="books-admin-page-book-item">
-                                            <div className="book-item-left-column">
-                                                <img
-                                                    src={IMAGES.decodeBookCoverImage(book.image)}
-                                                    alt={book.title}
-                                                    onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
-                                                    className="book-item-cover"
-                                                />
-                                            </div>
-                                            <div className="book-item-right-column">
-                                                <p className="book-item-title">{book.title}</p>
-                                                <p className="book-item-author">Author: {book.author}</p>
-                                                <p className="book-item-release-date">
-                                                    Release Date: {book.released_date || "Unknown"}
-                                                </p>
-                                                <div className="book-item-buttons">
-                                                    <button
-                                                        className="book-item-visibility-button"
-                                                    >
-                                                        {book.hidden ? "Unhide" : "Hide"}
-                                                        <img
-                                                            src={
-                                                                book.hidden
-                                                                    ? IMAGES.EYE_OPEN_ICON
-                                                                    : IMAGES.EYE_CLOSED_ICON
-                                                            }
-                                                            alt="Visibility Icon"
-                                                            className="book-item-button-icon"
-                                                        />
-                                                    </button>
-                                                    <button
-                                                        className="book-item-delete-button"
-                                                    >
-                                                        Delete
-                                                        <div className="book-item-button-icon">
-                                                            <img
-                                                                src={IMAGES.RED_TRASH_ICON}
-                                                                alt="Delete Icon"
-                                                                className="icon-normal"
-                                                            />
-                                                            <img
-                                                                src={IMAGES.WHITE_TRASH_ICON}
-                                                                alt="Delete Hover Icon"
-                                                                className="icon-hover"
-                                                            />
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                <div id="accounts-admin-page-accounts-grid">
+                                    {userAccounts.map((userAccount, index) => (
+                                        <div 
+                                            key={index} 
+                                            className="accounts-admin-page-account-item"
+                                        >
+                                            {userAccount.email}
                                         </div>
                                     ))}
                                 </div>
