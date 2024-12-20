@@ -54,12 +54,9 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
     useEffect(() => {
         let changed = false;
 
-        // Condition 1: If the status is changed, and it's not "temporarily_banned"
-        if (status !== userAccount.account_status && status !== "temporarily_banned") {
+        if (status !== userAccount.account_status && status !== "temporarily_banned") 
             changed = true;
-        }
 
-        // Condition 2: If the status is not changed but status is "temporarily_banned", check the dates
         if (status === "temporarily_banned" && userAccount.account_status === status) {
             const oldFromDate = userAccount.ban_information.start_time.split("T")[0]; // Extract date only
             const oldToDate = userAccount.ban_information.end_time.split("T")[0]; // Extract date only
@@ -69,7 +66,6 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             }
         }
 
-        // Condition 3: If the status changes to "temporarily_banned", check the dates
         if (status === "temporarily_banned" && userAccount.account_status !== status) {
             if (areDatesValid(fromDate, toDate)) {
                 changed = true;
