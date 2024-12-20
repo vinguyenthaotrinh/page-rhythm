@@ -53,6 +53,15 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             } catch (error) {
                 console.error("Error banning user account permanently:", error);
             }
+        } else if (status === "temporarily_banned") {
+            if (areDatesValid(fromDate, toDate)) {
+                try {
+                    await server.banUserAccountTemporarily(userAccount.account_id, fromDate, toDate);
+                    setIsChanged(false);
+                } catch (error) {
+                    console.error("Error banning user account temporarily:", error);
+                }
+            }
         }
     }
 

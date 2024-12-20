@@ -996,4 +996,49 @@ export default class Server {
             this.logAndThrowError("Error during permanent ban of user account:", error);
         }
     }
+
+    public async banUserAccountTemporarily(banned_account_id: number, from: string, to: string): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/user_account_management/ban/temporarily/period`;
+
+        const body = {
+            banned_account_id,
+            start_time: {
+                day: parseInt(from.split("-")[2], 10),
+                month: parseInt(from.split("-")[1], 10),
+                year: parseInt(from.split("-")[0], 10),
+                hour: 0,
+                minute: 0,
+                second: 0,
+            },
+            end_time: {
+                day: parseInt(to.split("-")[2], 10),
+                month: parseInt(to.split("-")[1], 10),
+                year: parseInt(to.split("-")[0], 10),
+                hour: 23,
+                minute: 59,
+                second: 59,
+            },
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error temporarily banning user account:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to temporarily ban user account.");
+            }
+
+            console.log("User account temporarily banned successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during temporary ban of user account:", error);
+        }
+    }
 }

@@ -238,7 +238,7 @@ def ban_user_temporarily_for_specific_period():
     if end_time < start_time:
         return jsonify({"message": "End time cannot be before start time"}), 400
 
-    if user_account_management_service.ban_temporarily_for_specific_period(banned_account_id, start_time, end_time):
+    if user_account_management_service.ban_account_temporarily_for_specific_period(banned_account_id, account_id, start_time, end_time):
         return jsonify({"message": "A temporary ban was successfully placed on the requested account"}), 200
     
     return jsonify({"message": "Account could not be banned"}), 500
