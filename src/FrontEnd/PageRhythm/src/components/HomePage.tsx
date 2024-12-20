@@ -20,7 +20,6 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch books on page load
         const fetchBooks = async () => {
             try {
                 const server = await Server.getInstance();  // Get the server instance
@@ -32,6 +31,13 @@ export default function HomePage() {
         };
 
         fetchBooks();
+
+        document.body.style.overflowY = "hidden";
+
+        return () => {
+            // Re-enable global scrolling on component unmount
+            document.body.style.overflowY = "auto";
+        };
     }, []);
 
     useEffect(() => {
@@ -55,13 +61,10 @@ export default function HomePage() {
         try {
             const server = await Server.getInstance();
 
-            // Call the searchBooks method with the search term and selected genre
             const searchResults = await server.searchBooks(searchTerm, selectedGenre === "All" ? null : selectedGenre);
 
-            // Set the state with the search results
             setBooks(searchResults);
 
-            // Optionally, you can log the results to verify
             console.log("Search results:", searchResults);
         } catch (error) {
             console.error("Error during search:", error);

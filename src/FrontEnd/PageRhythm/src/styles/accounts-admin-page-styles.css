@@ -94,6 +94,11 @@
     border: 1px solid #ccc;
 }
 
+.status-dropdown {
+    background-color: #265073;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
 .account-item-row.disabled {
     color: gray;
 }
