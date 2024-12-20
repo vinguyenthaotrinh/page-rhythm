@@ -62,6 +62,13 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                     console.error("Error banning user account temporarily:", error);
                 }
             }
+        } else if (status === "active") {
+            try {
+                await server.unbanUserAccount(userAccount.account_id);
+                setIsChanged(false);
+            } catch (error) {
+                console.error("Error unbanning user account:", error);
+            }
         }
     }
 

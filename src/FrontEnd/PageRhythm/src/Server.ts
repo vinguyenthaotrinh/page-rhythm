@@ -1041,4 +1041,33 @@ export default class Server {
             this.logAndThrowError("Error during temporary ban of user account:", error);
         }
     }
+
+    public async unbanUserAccount(banned_account_id: number): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/user_account_management/unban`;
+
+        const body = {
+            banned_account_id,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error unbanning user account:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to unban user account.");
+            }
+
+            console.log("User account unbanned successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during unban of user account:", error);
+        }
+    }
 }

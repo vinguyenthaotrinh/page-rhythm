@@ -68,7 +68,7 @@ def unban_user():
     
     user_account_management_service = UserAccountManagementService()
 
-    if user_account_management_service.unban(banned_account_id):
+    if user_account_management_service.unban_account(banned_account_id):
         return jsonify({"message": "Requested account was successfully unbanned"}), 200
     
     return jsonify({"message": "Account could not be unbanned"}), 500
