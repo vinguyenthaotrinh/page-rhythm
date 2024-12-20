@@ -1,5 +1,6 @@
 from services.user_account_management.supabase_user_account_management_api_service import SupabaseUserAccountManagementAPIService
 from models.banned_account import BannedAccount, BanType, AccountStatus
+from services.account.account_service import AccountService
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -84,3 +85,18 @@ class UserAccountManagementService:
             return AccountStatus.ACTIVE
         
         return AccountStatus.TEMPORARILY_BANNED
+    
+    def get_all_user_accounts(self) -> list[dict]:
+        account_service = AccountService()
+        user_accounts = account_service.get_all_user_accounts()
+        result = []
+        for user_account in user_accounts:
+            account = user_account.to_serializable_JSON()
+            account["account_status"] = self.get_account_status(user_account.get_account_id()).value
+            if account["account_status"] == AccountStatus.TEMPORARILY_BANNED.value:
+                banned_account = self.get_ban_account(user_account.get_account_id())
+                account["ban_information"] = banned_account.to_serializable_JSON()
+            else:
+                account["ban_information"] = None
+            result.append(account)
+        return result

@@ -242,3 +242,22 @@ def ban_user_temporarily_for_specific_period():
         return jsonify({"message": "A temporary ban was successfully placed on the requested account"}), 200
     
     return jsonify({"message": "Account could not be banned"}), 500
+
+@user_account_management_blueprint.route("/user/all", methods=["GET"])
+@jwt_required()
+def get_all_user_accounts_for_management_purpose():
+    account_service = AccountService()
+    current_identity = json.loads(get_jwt_identity())
+    account_id = current_identity["account_id"]
+    requesting_account = account_service.get_account_by_id(account_id)
+
+    if requesting_account.get_account_type() != AccountType.ADMIN:
+        return jsonify({"message": "Unauthorized"}), 401
+
+    user_account_management_service = UserAccountManagementService()
+
+    accounts = user_account_management_service.get_all_user_accounts()
+    return jsonify({
+        "status": "success",
+        "data": accounts
+    }), 200
