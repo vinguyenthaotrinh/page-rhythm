@@ -71,16 +71,16 @@ class BannedAccount(BaseEntity):
             "banned_account_id": self.banned_account_id,
             "banning_account_id": self.banning_account_id,
             "ban_type": self.ban_type.value,
-            "start_time": self.start_time.strftime("%Y-%m-%d %H:%M:%S"),
-            "end_time": self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+            "start_time": self.start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "end_time": self.end_time.strftime("%Y-%m-%dT%H:%M:%S")
         }
     
     def from_serializable_JSON(self, dictionary: dict):
         self.set_banned_account_id(dictionary["banned_account_id"])
         self.set_banning_account_id(dictionary["banning_account_id"])
         self.set_ban_type(BanType(dictionary["ban_type"]))
-        self.set_start_time(datetime.datetime.strptime(dictionary["start_time"], "%Y-%m-%d %H:%M:%S"))
-        self.set_end_time(datetime.datetime.strptime(dictionary["end_time"], "%Y-%m-%d %H:%M:%S"))
+        self.set_start_time(datetime.datetime.strptime(dictionary["start_time"], "%Y-%m-%dT%H:%M:%S"))
+        self.set_end_time(datetime.datetime.strptime(dictionary["end_time"], "%Y-%m-%dT%H:%M:%S"))
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "BannedAccount":

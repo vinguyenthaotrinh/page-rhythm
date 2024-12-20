@@ -13,25 +13,25 @@
 
 #book-details-page-back-button-region {
     background-color: #F6FFDE;
+    top: 76px;
+    gap: 12px;
+    z-index: 20;
     padding: 16px;
     display: flex;
-    justify-content: flex-start; /* Align children to the left */
-    align-items: center;
-    gap: 12px;
     position: sticky;
-    top: 80px;
     border-radius: 8px;
-    z-index: 20;
+    align-items: center;
+    justify-content: flex-start; /* Align children to the left */
 }
 
 #book-details-page-back-button-container {
     display: flex;
-    align-items: center;
-    position: relative;
     cursor: pointer;
     font-size: 16px;
-    font-family: "Poppins-Regular", sans-serif;
     margin-left: 24px;
+    position: relative;
+    align-items: center;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 .book-details-page-back-button-icon {
