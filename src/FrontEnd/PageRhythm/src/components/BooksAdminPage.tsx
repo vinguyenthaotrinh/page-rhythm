@@ -152,7 +152,7 @@ export default function BooksAdminPage() {
                     ...bookToToggle,
                     hidden: !bookToToggle.hidden,
                 };
-                //await server.updateBookVisibility(bookToToggle.book_id, updatedBook.hidden);
+                await server.toggleBookVisibility(bookToToggle.book_id);
                 setBooks(books.map((book) =>
                     book.book_id === bookToToggle.book_id ? updatedBook : book
                 ));

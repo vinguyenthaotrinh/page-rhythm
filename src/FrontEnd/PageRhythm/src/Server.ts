@@ -197,8 +197,6 @@ export default class Server {
     
         const url = `${this.host}/book/public/all/random`;  
     
-        const sessionToken = this.getSessionToken();
-
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -898,6 +896,31 @@ export default class Server {
             console.log("Sample audio file updated successfully:", result);
         } catch (error) {
             this.logAndThrowError("Error during sample audio file update:", error);
+        }
+    }
+
+    public async toggleBookVisibility(bookID: string): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+        
+        const url = `${this.host}/book/visibility/toggle/${bookID}`;
+        
+        try {
+            const response = await fetch(url, {
+                method: "PATCH",
+                headers: this.getSimpleHeadersWithSessionToken(), // Use method to get headers with session token
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error toggling book visibility:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to toggle book visibility.");
+            }
+    
+            const result = await response.json(); // Parse response JSON
+            console.log("Book visibility toggled successfully:", result);
+        } catch (error) {
+            this.logAndThrowError("Error during book visibility toggle:", error);
         }
     }
 }
