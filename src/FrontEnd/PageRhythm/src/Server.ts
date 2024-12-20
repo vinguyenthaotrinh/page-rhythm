@@ -923,4 +923,26 @@ export default class Server {
             this.logAndThrowError("Error during book visibility toggle:", error);
         }
     }
+
+    public async getAllUserAccounts(): Promise<any[]> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+    
+        const url = `${this.host}/account/user/all`;
+    
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: this.getSimpleHeadersWithSessionToken(),
+            });
+    
+            if (!response.ok) 
+                throw new Error(`Failed to fetch user accounts. Status: ${response.status}`);
+    
+            const accounts = await response.json(); // The response is expected to be a JSON array of accounts
+            return accounts; // Return the array of user accounts
+        } catch (error) {
+            this.logAndThrowError("Error fetching user accounts:", error);
+        }
+    }
 }
