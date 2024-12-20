@@ -145,7 +145,6 @@
     width: 100%;
 }
 
-/* Smooth fade-in animation */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -155,14 +154,6 @@
     }
 }
 
-/* Container for input and file name */
-.file-input-container {
-    display: flex;
-    align-items: center; /* Vertically center the elements */
-    margin-top: 12px;
-    gap: 10px; /* Space between input and file name */
-}
-
 #accounts-admin-page-loading-text {
     font-size: 20px;
     font-weight: bold;
@@ -170,4 +161,25 @@
     color: #333;
     margin-top: 20px;
     text-align: center;
+}
+
+.profile-picture-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.account-item-row.disabled {
+    color: gray;
+}
+
+.account-item-row.disabled input {
+    background-color: #f0f0f0;
+    pointer-events: none;
+}
+
+.account-item-row.disabled button {
+    background-color: #ccc;
+    pointer-events: none;
 }
