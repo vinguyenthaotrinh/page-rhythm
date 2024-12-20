@@ -43,8 +43,17 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
         return fromParsed < toParsed && toParsed > new Date();
     };
 
-    const handleSaveButtonClicked = () => {
-        console.log("Saving user:", userAccount.email, { status, fromDate, toDate });
+    const handleSaveButtonClicked = async () => {
+        const server = await Server.getInstance();
+
+        if (status === "permanently_banned") {
+            try {
+                await server.banUserAccountPermanently(userAccount.account_id);
+                setIsChanged(false);
+            } catch (error) {
+                console.error("Error banning user account permanently:", error);
+            }
+        }
     }
 
     useEffect(() => {

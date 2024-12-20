@@ -37,7 +37,7 @@ def ban_user_permanently():
     
     user_account_management_service = UserAccountManagementService()
 
-    if user_account_management_service.ban_permanently(banned_account_id):
+    if user_account_management_service.ban_account_permanently(banned_account_id, account_id):
         return jsonify({"message": "Account banned"}), 200
     
     return jsonify({"message": "Account could not be banned"}), 500

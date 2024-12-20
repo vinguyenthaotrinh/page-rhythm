@@ -21,9 +21,10 @@ class SupabaseUserAccountManagementAPIService:
             return False
 
         try:
-            self.client.table("BannedAccount").insert(banned_account.serialize_JSON()).execute()
+            self.client.table("BannedAccount").insert(banned_account.to_serializable_JSON()).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
     
@@ -33,9 +34,10 @@ class SupabaseUserAccountManagementAPIService:
             return False
 
         try:
-            self.client.table("BannedAccount").update(banned_account.serialize_JSON()).eq("banned_account_id", banned_account.banned_account_id).execute()
+            self.client.table("BannedAccount").update(banned_account.to_serializable_JSON()).eq("banned_account_id", banned_account.banned_account_id).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
     
@@ -48,5 +50,6 @@ class SupabaseUserAccountManagementAPIService:
             self.client.table("BannedAccount").delete().eq("banned_account_id", banned_account_id).execute()
             return True
         except Exception as e:
+            print(e)
             return False
         return False
