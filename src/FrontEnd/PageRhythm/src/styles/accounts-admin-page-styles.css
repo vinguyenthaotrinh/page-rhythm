@@ -47,28 +47,27 @@
     padding: 20px;
     overflow: auto;
     max-width: 1000px;
-    margin: 0 auto; /* Center the grid horizontally */
+    margin: 0 auto;
 }
 
-/* account item container: two-column layout */
 .accounts-admin-page-account-item {
-    display: flex;             /* Flexbox for the two-column layout */
+    display: flex;             
     background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    gap: 20px;                 /* Spacing between the two columns */
+    gap: 20px;                
     transition: transform 0.3s ease;
-    align-items: center;       /* Vertically center the content */
+    align-items: center;      
 }
 
 .accounts-admin-page-account-item:hover {
-    transform: translateY(-5px);  /* Adds a hover effect to lift the item */
+    transform: translateY(-5px); 
 }
 
 @media (max-width: 768px) {
     .accounts-admin-page-account-item {
-        flex-direction: column; /* Stack the columns vertically */
+        flex-direction: column;
         align-items: flex-start;
     }
 }
@@ -91,60 +90,6 @@
     background-color: #0f4ba3;
 }
 
-/* Confirmation Box Overlay */
-.accounts-admin-page-deletion-confirmation-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it's on top */
-}
-
-/* Confirmation Box */
-.accounts-admin-page-deletion-confirmation-box {
-    background-color: #EFEAD3;
-    color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-}
-
-/* Confirmation Box Overlay */
-.accounts-admin-page-visibility-confirmation-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-/* Confirmation Box */
-.accounts-admin-page-visibility-confirmation-box {
-    background-color: #EFEAD3;
-    color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-}
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -155,19 +100,19 @@
 }
 
 #accounts-admin-page-loading-text {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
     color: #333;
+    font-size: 20px;
     margin-top: 20px;
+    font-weight: bold;
     text-align: center;
+    font-family: "Poppins-SemiBold", sans-serif;
 }
 
 .profile-picture-circle {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .account-item-row.disabled {

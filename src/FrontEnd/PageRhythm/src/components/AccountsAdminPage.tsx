@@ -42,12 +42,12 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             {/* Row 1: Profile picture, full name, email */}
             <div className="account-item-row">
                 <img 
-                    src={userAccount.profilePicture || "default-profile.png"} 
+                    src={IMAGES.decodeProfilePicture(userAccount.profile_picture)}
                     alt="Profile" 
                     className="profile-picture-circle" 
                 />
                 <div className="account-info">
-                    <p className="full-name">{userAccount.fullName}</p>
+                    <p className="full-name">{userAccount.full_name}</p>
                     <p className="email">{userAccount.email}</p>
                 </div>
             </div>
