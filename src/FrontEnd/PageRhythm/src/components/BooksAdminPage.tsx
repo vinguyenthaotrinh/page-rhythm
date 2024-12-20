@@ -41,6 +41,41 @@ const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
     );
 };
 
+interface VisibilityConfirmationBoxProps {
+    message?: string;           // Confirmation message
+    onConfirm: () => void;      // Function to call when confirmed
+    onCancel: () => void;       // Function to call when canceled
+}
+
+const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
+    message,
+    onConfirm,
+    onCancel,
+}) => {
+    return (
+        <div className="books-admin-page-visibility-confirmation-overlay">
+            <div className="books-admin-page-visibility-confirmation-box">
+                <h1 id="books-admin-page-visibility-confirmation-title">Confirm Action</h1>
+                <p>{message}</p>
+                <div className="books-admin-page-visibility-confirmation-buttons">
+                    <button
+                        className="books-admin-page-visibility-confirmation-button confirm"
+                        onClick={onConfirm}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="books-admin-page-visibility-confirmation-button cancel"
+                        onClick={onCancel}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 function LoadingText() {
     return (
         <p
@@ -102,6 +137,38 @@ export default function BooksAdminPage() {
         setShowDeletionConfirmation(false); // Close the confirmation box
     };
 
+    const handleVisibilityClick = (book: any) => {
+        setBookToToggle(book);
+        const action = book.hidden ? "Unhide" : "Hide";
+        setVisibilityMessage(`Are you sure you want to ${action} this book?`);
+        setShowVisibilityConfirmation(true);
+    };
+
+    const handleConfirmToggleVisibility = async () => {
+        if (bookToToggle) {
+            try {
+                const server = await Server.getInstance();
+                const updatedBook = {
+                    ...bookToToggle,
+                    hidden: !bookToToggle.hidden,
+                };
+                //await server.updateBookVisibility(bookToToggle.book_id, updatedBook.hidden);
+                setBooks(books.map((book) =>
+                    book.book_id === bookToToggle.book_id ? updatedBook : book
+                ));
+                setBookToToggle(null);
+                setShowVisibilityConfirmation(false);
+            } catch (error) {
+                console.error("Error toggling book visibility:", error);
+            }
+        }
+    };
+
+    const handleCancelToggleVisibility = () => {
+        setBookToToggle(null);
+        setShowVisibilityConfirmation(false);
+    };
+
     return (
         <div id="books-admin-page">
             <NavigationBar />
@@ -131,8 +198,21 @@ export default function BooksAdminPage() {
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
                                             <div className="book-item-buttons">
-                                                
-
+                                                <button
+                                                    className="book-item-visibility-button"
+                                                    onClick={() => handleVisibilityClick(book)}
+                                                >
+                                                    {book.hidden ? "Unhide" : "Hide"}
+                                                    <img
+                                                        src={
+                                                            book.hidden
+                                                                ? IMAGES.EYE_OPEN_ICON
+                                                                : IMAGES.EYE_CLOSED_ICON
+                                                        }
+                                                        alt="Visibility Icon"
+                                                        className="book-item-button-icon"
+                                                    />
+                                                </button>
                                                 <button
                                                     className="book-item-delete-button"
                                                     onClick={() => handleDeleteClick(book)}
@@ -161,7 +241,14 @@ export default function BooksAdminPage() {
                 </div>
             </div>
 
-            {/* Confirmation Box */}
+            {showVisibilityConfirmation && (
+                <VisibilityConfirmationBox
+                    message={visibilityMessage}
+                    onConfirm={handleConfirmToggleVisibility}
+                    onCancel={handleCancelToggleVisibility}
+                />
+            )}
+
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
                     onConfirm   =   {handleConfirmDelete}
