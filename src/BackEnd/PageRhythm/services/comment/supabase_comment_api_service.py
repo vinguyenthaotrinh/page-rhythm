@@ -33,14 +33,24 @@ class SupabaseCommentAPIService:
         return False
     
     def insert_comment(self, comment_JSON: dict) -> bool:
-        while True:
+        if "comment_id" in comment_JSON:
             try:
                 response = self.client.table("Comment").insert(comment_JSON()).execute()
                 return True
             except Exception as e:
                 print(e)
-                if e.code != "23505":
-                    return False
+                return False
+            return False
+        else:
+            while True:
+                try:
+                    response = self.client.table("Comment").insert(comment_JSON()).execute()
+                    return True
+                except Exception as e:
+                    print(e)
+                    if e.code != "23505":
+                        return False
+            return False
         return False
     
     def get_all_comments(self, book_id: int) -> list[Comment]:

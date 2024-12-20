@@ -294,6 +294,16 @@ function LoadingText() {
     );
 }
 
+function NoBookText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            You currently have no books.
+        </p>
+    );
+}
+
 export default function BooksMyLibraryPage() {
     const [books, setBooks] = useState<any[]>([]);                                      // Books data state
     const [loading, setLoading] = useState(true);                                       // Loading state
@@ -456,7 +466,7 @@ export default function BooksMyLibraryPage() {
 
                     {/* Scrollable section for books */}
                     <div id="books-my-library-page-books-list-container">
-                        {loading ? (<LoadingText />) : (
+                        {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
                             <div id="books-my-library-page-books-grid">
                                 {books.map((book, index) => (
                                     <div key={index} className="books-my-library-page-book-item">

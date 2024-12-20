@@ -137,8 +137,8 @@
     margin-top: 0px;
 }
 
-/* Edit Button */
-.book-item-edit-button {
+/* Visibility Button */
+.book-item-visibility-button {
     display: flex;
     align-items: center;
     gap: 5px; /* Space between text and icon */
@@ -155,7 +155,7 @@
     justify-content: space-between;
 }
 
-.book-item-edit-button:hover {
+.book-item-visibility-button:hover {
     background-color: #0f4ba3;
 }
 
@@ -272,6 +272,33 @@
     width: 100%;
 }
 
+/* Confirmation Box Overlay */
+.books-admin-page-visibility-confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Confirmation Box */
+.books-admin-page-visibility-confirmation-box {
+    background-color: #EFEAD3;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
 /* Confirmation Buttons */
 .books-admin-page-deletion-confirmation-buttons {
     display: flex;
@@ -315,41 +342,46 @@
     font-family: "Poppins-SemiBold", sans-serif;
 }
 
-/* Main overlay container */
-.add-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
+.books-admin-page-visibility-confirmation-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 31082003;  /* Ensure overlay appears above other content */
-    transition: opacity 0.3s ease; /* Smooth fade-in/out */
+    gap: 10px;
+    margin-top: 15px;
 }
 
-/* Content inside the overlay */
-.add-overlay-content {
-    background-color: #EFEAD3;  /* Light beige background */
+.books-admin-page-visibility-confirmation-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.books-admin-page-visibility-confirmation-button.confirm {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.books-admin-page-visibility-confirmation-button.cancel {
+    background-color: #ccc;
     color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px; /* Limit the maximum width for large screens */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
-    display: flex;
-    flex-direction: column;   /* Stack children vertically */
-    justify-content: center;  /* Center the content vertically */
-    align-items: center;      /* Center the content horizontally */
-    gap: 0px;                /* Add space between elements */
-    animation: fadeIn 0.3s ease-out; /* Fade-in effect for content */
+}
+
+.books-admin-page-visibility-confirmation-button.confirm:hover {
+    background-color: #d43e2d;
+    color: white;
+}
+
+.books-admin-page-visibility-confirmation-button.cancel:hover {
+    background-color: #ececec;
+    color: black;
+}
+
+#books-admin-page-visibility-confirmation-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
 }
 
 /* Smooth fade-in animation */
@@ -360,91 +392,6 @@
     100% {
         opacity: 1;
     }
-}
-
-/* Title styling */
-#add-overlay-title {
-    font-size: 24px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
-    margin-bottom: 15px;
-}
-
-/* Styling for text descriptions */
-.add-overlay p {
-    font-size: 16px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-/* Input fields styling */
-.add-overlay input,
-.add-overlay textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    background-color: #fff;
-    transition: border 0.3s ease;
-}
-
-.add-overlay input:focus,
-.add-overlay textarea:focus {
-    border-color: #5b5b5b;  /* Darker border on focus */
-    outline: none;
-}
-
-/* File input styling */
-.add-overlay input[type="file"] {
-    padding: 5px;
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-/* Image preview container */
-.add-overlay img {
-    margin-top: 15px;
-    max-width: 100%;
-    border-radius: 5px;
-}
-
-/* Buttons styling */
-.add-overlay-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.add-overlay-buttons button {
-    background-color: #4CAF50;  /* Green background */
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: "Poppins-SemiBold", sans-serif;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: 8px;
-    margin-right: 8px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effects for buttons */
-.add-overlay-buttons button:hover {
-    background-color: #45a049;  /* Darker green */
-}
-
-/* Close button with a different color */
-.add-overlay-buttons button:nth-child(2) {
-    background-color: #f44336;  /* Red background */
-}
-
-.add-overlay-buttons button:nth-child(2):hover {
-    background-color: #e53935;  /* Darker red */
 }
 
 /* Responsiveness */
@@ -507,7 +454,7 @@
 .file-name-display {
     font-size: 14px;
     color: #555;
-    max-width: 200px; /* Optional: Limit the file name width */
+    max-width: 200px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

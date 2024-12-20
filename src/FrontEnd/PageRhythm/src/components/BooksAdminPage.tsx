@@ -41,114 +41,35 @@ const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
     );
 };
 
-interface EditBookOverlayProps {
-    showEditOverlay:    boolean;
-    setShowEditOverlay: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedBook:       any | null;
-    setSelectedBook:    React.Dispatch<React.SetStateAction<any | null>>;
-    handleEditBook:     (updatedBook: any) => void;
+interface VisibilityConfirmationBoxProps {
+    message?: string;           // Confirmation message
+    onConfirm: () => void;      // Function to call when confirmed
+    onCancel: () => void;       // Function to call when canceled
 }
 
-const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
-    showEditOverlay,
-    setShowEditOverlay,
-    selectedBook,
-    setSelectedBook,
-    handleEditBook,
+const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
+    message,
+    onConfirm,
+    onCancel,
 }) => {
-    const [bookName, setBookName]                       = useState(selectedBook?.title || "");
-    const [authorName, setAuthorName]                   = useState(selectedBook?.author || "");
-    const [releaseDate, setReleaseDate]                 = useState<string | null>(selectedBook?.release_date || "");
-    const [genre, setGenre]                             = useState<string | null>(selectedBook?.genre || "");
-    const [summary, setSummary]                         = useState(selectedBook?.summary || "");
-    const [selectedCoverImage, setSelectedCoverImage]   = useState<File | null>(null); // Add cover image upload if necessary
-
-    useEffect(() => {
-        // Reset form values when selectedBook changes
-        if (selectedBook) {
-            setBookName(selectedBook.title);
-            setAuthorName(selectedBook.author);
-            setReleaseDate(selectedBook.release_date);
-            setGenre(selectedBook.genre);
-            setSummary(selectedBook.summary);
-        }
-    }, [selectedBook]);
-
-    const handleBookEdit = () => {
-        const updatedBook = {
-            ...selectedBook,
-            title: bookName,
-            author: authorName,
-            release_date: releaseDate,
-            genre: genre,
-            summary: summary,
-            image: selectedCoverImage || selectedBook?.image, // Keep old image if not updating
-        };
-        handleEditBook(updatedBook); // Pass the updated book data
-        setShowEditOverlay(false); // Close the overlay
-    };
-
-    if (!showEditOverlay || !selectedBook) return null;
-
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Edit Book Information</h1>
-                <p>Edit the book details below</p>
-
-                <input
-                    type="text"
-                    placeholder="Book Name"
-                    value={bookName}
-                    onChange={(e) => setBookName(e.target.value)}
-                />
-
-                <input
-                    type="text"
-                    placeholder="Author Name"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
-                />
-                <input
-                    type="date"
-                    placeholder="Release Date"
-                    value={releaseDate || ""}
-                    onChange={(e) => setReleaseDate(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Genre (optional)"
-                    value={genre || ""}
-                    onChange={(e) => setGenre(e.target.value)}
-                />
-                <textarea
-                    placeholder="Summary"
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
-                />
-
-                <div className="file-input-container">
-                    <label htmlFor="cover-image-input" className="file-input-label">
-                        Upload Cover Image (optional)
-                    </label>
-                    <input
-                        type="file"
-                        id="cover-image-input"
-                        onChange={(e) => setSelectedCoverImage(e.target.files?.[0] || null)}
-                        accept="image/*"
-                        className="file-input-button"
-                    />
-
-                    {selectedCoverImage && (
-                        <div className="file-name-display">
-                            {selectedCoverImage.name}
-                        </div>
-                    )}
-                </div>
-
-                <div className="add-overlay-buttons">
-                    <button onClick={handleBookEdit}>Save Changes</button>
-                    <button onClick={() => setShowEditOverlay(false)}>Close</button>
+        <div className="books-admin-page-visibility-confirmation-overlay">
+            <div className="books-admin-page-visibility-confirmation-box">
+                <h1 id="books-admin-page-visibility-confirmation-title">Confirm Action</h1>
+                <p>{message}</p>
+                <div className="books-admin-page-visibility-confirmation-buttons">
+                    <button
+                        className="books-admin-page-visibility-confirmation-button confirm"
+                        onClick={onConfirm}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="books-admin-page-visibility-confirmation-button cancel"
+                        onClick={onCancel}
+                    >
+                        No
+                    </button>
                 </div>
             </div>
         </div>
@@ -166,15 +87,14 @@ function LoadingText() {
 }
 
 export default function BooksAdminPage() {
-    const [books, setBooks] = useState<any[]>([]);                                      // Books data state
-    const [loading, setLoading] = useState(true);                                       // Loading state
-    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);                    // Confirmation box visibility
-    const [bookToDelete, setBookToDelete] = useState<any | null>(null);                 // Track the selected book for deletion
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);                // Track the selected file for upload
-    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);    // Track the cover image file
-    const [showEditOverlay, setShowEditOverlay] = useState(false);                      // State for Edit Overlay
-    const [selectedBook, setSelectedBook] = useState<any | null>(null);                 // State for selected book
-    const navigate = useNavigate();
+    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
+    const [loading, setLoading]                                         = useState(true);                   // Loading state
+    const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
+    const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);       // Track the selected book for deletion
+    const [showVisibilityConfirmation, setShowVisibilityConfirmation]   = useState(false);
+    const [visibilityMessage, setVisibilityMessage]                     = useState("");
+    const [bookToToggle, setBookToToggle]                               = useState<any | null>(null);
+    const navigate                                                      = useNavigate();
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -194,7 +114,7 @@ export default function BooksAdminPage() {
     }, []);
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);      // Set the selected book
+        setBookToDelete(book);              // Set the selected book
         setShowDeletionConfirmation(true);  // Show the confirmation box
     };
 
@@ -217,23 +137,36 @@ export default function BooksAdminPage() {
         setShowDeletionConfirmation(false); // Close the confirmation box
     };
 
-    const handleEditClick = (book: any) => {
-        setSelectedBook(book);
-        setShowEditOverlay(true);  // Show the edit overlay
+    const handleVisibilityClick = (book: any) => {
+        setBookToToggle(book);
+        const action = book.hidden ? "Unhide" : "Hide";
+        setVisibilityMessage(`Are you sure you want to ${action} this book?`);
+        setShowVisibilityConfirmation(true);
     };
 
-    const handleEditBook = async (updatedBook: any) => {
-        try {
-            const server = await Server.getInstance();
-            await server.updateBook(updatedBook);
-            setBooks(books.map((book) =>
-                book.book_id === updatedBook.book_id ? updatedBook : book
-            )); // Update book list with the new details
-            setSelectedBook(null);
-            setShowEditOverlay(false);
-        } catch (error) {
-            console.error("Error updating book:", error);
+    const handleConfirmToggleVisibility = async () => {
+        if (bookToToggle) {
+            try {
+                const server = await Server.getInstance();
+                const updatedBook = {
+                    ...bookToToggle,
+                    hidden: !bookToToggle.hidden,
+                };
+                await server.toggleBookVisibility(bookToToggle.book_id);
+                setBooks(books.map((book) =>
+                    book.book_id === bookToToggle.book_id ? updatedBook : book
+                ));
+                setBookToToggle(null);
+                setShowVisibilityConfirmation(false);
+            } catch (error) {
+                console.error("Error toggling book visibility:", error);
+            }
         }
+    };
+
+    const handleCancelToggleVisibility = () => {
+        setBookToToggle(null);
+        setShowVisibilityConfirmation(false);
     };
 
     return (
@@ -265,14 +198,18 @@ export default function BooksAdminPage() {
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
                                             <div className="book-item-buttons">
-                                                <button 
-                                                    className="book-item-edit-button"
-                                                    onClick = {() => handleEditClick(book)}
+                                                <button
+                                                    className="book-item-visibility-button"
+                                                    onClick={() => handleVisibilityClick(book)}
                                                 >
-                                                    Edit
+                                                    {book.hidden ? "Unhide" : "Hide"}
                                                     <img
-                                                        src={IMAGES.WHITE_PENCIL_ICON}
-                                                        alt="Edit Icon"
+                                                        src={
+                                                            book.hidden
+                                                                ? IMAGES.EYE_OPEN_ICON
+                                                                : IMAGES.EYE_CLOSED_ICON
+                                                        }
+                                                        alt="Visibility Icon"
                                                         className="book-item-button-icon"
                                                     />
                                                 </button>
@@ -304,7 +241,14 @@ export default function BooksAdminPage() {
                 </div>
             </div>
 
-            {/* Confirmation Box */}
+            {showVisibilityConfirmation && (
+                <VisibilityConfirmationBox
+                    message={visibilityMessage}
+                    onConfirm={handleConfirmToggleVisibility}
+                    onCancel={handleCancelToggleVisibility}
+                />
+            )}
+
             {showDeletionConfirmation && (
                 <DeletionConfirmationBox
                     onConfirm   =   {handleConfirmDelete}
@@ -312,13 +256,6 @@ export default function BooksAdminPage() {
                 />
             )}
 
-            <EditBookOverlay
-                showEditOverlay={showEditOverlay}
-                setShowEditOverlay={setShowEditOverlay}
-                selectedBook={selectedBook}
-                setSelectedBook={setSelectedBook}
-                handleEditBook={handleEditBook}
-            />
         </div>
     );
 }

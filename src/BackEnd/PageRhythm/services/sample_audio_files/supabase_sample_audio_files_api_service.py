@@ -25,16 +25,28 @@ class SupabaseSampleAudioFilesAPIService:
         return None
     
     def insert_sample_audio_file(self, sample_audio_file_JSON: dict) -> Optional[SampleAudioFile]:
-        while True:
+        if "sample_audio_file_id" in sample_audio_file_JSON:
             try:
                 response = self.client.table("SampleAudioFile").insert(sample_audio_file_JSON).execute()
                 if response.data:
                     return SampleAudioFile.deserialize_JSON(response.data[0])
                 return None
             except Exception as e:
-                print(e)
-                if e.code != "23505":
+                    print(e)
                     return None
+            return None
+        else:
+            while True:
+                try:
+                    response = self.client.table("SampleAudioFile").insert(sample_audio_file_JSON).execute()
+                    if response.data:
+                        return SampleAudioFile.deserialize_JSON(response.data[0])
+                    return None
+                except Exception as e:
+                    print(e)
+                    if e.code != "23505":
+                        return None
+            return None
         return None
     
     def check_ownership(self, sample_audio_file_id: int, owner_id: int) -> bool:

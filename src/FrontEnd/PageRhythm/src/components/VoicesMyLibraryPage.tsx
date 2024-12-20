@@ -181,6 +181,16 @@ function LoadingText() {
     );
 }
 
+function NoVoiceText() {
+    return (
+        <p
+            id = "books-my-library-page-loading-text"
+        >
+            You currently have no sample audio files.
+        </p>
+    );
+}
+
 export default function VoicesMyLibraryPage() {
     const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
     const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
@@ -370,108 +380,112 @@ export default function VoicesMyLibraryPage() {
 
                     {/* Scrollable section for records */}
                     <div id="voices-my-library-page-record-list-container">
-                        {records.map((record, index) => (
-                            <div 
-                                key={record.sample_audio_file_id} 
-                                className="record-item"
-                            >
-                                <div className="record-header">
-                                    <span className="sample-audio-file-name">{record.file_name}</span>
-                                </div>
-
-                                <div className="record-body">
-                                    {/* Left Column */}
-                                    <div className="record-left-column">
-                                        <audio
-                                            ref={(el) => (audioRefs.current[index] = el!)}
-                                            src={
-                                                record.content
-                                            }
-                                            onTimeUpdate={() =>
-                                                setAudioTimes((prev) => ({
-                                                    ...prev,
-                                                    [index]: audioRefs.current[index].currentTime,
-                                                }))
-                                            }
-                                            onEnded={() => setPlayingIndex(null)}
-                                        />
-
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="100"
-                                            value={(audioTimes[index] / audioRefs.current[index]?.duration) * 100 || 0}
-                                            onChange={(event) => handleSeek(event, index)}
-                                            className="audio-slider"
-                                        />
-
-                                        <div className="slider-container">
-                                            <div className="time-labels">
-                                                <span className="start-time">00:00</span>
-                                                <span className="current-time">
-                                                    {isNaN(audioTimes[index]) || audioTimes[index] === null
-                                                    ? "00:00"  // Fallback in case of invalid value
-                                                    : new Date(audioTimes[index] * 1000).toISOString().substring(14, 19)}
-                                                </span>
-                                                <span className="end-time">
-                                                    {audioRefs.current[index]?.duration
-                                                        ? new Date(audioRefs.current[index].duration * 1000)
-                                                            .toISOString()
-                                                            .substring(14, 19)
-                                                        : "00:00"}
-                                                </span>
-                                            </div>
-                                            
+                        {
+                            records.length === 0 ? <NoVoiceText /> : (
+                                records.map((record, index) => (
+                                    <div 
+                                        key={record.sample_audio_file_id} 
+                                        className="record-item"
+                                    >
+                                        <div className="record-header">
+                                            <span className="sample-audio-file-name">{record.file_name}</span>
                                         </div>
-                                        
-                                        <button
-                                            className="play-pause-button"
-                                            onClick={() => handlePlayPause(index)}
-                                        >
-                                            <img
-                                                src={playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}
-                                                alt={playingIndex === index ? "Pause Icon" : "Play Icon"}
-                                                className="play-pause-icon"
-                                            />
-                                        </button>
-                                    </div>
-
-                                    {/* Right Column */}
-                                    <div className="record-right-column">
-                                        <button
-                                            className="record-item-edit-button"
-                                            onClick={() => handleEditClick(record)}
-                                        >
-                                            Edit
-                                            <img
-                                                src={IMAGES.WHITE_PENCIL_ICON}
-                                                alt="Edit Icon"
-                                                className="record-item-button-icon"
-                                            />
-                                        </button>
-
-                                        <button
-                                            className="record-item-delete-button"
-                                            onClick={() => handleDeleteClick(record)}
-                                        >
-                                            Delete
-                                            <div className="record-item-button-icon">
-                                                <img
-                                                    src={IMAGES.RED_TRASH_ICON}
-                                                    alt="Delete Icon"
-                                                    className="icon-normal"
+        
+                                        <div className="record-body">
+                                            {/* Left Column */}
+                                            <div className="record-left-column">
+                                                <audio
+                                                    ref={(el) => (audioRefs.current[index] = el!)}
+                                                    src={
+                                                        record.content
+                                                    }
+                                                    onTimeUpdate={() =>
+                                                        setAudioTimes((prev) => ({
+                                                            ...prev,
+                                                            [index]: audioRefs.current[index].currentTime,
+                                                        }))
+                                                    }
+                                                    onEnded={() => setPlayingIndex(null)}
                                                 />
-                                                <img
-                                                    src={IMAGES.WHITE_TRASH_ICON}
-                                                    alt="Delete Hover Icon"
-                                                    className="icon-hover"
+        
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="100"
+                                                    value={(audioTimes[index] / audioRefs.current[index]?.duration) * 100 || 0}
+                                                    onChange={(event) => handleSeek(event, index)}
+                                                    className="audio-slider"
                                                 />
+        
+                                                <div className="slider-container">
+                                                    <div className="time-labels">
+                                                        <span className="start-time">00:00</span>
+                                                        <span className="current-time">
+                                                            {isNaN(audioTimes[index]) || audioTimes[index] === null
+                                                            ? "00:00"  // Fallback in case of invalid value
+                                                            : new Date(audioTimes[index] * 1000).toISOString().substring(14, 19)}
+                                                        </span>
+                                                        <span className="end-time">
+                                                            {audioRefs.current[index]?.duration
+                                                                ? new Date(audioRefs.current[index].duration * 1000)
+                                                                    .toISOString()
+                                                                    .substring(14, 19)
+                                                                : "00:00"}
+                                                        </span>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                <button
+                                                    className="play-pause-button"
+                                                    onClick={() => handlePlayPause(index)}
+                                                >
+                                                    <img
+                                                        src={playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}
+                                                        alt={playingIndex === index ? "Pause Icon" : "Play Icon"}
+                                                        className="play-pause-icon"
+                                                    />
+                                                </button>
                                             </div>
-                                        </button>
+        
+                                            {/* Right Column */}
+                                            <div className="record-right-column">
+                                                <button
+                                                    className="record-item-edit-button"
+                                                    onClick={() => handleEditClick(record)}
+                                                >
+                                                    Edit
+                                                    <img
+                                                        src={IMAGES.WHITE_PENCIL_ICON}
+                                                        alt="Edit Icon"
+                                                        className="record-item-button-icon"
+                                                    />
+                                                </button>
+        
+                                                <button
+                                                    className="record-item-delete-button"
+                                                    onClick={() => handleDeleteClick(record)}
+                                                >
+                                                    Delete
+                                                    <div className="record-item-button-icon">
+                                                        <img
+                                                            src={IMAGES.RED_TRASH_ICON}
+                                                            alt="Delete Icon"
+                                                            className="icon-normal"
+                                                        />
+                                                        <img
+                                                            src={IMAGES.WHITE_TRASH_ICON}
+                                                            alt="Delete Hover Icon"
+                                                            className="icon-hover"
+                                                        />
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
+                                ))
+                            )
+                        }
                     </div>
                 </div>
             </div>
