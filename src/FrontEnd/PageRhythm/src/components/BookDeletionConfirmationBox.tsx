@@ -1,3 +1,5 @@
+import "../styles/book-deletion-confirmation-box-styles.css";
+
 interface BookDeletionConfirmationBoxProps {
     title?:                     string;             // Title of the book
     message?:                   string;             // Message to display
@@ -20,7 +22,7 @@ const BookDeletionConfirmationBox: React.FC<BookDeletionConfirmationBoxProps> = 
     return (
         <div className="books-my-library-page-deletion-confirmation-overlay">
             <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">{title}</h1>
+                <h1 className="books-my-library-page-deletion-confirmation-title">{title}</h1>
                 <p>{message}</p>
                 <div className="books-my-library-page-deletion-confirmation-buttons">
                     <button

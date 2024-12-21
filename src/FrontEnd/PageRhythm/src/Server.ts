@@ -1129,7 +1129,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
-        const url = `${this.host}/statistics/track_progress/`;
+        const url = `${this.host}/statistics/tracked_progress/delete`;
 
         const body = {
             book_id: bookID,
@@ -1137,7 +1137,7 @@ export default class Server {
 
         try {
             const response = await fetch(url, {
-                method: "DELETE",
+                method: "POST",
                 headers: this.getSimpleHeadersWithSessionToken(),
                 body: JSON.stringify(body),
             });
@@ -1153,5 +1153,32 @@ export default class Server {
             this.logAndThrowError("Error during deleting tracked reading progress:", error);
         }
     }
-        
+       
+    public async getTrackedReadingProgress(bookID: number): Promise<any> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/tracked_progress/`;
+
+        const body = {
+            book_id: bookID,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body),
+            });
+
+            if (!response.ok) 
+                throw new Error(`Failed to fetch reading progress. Status: ${response.status}`);
+
+            const progress = await response.json(); // The response is expected to be a JSON object representing the reading progress
+
+            return progress.data; // Return the reading progress object
+        } catch (error) {
+            this.logAndThrowError("Error fetching reading progress:", error);
+        }
+    }
 }

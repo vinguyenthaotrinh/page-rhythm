@@ -120,7 +120,7 @@
 }
 
 /* Button container (this was adjusted to ensure buttons are stacked vertically) */
-.book-item-buttons {
+.statistics-book-item-buttons {
     gap: 8px;               /* Space between buttons */
     display: flex;
     margin-top: 0px;
@@ -128,7 +128,7 @@
 }
 
 /* Edit Button */
-.book-item-edit-button {
+.statistics-book-item-edit-button {
     gap: 5px;           /* Space between text and icon */
     width: 100%;        /* Make it responsive */
     border: none;
@@ -136,7 +136,7 @@
     color: white;
     cursor: pointer;
     font-size: 14px;
-    max-width: 120px;   /* Limit the width of the button */
+    max-width: 140px;   /* Limit the width of the button */
     padding: 8px 12px;
     border-radius: 12px;
     align-items: center;
@@ -150,14 +150,14 @@
 }
 
 /* Delete Button */
-.book-item-delete-button {
+.statistics-book-item-delete-button {
     gap: 5px;               /* Space between text and icon */
     width: auto;            /* Ensure the width adapts to the content */
     display: flex;
     cursor: pointer;
     font-size: 14px;
     color: #FF0000;
-    max-width: 120px;
+    max-width: 140px;
     padding: 8px 12px;
     border-radius: 12px;
     align-items: center;
@@ -167,13 +167,13 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.book-item-delete-button:hover {
+.statistics-book-item-delete-button:hover {
     background-color: #e74c3c;
     border-color: #e74c3c;
     color: white;
 }
 
-.book-item-button-icon {
+.statistics-book-item-button-icon {
     position: relative;
     height: 16px;
     width: 16px;
@@ -187,11 +187,11 @@
     display: none;      /* Initially hide the hover icon */
 }
 
-.book-item-delete-button:hover .icon-normal {
+.statistics-book-item-delete-button:hover .icon-normal {
     display: none;      /* Hide the default icon when hovering */
 }
 
-.book-item-delete-button:hover .icon-hover {
+.statistics-book-item-delete-button:hover .icon-hover {
     display: block;     /* Show the hover icon when hovering */
 }
 

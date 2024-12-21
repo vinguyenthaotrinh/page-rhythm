@@ -104,23 +104,23 @@ export default function StatisticsProfilePage() {
                                             <p className="statistics-book-item-release-date">
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
-                                            <div className="book-item-buttons">
+                                            <div className="statistics-book-item-buttons">
                                                 <button 
-                                                    className="book-item-edit-button"
+                                                    className="statistics-book-item-edit-button"
                                                 >
-                                                    Edit
+                                                    Update Status
                                                     <img
                                                         src={IMAGES.WHITE_PENCIL_ICON}
                                                         alt="Edit Icon"
-                                                        className="book-item-button-icon"
+                                                        className="statistics-book-item-button-icon"
                                                     />
                                                 </button>
                                                 <button
-                                                    className="book-item-delete-button"
+                                                    className="statistics-book-item-delete-button"
                                                     onClick={() => handleDeleteClick(book)}
                                                 >
                                                     Delete
-                                                    <div className="book-item-button-icon">
+                                                    <div className="statistics-book-item-button-icon">
                                                         <img
                                                             src={IMAGES.RED_TRASH_ICON}
                                                             alt="Delete Icon"
