@@ -1006,18 +1006,18 @@ export default class Server {
         const body = {
             banned_account_id,
             start_time: {
-                day: parseInt(from.split("-")[2], 10),
-                month: parseInt(from.split("-")[1], 10),
-                year: parseInt(from.split("-")[0], 10),
-                hour: 0,
+                day:    parseInt(from.split("-")[2], 10),
+                month:  parseInt(from.split("-")[1], 10),
+                year:   parseInt(from.split("-")[0], 10),
+                hour:   0,
                 minute: 0,
                 second: 0,
             },
             end_time: {
-                day: parseInt(to.split("-")[2], 10),
-                month: parseInt(to.split("-")[1], 10),
-                year: parseInt(to.split("-")[0], 10),
-                hour: 23,
+                day:    parseInt(to.split("-")[2], 10),
+                month:  parseInt(to.split("-")[1], 10),
+                year:   parseInt(to.split("-")[0], 10),
+                hour:   23,
                 minute: 59,
                 second: 59,
             },
@@ -1120,6 +1120,58 @@ export default class Server {
             const progress = await response.json(); // The response is expected to be a JSON array of reading progress
 
             return progress.data; // Return the array of reading progress
+        } catch (error) {
+            this.logAndThrowError("Error fetching reading progress:", error);
+        }
+    }
+
+    public async deleteTrackedReadingProgress(bookID: number): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/tracked_progress/delete`;
+
+        const body = {
+            book_id: bookID,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error deleting tracked reading progress:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to delete tracked reading progress.");
+            }
+
+            console.log("Tracked reading progress deleted successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during deleting tracked reading progress:", error);
+        }
+    }
+       
+    public async getTrackedReadingProgress(bookID: number): Promise<any> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/tracked_progress/${bookID}`;
+
+        try {
+            const response = await fetch(url, {
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken()
+            });
+
+            if (!response.ok) 
+                throw new Error(`Failed to fetch reading progress. Status: ${response.status}`);
+
+            const progress = await response.json(); // The response is expected to be a JSON object representing the reading progress
+
+            return progress.data; // Return the reading progress object
         } catch (error) {
             this.logAndThrowError("Error fetching reading progress:", error);
         }

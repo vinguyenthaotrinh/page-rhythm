@@ -28,7 +28,6 @@ import LANDING_PAGE_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-bottom
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER from "./assets/images/landing-page-bottom-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER from "./assets/images/landing-page-login-section-top-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER from "./assets/images/landing-page-login-section-bottom-left-corner.png";
-import { decode } from "punycode";
 
 const IMAGES = {
     LOGO,

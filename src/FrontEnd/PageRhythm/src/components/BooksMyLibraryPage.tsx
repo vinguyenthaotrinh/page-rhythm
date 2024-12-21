@@ -5,41 +5,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/books-my-library-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
-
-interface DeletionConfirmationBoxProps {
-    title?: string;             // Optional custom title
-    message?: string;           // Confirmation message
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
-}
-
-const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    onConfirm,
-    onCancel,
-}) => {
-    return (
-        <div className="books-my-library-page-deletion-confirmation-overlay">
-            <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">Delete your book</h1>
-                <p>Are you sure you want to delete this book?</p>
-                <div className="books-my-library-page-deletion-confirmation-buttons">
-                    <button
-                        className="books-my-library-page-deletion-confirmation-button confirm"
-                        onClick={onConfirm}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="books-my-library-page-deletion-confirmation-button cancel"
-                        onClick={onCancel}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
+import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
 interface AddBookOverlayProps {
     showAddOverlay:         boolean;
@@ -305,21 +271,21 @@ function NoBookText() {
 }
 
 export default function BooksMyLibraryPage() {
-    const [books, setBooks] = useState<any[]>([]);                                      // Books data state
-    const [loading, setLoading] = useState(true);                                       // Loading state
-    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);    // Confirmation box visibility
-    const [bookToDelete, setBookToDelete] = useState<any | null>(null);                 // Track the selected book for deletion
-    const [showAddOverlay, setShowAddOverlay] = useState(false);                        // State for Add Overlay
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);                // Track the selected file for upload
-    const [bookName, setBookName] = useState("");                                       // Book name input
-    const [authorName, setAuthorName] = useState("");                                   // Author name input
-    const [releaseDate, setReleaseDate] = useState<string | null>("");                  // Release date input
-    const [genre, setGenre] = useState<string | null>("");                              // Genre input
-    const [summary, setSummary] = useState("");                                         // Summary input
-    const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);    // Track the cover image file
-    const [showEditOverlay, setShowEditOverlay] = useState(false);                      // State for Edit Overlay
-    const [selectedBook, setSelectedBook] = useState<any | null>(null);                 // State for selected book
-    const navigate = useNavigate();
+    const [books, setBooks]                                         = useState<any[]>([]);              // Books data state
+    const [loading, setLoading]                                     = useState(true);                   // Loading state
+    const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);                  // Confirmation box visibility
+    const [bookToDelete, setBookToDelete]                           = useState<any | null>(null);       // Track the selected book for deletion
+    const [showAddOverlay, setShowAddOverlay]                       = useState(false);                  // State for Add Overlay
+    const [selectedFile, setSelectedFile]                           = useState<File | null>(null);      // Track the selected file for upload
+    const [bookName, setBookName]                                   = useState("");                     // Book name input
+    const [authorName, setAuthorName]                               = useState("");                     // Author name input
+    const [releaseDate, setReleaseDate]                             = useState<string | null>("");      // Release date input
+    const [genre, setGenre]                                         = useState<string | null>("");      // Genre input
+    const [summary, setSummary]                                     = useState("");                     // Summary input
+    const [selectedCoverImage, setSelectedCoverImage]               = useState<File | null>(null);      // Track the cover image file
+    const [showEditOverlay, setShowEditOverlay]                     = useState(false);                  // State for Edit Overlay
+    const [selectedBook, setSelectedBook]                           = useState<any | null>(null);       // State for selected book
+    const navigate                                                  = useNavigate();
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -404,7 +370,7 @@ export default function BooksMyLibraryPage() {
     };
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);      // Set the selected book
+        setBookToDelete(book);              // Set the selected book
         setShowDeletionConfirmation(true);  // Show the confirmation box
     };
 
@@ -526,13 +492,11 @@ export default function BooksMyLibraryPage() {
                 </div>
             </div>
 
-            {/* Confirmation Box */}
-            {showDeletionConfirmation && (
-                <DeletionConfirmationBox
-                    onConfirm   =   {handleConfirmDelete}
-                    onCancel    =   {handleCancelDelete}
-                />
-            )}
+            <BookDeletionConfirmationBox
+                showDeletionConfirmation    =   {showDeletionConfirmation}
+                onConfirm                   =   {handleConfirmDelete}
+                onCancel                    =   {handleCancelDelete}
+            />
 
             {/* Render the AddBookOverlay */}
             <AddBookOverlay

@@ -37,7 +37,7 @@ CREATE TABLE "TrackedProgress" (
   "user_id"                   bigserial NOT NULL,
   "book_id"                   bigserial NOT NULL,
   "page_number"               int,
-  "status"                    varchar(50),
+  "status"                    text NOT NULL DEFAULT 'in_progress' CHECK (status IN ("in_progress", "not_started", "finished")),
   "most_recent_update_date"   date,
   PRIMARY KEY ("user_id", "book_id")
 );

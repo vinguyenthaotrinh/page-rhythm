@@ -108,6 +108,7 @@ export default function BookDetailsPage() {
                 const server = await Server.getInstance();  // Get the server instance
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
                 setBook(book);                              // Set the book details in state
+                const response = await server.getTrackedReadingProgress(parseInt(bookID, 10));
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
@@ -152,7 +153,7 @@ export default function BookDetailsPage() {
             fetchUserRating();
             fetchComments();
         }
-    }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
+    }, [bookID]);
 
     if (!book) {
         return (

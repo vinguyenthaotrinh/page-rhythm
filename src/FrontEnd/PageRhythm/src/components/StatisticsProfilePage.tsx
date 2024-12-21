@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import ProfileSectionBar from "./ProfileSectionBar";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/statistics-profile-page-styles.css";
+import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
 function LoadingText() {
     return (
@@ -27,9 +28,58 @@ function NoBookText() {
 }
 
 export default function StatisticsProfilePage() {
-    const [books, setBooks]     = useState<any[]>([]);                                  // Books data state
-    const [loading, setLoading] = useState(true);                                       // Loading state
-    const navigate              = useNavigate();                                        // Navigation hook
+    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
+    const [loading, setLoading]                                         = useState(true);                   // Loading state
+    const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
+    const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);
+    const navigate                                                      = useNavigate();                    // Navigation hook
+
+    const handleDeleteClick = (book: any) => {
+        setBookToDelete(book);              // Set the selected book
+        setShowDeletionConfirmation(true);  // Show the confirmation box
+    };
+    
+    const handleConfirmDelete = async () => {
+        if (bookToDelete) {
+            try {
+                const server = await Server.getInstance();
+                await server.deleteTrackedReadingProgress(bookToDelete.book_id); 
+                setBooks(books.filter((b) => b.book_id !== bookToDelete.book_id)); // Remove book from state
+                setBookToDelete(null);
+                setShowDeletionConfirmation(false);
+            } catch (error) {
+                console.error("Error deleting book:", error);
+            }
+        }
+    };
+    
+    const handleCancelDelete = () => {
+        setBookToDelete(null);
+        setShowDeletionConfirmation(false); // Close the confirmation box
+    };
+
+    const formatProgressStatus = (status: string, currentPage: number): string => {
+
+        console.log(status);
+
+        if (status == "not_started") 
+            return "Not started";
+
+        if (status == "in_progress")
+            return `In progress (page ${currentPage})`;
+
+        if (status == "finished")
+            return "Finished";
+
+        return "Unknown";
+    }
+
+    const formatMostRecentUpdateDate = (datetime: string | null): string => {
+        if (datetime === null)
+            return "No updates yet";
+
+        return datetime.split("T")[0];
+    }
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -77,22 +127,29 @@ export default function StatisticsProfilePage() {
                                             <p className="statistics-book-item-release-date">
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
-                                            <div className="book-item-buttons">
+                                            <p className="statistics-book-item-most-recent-update">
+                                                Most Recent Update: {formatMostRecentUpdateDate(book.progress.most_recent_update_date)}
+                                            </p>
+                                            <p className="statistics-book-item-progress-status">
+                                                Status: {formatProgressStatus(book.progress.status, book.progress.page_number)}
+                                            </p>
+                                            <div className="statistics-book-item-buttons">
                                                 <button 
-                                                    className="book-item-edit-button"
+                                                    className="statistics-book-item-edit-button"
                                                 >
-                                                    Edit
+                                                    Update Status
                                                     <img
                                                         src={IMAGES.WHITE_PENCIL_ICON}
                                                         alt="Edit Icon"
-                                                        className="book-item-button-icon"
+                                                        className="statistics-book-item-button-icon"
                                                     />
                                                 </button>
                                                 <button
-                                                    className="book-item-delete-button"
+                                                    className="statistics-book-item-delete-button"
+                                                    onClick={() => handleDeleteClick(book)}
                                                 >
                                                     Delete
-                                                    <div className="book-item-button-icon">
+                                                    <div className="statistics-book-item-button-icon">
                                                         <img
                                                             src={IMAGES.RED_TRASH_ICON}
                                                             alt="Delete Icon"
@@ -114,6 +171,14 @@ export default function StatisticsProfilePage() {
                     </div>
                 </div>
             </div>
+
+            <BookDeletionConfirmationBox
+                title                       =   "Delete the tracked progress"
+                message                     =   "Are you sure you want to delete the tracked progress of this book?"
+                showDeletionConfirmation    =   {showDeletionConfirmation}
+                onConfirm                   =   {handleConfirmDelete}
+                onCancel                    =   {handleCancelDelete}
+            />
         </div>
     );
 }
