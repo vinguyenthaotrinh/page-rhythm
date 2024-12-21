@@ -39,7 +39,7 @@ export default function ReadBookPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();  // Get the server instance
+                const server = await Server.getInstance();
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
 
                 setBook(book);                              // Set the book details in state

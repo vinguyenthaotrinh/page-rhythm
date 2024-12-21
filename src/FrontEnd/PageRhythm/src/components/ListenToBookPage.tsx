@@ -9,18 +9,18 @@ export default function ListenToBookPage() {
     const [loading, setLoading]                 = useState(true);
     const { bookID }                            = useParams<{ bookID: string }>();
     const [book, setBook]                       = useState<any>(null);
-    const [currentLeftPage, setCurrentLeftPage] = useState(1);
+    const [currentPage, setCurrentPage]         = useState(1);
     const [contentPages, setContentPages]       = useState<string[]>([]);
     const navigate                              = useNavigate();
     const pageCapacity                          = 1600;
     const maximumLineLength                     = 80;
     
     const handleBackClick = () => {
-        navigate(-1); // Navigate back to the previous page
+        navigate(-1);
     };
 
     const handleListenButtonClick = () => {
-        navigate(`/listen-to-book-page/${bookID}`); // Navigate to the ListenToBookPage component
+        navigate(`/listen-to-book-page/${bookID}`);
     };
 
     const decodeBookCover = (bookCover: string | null) => {
@@ -50,7 +50,7 @@ export default function ListenToBookPage() {
                 const progress = await server.getTrackedReadingProgress(parseInt(bookID));  // Fetch the progress of reading the book
 
                 if (progress && progress.status === "in_progress") 
-                    setCurrentLeftPage(progress.page_number);
+                    setCurrentPage(progress.page_number);
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
@@ -60,7 +60,7 @@ export default function ListenToBookPage() {
         if (bookID) 
             fetchBookDetails(); 
         
-    }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
+    }, [bookID]);
 
     useEffect(() => {
         if (loading) 
@@ -73,12 +73,12 @@ export default function ListenToBookPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();  // Get the server instance
+                const server = await Server.getInstance();
 
-                if (currentLeftPage === contentPages.length) {
-                    await server.trackProgressOfReadingBook(parseInt(bookID), currentLeftPage, "finished");  // Update the progress of reading the book
+                if (currentPage === contentPages.length) {
+                    await server.trackProgressOfReadingBook(parseInt(bookID), currentPage, "finished");
                 } else {
-                    await server.trackProgressOfReadingBook(parseInt(bookID), currentLeftPage, "in_progress");  // Update the progress of reading the book
+                    await server.trackProgressOfReadingBook(parseInt(bookID), currentPage, "in_progress"); 
                 }
             } catch (error) {
                 console.error("Error updating progress:", error);
@@ -87,20 +87,20 @@ export default function ListenToBookPage() {
 
         updateProgress(); 
 
-    }, [currentLeftPage, loading]);
+    }, [currentPage, loading]);
 
     if (!book) 
         return <div>Loading...</div>;
 
     const onLeftButtonClick = () => {
-        if (currentLeftPage > 1) {
-            setCurrentLeftPage(currentLeftPage - 1);
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
         }
     };
 
     const onRightButtonClick = () => {
-        if (currentLeftPage < contentPages.length) {
-            setCurrentLeftPage(currentLeftPage + 1);
+        if (currentPage < contentPages.length) {
+            setCurrentPage(currentPage + 1);
         }
     };
 
@@ -171,9 +171,7 @@ export default function ListenToBookPage() {
                         </button>
 
                         <span>
-                            {currentLeftPage >= contentPages.length
-                                ? `${currentLeftPage} of ${contentPages.length}`
-                                : `Page ${currentLeftPage} & ${currentLeftPage + 1} of ${contentPages.length}`}
+                            {`${currentPage} of ${contentPages.length}`}
                         </span>
 
                         <button
@@ -186,29 +184,15 @@ export default function ListenToBookPage() {
                 </div>
 
                 <div id="listen-to-book-page-content-body">
-                    <div id="listen-to-book-page-left-content-page" className="listen-to-book-page-content-page">
-                        {/* Check if the left page content is defined before rendering */}
-                        {contentPages[currentLeftPage - 1] &&
-                        contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
+                    <div id="listen-to-book-page-current-content-page" className="listen-to-book-page-content-page">
+                        {contentPages[currentPage - 1] &&
+                        contentPages[currentPage - 1].split("\n").map((line, index) => (
                             <React.Fragment key={index}>
                             {line}
                             <br />
                             </React.Fragment>
                         ))}
                     </div>
-
-                    {/* Conditionally hide the right page if it's the last page */}
-                    {currentLeftPage < contentPages.length && contentPages[currentLeftPage] && (
-                        <div id="listen-to-book-page-right-content-page" className="listen-to-book-page-content-page">
-                        {/* Check if the right page content is defined before rendering */}
-                        {contentPages[currentLeftPage].split("\n").map((line, index) => (
-                            <React.Fragment key={index}>
-                            {line}
-                            <br />
-                            </React.Fragment>
-                        ))}
-                        </div>
-                    )}
                 </div>
 
             </div>
