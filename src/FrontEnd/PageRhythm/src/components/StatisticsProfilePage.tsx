@@ -9,7 +9,7 @@ import "../styles/statistics-profile-page-styles.css";
 function LoadingText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id = "statistics-profile-page-loading-text"
         >
             Loading...
         </p>
@@ -19,7 +19,7 @@ function LoadingText() {
 function NoBookText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id = "statistics-profile-page-loading-text"
         >
             There is no book to display.
         </p>
@@ -58,12 +58,12 @@ export default function StatisticsProfilePage() {
                     <h1 id = "statistics-profile-page-title">Statistics</h1>
 
                     {/* Scrollable section for books */}
-                    <div id="books-my-library-page-books-list-container">
+                    <div id="statistics-profile-page-books-list-container">
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
-                            <div id="books-my-library-page-books-grid">
+                            <div id="statistics-profile-page-books-grid">
                                 {books.map((book, index) => (
-                                    <div key={index} className="books-my-library-page-book-item">
-                                        <div className="book-item-left-column">
+                                    <div key={index} className="statistics-profile-page-book-item">
+                                        <div className="statistics-book-item-left-column">
                                             <img
                                                 src={IMAGES.decodeBookCoverImage(book.image)}
                                                 alt={book.title}
@@ -71,10 +71,10 @@ export default function StatisticsProfilePage() {
                                                 className="book-item-cover"
                                             />
                                         </div>
-                                        <div className="book-item-right-column">
-                                            <p className="book-item-title">{book.title}</p>
-                                            <p className="book-item-author">Author: {book.author}</p>
-                                            <p className="book-item-release-date">
+                                        <div className="statistics-book-item-right-column">
+                                            <p className="statistics-book-item-title">{book.title}</p>
+                                            <p className="statistics-book-item-author">Author: {book.author}</p>
+                                            <p className="statistics-book-item-release-date">
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
                                             <div className="book-item-buttons">

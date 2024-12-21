@@ -35,7 +35,7 @@ class SupabaseCommentAPIService:
     def insert_comment(self, comment_JSON: dict) -> bool:
         if "comment_id" in comment_JSON:
             try:
-                response = self.client.table("Comment").insert(comment_JSON()).execute()
+                response = self.client.table("Comment").insert(comment_JSON).execute()
                 return True
             except Exception as e:
                 print(e)
@@ -44,11 +44,11 @@ class SupabaseCommentAPIService:
         else:
             while True:
                 try:
-                    response = self.client.table("Comment").insert(comment_JSON()).execute()
+                    response = self.client.table("Comment").insert(comment_JSON).execute()
                     return True
                 except Exception as e:
                     print(e)
-                    if e.code != "23505":
+                    if hasattr(e, "code") and (e.code != "23505"):
                         return False
             return False
         return False

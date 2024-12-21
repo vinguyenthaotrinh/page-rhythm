@@ -7,8 +7,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function CommentPage() {
 
-    const { bookID } = useParams<{ bookID: string }>();
-    const {repliedCommentID} = useParams<{ repliedCommentID: string }>();
+    const { bookID }            = useParams<{ bookID: string }>();
+    const {repliedCommentID}    = useParams<{ repliedCommentID: string }>();
 
     const navigate = useNavigate();
     const [comment, setComment] = useState<string>(""); // Stores user input for the comment

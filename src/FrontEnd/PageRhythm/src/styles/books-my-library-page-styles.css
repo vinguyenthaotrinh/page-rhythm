@@ -372,9 +372,10 @@
 
 /* Styling for text descriptions */
 .add-overlay p {
+    color: #333;
     font-size: 16px;
     margin-bottom: 15px;
-    color: #333;
+    font-family : "Poppins-Bold", sans-serif;
 }
 
 /* Input fields styling */
@@ -470,10 +471,10 @@
 
 /* Container for input and file name */
 .file-input-container {
+    gap: 10px;              /* Space between input and file name */
     display: flex;
-    align-items: center; /* Vertically center the elements */
     margin-top: 12px;
-    gap: 10px; /* Space between input and file name */
+    align-items: center;    /* Vertically center the elements */
 }
 
 /* Hide the default file input */
@@ -483,15 +484,15 @@
 
 /* Custom label button for uploading content */
 .file-input-label {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #265073;  /* Custom background */
     color: white;
     font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 12px 20px;
+    border-radius: 5px;
     text-align: center;
+    display: inline-block;
+    background-color: #265073;  /* Custom background */
+    transition: background-color 0.3s ease;
 }
 
 /* Hover effect for the custom file input button */
@@ -505,21 +506,21 @@
 }
 
 .file-name-display {
-    font-size: 14px;
     color: #555;
-    max-width: 200px; /* Optional: Limit the file name width */
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 14px;
+    max-width: 200px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #books-my-library-page-loading-text {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
     color: #333;
+    font-size: 20px;
     margin-top: 20px;
+    font-weight: bold;
     text-align: center;
+    font-family: "Poppins-SemiBold", sans-serif;
 }
 
 #books-my-library-page-title {

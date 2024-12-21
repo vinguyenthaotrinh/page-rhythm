@@ -37,3 +37,272 @@
     font-family : "Poppins-Bold", sans-serif;
 }
 
+#statistics-profile-page-books-list-container {
+    flex-grow: 1;           /* Allows this container to take up the remaining space */
+    overflow-y: auto;       /* Enables scrolling if there are too many books */
+}
+
+#statistics-profile-page-books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
+    gap: 20px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 1000px;
+    margin: 0 auto; /* Center the grid horizontally */
+}
+
+#statistics-profile-page-loading-text {
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
+
+/* Book item container: two-column layout */
+.statistics-profile-page-book-item {
+    display: flex;             /* Flexbox for the two-column layout */
+    background-color: #EFEAD3;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 20px;                 /* Spacing between the two columns */
+    transition: transform 0.3s ease;
+    align-items: center;       /* Vertically center the content */
+}
+
+.statistics-profile-page-book-item:hover {
+    transform: translateY(-5px);  /* Adds a hover effect to lift the item */
+}
+
+/* Left column: book cover */
+.statistics-book-item-left-column {
+    flex: 0 0 120px; /* Fixed width for the book cover */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-item-cover {
+    gap: 4px;
+    width: 180px;
+    height: 220px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a black shadow */
+}
+
+/* Right column: book details */
+.statistics-book-item-right-column {
+    flex: 1;                 /* Takes up the remaining space */
+    display: flex;
+    flex-direction: column;  /* Stacks text and buttons vertically */
+    justify-content: flex-start;
+}
+
+/* Book details */
+.statistics-book-item-title {
+    color: #333;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
+
+.statistics-book-item-author,
+.statistics-book-item-release-date {
+    color: #555;
+    font-size: 14px;
+    margin-top: 0px;
+    text-align: left;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+/* Button container (this was adjusted to ensure buttons are stacked vertically) */
+.book-item-buttons {
+    display: flex;
+    flex-direction: column; /* Stack the buttons vertically */
+    gap: 8px; /* Space between buttons */
+    margin-top: 0px;
+}
+
+/* Edit Button */
+.book-item-edit-button {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between text and icon */
+    background-color: #265073;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    max-width: 120px; /* Limit the width of the button */
+    width: 100%; /* Make it responsive */
+    justify-content: space-between;
+}
+
+.book-item-edit-button:hover {
+    background-color: #0f4ba3;
+}
+
+/* Delete Button */
+.book-item-delete-button {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    gap: 5px; /* Space between text and icon */
+    /* Remove the width 100% to prevent it from expanding */
+    max-width: 120px;
+    width: auto; /* Ensure the width adapts to the content */
+    justify-content: space-between;
+}
+
+.book-item-delete-button:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.book-item-button-icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-normal {
+    display: block; /* Default icon */
+}
+
+.icon-hover {
+    display: none; /* Initially hide the hover icon */
+}
+
+.book-item-delete-button:hover .icon-normal {
+    display: none; /* Hide the default icon when hovering */
+}
+
+.book-item-delete-button:hover .icon-hover {
+    display: block; /* Show the hover icon when hovering */
+}
+
+@media (max-width: 768px) {
+    .statistics-profile-page-book-item {
+        flex-direction: column; /* Stack the columns vertically */
+        align-items: flex-start;
+    }
+
+    .statistics-book-item-left-column {
+        flex: none;
+        margin-bottom: 10px; /* Add spacing between the image and details */
+    }
+
+    .statistics-book-item-cover {
+        width: 100%; /* Make the cover full-width for smaller screens */
+        height: auto;
+    }
+
+    .statistics-book-item-right-column {
+        align-items: flex-start; /* Align content to the left */
+    }
+}
+
+/* For Webkit-based browsers (Chrome, Edge, etc.) */
+#statistics-profile-page-books-list-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#statistics-profile-page-books-list-container::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5); /* Track color */
+}
+
+#statistics-profile-page-books-list-container::-webkit-scrollbar-thumb {
+    background-color: #265073;          /* Thumb color */
+    border-radius: 4px;                     /* Rounded corners for the thumb */
+    border: 2px solid #f1f1f1;              /* Optional: Create spacing around the thumb */
+}
+
+#statistics-profile-page-books-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: #0f4ba3; /* Thumb hover color */
+}
+
+/* Confirmation Box Overlay */
+.statistics-profile-page-deletion-confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Confirmation Box */
+.statistics-profile-page-deletion-confirmation-box {
+    background-color: #EFEAD3;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Confirmation Buttons */
+.statistics-profile-page-deletion-confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.statistics-profile-page-deletion-confirmation-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.statistics-profile-page-deletion-confirmation-button.confirm {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.statistics-profile-page-deletion-confirmation-button.cancel {
+    background-color: #ccc;
+    color: black;
+}
+
+.statistics-profile-page-deletion-confirmation-button.confirm:hover {
+    background-color: #d43e2d;
+    color: white;
+}
+
+.statistics-profile-page-deletion-confirmation-button.cancel:hover {
+    background-color: #ececec;
+    color: black;
+}
+
+#statistics-profile-page-deletion-confirmation-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
