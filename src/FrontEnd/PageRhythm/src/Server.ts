@@ -123,19 +123,19 @@ export default class Server {
         const url = `${this.host}/authentication/register`;
 
         const body = {
-            "email": email,
-            "full_name": fullName,
-            "first_name": "",
-            "last_name": "",
+            "email":            email,
+            "full_name":        fullName,
+            "first_name":       "",
+            "last_name":        "",
             "birthday": {
-                "day": parseInt(birthday.split("-")[2], 10),    // Parse the day as an integer
-                "month": parseInt(birthday.split("-")[1], 10),  // Parse the month as an integer
-                "year": parseInt(birthday.split("-")[0], 10),   // Parse the year as an integer
+                "day":          parseInt(birthday.split("-")[2], 10),   // Parse the day as an integer
+                "month":        parseInt(birthday.split("-")[1], 10),   // Parse the month as an integer
+                "year":         parseInt(birthday.split("-")[0], 10),   // Parse the year as an integer
             },
-            "password": password,
-            "bio": bio,
-            "account_type": "user",
-            "profile_picture": null,
+            "password":         password,
+            "bio":              bio,
+            "account_type":     "user",
+            "profile_picture":  null,
         };
 
         try {
@@ -174,8 +174,8 @@ export default class Server {
 
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -197,8 +197,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -229,8 +229,8 @@ export default class Server {
 
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
 
             if (response.ok) {
@@ -251,24 +251,24 @@ export default class Server {
         const url = `${this.host}/account/update_account_profile_information`;
     
         const body = {
-            full_name: profile.fullName,
-            email: profile.email,
-            bio: profile.bio,
-            first_name: "",
-            last_name: "",
-            profile_picture: null,
+            full_name:          profile.fullName,
+            email:              profile.email,
+            bio:                profile.bio,
+            first_name:         "",
+            last_name:          "",
+            profile_picture:    null,
             birthday: {
-                day: parseInt(profile.birthday.split("-")[2], 10),    // Parse the day as an integer
-                month: parseInt(profile.birthday.split("-")[1], 10),  // Parse the month as an integer
-                year: parseInt(profile.birthday.split("-")[0], 10),   // Parse the year as an integer
+                day:    parseInt(profile.birthday.split("-")[2], 10),   // Parse the day as an integer
+                month:  parseInt(profile.birthday.split("-")[1], 10),   // Parse the month as an integer
+                year:   parseInt(profile.birthday.split("-")[0], 10),   // Parse the year as an integer
             }
         };
     
         try {
             const response = await fetch(url, {
-                method: "PUT",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send the updated profile data as the body
+                method:     "PUT",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send the updated profile data as the body
             });
     
             if (response.ok) 
@@ -287,16 +287,16 @@ export default class Server {
         const url = `${this.host}/authentication/change_password`;  
 
         const body = {
-            old_password: passwords.currentPassword,
-            new_password: passwords.newPassword,
-            confirmed_new_password: passwords.confirmedNewPassword,
+            old_password:               passwords.currentPassword,
+            new_password:               passwords.newPassword,
+            confirmed_new_password:     passwords.confirmedNewPassword,
         };
     
         try {
             const response = await fetch(url, {
-                method: "PUT",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send the password data as the body
+                method:     "PUT",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send the password data as the body
             });
     
             if (response.ok) {
@@ -320,8 +320,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -350,8 +350,8 @@ export default class Server {
     
         try {
             const response = await fetch(url.toString(), {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -372,8 +372,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -395,8 +395,8 @@ export default class Server {
     
         try {
             const response = await fetch(`${this.host}${url}`, {
-                method: "DELETE",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "DELETE",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {
@@ -421,8 +421,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -449,9 +449,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send the rating data as the body
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send the rating data as the body
             });
     
             if (response.ok) {
@@ -528,9 +528,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send the comment data as the body
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send the comment data as the body
             });
     
             if (!response.ok) {
@@ -561,9 +561,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send the reply data as the body
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send the reply data as the body
             });
     
             if (!response.ok) {
@@ -594,7 +594,6 @@ export default class Server {
                 }
             });
 
-            // Ensure the response is OK
             if (!response.ok) 
                 throw new Error(`Error fetching pages: ${response.statusText}`);
     
@@ -614,8 +613,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -636,8 +635,8 @@ export default class Server {
     
         try {
             const response = await fetch(`${this.host}${url}`, {
-                method: "DELETE",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "DELETE",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {
@@ -658,7 +657,6 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `${this.host}/book/create`; 
-        const sessionToken = this.findSessionToken();
     
         const formData = new FormData();
         formData.append("title", book.title);
@@ -676,11 +674,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
-                },
-                body: formData, // Use FormData as the request body
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       formData, // Use FormData as the request body
             });
     
             if (!response.ok) {
@@ -700,8 +696,7 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
     
-        const url = `${this.host}/book/${book.book_id}`; 
-        const sessionToken = this.findSessionToken();
+        const url = `${this.host}/book/${book.book_id}`;
     
         const formData = new FormData();
         
@@ -725,11 +720,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "PATCH",
-                headers: {
-                    "Authorization": `Bearer ${sessionToken}`, // Add JWT authorization header
-                },
-                body: formData, // Send the FormData as the body of the request
+                method:     "PATCH",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       formData, // Send the FormData as the body of the request
             });
     
             if (!response.ok) {
@@ -750,14 +743,11 @@ export default class Server {
             throw new Error("Host is not initialized.");
     
         const url = `${this.host}/sample_audio_file/uploaded_files`; 
-        const sessionToken = this.findSessionToken(); // Get the session token (JWT)
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${sessionToken}`, // Pass the JWT token in the Authorization header
-                },
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {
@@ -804,7 +794,6 @@ export default class Server {
             // Convert the file to base64
             const base64Content = await fileToBase64(record.content);
 
-            // Create the payload
             const payload = {
                 file_name: record.file_name,
                 description: record.description,
@@ -812,11 +801,10 @@ export default class Server {
                 file_extension: record.content.type.split("/")[1], // Extract the file extension
             };
     
-            // Send the POST request
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(payload),
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(payload),
             });
     
             // Check for errors
@@ -841,9 +829,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify({
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify({
                     sample_audio_file_id: fileID // Include the file ID in the request body
                 }),
             });
@@ -872,16 +860,16 @@ export default class Server {
         const url = `${this.host}/sample_audio_file/update/meta_information`;
     
         const body = {
-            sample_audio_file_id: record.sample_audio_file_id,
-            file_name: record.file_name,
-            description: record.description,
+            sample_audio_file_id:   record.sample_audio_file_id,
+            file_name:              record.file_name,
+            description:            record.description,
         };
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body), // Send JSON data
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body), // Send JSON data
             });
     
             if (!response.ok) {
@@ -905,8 +893,8 @@ export default class Server {
         
         try {
             const response = await fetch(url, {
-                method: "PATCH",
-                headers: this.getSimpleHeadersWithSessionToken(), // Use method to get headers with session token
+                method:     "PATCH",
+                headers:    this.getSimpleHeadersWithSessionToken(), // Use method to get headers with session token
             });
     
             if (!response.ok) {
@@ -930,8 +918,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -953,8 +941,8 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "GET",
-                headers: this.getSimpleHeadersWithSessionToken(),
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) 
@@ -980,9 +968,9 @@ export default class Server {
     
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body),
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body),
             });
     
             if (!response.ok) {
@@ -1078,16 +1066,16 @@ export default class Server {
         const url = `${this.host}/statistics/track_progress`;
 
         const body = {
-            book_id: bookID,
-            page_number: pageNumber,
-            status: status,
+            book_id:        bookID,
+            page_number:    pageNumber,
+            status:         status,
         };
 
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body),
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body),
             });
 
             if (!response.ok) {

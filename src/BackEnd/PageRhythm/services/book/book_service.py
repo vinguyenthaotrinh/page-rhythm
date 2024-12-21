@@ -71,7 +71,7 @@ class BookService:
         random.shuffle(books)
         return books
 
-    def get_all_book_pages(self, book_id: int, page_capacity: int, maximum_line_length: int) -> list[str]:
+    def get_all_book_pages(self, book_id: int, page_capacity: int = 1600, maximum_line_length: int = 80) -> list[str]:
         content = self.get_book_information(book_id).content
         words = content.split(" ")
         pages = []

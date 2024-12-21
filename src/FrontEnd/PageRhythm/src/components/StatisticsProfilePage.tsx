@@ -7,6 +7,105 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/statistics-profile-page-styles.css";
 import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
+interface UpdateStatusOverlayProps {
+    showUpdateStatusOverlay:        boolean;
+    setShowUpdateStatusOverlay:     (show: boolean) => void;
+    selectedBook:                   any | null;
+    setSelectedBook:                (book: any | null) => void;
+    handleUpdateStatusBook:         (book: any) => void;
+}
+
+const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
+    showUpdateStatusOverlay,
+    setShowUpdateStatusOverlay,
+    selectedBook,
+    setSelectedBook,
+    handleUpdateStatusBook,
+}) => {
+    const [status, setStatus]                 = useState(selectedBook?.progress.status || "not_started");
+    const [currentPage, setCurrentPage]       = useState(selectedBook?.progress.page_number || 0);
+
+    useEffect(() => {
+        // Reset form values when selectedBook changes
+        if (selectedBook) {
+            setStatus(selectedBook.progress.status);
+            setCurrentPage(selectedBook.progress.page_number);
+        }
+    }, [selectedBook]);
+
+    useEffect(() => {
+
+        if (status !== "in_progress") 
+            setCurrentPage(selectedBook?.progress.page_number || 0);
+
+    }, [status, currentPage]);
+
+    const handleUpdateStatus = () => {
+
+        if (selectedBook) {
+            handleUpdateStatusBook({
+                ...selectedBook,
+                progress: {
+                    ...selectedBook.progress,
+                    status: status,
+                    page_number: currentPage,
+                },
+            });
+        }
+    };
+
+    if (!showUpdateStatusOverlay || !selectedBook) 
+        return null;
+
+    return (
+        <div className="add-overlay">
+            <div className="statistics-profile-page-add-overlay-content">
+                <h1 
+                    className="add-overlay-title">
+                    Update your progress
+                </h1>
+                <p>
+                    You can update the progress of reading the book here
+                </p>
+
+                <div className="statistics-profile-page-input-row-container">
+                    <label className="status-label">Status:</label>
+                    <select 
+                        value       =   {status} 
+                        onChange    =   {(e) => setStatus(e.target.value)}
+                        className   =   "status-dropdown"
+                    >
+                        <option value="not_started">    Not started </option>
+                        <option value="in_progress">    In progress </option>
+                        <option value="finished">       Finished    </option>
+                    </select>
+                </div>
+
+                <div className="statistics-profile-page-input-row-container">
+                    <label 
+                        className   =   {`status-label ${status !== "in_progress" ? "disabled" : ""}`}
+                    >
+                        Current Page:
+                    </label>
+                    <input
+                        type        =   "number"
+                        min         =   {1}
+                        value       =   {currentPage}
+                        onChange    =   {(e) => setCurrentPage(parseInt(e.target.value))}
+                        className   =   {`statistics-profile-page-page-number-input ${status !== "in_progress" ? "disabled" : ""}`}
+                        disabled    =   {status !== "in_progress"}
+                    />
+                </div>
+
+                <div className="add-overlay-buttons">
+                    <button onClick={handleUpdateStatus}>Update</button>
+                    <button onClick={() => setShowUpdateStatusOverlay(false)}>Cancel</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 function LoadingText() {
     return (
         <p
@@ -32,7 +131,32 @@ export default function StatisticsProfilePage() {
     const [loading, setLoading]                                         = useState(true);                   // Loading state
     const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);
+    const [selectedBook, setSelectedBook]                               = useState<any | null>(null);       // Selected book for update status
+    const [showUpdateStatusOverlay, setShowUpdateStatusOverlay]         = useState(false);                  // Update status overlay visibility
     const navigate                                                      = useNavigate();                    // Navigation hook
+
+    const handleUpdateStatusClick = (book: any) => {
+        setSelectedBook(book);
+        setShowUpdateStatusOverlay(true); 
+    };
+    
+    const handleUpdateStatusBook = async (updatedBook: any) => {
+        try {
+            const server = await Server.getInstance();
+            await server.trackProgressOfReadingBook(
+                updatedBook.book_id,
+                updatedBook.progress.page_number,
+                updatedBook.progress.status
+            );
+            setBooks(books.map((book) =>
+                book.book_id === updatedBook.book_id ? updatedBook : book
+            ));
+            setSelectedBook(null);
+            setShowUpdateStatusOverlay(false);
+        } catch (error) {
+            console.error("Error updating book:", error);
+        }
+    };
 
     const handleDeleteClick = (book: any) => {
         setBookToDelete(book);              // Set the selected book
@@ -136,6 +260,7 @@ export default function StatisticsProfilePage() {
                                             <div className="statistics-book-item-buttons">
                                                 <button 
                                                     className="statistics-book-item-edit-button"
+                                                    onClick={() => handleUpdateStatusClick(book)}
                                                 >
                                                     Update Status
                                                     <img
@@ -178,6 +303,14 @@ export default function StatisticsProfilePage() {
                 showDeletionConfirmation    =   {showDeletionConfirmation}
                 onConfirm                   =   {handleConfirmDelete}
                 onCancel                    =   {handleCancelDelete}
+            />
+
+            <UpdateStatusOverlay
+                showUpdateStatusOverlay     =   {showUpdateStatusOverlay}
+                setShowUpdateStatusOverlay  =   {setShowUpdateStatusOverlay}
+                selectedBook                =   {selectedBook}
+                setSelectedBook             =   {setSelectedBook}
+                handleUpdateStatusBook      =   {handleUpdateStatusBook}
             />
         </div>
     );
