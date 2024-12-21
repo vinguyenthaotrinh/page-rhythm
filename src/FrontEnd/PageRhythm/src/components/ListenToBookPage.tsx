@@ -106,68 +106,68 @@ export default function ListenToBookPage() {
 
     return (
         <div
-            id = "read-book-page"
+            id = "listen-to-book-page"
         >
             <NavigationBar />
             
             <div
-                id = "read-book-page-top-region"
+                id = "listen-to-book-page-top-region"
             >
-                <div id="read-book-page-back-button-container" onClick={handleBackClick}>
-                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="read-book-page-back-button-icon" />
+                <div id="listen-to-book-page-back-button-container" onClick={handleBackClick}>
+                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="listen-to-book-page-back-button-icon" />
                     <span>Back</span>
                 </div>
 
                 <button
-                    id          = "read-book-page-listen-button"
-                    className   = "read-book-page-button"
+                    id          = "listen-to-book-page-listen-button"
+                    className   = "listen-to-book-page-button"
                     onClick     = {handleListenButtonClick}
                 >   
                     <img
                         src = {IMAGES.PLAY_BUTTON_ICON}
                         alt = "Listen"
-                        className = "read-book-page-button-icon"
+                        className = "listen-to-book-page-button-icon"
                     />
                     Listen To Audio Book
                 </button>
             </div>
 
             <div
-                id = "read-book-page-content-region"
+                id = "listen-to-book-page-content-region"
             >
                 <div
-                    id = "read-book-page-content-header"
+                    id = "listen-to-book-page-content-header"
                 >
 
                     <div
-                        id = "read-book-page-book-details-section"
+                        id = "listen-to-book-page-book-details-section"
                     >
                         <img
                             src     = {decodeBookCover(book.image)}
                             alt     = {book.title}
-                            id      = "read-book-page-book-cover"
+                            id      = "listen-to-book-page-book-cover"
                             onClick = {() => navigate(`/book-details-page/${bookID}`)}
                         />
                         <div
-                            id = "read-book-page-book-details"
+                            id = "listen-to-book-page-book-details"
                         >
                             <h1
-                                id = "read-book-page-book-title"
+                                id = "listen-to-book-page-book-title"
                             >{book.title}</h1>
                             <h2
-                                id = "read-book-page-book-author"
+                                id = "listen-to-book-page-book-author"
                             >{book.author}</h2>
                         </div>
                     </div>
 
                     <div
-                        id = "read-book-page-navigation-section"
+                        id = "listen-to-book-page-navigation-section"
                     >
                         <button
-                            className = "read-book-page-navigation-button"
+                            className = "listen-to-book-page-navigation-button"
                             onClick = {onLeftButtonClick}
                         >
-                            <img src={IMAGES.LEFT_ICON} alt="Previous" className="read-book-page-navigation-icon" />
+                            <img src={IMAGES.LEFT_ICON} alt="Previous" className="listen-to-book-page-navigation-icon" />
                         </button>
 
                         <span>
@@ -177,16 +177,16 @@ export default function ListenToBookPage() {
                         </span>
 
                         <button
-                            className = "read-book-page-navigation-button"
+                            className = "listen-to-book-page-navigation-button"
                             onClick = {onRightButtonClick}
                         >
-                            <img src={IMAGES.RIGHT_ICON} alt="Next" className="read-book-page-navigation-icon" />
+                            <img src={IMAGES.RIGHT_ICON} alt="Next" className="listen-to-book-page-navigation-icon" />
                         </button>
                     </div>
                 </div>
 
-                <div id="read-book-page-content-body">
-                    <div id="read-book-page-left-content-page" className="read-book-page-content-page">
+                <div id="listen-to-book-page-content-body">
+                    <div id="listen-to-book-page-left-content-page" className="listen-to-book-page-content-page">
                         {/* Check if the left page content is defined before rendering */}
                         {contentPages[currentLeftPage - 1] &&
                         contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
@@ -199,7 +199,7 @@ export default function ListenToBookPage() {
 
                     {/* Conditionally hide the right page if it's the last page */}
                     {currentLeftPage < contentPages.length && contentPages[currentLeftPage] && (
-                        <div id="read-book-page-right-content-page" className="read-book-page-content-page">
+                        <div id="listen-to-book-page-right-content-page" className="listen-to-book-page-content-page">
                         {/* Check if the right page content is defined before rendering */}
                         {contentPages[currentLeftPage].split("\n").map((line, index) => (
                             <React.Fragment key={index}>
