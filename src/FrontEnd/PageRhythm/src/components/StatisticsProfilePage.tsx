@@ -104,6 +104,9 @@ export default function StatisticsProfilePage() {
                                             <p className="statistics-book-item-release-date">
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
+                                            <p className="statistics-book-item-progress-status">
+                                                Status: {book.progress.status}
+                                            </p>
                                             <div className="statistics-book-item-buttons">
                                                 <button 
                                                     className="statistics-book-item-edit-button"

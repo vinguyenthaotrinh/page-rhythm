@@ -1158,17 +1158,12 @@ export default class Server {
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
-        const url = `${this.host}/statistics/tracked_progress/`;
-
-        const body = {
-            book_id: bookID,
-        };
+        const url = `${this.host}/statistics/tracked_progress/${bookID}`;
 
         try {
             const response = await fetch(url, {
                 method:     "GET",
-                headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body),
+                headers:    this.getSimpleHeadersWithSessionToken()
             });
 
             if (!response.ok) 

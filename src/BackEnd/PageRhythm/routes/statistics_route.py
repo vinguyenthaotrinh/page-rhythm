@@ -6,15 +6,11 @@ from services.statistics.statistics_service import StatisticsService
 
 statistics_blueprint = Blueprint("statistics", __name__)
 
-@statistics_blueprint.route("/tracked_progress", methods=["GET"])
+@statistics_blueprint.route("/tracked_progress/<string:book_id>", methods=["GET"])
 @jwt_required()
-def get_tracked_progress():
+def get_tracked_progress(book_id):
     current_identity = json.loads(get_jwt_identity())
     user_id = current_identity["account_id"]
-
-    data = request.get_json()
-
-    book_id = data.get("book_id")
 
     statistics_service = StatisticsService()
 
