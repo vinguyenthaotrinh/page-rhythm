@@ -177,10 +177,10 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
             release_date: releaseDate,
             genre: genre,
             summary: summary,
-            image: selectedCoverImage || selectedBook?.image, // Keep old image if not updating
+            image: selectedCoverImage || selectedBook?.image,   // Keep old image if not updating
         };
-        handleEditBook(updatedBook); // Pass the updated book data
-        setShowEditOverlay(false); // Close the overlay
+        handleEditBook(updatedBook);                            // Pass the updated book data
+        setShowEditOverlay(false);                              // Close the overlay
     };
 
     if (!showEditOverlay || !selectedBook) return null;
@@ -498,7 +498,6 @@ export default function BooksMyLibraryPage() {
                 onCancel                    =   {handleCancelDelete}
             />
 
-            {/* Render the AddBookOverlay */}
             <AddBookOverlay
                 showAddOverlay          =   {showAddOverlay}
                 setShowAddOverlay       =   {setShowAddOverlay}
