@@ -45,12 +45,15 @@ html, body {
 }
 
 #read-book-page-listen-button {
-    background-color: white;
-    color: #265073;
-    border: 2px solid #265073;
-    padding: 10px 20px;   /* Adjust padding for button size */
-    border-radius: 12px;   /* Optional: Rounded corners */
+    gap: 8px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    color: #265073;
+    padding: 10px 20px;     /* Adjust padding for button size */
+    border-radius: 12px;    /* Optional: Rounded corners */
+    background-color: white;    
+    border: 2px solid #265073;
     font-family: "Poppins-Regular", sans-serif;
     transition: background-color color border 0.3s ease-in-out;
 }
@@ -68,7 +71,6 @@ html, body {
     margin-left: 64px;
     margin-right: 64px;
     margin-top: 64px;            /* Space between the content and the top */
-    /* No centering here now */
     display: flex;
     flex-direction: column;      /* Stack children vertically */
 }
@@ -114,19 +116,20 @@ html, body {
 }
 
 #read-book-page-book-cover {
-    height: 48px;            /* Set height to 80% of the parent's height */
     width: auto;            /* Set width to auto to maintain aspect ratio */
+    height: 48px;           /* Set height to 80% of the parent's height */
+    cursor: pointer;        /* Change cursor to pointer on hover */
     object-fit: cover;      /* Maintain the aspect ratio and ensure it fills the space without stretching */
     border-radius: 8px;     /* Optional: Rounded corners */
 }
 
 #read-book-page-book-details-section {
-    position: absolute;  /* Position it absolutely within the parent */
-    left: 64px;  /* 12px from the left boundary of the parent */
-    top: 0;  /* Align it to the top of the parent */
+    gap: 12px;              /* Space between the cover image and text */
+    left: 64px;             /* 12px from the left boundary of the parent */
     display: flex;
-    align-items: center;  /* Vertically align content */
-    gap: 12px;  /* Space between the cover image and text */
+    align-items: center;    /* Vertically align content */
+    position: absolute;     /* Position it absolutely within the parent */
+    top: 0;                 /* Align it to the top of the parent */    
 }
 
 #read-book-page-book-details {
@@ -164,4 +167,10 @@ html, body {
 
 .read-book-page-content-page:hover {
     box-shadow: 0 0 0 2px inset #265073;
+}
+
+.read-book-page-button-icon {
+    width: 32px; /* Icon size */
+    height: 32px;
+    cursor: pointer;
 }

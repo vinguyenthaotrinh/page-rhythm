@@ -49,11 +49,11 @@ const WriteCommentOverlay: React.FC<WriteCommentOverlayProps> = ({
 export default function BookDetailsPage() {
     const { bookID }                                    = useParams<{ bookID: string }>();
     const [book, setBook]                               = useState<any>(null);
-    const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false); // Show the comment overlay
-    const [repliedCommentID, setRepliedCommentID]       = useState<string | null>(null); // Comment ID for replies
-    const [comment, setComment]                         = useState<string>(""); // Stores user input for the comment
-    const [userRating, setUserRating]                   = useState<number | null>(null); // User-selected rating
-    const [comments, setComments]                       = useState<any[]>([]); // Comments for the book
+    const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false);         // Show the comment overlay
+    const [repliedCommentID, setRepliedCommentID]       = useState<string | null>(null);    // Comment ID for replies
+    const [comment, setComment]                         = useState<string>("");             // Stores user input for the comment
+    const [userRating, setUserRating]                   = useState<number | null>(null);    // User-selected rating
+    const [comments, setComments]                       = useState<any[]>([]);              // Comments for the book
 
     const handleRating = async (rating: number) => {
         const server = await Server.getInstance();
@@ -105,7 +105,7 @@ export default function BookDetailsPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();  // Get the server instance
+                const server = await Server.getInstance();
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
                 setBook(book);                              // Set the book details in state
                 const response = await server.getTrackedReadingProgress(parseInt(bookID, 10));
@@ -213,6 +213,10 @@ export default function BookDetailsPage() {
         navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
     };
 
+    const handleListenToBookButtonClick = () => {
+        navigate(`/listen-to-book-page/${bookID}`); // Navigate to the listen to book page
+    };
+
     const handleCommentSubmit = async () => {
         if (!comment.trim()) {
             console.error("Comment cannot be empty.");
@@ -316,9 +320,16 @@ export default function BookDetailsPage() {
                                     Read This Book
                                 </button>
                                 <button
-                                    id = "book-details-page-listen-button"
-                                    className = "book-details-page-button"
-                                >   Listen To Audio Book
+                                    id          = "book-details-page-listen-button"
+                                    className   = "book-details-page-button"
+                                    onClick     = {handleListenToBookButtonClick}
+                                >   
+                                    <img
+                                        src = {IMAGES.PLAY_BUTTON_ICON}
+                                        alt = "Listen"
+                                        className = "read-book-page-button-icon"
+                                    />
+                                    Listen To Audio Book
                                 </button>
                             </div>
                         </div>

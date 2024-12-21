@@ -28,6 +28,8 @@ export default function App() {
         <Route path="/read-book-page/:bookID" element={<ReadBookPage />} />    
         <Route path="/book-details-page/:bookID" element={<BookDetailsPage />} />
     
+        <Route path="/listen-to-book-page/:bookID" element={<ListenToBookPage />} />
+
         <Route path="/comment-page/:bookID/:repliedCommentID" element={<CommentPage />} />
         <Route path="/request-password-reset-page" element={<RequestPasswordResetPage />} />
         <Route path="/" element={<Navigate to="/landing-page" />} />

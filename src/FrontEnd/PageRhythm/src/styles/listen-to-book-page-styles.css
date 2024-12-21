@@ -1,0 +1,176 @@
+@import url("fonts.css");
+
+html, body {
+    background-color: #F6FFDE;
+}
+
+#listen-to-book-page {
+    width: 100vw;               /* Full viewport width */
+    height: 100vh;              /* Full viewport height */
+    display: flex;
+    color: black;
+    flex-direction: column;     /* Stack NavigationBar and Content vertically */
+    background-color: #F6FFDE;
+}
+
+#listen-to-book-page-top-region {
+    gap: 12px;
+    top: 72px;
+    display: flex;
+    position: sticky;
+    margin-left: 64px;
+    padding-top: 16px;
+    border-radius: 8px;
+    margin-right: 64px;
+    align-items: center;
+    padding-bottom: 16px;
+    background-color: transparent;      /* Light blue background */
+    justify-content: space-between;     /* Space between left and right buttons */
+}
+
+#listen-to-book-page-back-button-container {
+    display: flex;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 24px;
+    position: relative;
+    align-items: center;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.listen-to-book-page-back-button-icon {
+    width: 24px;                        /* Adjust the icon size as needed */
+    height: 24px;                       /* Adjust the icon size as needed */
+    margin-right: 8px;                  /* Space between the icon and the text */
+}
+
+#listen-to-book-page-listen-button {
+    gap: 8px;
+    display: flex;
+    cursor: pointer;
+    color: #265073;
+    padding: 10px 20px;     /* Adjust padding for button size */
+    align-items: center;
+    border-radius: 12px;
+    background-color: white;    
+    border: 2px solid #265073;
+    font-family: "Poppins-Regular", sans-serif;
+    transition: background-color color border 0.3s ease-in-out;
+}
+
+#listen-to-book-page-listen-button:hover {
+    background-color: rgb(242, 242, 242);
+    color: #1A3E5C;
+    border: 2px solid #1A3E5C;
+}
+
+#listen-to-book-page-content-region {
+    background-color: #4D4D4D;   /* Light grey background */
+    flex-grow: 1;                /* Allow it to grow and take remaining space */
+    margin-bottom: 16px;         /* Space between the content and the bottom */
+    margin-left: 64px;
+    margin-right: 64px;
+    margin-top: 64px;            /* Space between the content and the top */
+    display: flex;
+    flex-direction: column;      /* Stack children vertically */
+}
+
+#listen-to-book-page-content-header {
+    position: relative;         /* This makes the parent container a reference point for absolute positioning */
+    padding: 10px 20px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;    /* Center the navigation */
+    align-items: center;
+    color: white;
+    width: 100%;
+    z-index: 1;                 /* Ensures this section is above others */
+}
+
+#listen-to-book-page-navigation-section {
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between; /* Space between the navigation buttons and page number */
+}
+
+.listen-to-book-page-navigation-icon {
+    width: 24px; /* Icon size */
+    height: 24px;
+    cursor: pointer;
+}
+
+#listen-to-book-page-navigation-section span {
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.listen-to-book-page-navigation-button {
+    background-color: transparent;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.listen-to-book-page-navigation-button:hover {
+    border-color: grey;
+}
+
+#listen-to-book-page-book-cover {
+    width: auto;            /* Set width to auto to maintain aspect ratio */
+    height: 48px;           /* Set height to 80% of the parent's height */
+    cursor: pointer;        /* Change cursor to pointer on hover */
+    object-fit: cover;      /* Maintain the aspect ratio and ensure it fills the space without stretching */
+    border-radius: 8px;     /* Optional: Rounded corners */
+}
+
+#listen-to-book-page-book-details-section {
+    gap: 12px;              /* Space between the cover image and text */
+    left: 64px;             /* 12px from the left boundary of the parent */
+    display: flex;
+    align-items: center;    /* Vertically align content */
+    position: absolute;     /* Position it absolutely within the parent */
+    top: 0;                 /* Align it to the top of the parent */    
+}
+
+#listen-to-book-page-book-details {
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 12px;
+}
+
+#listen-to-book-page-book-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#listen-to-book-page-book-author {
+    font-size: 12px;
+}
+
+.listen-to-book-page-content-page {
+    background-color: white; /* White background for each page */
+    color: black;           /* Black text color */
+    width: 40%;                 /* 25% width of the parent */
+    height: 100%;               /* Take the full height of the parent */
+    padding: 16px;             
+    box-sizing: border-box;     /* Ensure padding doesn't affect the width */
+    margin: 0 20px;             /* Space between the pages */
+}
+  
+#listen-to-book-page-content-body {
+    width: 100%;                /* Full width of the parent */
+    display: flex;
+    padding-bottom: 8px;
+    justify-content: center;    /* Center the two pages horizontally */
+    align-items: flex-start;    /* Align the pages at the top */
+    height: calc(100% - 64px);  /* The remaining height of the parent */
+}
+
+.listen-to-book-page-content-page:hover {
+    box-shadow: 0 0 0 2px inset #265073;
+}
+
+.listen-to-book-page-button-icon {
+    width: 32px; /* Icon size */
+    height: 32px;
+    cursor: pointer;
+}
