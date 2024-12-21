@@ -201,7 +201,7 @@ export default function AccountsAdminPage() {
             <div id="accounts-admin-page-container">
                 <AdminSectionBar currentOption="accounts" />
                 <div id="accounts-admin-page-content">
-                    
+                <h1 id = "general-profile-page-title">Admin</h1>
                     <div id="accounts-admin-page-accounts-list-container">
                         {loading ? (<LoadingText />) : (userAccounts.length === 0 ? (<NoUserAccountText />) : 
                             (

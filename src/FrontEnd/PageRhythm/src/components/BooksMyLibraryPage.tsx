@@ -464,6 +464,8 @@ export default function BooksMyLibraryPage() {
                         />
                     </button>
 
+                    <h1 id = "books-my-library-page-title">My Library</h1>
+
                     {/* Scrollable section for books */}
                     <div id="books-my-library-page-books-list-container">
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :

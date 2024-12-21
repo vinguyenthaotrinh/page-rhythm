@@ -186,7 +186,7 @@ export default function BooksAdminPage() {
             <div id="books-admin-page-container">
                 <AdminSectionBar currentOption="books" />
                 <div id="books-admin-page-content">
-                    
+                    <h1 id = "general-profile-page-title">Admin</h1>
                     {/* Scrollable section for books */}
                     <div id="books-admin-page-books-list-container">
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :

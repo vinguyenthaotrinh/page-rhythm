@@ -1,5 +1,6 @@
 from services.statistics.supabase_statistics_api_service import SupabaseStatisticsAPIService
 from models.tracked_progress import TrackedProgress, ReadingStatus
+from services.book.book_service import BookService
 import matplotlib.pyplot as plt
 from typing import Optional
 import datetime
@@ -209,3 +210,12 @@ class StatisticsService:
         
         # Return the binary content of the image
         return buffer.getvalue()
+    
+    def get_all_tracked_progress_of_user(self, user_id: int) -> list[dict]:
+        book_service = BookService()
+        result = []
+        for tracked_progress in self.supabase.get_all_tracked_progress_of_user(user_id):
+            book = book_service.get_book_information(tracked_progress.book_id).to_serializable_JSON()
+            book["progress"] = tracked_progress.to_serializable_JSON()
+            result.append(book)
+        return result
