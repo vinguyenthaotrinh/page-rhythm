@@ -7,10 +7,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ReadBookPage() {
 
-    const { bookID } = useParams<{ bookID: string }>();
-    const [book, setBook] = useState<any>(null);
-    const navigate = useNavigate();
-    const pageCapacity = 1600;
+    const { bookID }        = useParams<{ bookID: string }>();
+    const [book, setBook]   = useState<any>(null);
+    const navigate          = useNavigate();
+    const pageCapacity      = 1600;
     const maximumLineLength = 80;
 
     const [currentLeftPage, setCurrentLeftPage] = useState(1);

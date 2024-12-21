@@ -33,13 +33,21 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
         }
     }, [selectedBook]);
 
+    useEffect(() => {
+
+        if (status !== "in_progress") 
+            setCurrentPage(selectedBook?.progress.page_number || 0);
+
+    }, [status, currentPage]);
+
     const handleUpdateStatus = () => {
+
         if (selectedBook) {
             handleUpdateStatusBook({
                 ...selectedBook,
                 progress: {
                     ...selectedBook.progress,
-                    status,
+                    status: status,
                     page_number: currentPage,
                 },
             });
@@ -74,13 +82,17 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                 </div>
 
                 <div className="statistics-profile-page-input-row-container">
-                    <label className="status-label">Current Page:</label>
+                    <label 
+                        className   =   {`status-label ${status !== "in_progress" ? "disabled" : ""}`}
+                    >
+                        Current Page:
+                    </label>
                     <input
                         type        =   "number"
                         min         =   {1}
                         value       =   {currentPage}
                         onChange    =   {(e) => setCurrentPage(parseInt(e.target.value))}
-                        className   =   "statistics-profile-page-page-number-input"
+                        className   =   {`statistics-profile-page-page-number-input ${status !== "in_progress" ? "disabled" : ""}`}
                         disabled    =   {status !== "in_progress"}
                     />
                 </div>
@@ -133,8 +145,8 @@ export default function StatisticsProfilePage() {
             const server = await Server.getInstance();
             await server.trackProgressOfReadingBook(
                 updatedBook.book_id,
-                updatedBook.progress.status,
-                updatedBook.progress.page_number
+                updatedBook.progress.page_number,
+                updatedBook.progress.status
             );
             setBooks(books.map((book) =>
                 book.book_id === updatedBook.book_id ? updatedBook : book

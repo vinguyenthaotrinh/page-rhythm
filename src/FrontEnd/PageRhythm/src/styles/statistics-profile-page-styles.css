@@ -357,3 +357,17 @@
     appearance: none;         /* Hides the default spinner buttons */
     margin: 0;                /* Removes margin for cleaner layout */
 }
+
+.statistics-profile-page-page-number-input.disabled {
+    color: gray;
+    background-color: rgb(234, 234, 234);
+}
+
+.status-label {
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.status-label.disabled {
+    color: gray;
+}

@@ -1,6 +1,7 @@
 import json
 from flask import Blueprint, jsonify, request
 from models.tracked_progress import ReadingStatus
+from services.book.book_service import BookService
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from services.statistics.statistics_service import StatisticsService
 
@@ -32,6 +33,16 @@ def track_progress():
     book_id     = data.get("book_id")
     page_number = data.get("page_number")
     status      = ReadingStatus(data.get("status"))
+
+    book_service = BookService()
+
+    number_of_pages = len(book_service.get_all_book_pages(book_id))
+
+    if page_number > number_of_pages:
+        return jsonify({
+            "status": "error",
+            "message": "Page number is greater than the total number of pages in the book"
+        }), 400
 
     statistics_service = StatisticsService()
 
