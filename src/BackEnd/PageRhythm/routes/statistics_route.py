@@ -10,8 +10,8 @@ statistics_blueprint = Blueprint("statistics", __name__)
 @statistics_blueprint.route("/tracked_progress/<string:book_id>", methods=["GET"])
 @jwt_required()
 def get_tracked_progress(book_id):
-    current_identity = json.loads(get_jwt_identity())
-    user_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    user_id             = current_identity["account_id"]
 
     statistics_service = StatisticsService()
 

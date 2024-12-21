@@ -6,18 +6,21 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ReadBookPage() {
-
-    const { bookID }        = useParams<{ bookID: string }>();
-    const [book, setBook]   = useState<any>(null);
-    const navigate          = useNavigate();
-    const pageCapacity      = 1600;
-    const maximumLineLength = 80;
-
+    const [loading, setLoading]                 = useState(true);
+    const { bookID }                            = useParams<{ bookID: string }>();
+    const [book, setBook]                       = useState<any>(null);
     const [currentLeftPage, setCurrentLeftPage] = useState(1);
-    const [contentPages, setContentPages] = useState<string[]>([]);
+    const [contentPages, setContentPages]       = useState<string[]>([]);
+    const navigate                              = useNavigate();
+    const pageCapacity                          = 1600;
+    const maximumLineLength                     = 80;
     
     const handleBackClick = () => {
         navigate(-1); // Navigate back to the previous page
+    };
+
+    const handleListenButtonClick = () => {
+        navigate(`/listen-to-book-page/${bookID}`); // Navigate to the ListenToBookPage component
     };
 
     const decodeBookCover = (bookCover: string | null) => {
@@ -29,6 +32,7 @@ export default function ReadBookPage() {
 
     useEffect(() => {
         const fetchBookDetails = async () => {
+            setLoading(true);
             try {
                 if (!bookID) {
                     console.error("Book ID is not available.");
@@ -38,13 +42,19 @@ export default function ReadBookPage() {
                 const server = await Server.getInstance();  // Get the server instance
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
 
-                setBook(book);  // Set the book details in state
+                setBook(book);                              // Set the book details in state
 
                 const pages = await server.getContentPages(parseInt(bookID), pageCapacity, maximumLineLength);  // Fetch the content pages
-                setContentPages(pages);  // Set the content pages in state
+                setContentPages(pages);                     // Set the content pages in state
+
+                const progress = await server.getTrackedReadingProgress(parseInt(bookID));  // Fetch the progress of reading the book
+
+                if (progress && progress.status === "in_progress") 
+                    setCurrentLeftPage(progress.page_number);
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
+            setLoading(false);
         };
 
         if (bookID) 
@@ -53,6 +63,8 @@ export default function ReadBookPage() {
     }, [bookID]); // Dependency array: fetch book details whenever the bookID changes
 
     useEffect(() => {
+        if (loading) 
+            return;
         
         const updateProgress = async () => {
             try {
@@ -73,9 +85,9 @@ export default function ReadBookPage() {
             }
         }
 
-        updateProgress();  // Update the progress whenever the currentLeftPage
+        updateProgress(); 
 
-    }, [currentLeftPage]);
+    }, [currentLeftPage, loading]);
 
     if (!book) 
         return <div>Loading...</div>;
@@ -107,9 +119,16 @@ export default function ReadBookPage() {
                 </div>
 
                 <button
-                    id = "read-book-page-listen-button"
-                    className = "read-book-page-button"
-                >   Listen To Audio Book
+                    id          = "read-book-page-listen-button"
+                    className   = "read-book-page-button"
+                    onClick     = {handleListenButtonClick}
+                >   
+                    <img
+                        src = {IMAGES.PLAY_BUTTON_ICON}
+                        alt = "Listen"
+                        className = "read-book-page-button-icon"
+                    />
+                    Listen To Audio Book
                 </button>
             </div>
 
@@ -124,9 +143,10 @@ export default function ReadBookPage() {
                         id = "read-book-page-book-details-section"
                     >
                         <img
-                            src = {decodeBookCover(book.image)}
-                            alt = {book.title}
-                            id = "read-book-page-book-cover"
+                            src     = {decodeBookCover(book.image)}
+                            alt     = {book.title}
+                            id      = "read-book-page-book-cover"
+                            onClick = {() => navigate(`/book-details-page/${bookID}`)}
                         />
                         <div
                             id = "read-book-page-book-details"

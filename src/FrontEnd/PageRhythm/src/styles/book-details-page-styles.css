@@ -121,8 +121,11 @@
 }
 
 #book-details-page-listen-button {
-    background-color: white;
+    gap: 8px;
+    display: flex;
     color: #265073;
+    align-items: center;
+    background-color: white;
     border: 2px solid #265073;
     transition: background-color color border 4s;
 }
