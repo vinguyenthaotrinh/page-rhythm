@@ -5,9 +5,34 @@ import "../styles/book-details-page-styles.css";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+interface WriteCommentOverlayProps {
+    showWriteCommentOverlay:    boolean;
+    bookID:                     string | undefined;
+    repliedCommentID:           string | null;
+}
+
+const WriteCommentOverlay: React.FC<WriteCommentOverlayProps> = ({
+    showWriteCommentOverlay,
+    bookID,
+    repliedCommentID
+}) => {
+
+    if (!showWriteCommentOverlay || !bookID) {
+        return null;
+    }
+
+    return (
+        <p>
+            Hello
+        </p>
+    )
+}
+
 export default function BookDetailsPage() {
-    const { bookID } = useParams<{ bookID: string }>();
-    const [book, setBook] = useState<any>(null);
+    const { bookID }                                    = useParams<{ bookID: string }>();
+    const [book, setBook]                               = useState<any>(null);
+    const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false); // Show the comment overlay
+    const [repliedCommentID, setRepliedCommentID]       = useState<string | null>(null); // Comment ID for replies
 
     const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
 
@@ -55,7 +80,6 @@ export default function BookDetailsPage() {
         navigate(-1); // Navigate back to the previous page
     };
     
-    // Fetch book details from the server
     useEffect(() => {
         const fetchBookDetails = async () => {
             try {
@@ -156,7 +180,19 @@ export default function BookDetailsPage() {
 
     // Handle the reply button click (navigate to the comment page for that comment)
     const handleReplyClick = (repliedCommentID: number) => {
-        navigate(`/comment-page/${bookID}/${repliedCommentID}`);
+        //navigate(`/comment-page/${bookID}/${repliedCommentID}`);
+        setRepliedCommentID(repliedCommentID.toString());
+        setShowCommentOverlay(true);
+    };
+
+    const handleWriteCommentButtonClick = () => {
+        //navigate(`/comment-page/${bookID}/null`); // Navigate to the comment page
+        setRepliedCommentID(null);
+        setShowCommentOverlay(true);
+    };
+
+    const handleReadThisBookButtonClick = () => {
+        navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
     };
 
     // Render the comment tree
@@ -182,14 +218,6 @@ export default function BookDetailsPage() {
         }
         return stars;
     }
-
-    const handleWriteCommentButtonClick = () => {
-        navigate(`/comment-page/${bookID}/null`); // Navigate to the comment page
-    };
-
-    const handleReadThisBookButtonClick = () => {
-        navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
-    };
 
     return (
         <div
@@ -298,6 +326,12 @@ export default function BookDetailsPage() {
             >
                 {renderCommentTree()}
             </div>
+
+            <WriteCommentOverlay 
+                showWriteCommentOverlay         =   {showCommentOverlay} 
+                bookID                          =   {bookID}
+                repliedCommentID                =   {repliedCommentID}
+            />
 
         </div>
     )
