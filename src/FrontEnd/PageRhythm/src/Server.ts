@@ -1119,7 +1119,7 @@ export default class Server {
 
             const progress = await response.json(); // The response is expected to be a JSON array of reading progress
 
-            return progress; // Return the array of reading progress
+            return progress.data; // Return the array of reading progress
         } catch (error) {
             this.logAndThrowError("Error fetching reading progress:", error);
         }

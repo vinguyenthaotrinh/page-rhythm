@@ -307,7 +307,7 @@ function NoBookText() {
 export default function BooksMyLibraryPage() {
     const [books, setBooks] = useState<any[]>([]);                                      // Books data state
     const [loading, setLoading] = useState(true);                                       // Loading state
-    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);                    // Confirmation box visibility
+    const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false);    // Confirmation box visibility
     const [bookToDelete, setBookToDelete] = useState<any | null>(null);                 // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay] = useState(false);                        // State for Add Overlay
     const [selectedFile, setSelectedFile] = useState<File | null>(null);                // Track the selected file for upload
