@@ -49,7 +49,7 @@ html, body {
     display: flex;
     cursor: pointer;
     color: #265073;
-    padding: 10px 20px;     /* Adjust padding for button size */
+    padding: 10px 20px;                 /* Adjust padding for button size */
     align-items: center;
     border-radius: 12px;
     background-color: white;    
@@ -66,25 +66,25 @@ html, body {
 
 #listen-to-book-page-content-region {
     background-color: #4D4D4D;   /* Light grey background */
-    flex-grow: 1;                /* Allow it to grow and take remaining space */
-    margin-bottom: 16px;         /* Space between the content and the bottom */
+    flex-grow: 1;                   /* Allow it to grow and take remaining space */
+    margin-bottom: 16px;            /* Space between the content and the bottom */
     margin-left: 64px;
     margin-right: 64px;
-    margin-top: 64px;            /* Space between the content and the top */
+    margin-top: 64px;               /* Space between the content and the top */
     display: flex;
-    flex-direction: column;      /* Stack children vertically */
+    flex-direction: column;         /* Stack children vertically */
 }
 
 #listen-to-book-page-content-header {
-    position: relative;         /* This makes the parent container a reference point for absolute positioning */
+    position: relative;             /* This makes the parent container a reference point for absolute positioning */
     padding: 10px 20px;
     background-color: transparent;
     display: flex;
-    justify-content: center;    /* Center the navigation */
+    justify-content: center;        /* Center the navigation */
     align-items: center;
     color: white;
     width: 100%;
-    z-index: 1;                 /* Ensures this section is above others */
+    z-index: 1;                     /* Ensures this section is above others */
 }
 
 #listen-to-book-page-navigation-section {
@@ -95,7 +95,7 @@ html, body {
 }
 
 .listen-to-book-page-navigation-icon {
-    width: 24px; /* Icon size */
+    width: 24px;
     height: 24px;
     cursor: pointer;
 }
