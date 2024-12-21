@@ -19,8 +19,8 @@ export default function ListenToBookPage() {
         navigate(-1);
     };
 
-    const handleListenButtonClick = () => {
-        navigate(`/listen-to-book-page/${bookID}`);
+    const handleReadThisBookButtonClick = () => {
+        navigate(`/read-book-page/${bookID}`);
     };
 
     const decodeBookCover = (bookCover: string | null) => {
@@ -119,16 +119,11 @@ export default function ListenToBookPage() {
                 </div>
 
                 <button
-                    id          = "listen-to-book-page-listen-button"
-                    className   = "listen-to-book-page-button"
-                    onClick     = {handleListenButtonClick}
-                >   
-                    <img
-                        src = {IMAGES.PLAY_BUTTON_ICON}
-                        alt = "Listen"
-                        className = "listen-to-book-page-button-icon"
-                    />
-                    Listen To Audio Book
+                    id = "book-details-page-read-button"
+                    className = "book-details-page-button"
+                    onClick = {handleReadThisBookButtonClick}
+                >
+                    Read This Book
                 </button>
             </div>
 
