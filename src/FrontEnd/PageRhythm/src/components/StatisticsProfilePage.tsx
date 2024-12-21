@@ -58,6 +58,29 @@ export default function StatisticsProfilePage() {
         setShowDeletionConfirmation(false); // Close the confirmation box
     };
 
+    const formatProgressStatus = (status: string, currentPage: number): string => {
+
+        console.log(status);
+
+        if (status == "not_started") 
+            return "Not started";
+
+        if (status == "in_progress")
+            return `In progress (page ${currentPage})`;
+
+        if (status == "finished")
+            return "Finished";
+
+        return "Unknown";
+    }
+
+    const formatMostRecentUpdateDate = (datetime: string | null): string => {
+        if (datetime === null)
+            return "No updates yet";
+
+        return datetime.split("T")[0];
+    }
+
     useEffect(() => {
         const fetchBooks = async () => {
             try {
@@ -104,8 +127,11 @@ export default function StatisticsProfilePage() {
                                             <p className="statistics-book-item-release-date">
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
+                                            <p className="statistics-book-item-most-recent-update">
+                                                Most Recent Update: {formatMostRecentUpdateDate(book.progress.most_recent_update_date)}
+                                            </p>
                                             <p className="statistics-book-item-progress-status">
-                                                Status: {book.progress.status}
+                                                Status: {formatProgressStatus(book.progress.status, book.progress.page_number)}
                                             </p>
                                             <div className="statistics-book-item-buttons">
                                                 <button 
