@@ -219,3 +219,6 @@ class StatisticsService:
             book["progress"] = tracked_progress.to_serializable_JSON()
             result.append(book)
         return result
+    
+    def delete_tracked_progress(self, user_id: int, book_id: int) -> bool:
+        return self.supabase.delete_tracked_progress(user_id, book_id)

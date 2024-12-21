@@ -1006,18 +1006,18 @@ export default class Server {
         const body = {
             banned_account_id,
             start_time: {
-                day: parseInt(from.split("-")[2], 10),
-                month: parseInt(from.split("-")[1], 10),
-                year: parseInt(from.split("-")[0], 10),
-                hour: 0,
+                day:    parseInt(from.split("-")[2], 10),
+                month:  parseInt(from.split("-")[1], 10),
+                year:   parseInt(from.split("-")[0], 10),
+                hour:   0,
                 minute: 0,
                 second: 0,
             },
             end_time: {
-                day: parseInt(to.split("-")[2], 10),
-                month: parseInt(to.split("-")[1], 10),
-                year: parseInt(to.split("-")[0], 10),
-                hour: 23,
+                day:    parseInt(to.split("-")[2], 10),
+                month:  parseInt(to.split("-")[1], 10),
+                year:   parseInt(to.split("-")[0], 10),
+                hour:   23,
                 minute: 59,
                 second: 59,
             },
@@ -1124,4 +1124,34 @@ export default class Server {
             this.logAndThrowError("Error fetching reading progress:", error);
         }
     }
+
+    public async deleteTrackedReadingProgress(bookID: number): Promise<void> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/track_progress/`;
+
+        const body = {
+            book_id: bookID,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: "DELETE",
+                headers: this.getSimpleHeadersWithSessionToken(),
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error deleting tracked reading progress:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to delete tracked reading progress.");
+            }
+
+            console.log("Tracked reading progress deleted successfully.");
+        } catch (error) {
+            this.logAndThrowError("Error during deleting tracked reading progress:", error);
+        }
+    }
+        
 }

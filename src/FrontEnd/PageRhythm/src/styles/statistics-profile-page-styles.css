@@ -2,54 +2,52 @@
 
 /* Full page layout */
 .statistics-profile-page {
+    width: 100vw;   /* Makes the page take up the full viewport width */
+    height: 100vh;  /* Makes the page take up the full viewport height */
     display: flex;
     flex-direction: column;
-    height: 100vh;  /* Makes the page take up the full viewport height */
-    width: 100vw;   /* Makes the page take up the full viewport width */
 }
 
 /* Container for both sidebar and content */
 .statistics-profile-page-container {
-    display: flex;
     flex-grow: 1;               /* Ensure content grows to fill the available space */
+    display: flex;
     margin-top: 60px;           /* Adjust for navigation bar height */
     height: calc(100vh - 60px); /* Adjust container height to fill remaining space after navigation bar */
 }
-
-
 
 /* Main content area */
 .statistics-profile-page-profile-content {
     flex-grow: 1; /* This allows it to fill the remaining space */
     padding: 20px;
+    overflow-y: auto;
     text-align: center;
     background-color: #F6FFDE;
-    overflow-y: auto;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for profile content */
 }
 
 #statistics-profile-page-title {
     font-size: 24px;
+    color: #265073;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #265073;
     align-items: center;
     font-family : "Poppins-Bold", sans-serif;
 }
 
 #statistics-profile-page-books-list-container {
-    flex-grow: 1;           /* Allows this container to take up the remaining space */
-    overflow-y: auto;       /* Enables scrolling if there are too many books */
+    flex-grow: 1;                           /* Allows this container to take up the remaining space */
+    overflow-y: auto;                       /* Enables scrolling if there are too many books */
 }
 
 #statistics-profile-page-books-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
     gap: 20px;
+    display: grid;
     padding: 20px;
+    margin: 0 auto;                         /* Center the grid horizontally */
     overflow: auto;
     max-width: 1000px;
-    margin: 0 auto; /* Center the grid horizontally */
+    grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
 }
 
 #statistics-profile-page-loading-text {
@@ -63,26 +61,26 @@
 
 /* Book item container: two-column layout */
 .statistics-profile-page-book-item {
+    gap: 20px;                 /* Spacing between the two columns */
     display: flex;             /* Flexbox for the two-column layout */
-    background-color: #EFEAD3;
     padding: 16px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    gap: 20px;                 /* Spacing between the two columns */
-    transition: transform 0.3s ease;
     align-items: center;       /* Vertically center the content */
+    background-color: #EFEAD3;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .statistics-profile-page-book-item:hover {
-    transform: translateY(-5px);  /* Adds a hover effect to lift the item */
+    transform: translateY(-5px);    /* Adds a hover effect to lift the item */
 }
 
 /* Left column: book cover */
 .statistics-book-item-left-column {
-    flex: 0 0 120px; /* Fixed width for the book cover */
     display: flex;
-    justify-content: center;
+    flex: 0 0 120px;                /* Fixed width for the book cover */
     align-items: center;
+    justify-content: center;
 }
 
 .book-item-cover {
@@ -123,28 +121,28 @@
 
 /* Button container (this was adjusted to ensure buttons are stacked vertically) */
 .book-item-buttons {
+    gap: 8px;               /* Space between buttons */
     display: flex;
-    flex-direction: column; /* Stack the buttons vertically */
-    gap: 8px; /* Space between buttons */
     margin-top: 0px;
+    flex-direction: column; /* Stack the buttons vertically */
 }
 
 /* Edit Button */
 .book-item-edit-button {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between text and icon */
-    background-color: #265073;
-    color: white;
+    gap: 5px;           /* Space between text and icon */
+    width: 100%;        /* Make it responsive */
     border: none;
-    border-radius: 12px;
-    padding: 8px 12px;
+    display: flex;
+    color: white;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s ease;
-    max-width: 120px; /* Limit the width of the button */
-    width: 100%; /* Make it responsive */
+    max-width: 120px;   /* Limit the width of the button */
+    padding: 8px 12px;
+    border-radius: 12px;
+    align-items: center;
+    background-color: #265073;
     justify-content: space-between;
+    transition: background-color 0.3s ease;
 }
 
 .book-item-edit-button:hover {
@@ -153,48 +151,48 @@
 
 /* Delete Button */
 .book-item-delete-button {
+    gap: 5px;               /* Space between text and icon */
+    width: auto;            /* Ensure the width adapts to the content */
     display: flex;
-    align-items: center;
-    background-color: white;
-    color: #FF0000;
-    border: 1px solid #FF0000;
-    border-radius: 12px;
-    padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    gap: 5px; /* Space between text and icon */
-    /* Remove the width 100% to prevent it from expanding */
+    color: #FF0000;
     max-width: 120px;
-    width: auto; /* Ensure the width adapts to the content */
+    padding: 8px 12px;
+    border-radius: 12px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #FF0000;
     justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .book-item-delete-button:hover {
     background-color: #e74c3c;
+    border-color: #e74c3c;
     color: white;
 }
 
 .book-item-button-icon {
     position: relative;
-    width: 16px;
     height: 16px;
+    width: 16px;
 }
 
 .icon-normal {
-    display: block; /* Default icon */
+    display: block;     /* Default icon */
 }
 
 .icon-hover {
-    display: none; /* Initially hide the hover icon */
+    display: none;      /* Initially hide the hover icon */
 }
 
 .book-item-delete-button:hover .icon-normal {
-    display: none; /* Hide the default icon when hovering */
+    display: none;      /* Hide the default icon when hovering */
 }
 
 .book-item-delete-button:hover .icon-hover {
-    display: block; /* Show the hover icon when hovering */
+    display: block;     /* Show the hover icon when hovering */
 }
 
 @media (max-width: 768px) {
@@ -244,61 +242,61 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
-    justify-content: center;
+    z-index: 1000;                          /* Ensure it's on top */
     align-items: center;
-    z-index: 1000; /* Ensure it's on top */
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
 /* Confirmation Box */
 .statistics-profile-page-deletion-confirmation-box {
-    background-color: #EFEAD3;
+    width: 100%;
     color: black;
-    font-family: "Poppins-Regular", sans-serif;
+    max-width: 400px;
+    text-align: center;
     padding: 20px 30px;
     border-radius: 10px;
+    background-color: #EFEAD3;
+    font-family: "Poppins-Regular", sans-serif;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
 }
 
 /* Confirmation Buttons */
 .statistics-profile-page-deletion-confirmation-buttons {
-    display: flex;
-    justify-content: center;
     gap: 10px;
+    display: flex;
     margin-top: 15px;
+    justify-content: center;
 }
 
 .statistics-profile-page-deletion-confirmation-button {
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .statistics-profile-page-deletion-confirmation-button.confirm {
-    background-color: #e74c3c;
     color: white;
+    background-color: #e74c3c;
 }
 
 .statistics-profile-page-deletion-confirmation-button.cancel {
-    background-color: #ccc;
     color: black;
+    background-color: #ccc;
 }
 
 .statistics-profile-page-deletion-confirmation-button.confirm:hover {
-    background-color: #d43e2d;
     color: white;
+    background-color: #d43e2d;
 }
 
 .statistics-profile-page-deletion-confirmation-button.cancel:hover {
-    background-color: #ececec;
     color: black;
+    background-color: #ececec;
 }
 
 #statistics-profile-page-deletion-confirmation-title {

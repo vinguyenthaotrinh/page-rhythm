@@ -5,53 +5,25 @@ import "../styles/books-admin-page-styles.css";
 import AdminSectionBar from "./AdminSectionBar";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-interface DeletionConfirmationBoxProps {
-    title?: string;             // Optional custom title
-    message?: string;           // Confirmation message
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
-}
-
-const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    onConfirm,
-    onCancel,
-}) => {
-    return (
-        <div className="books-admin-page-deletion-confirmation-overlay">
-            <div className="books-admin-page-deletion-confirmation-box">
-                <h1 id="books-admin-page-deletion-confirmation-title">Delete your book</h1>
-                <p>Are you sure you want to delete this book?</p>
-                <div className="books-admin-page-deletion-confirmation-buttons">
-                    <button
-                        className="books-admin-page-deletion-confirmation-button confirm"
-                        onClick={onConfirm}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="books-admin-page-deletion-confirmation-button cancel"
-                        onClick={onCancel}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
+import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
 interface VisibilityConfirmationBoxProps {
-    message?: string;           // Confirmation message
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
+    showVisibilityConfirmation:     boolean;            // Whether to show the visibility confirmation box
+    message?:                       string;             // Confirmation message
+    onConfirm:                      () => void;         // Function to call when confirmed
+    onCancel:                       () => void;         // Function to call when canceled
 }
 
 const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
+    showVisibilityConfirmation,
     message,
     onConfirm,
     onCancel,
 }) => {
+
+    if (!showVisibilityConfirmation)
+        return null;
+
     return (
         <div className="books-admin-page-visibility-confirmation-overlay">
             <div className="books-admin-page-visibility-confirmation-box">
@@ -253,20 +225,18 @@ export default function BooksAdminPage() {
                 </div>
             </div>
 
-            {showVisibilityConfirmation && (
-                <VisibilityConfirmationBox
-                    message={visibilityMessage}
-                    onConfirm={handleConfirmToggleVisibility}
-                    onCancel={handleCancelToggleVisibility}
-                />
-            )}
+            <VisibilityConfirmationBox
+                showVisibilityConfirmation  =   {showVisibilityConfirmation}
+                message                     =   {visibilityMessage}
+                onConfirm                   =   {handleConfirmToggleVisibility}
+                onCancel                    =   {handleCancelToggleVisibility}
+            />
 
-            {showDeletionConfirmation && (
-                <DeletionConfirmationBox
-                    onConfirm   =   {handleConfirmDelete}
-                    onCancel    =   {handleCancelDelete}
-                />
-            )}
+            <BookDeletionConfirmationBox
+                showDeletionConfirmation    =   {showDeletionConfirmation}
+                onConfirm                   =   {handleConfirmDelete}
+                onCancel                    =   {handleCancelDelete}
+            />
 
         </div>
     );

@@ -51,3 +51,12 @@ class SupabaseStatisticsAPIService:
             print(e)
             return []
         return []
+    
+    def delete_tracked_progress(self, user_id: int, book_id: int) -> bool:
+        try:
+            response = self.client.table("TrackedProgress").delete().eq("user_id", user_id).eq("book_id", book_id).execute()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        return False
