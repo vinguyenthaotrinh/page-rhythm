@@ -1,17 +1,17 @@
-from routes.user_account_management_route import user_account_management_blueprint
-from routes.sample_audio_file_route import sample_audio_file_blueprint
-from routes.voice_generation_route import voice_generation_blueprint
-from routes.authentication_route import authentication_blueprint
-from routes.book_rating_route import book_rating_blueprint
-from routes.statistics_route import statistics_blueprint
-from routes.account_route import account_blueprint
-from routes.comment_route import comment_blueprint
-from routes.home_route import home_blueprint
-from routes.book_route import book_blueprint
-from flask_jwt_extended import JWTManager
-from datetime import timedelta
-from flask_cors import CORS
-from flask import Flask
+from routes.user_account_management_route   import user_account_management_blueprint
+from routes.sample_audio_file_route         import sample_audio_file_blueprint
+from routes.voice_generation_route          import voice_generation_blueprint
+from routes.authentication_route            import authentication_blueprint
+from routes.book_rating_route               import book_rating_blueprint
+from routes.statistics_route                import statistics_blueprint
+from routes.account_route                   import account_blueprint
+from routes.comment_route                   import comment_blueprint
+from routes.home_route                      import home_blueprint
+from routes.book_route                      import book_blueprint
+from flask_jwt_extended                     import JWTManager
+from datetime                               import timedelta
+from flask_cors                             import CORS
+from flask                                  import Flask
 import os
 
 app = Flask(__name__)
