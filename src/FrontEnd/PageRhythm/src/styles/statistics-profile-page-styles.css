@@ -37,12 +37,12 @@
     font-family : "Poppins-Bold", sans-serif;
 }
 
-#books-my-library-page-books-list-container {
+#statistics-profile-page-books-list-container {
     flex-grow: 1;           /* Allows this container to take up the remaining space */
     overflow-y: auto;       /* Enables scrolling if there are too many books */
 }
 
-#books-my-library-page-books-grid {
+#statistics-profile-page-books-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
     gap: 20px;
@@ -52,8 +52,17 @@
     margin: 0 auto; /* Center the grid horizontally */
 }
 
+#statistics-profile-page-loading-text {
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
+
 /* Book item container: two-column layout */
-.books-my-library-page-book-item {
+.statistics-profile-page-book-item {
     display: flex;             /* Flexbox for the two-column layout */
     background-color: #EFEAD3;
     padding: 16px;
@@ -64,12 +73,12 @@
     align-items: center;       /* Vertically center the content */
 }
 
-.books-my-library-page-book-item:hover {
+.statistics-profile-page-book-item:hover {
     transform: translateY(-5px);  /* Adds a hover effect to lift the item */
 }
 
 /* Left column: book cover */
-.book-item-left-column {
+.statistics-book-item-left-column {
     flex: 0 0 120px; /* Fixed width for the book cover */
     display: flex;
     justify-content: center;
@@ -77,17 +86,17 @@
 }
 
 .book-item-cover {
+    gap: 4px;
     width: 180px;
     height: 220px;
+    cursor: pointer;
     object-fit: cover;
     border-radius: 8px;
-    gap: 4px;
-    cursor: pointer;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a black shadow */
 }
 
 /* Right column: book details */
-.book-item-right-column {
+.statistics-book-item-right-column {
     flex: 1;                 /* Takes up the remaining space */
     display: flex;
     flex-direction: column;  /* Stacks text and buttons vertically */
@@ -95,18 +104,21 @@
 }
 
 /* Book details */
-.book-item-title {
-    font-size: 18px;
-    font-weight: bold;
+.statistics-book-item-title {
     color: #333;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
 }
 
-.book-item-author,
-.book-item-release-date {
-    font-size: 14px;
+.statistics-book-item-author,
+.statistics-book-item-release-date {
     color: #555;
+    font-size: 14px;
     margin-top: 0px;
+    text-align: left;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Button container (this was adjusted to ensure buttons are stacked vertically) */
@@ -186,47 +198,47 @@
 }
 
 @media (max-width: 768px) {
-    .books-my-library-page-book-item {
+    .statistics-profile-page-book-item {
         flex-direction: column; /* Stack the columns vertically */
         align-items: flex-start;
     }
 
-    .book-item-left-column {
+    .statistics-book-item-left-column {
         flex: none;
         margin-bottom: 10px; /* Add spacing between the image and details */
     }
 
-    .book-item-cover {
+    .statistics-book-item-cover {
         width: 100%; /* Make the cover full-width for smaller screens */
         height: auto;
     }
 
-    .book-item-right-column {
+    .statistics-book-item-right-column {
         align-items: flex-start; /* Align content to the left */
     }
 }
 
 /* For Webkit-based browsers (Chrome, Edge, etc.) */
-#books-my-library-page-books-list-container::-webkit-scrollbar {
+#statistics-profile-page-books-list-container::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar */
 }
 
-#books-my-library-page-books-list-container::-webkit-scrollbar-track {
+#statistics-profile-page-books-list-container::-webkit-scrollbar-track {
     background: rgba(241, 241, 241, 0.5); /* Track color */
 }
 
-#books-my-library-page-books-list-container::-webkit-scrollbar-thumb {
+#statistics-profile-page-books-list-container::-webkit-scrollbar-thumb {
     background-color: #265073;          /* Thumb color */
     border-radius: 4px;                     /* Rounded corners for the thumb */
     border: 2px solid #f1f1f1;              /* Optional: Create spacing around the thumb */
 }
 
-#books-my-library-page-books-list-container::-webkit-scrollbar-thumb:hover {
+#statistics-profile-page-books-list-container::-webkit-scrollbar-thumb:hover {
     background-color: #0f4ba3; /* Thumb hover color */
 }
 
 /* Confirmation Box Overlay */
-.books-my-library-page-deletion-confirmation-overlay {
+.statistics-profile-page-deletion-confirmation-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -240,7 +252,7 @@
 }
 
 /* Confirmation Box */
-.books-my-library-page-deletion-confirmation-box {
+.statistics-profile-page-deletion-confirmation-box {
     background-color: #EFEAD3;
     color: black;
     font-family: "Poppins-Regular", sans-serif;
@@ -253,14 +265,14 @@
 }
 
 /* Confirmation Buttons */
-.books-my-library-page-deletion-confirmation-buttons {
+.statistics-profile-page-deletion-confirmation-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.books-my-library-page-deletion-confirmation-button {
+.statistics-profile-page-deletion-confirmation-button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -269,182 +281,28 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.books-my-library-page-deletion-confirmation-button.confirm {
+.statistics-profile-page-deletion-confirmation-button.confirm {
     background-color: #e74c3c;
     color: white;
 }
 
-.books-my-library-page-deletion-confirmation-button.cancel {
+.statistics-profile-page-deletion-confirmation-button.cancel {
     background-color: #ccc;
     color: black;
 }
 
-.books-my-library-page-deletion-confirmation-button.confirm:hover {
+.statistics-profile-page-deletion-confirmation-button.confirm:hover {
     background-color: #d43e2d;
     color: white;
 }
 
-.books-my-library-page-deletion-confirmation-button.cancel:hover {
+.statistics-profile-page-deletion-confirmation-button.cancel:hover {
     background-color: #ececec;
     color: black;
 }
 
-#books-my-library-page-deletion-confirmation-title {
+#statistics-profile-page-deletion-confirmation-title {
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
 }
-
-/* Main overlay container */
-.add-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 31082003;  /* Ensure overlay appears above other content */
-    transition: opacity 0.3s ease; /* Smooth fade-in/out */
-}
-
-/* Content inside the overlay */
-.add-overlay-content {
-    background-color: #EFEAD3;  /* Light beige background */
-    color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px; /* Limit the maximum width for large screens */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
-    display: flex;
-    flex-direction: column;   /* Stack children vertically */
-    justify-content: center;  /* Center the content vertically */
-    align-items: center;      /* Center the content horizontally */
-    gap: 0px;                /* Add space between elements */
-    animation: fadeIn 0.3s ease-out; /* Fade-in effect for content */
-}
-
-/* Smooth fade-in animation */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Title styling */
-#add-overlay-title {
-    font-size: 24px;
-    font-weight: bold;
-    font-family: "Poppins-SemiBold", sans-serif;
-    margin-bottom: 15px;
-}
-
-/* Styling for text descriptions */
-.add-overlay p {
-    font-size: 16px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-/* Input fields styling */
-.add-overlay input,
-.add-overlay textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    background-color: #fff;
-    transition: border 0.3s ease;
-}
-
-.add-overlay input:focus,
-.add-overlay textarea:focus {
-    border-color: #5b5b5b;  /* Darker border on focus */
-    outline: none;
-}
-
-/* File input styling */
-.add-overlay input[type="file"] {
-    padding: 5px;
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-/* Image preview container */
-.add-overlay img {
-    margin-top: 15px;
-    max-width: 100%;
-    border-radius: 5px;
-}
-
-/* Buttons styling */
-.add-overlay-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.add-overlay-buttons button {
-    background-color: #4CAF50;  /* Green background */
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: "Poppins-SemiBold", sans-serif;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: 8px;
-    margin-right: 8px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effects for buttons */
-.add-overlay-buttons button:hover {
-    background-color: #45a049;  /* Darker green */
-}
-
-/* Close button with a different color */
-.add-overlay-buttons button:nth-child(2) {
-    background-color: #f44336;  /* Red background */
-}
-
-.add-overlay-buttons button:nth-child(2):hover {
-    background-color: #e53935;  /* Darker red */
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-    .add-overlay-content {
-        width: 85%;  /* Take more width on smaller screens */
-        padding: 15px;
-    }
-
-    #add-overlay-title {
-        font-size: 20px;
-    }
-
-    .add-overlay p {
-        font-size: 14px;
-    }
-
-    .add-overlay-buttons button {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
-
