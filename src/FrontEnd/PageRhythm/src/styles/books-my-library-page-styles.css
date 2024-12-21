@@ -262,24 +262,24 @@
 
 /* Content inside the overlay */
 .add-overlay-content {
-    background-color: #EFEAD3;  /* Light beige background */
+    gap: 0px;                           /* Add space between elements */
+    width: 90%;
+    display: flex;
     color: black;
-    font-family: "Poppins-Regular", sans-serif;
-    padding-left: 20px;
-    padding-right: 20px;
+    max-width: 400px;                   /* Limit the maximum width for large screens */
     padding-top: 8px;
+    padding-left: 20px;
+    text-align: center;
+    padding-right: 20px;
     padding-bottom: 8px;
     border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px; /* Limit the maximum width for large screens */
+    align-items: center;                /* Center the content horizontally */
+    flex-direction: column;             /* Stack children vertically */
+    justify-content: center;            /* Center the content vertically */
+    background-color: #EFEAD3;  /* Light beige background */
+    animation: fadeIn 0.3s ease-out;    /* Fade-in effect for content */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
-    display: flex;
-    flex-direction: column;   /* Stack children vertically */
-    justify-content: center;  /* Center the content vertically */
-    align-items: center;      /* Center the content horizontally */
-    gap: 0px;                /* Add space between elements */
-    animation: fadeIn 0.3s ease-out; /* Fade-in effect for content */
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Smooth fade-in animation */
@@ -293,7 +293,7 @@
 }
 
 /* Title styling */
-#add-overlay-title {
+.add-overlay-title {
     font-size: 24px;
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
@@ -305,7 +305,7 @@
     color: #333;
     font-size: 16px;
     margin-bottom: 15px;
-    font-family : "Poppins-Bold", sans-serif;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Input fields styling */

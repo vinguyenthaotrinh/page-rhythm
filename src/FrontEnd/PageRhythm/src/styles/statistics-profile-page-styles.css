@@ -306,3 +306,54 @@
     font-weight: bold;
     font-family: "Poppins-SemiBold", sans-serif;
 }
+
+.statistics-profile-page-add-overlay-content {
+    gap: 0px;                           /* Add space between elements */
+    width: 90%;
+    display: flex;
+    color: black;
+    max-width: 440px;                   /* Limit the maximum width for large screens */
+    padding-top: 8px;
+    padding-left: 20px;
+    text-align: center;
+    padding-right: 20px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    align-items: center;                /* Center the content horizontally */
+    flex-direction: column;             /* Stack children vertically */
+    justify-content: center;            /* Center the content vertically */
+    background-color: #EFEAD3;  /* Light beige background */
+    animation: fadeIn 0.3s ease-out;    /* Fade-in effect for content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.statistics-profile-page-input-row-container {
+    gap: 8px;               /* Space between items in a row */
+    width: 100%;            /* Make rows span the full width of the container */
+    display: flex;
+    align-items: center;    /* Vertically center items within a row */
+    justify-content: center;
+}
+
+.statistics-profile-page-input-row-container .status-dropdown {
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+}
+
+.statistics-profile-page-page-number-input {
+    color: black;
+    max-width: 40px;
+    text-align: center;
+    appearance: textfield;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.statistics-profile-page-page-number-input::-webkit-inner-spin-button,
+.statistics-profile-page-page-number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Hides the default spinner buttons */
+    appearance: none;         /* Hides the default spinner buttons */
+    margin: 0;                /* Removes margin for cleaner layout */
+}

@@ -24,14 +24,14 @@ def get_tracked_progress(book_id):
 @statistics_blueprint.route("/track_progress", methods=["POST"])
 @jwt_required()
 def track_progress():
-    current_identity = json.loads(get_jwt_identity())
-    user_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    user_id             = current_identity["account_id"]
 
-    data = request.get_json()
+    data        = request.get_json()
 
-    book_id = data.get("book_id")
+    book_id     = data.get("book_id")
     page_number = data.get("page_number")
-    status = ReadingStatus(data.get("status"))
+    status      = ReadingStatus(data.get("status"))
 
     statistics_service = StatisticsService()
 

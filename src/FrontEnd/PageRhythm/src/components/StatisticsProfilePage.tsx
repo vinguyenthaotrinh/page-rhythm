@@ -22,9 +22,76 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
     setSelectedBook,
     handleUpdateStatusBook,
 }) => {
-    if (!showUpdateStatusOverlay || !selectedBook) return null;
+    const [status, setStatus]                 = useState(selectedBook?.progress.status || "not_started");
+    const [currentPage, setCurrentPage]       = useState(selectedBook?.progress.page_number || 0);
 
-    return <p>To Be Continued</p>
+    useEffect(() => {
+        // Reset form values when selectedBook changes
+        if (selectedBook) {
+            setStatus(selectedBook.progress.status);
+            setCurrentPage(selectedBook.progress.page_number);
+        }
+    }, [selectedBook]);
+
+    const handleUpdateStatus = () => {
+        if (selectedBook) {
+            handleUpdateStatusBook({
+                ...selectedBook,
+                progress: {
+                    ...selectedBook.progress,
+                    status,
+                    page_number: currentPage,
+                },
+            });
+        }
+    };
+
+    if (!showUpdateStatusOverlay || !selectedBook) 
+        return null;
+
+    return (
+        <div className="add-overlay">
+            <div className="statistics-profile-page-add-overlay-content">
+                <h1 
+                    className="add-overlay-title">
+                    Update your progress
+                </h1>
+                <p>
+                    You can update the progress of reading the book here
+                </p>
+
+                <div className="statistics-profile-page-input-row-container">
+                    <label className="status-label">Status:</label>
+                    <select 
+                        value       =   {status} 
+                        onChange    =   {(e) => setStatus(e.target.value)}
+                        className   =   "status-dropdown"
+                    >
+                        <option value="not_started">    Not started </option>
+                        <option value="in_progress">    In progress </option>
+                        <option value="finished">       Finished    </option>
+                    </select>
+                </div>
+
+                <div className="statistics-profile-page-input-row-container">
+                    <label className="status-label">Current Page:</label>
+                    <input
+                        type        =   "number"
+                        min         =   {1}
+                        value       =   {currentPage}
+                        onChange    =   {(e) => setCurrentPage(parseInt(e.target.value))}
+                        className   =   "statistics-profile-page-page-number-input"
+                        disabled    =   {status !== "in_progress"}
+                    />
+                </div>
+
+                <div className="add-overlay-buttons">
+                    <button onClick={handleUpdateStatus}>Update</button>
+                    <button onClick={() => setShowUpdateStatusOverlay(false)}>Cancel</button>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 function LoadingText() {
@@ -64,7 +131,11 @@ export default function StatisticsProfilePage() {
     const handleUpdateStatusBook = async (updatedBook: any) => {
         try {
             const server = await Server.getInstance();
-            //await server.updateBook(updatedBook);
+            await server.trackProgressOfReadingBook(
+                updatedBook.book_id,
+                updatedBook.progress.status,
+                updatedBook.progress.page_number
+            );
             setBooks(books.map((book) =>
                 book.book_id === updatedBook.book_id ? updatedBook : book
             ));

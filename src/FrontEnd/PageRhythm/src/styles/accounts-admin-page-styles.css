@@ -64,10 +64,10 @@
 }
 
 .accounts-admin-page-account-item .account-item-row {
+    gap: 8px;               /* Space between items in a row */
+    width: 100%;            /* Make rows span the full width of the container */
     display: flex;
-    align-items: center; /* Vertically center items within a row */
-    gap: 8px; /* Space between items in a row */
-    width: 100%; /* Make rows span the full width of the container */
+    align-items: center;    /* Vertically center items within a row */
 }
 
 .accounts-admin-page-account-item .account-info {

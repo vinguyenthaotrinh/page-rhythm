@@ -1066,16 +1066,16 @@ export default class Server {
         const url = `${this.host}/statistics/track_progress`;
 
         const body = {
-            book_id: bookID,
-            page_number: pageNumber,
-            status: status,
+            book_id:        bookID,
+            page_number:    pageNumber,
+            status:         status,
         };
 
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body),
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body),
             });
 
             if (!response.ok) {

@@ -55,8 +55,12 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
     return (
         <div className="add-overlay">
             <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Upload your book here</h1>
-                <p>Please enter the book information</p>
+                <h1 className="add-overlay-title">
+                    Upload your book here
+                </h1>
+                <p>
+                    Please enter the book information
+                </p>
 
                 <input
                     type="text"
@@ -183,13 +187,20 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
         setShowEditOverlay(false);                              // Close the overlay
     };
 
-    if (!showEditOverlay || !selectedBook) return null;
+    if (!showEditOverlay || !selectedBook) 
+        return null;
 
     return (
         <div className="add-overlay">
             <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Edit Book Information</h1>
-                <p>Edit the book details below</p>
+                <h1 
+                    className="add-overlay-title"
+                >
+                    Edit Book Information
+                </h1>
+                <p>
+                    Edit the book details below
+                </p>
 
                 <input
                     type="text"

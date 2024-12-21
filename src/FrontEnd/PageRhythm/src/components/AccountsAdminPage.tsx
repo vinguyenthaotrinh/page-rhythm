@@ -123,13 +123,13 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             <div className="account-item-row">
                 <label className="status-label">Status:</label>
                 <select 
-                    value={status} 
-                    onChange={(e) => setStatus(e.target.value)}
-                    className="status-dropdown"
+                    value       =   {status} 
+                    onChange    =   {(e) => setStatus(e.target.value)}
+                    className   =   "status-dropdown"
                 >
-                    <option value="active">Normal</option>
-                    <option value="temporarily_banned">Temporarily banned</option>
-                    <option value="permanently_banned">Permanently banned</option>
+                    <option value="active">             Normal              </option>
+                    <option value="temporarily_banned"> Temporarily banned  </option>
+                    <option value="permanently_banned"> Permanently banned  </option>
                 </select>
             </div>
 
@@ -143,11 +143,11 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                     From:
                 </label>
                 <input 
-                    type="date" 
-                    value={fromDate} 
-                    onChange={(e) => setFromDate(e.target.value)}
-                    disabled={status !== "temporarily_banned"}
-                    className = {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
+                    type        =   "date" 
+                    value       =   {fromDate} 
+                    onChange    =   {(e) => setFromDate(e.target.value)}
+                    disabled    =   {status !== "temporarily_banned"}
+                    className   =   {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 />
                 <label
                     className={`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}

@@ -69,8 +69,14 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
     return (
         <div className="add-overlay">
             <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Upload your sample audio file here</h1>
-                <p>Please enter the file information</p>
+                <h1 
+                    className="add-overlay-title"
+                >
+                    Upload your sample audio file here
+                </h1>
+                <p>
+                    Please enter the file information
+                </p>
 
                 <input
                     type="text"
@@ -146,8 +152,14 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
     return (
         <div className="add-overlay">
             <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Edit your sample audio file</h1>
-                <p>Please enter the updated file information</p>
+                <h1 
+                    className="add-overlay-title"
+                >
+                    Edit your sample audio file
+                </h1>
+                <p>
+                    Please enter the updated file information
+                </p>
 
                 <input
                     type="text"
