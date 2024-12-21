@@ -45,3 +45,18 @@ def track_progress():
         "status": "success",
         "data": success
     }), 200
+
+@statistics_blueprint.route("/tracked_progress/all", methods=["GET"])
+@jwt_required()
+def get_all_tracked_progress():
+    current_identity = json.loads(get_jwt_identity())
+    user_id = current_identity["account_id"]
+
+    statistics_service = StatisticsService()
+
+    tracked_progress = statistics_service.get_all_tracked_progress_of_user(user_id)
+
+    return jsonify({
+        "status": "success",
+        "data": tracked_progress
+    }), 200

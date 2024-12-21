@@ -381,6 +381,8 @@ export default function VoicesMyLibraryPage() {
                         />
                     </button>
 
+                    <h1 id = "books-my-library-page-title">My Library</h1>
+
                     {/* Scrollable section for records */}
                     <div id="voices-my-library-page-record-list-container">
                         {

@@ -55,7 +55,7 @@
     display: flex;
     flex-direction: column; /* Stacks items vertically */
     gap: 20px; /* Adds a 20px gap between items */
-    margin-top: 60px;
+    margin-top: 12px;
     flex-grow: 1;
     overflow-y: auto;
     padding-left: 20px;
@@ -88,71 +88,71 @@
 }
 
 .record-item {
+    gap: 10px;                  /* Space between the header and body */
     display: flex;
-    flex-direction: column; /* Stack header and body vertically */
-    background-color: #EFEAD3;
     padding: 16px;
-    border-radius: 8px;
     margin-left: 64px;
+    border-radius: 8px;
     margin-right: 64px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    gap: 10px; /* Space between the header and body */
+    flex-direction: column;     /* Stack header and body vertically */
+    background-color: #EFEAD3;
     transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Position the audio name at the top-left */
 .record-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .sample-audio-file-name {
-    font-weight: bold;
-    margin: 0; /* Remove unnecessary margins */
+    margin: 0;                  /* Remove unnecessary margins */
+    color: #333;                /* Darker color for better contrast */
     font-size: 24px;
-    color: #333; /* Darker color for better contrast */
+    font-weight: bold;
     font-family: "Poppins-Bold", sans-serif;
 }
 
 /* Record body layout */
 .record-body {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    width: 100%;
 }
 
 /* Left column layout for audio controls */
 .record-left-column {
     flex: 2;
+    gap: 10px;                  /* Space between progress bar and play button */
     display: flex;
+    align-items: center;        /* Center elements horizontally */
     flex-direction: column;
-    align-items: center; /* Center elements horizontally */
     justify-content: center;
-    gap: 10px; /* Space between progress bar and play button */
 }
 
 .audio-slider {
-    -webkit-appearance: none; /* Remove default styles for WebKit browsers */
-    appearance: none; /* Remove default styles for modern browsers */
     width: 100%;
-    height: 6px; /* Thickness of the slider track */
-    background: #A4C0ED; /* Light blue track color */
-    border-radius: 3px; /* Rounded track corners */
-    outline: none; /* Remove the outline */
-    transition: background 0.3s ease;
+    height: 6px;                /* Thickness of the slider track */
+    outline: none;              /* Remove the outline */
     cursor: pointer;
+    appearance: none;           /* Remove default styles for modern browsers */
+    border-radius: 3px;         /* Rounded track corners */
+    background: #A4C0ED;        /* Light blue track color */
+    -webkit-appearance: none;   /* Remove default styles for WebKit browsers */
+    transition: background 0.3s ease;
 }
 
 /* Custom handle (thumb) styles */
 .audio-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Remove default styles */
-    appearance: none; /* Remove default styles */
-    width: 12px; /* Width of the thumb */
-    height: 12px; /* Height of the thumb */
-    background: #265073; /* Dark blue thumb color */
-    border-radius: 50%; /* Make thumb circular */
+    -webkit-appearance: none;   /* Remove default styles */
+    appearance: none;           /* Remove default styles */
+    width: 12px;                /* Width of the thumb */
+    height: 12px;               /* Height of the thumb */
+    background: #265073;    /* Dark blue thumb color */
+    border-radius: 50%;         /* Make thumb circular */
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
 }
@@ -200,43 +200,43 @@
 
 /* Center the play button below the progress bar */
 .play-pause-button {
-    background: none;
     border: none;
-    cursor: pointer;
     display: flex;
+    cursor: pointer;
+    background: none;
     align-items: center;
     justify-content: center;
 }
 
 .play-pause-icon {
-    width: 60px; /* Adjust size as needed */
+    width: 60px;                        /* Adjust size as needed */
     height: 60px;
 }
 
 /* Right column layout for edit and delete buttons */
 .record-right-column {
     flex: 1;
+    gap: 10px;                          /* Space between buttons */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* Space between buttons */
     max-width: 240px;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* Common Styles for Buttons */
 .record-item-edit-button,
 .record-item-delete-button {
+    gap: 5px;                           /* Space between text and icon */
+    width: 100%;                        /* Ensure both buttons stretch equally */
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* Ensures space between text and icon */
-    gap: 5px; /* Space between text and icon */
-    border-radius: 12px;
-    padding: 8px 12px;
     cursor: pointer;
     font-size: 14px;
+    max-width: 120px;                   /* Set a maximum width */
+    padding: 8px 12px;
+    align-items: center;
+    border-radius: 12px;
+    justify-content: space-between;     /* Ensures space between text and icon */
     transition: background-color 0.3s ease, color 0.3s ease;
-    max-width: 120px; /* Set a maximum width */
-    width: 100%; /* Ensure both buttons stretch equally */
 }
 
 /* Edit Button Specific Styles */
@@ -271,13 +271,14 @@
 
 /* Time labels (00:00, current time, duration) */
 .time-labels {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: #333;
     width: 100%;
+    color: #333;
+    display: flex;
+    font-size: 12px;
     position: relative;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Position all time labels below the slider */
@@ -289,8 +290,8 @@
 
 /* Center the current time below the slider */
 .current-time {
-    text-align: center;
     font-size: 12px;
+    color: #265073;    
     font-weight: bold;
-    color: #265073;
+    text-align: center;
 }

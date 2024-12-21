@@ -1101,4 +1101,27 @@ export default class Server {
             this.logAndThrowError("Error during tracking reading progress:", error);
         }
     }
+
+    public async getAllUserReadingProgress(): Promise<any[]> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/statistics/tracked_progress/all`;
+
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: this.getSimpleHeadersWithSessionToken(),
+            });
+
+            if (!response.ok) 
+                throw new Error(`Failed to fetch reading progress. Status: ${response.status}`);
+
+            const progress = await response.json(); // The response is expected to be a JSON array of reading progress
+
+            return progress.data; // Return the array of reading progress
+        } catch (error) {
+            this.logAndThrowError("Error fetching reading progress:", error);
+        }
+    }
 }

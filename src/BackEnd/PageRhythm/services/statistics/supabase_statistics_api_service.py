@@ -42,3 +42,12 @@ class SupabaseStatisticsAPIService:
             print(e)
             return []
         return []
+    
+    def get_all_tracked_progress_of_user(self, user_id: int) -> list[TrackedProgress]:
+        try:
+            response = self.client.table("TrackedProgress").select("*").eq("user_id", user_id).execute()
+            return [TrackedProgress.deserialize_JSON(progress) for progress in response.data]
+        except Exception as e:
+            print(e)
+            return []
+        return []
