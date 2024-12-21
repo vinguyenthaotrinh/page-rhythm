@@ -37,3 +37,414 @@
     font-family : "Poppins-Bold", sans-serif;
 }
 
+#books-my-library-page-books-list-container {
+    flex-grow: 1;           /* Allows this container to take up the remaining space */
+    overflow-y: auto;       /* Enables scrolling if there are too many books */
+}
+
+#books-my-library-page-books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Creates two columns */
+    gap: 20px;
+    padding: 20px;
+    overflow: auto;
+    max-width: 1000px;
+    margin: 0 auto; /* Center the grid horizontally */
+}
+
+/* Book item container: two-column layout */
+.books-my-library-page-book-item {
+    display: flex;             /* Flexbox for the two-column layout */
+    background-color: #EFEAD3;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 20px;                 /* Spacing between the two columns */
+    transition: transform 0.3s ease;
+    align-items: center;       /* Vertically center the content */
+}
+
+.books-my-library-page-book-item:hover {
+    transform: translateY(-5px);  /* Adds a hover effect to lift the item */
+}
+
+/* Left column: book cover */
+.book-item-left-column {
+    flex: 0 0 120px; /* Fixed width for the book cover */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-item-cover {
+    width: 180px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    gap: 4px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a black shadow */
+}
+
+/* Right column: book details */
+.book-item-right-column {
+    flex: 1;                 /* Takes up the remaining space */
+    display: flex;
+    flex-direction: column;  /* Stacks text and buttons vertically */
+    justify-content: flex-start;
+}
+
+/* Book details */
+.book-item-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
+
+.book-item-author,
+.book-item-release-date {
+    font-size: 14px;
+    color: #555;
+    margin-top: 0px;
+}
+
+/* Button container (this was adjusted to ensure buttons are stacked vertically) */
+.book-item-buttons {
+    display: flex;
+    flex-direction: column; /* Stack the buttons vertically */
+    gap: 8px; /* Space between buttons */
+    margin-top: 0px;
+}
+
+/* Edit Button */
+.book-item-edit-button {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between text and icon */
+    background-color: #265073;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    max-width: 120px; /* Limit the width of the button */
+    width: 100%; /* Make it responsive */
+    justify-content: space-between;
+}
+
+.book-item-edit-button:hover {
+    background-color: #0f4ba3;
+}
+
+/* Delete Button */
+.book-item-delete-button {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    gap: 5px; /* Space between text and icon */
+    /* Remove the width 100% to prevent it from expanding */
+    max-width: 120px;
+    width: auto; /* Ensure the width adapts to the content */
+    justify-content: space-between;
+}
+
+.book-item-delete-button:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.book-item-button-icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-normal {
+    display: block; /* Default icon */
+}
+
+.icon-hover {
+    display: none; /* Initially hide the hover icon */
+}
+
+.book-item-delete-button:hover .icon-normal {
+    display: none; /* Hide the default icon when hovering */
+}
+
+.book-item-delete-button:hover .icon-hover {
+    display: block; /* Show the hover icon when hovering */
+}
+
+@media (max-width: 768px) {
+    .books-my-library-page-book-item {
+        flex-direction: column; /* Stack the columns vertically */
+        align-items: flex-start;
+    }
+
+    .book-item-left-column {
+        flex: none;
+        margin-bottom: 10px; /* Add spacing between the image and details */
+    }
+
+    .book-item-cover {
+        width: 100%; /* Make the cover full-width for smaller screens */
+        height: auto;
+    }
+
+    .book-item-right-column {
+        align-items: flex-start; /* Align content to the left */
+    }
+}
+
+/* For Webkit-based browsers (Chrome, Edge, etc.) */
+#books-my-library-page-books-list-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#books-my-library-page-books-list-container::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5); /* Track color */
+}
+
+#books-my-library-page-books-list-container::-webkit-scrollbar-thumb {
+    background-color: #265073;          /* Thumb color */
+    border-radius: 4px;                     /* Rounded corners for the thumb */
+    border: 2px solid #f1f1f1;              /* Optional: Create spacing around the thumb */
+}
+
+#books-my-library-page-books-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: #0f4ba3; /* Thumb hover color */
+}
+
+/* Confirmation Box Overlay */
+.books-my-library-page-deletion-confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Confirmation Box */
+.books-my-library-page-deletion-confirmation-box {
+    background-color: #EFEAD3;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Confirmation Buttons */
+.books-my-library-page-deletion-confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.books-my-library-page-deletion-confirmation-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.books-my-library-page-deletion-confirmation-button.confirm {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.books-my-library-page-deletion-confirmation-button.cancel {
+    background-color: #ccc;
+    color: black;
+}
+
+.books-my-library-page-deletion-confirmation-button.confirm:hover {
+    background-color: #d43e2d;
+    color: white;
+}
+
+.books-my-library-page-deletion-confirmation-button.cancel:hover {
+    background-color: #ececec;
+    color: black;
+}
+
+#books-my-library-page-deletion-confirmation-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+}
+
+/* Main overlay container */
+.add-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 31082003;  /* Ensure overlay appears above other content */
+    transition: opacity 0.3s ease; /* Smooth fade-in/out */
+}
+
+/* Content inside the overlay */
+.add-overlay-content {
+    background-color: #EFEAD3;  /* Light beige background */
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px; /* Limit the maximum width for large screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;   /* Stack children vertically */
+    justify-content: center;  /* Center the content vertically */
+    align-items: center;      /* Center the content horizontally */
+    gap: 0px;                /* Add space between elements */
+    animation: fadeIn 0.3s ease-out; /* Fade-in effect for content */
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Title styling */
+#add-overlay-title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Poppins-SemiBold", sans-serif;
+    margin-bottom: 15px;
+}
+
+/* Styling for text descriptions */
+.add-overlay p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input fields styling */
+.add-overlay input,
+.add-overlay textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+    font-family: "Poppins-Regular", sans-serif;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.add-overlay input:focus,
+.add-overlay textarea:focus {
+    border-color: #5b5b5b;  /* Darker border on focus */
+    outline: none;
+}
+
+/* File input styling */
+.add-overlay input[type="file"] {
+    padding: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Image preview container */
+.add-overlay img {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Buttons styling */
+.add-overlay-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.add-overlay-buttons button {
+    background-color: #4CAF50;  /* Green background */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: "Poppins-SemiBold", sans-serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-right: 8px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effects for buttons */
+.add-overlay-buttons button:hover {
+    background-color: #45a049;  /* Darker green */
+}
+
+/* Close button with a different color */
+.add-overlay-buttons button:nth-child(2) {
+    background-color: #f44336;  /* Red background */
+}
+
+.add-overlay-buttons button:nth-child(2):hover {
+    background-color: #e53935;  /* Darker red */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .add-overlay-content {
+        width: 85%;  /* Take more width on smaller screens */
+        padding: 15px;
+    }
+
+    #add-overlay-title {
+        font-size: 20px;
+    }
+
+    .add-overlay p {
+        font-size: 14px;
+    }
+
+    .add-overlay-buttons button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+

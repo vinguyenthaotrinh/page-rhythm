@@ -23,7 +23,7 @@ class SupabaseAuthenticationAPIService:
                     return True
                 except Exception as e:
                     print(e)
-                    if e.code != "23505":
+                    if hasattr(e, "code") and (e.code != "23505"):
                         return False
             return False
         return False

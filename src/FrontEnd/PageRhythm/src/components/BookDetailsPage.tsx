@@ -7,24 +7,42 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 interface WriteCommentOverlayProps {
     showWriteCommentOverlay:    boolean;
-    bookID:                     string | undefined;
-    repliedCommentID:           string | null;
+    comment:                    string;
+    setComment:                 (comment: string) => void;
+    handleCommentSubmit:        () => void;
 }
 
 const WriteCommentOverlay: React.FC<WriteCommentOverlayProps> = ({
     showWriteCommentOverlay,
-    bookID,
-    repliedCommentID
+    comment,
+    setComment,
+    handleCommentSubmit,
 }) => {
 
-    if (!showWriteCommentOverlay || !bookID) {
+    if (!showWriteCommentOverlay) 
         return null;
-    }
 
     return (
-        <p>
-            Hello
-        </p>
+        <div className="add-overlay">
+            <div className="add-overlay-content">
+                <h1 id="add-overlay-title">Write your comment here</h1>
+                <p>Please enter your comment</p>
+
+                <textarea
+                    id="comment-textarea"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Enter your comment..."
+                />
+
+                <button
+                    id="comment-submit-button"
+                    onClick={handleCommentSubmit}
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
     )
 }
 
@@ -33,10 +51,9 @@ export default function BookDetailsPage() {
     const [book, setBook]                               = useState<any>(null);
     const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false); // Show the comment overlay
     const [repliedCommentID, setRepliedCommentID]       = useState<string | null>(null); // Comment ID for replies
-
-    const [userRating, setUserRating] = useState<number | null>(null); // User-selected rating
-
-    const [comments, setComments] = useState<any[]>([]); // Comments for the book
+    const [comment, setComment]                         = useState<string>(""); // Stores user input for the comment
+    const [userRating, setUserRating]                   = useState<number | null>(null); // User-selected rating
+    const [comments, setComments]                       = useState<any[]>([]); // Comments for the book
 
     const handleRating = async (rating: number) => {
         const server = await Server.getInstance();
@@ -195,6 +212,47 @@ export default function BookDetailsPage() {
         navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
     };
 
+    const handleCommentSubmit = async () => {
+        if (!comment.trim()) {
+            console.error("Comment cannot be empty.");
+            return;
+        }
+    
+        if (bookID === undefined) {
+            console.error("Book ID is undefined.");
+            return;
+        }
+    
+        if (repliedCommentID === undefined) {
+            console.error("Replied comment ID is undefined.");
+            return;
+        }
+    
+        try {
+            const server = await Server.getInstance();
+    
+            // Parse the repliedCommentID as an integer if it's not "null" string
+            const parsedRepliedCommentID = (repliedCommentID === null) ? null : parseInt(repliedCommentID, 10);
+    
+            if (parsedRepliedCommentID === null) {
+                // If repliedCommentID is "null" or parsed as null, create a new comment
+                await server.createComment(bookID, comment);
+            } else if (parsedRepliedCommentID !== undefined) {
+                // If there is a valid repliedCommentID, reply to an existing comment
+                await server.replyToComment(bookID, comment, parsedRepliedCommentID);
+            }
+            console.log("Comment submitted successfully.");
+
+            const updatedComments = await server.retrieveAllComments(bookID);
+            setComments(updatedComments);
+
+            setShowCommentOverlay(false); // Close the comment overlay after submission
+            setComment(""); // Clear the comment input    
+        } catch (error) {
+            console.error("Error submitting comment:", error);
+        }
+    };
+
     // Render the comment tree
     const renderCommentTree = () => {
         // Root comments are those that don't have a replied_comment_id
@@ -328,9 +386,10 @@ export default function BookDetailsPage() {
             </div>
 
             <WriteCommentOverlay 
-                showWriteCommentOverlay         =   {showCommentOverlay} 
-                bookID                          =   {bookID}
-                repliedCommentID                =   {repliedCommentID}
+                showWriteCommentOverlay         =   {showCommentOverlay}
+                comment                         =   {comment}
+                setComment                      =   {setComment}
+                handleCommentSubmit             =   {handleCommentSubmit}
             />
 
         </div>
