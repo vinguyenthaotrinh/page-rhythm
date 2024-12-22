@@ -14,7 +14,13 @@ class VoiceGenerationService:
 
         self.total_character_limit_for_text_to_speech_generation = int(os.environ.get("TOTAL_CHARACTER_LIMIT_FOR_TEXT_TO_SPEECH_GENERATION"))
         
-        elevenlabs.set_api_key(os.environ.get("ELEVENLABS_TEXT_TO_SPEECH_API_KEYS"))
+        keys = os.environ.get("ELEVENLABS_TEXT_TO_SPEECH_API_KEYS").split(",")
+
+        self.client = elevenlabs.ElevenLabs(
+            api_key = keys[0]
+        )
+
+        self.simulated = True
 
         self.supabase = SupabaseVoiceGenerationAPIService()
 
@@ -23,22 +29,33 @@ class VoiceGenerationService:
         return (current_total_characters + len(text_content)) <= self.total_character_limit_for_text_to_speech_generation
     
     def convert_text_to_speech(self, account_id: int, text_content: str, voice_name: str) -> Optional[dict]:
-        if not self.check_text_to_speech_generation_possible(text_content):
-            return None
+        
+        content = None
 
-        audio = elevenlabs.generate(
-            text    = text_content,
-            voice   = voice_name
-        )
+        if not self.simulated:
 
-        temporary_file_name = f"{random.randint(0, 31082003)}.mp3"
+            if not self.check_text_to_speech_generation_possible(text_content):
+                return None
 
-        elevenlabs.save(audio, temporary_file_name)
+            audio = self.client.generate(
+                text    = text_content,
+                voice   = voice_name,
+                model   = "eleven_multilingual_v2"
+            )
 
-        with open(temporary_file_name, "rb") as file:
-            content = file.read()
+            temporary_file_name = f"{random.randint(0, 31082003)}.mp3"
 
-        #os.remove(temporary_file_name)
+            elevenlabs.save(audio, f"services/voice_generation/{temporary_file_name}")
+
+            with open(temporary_file_name, "rb") as file:
+                content = file.read()
+
+            os.remove(temporary_file_name)
+
+        else:
+
+            with open("services/voice_generation/22532618.mp3", "rb") as file:
+                content = file.read()
 
         record = TextToSpeechGeneration(
             id              =   random.randint(0, 31082003),
@@ -102,7 +119,3 @@ class VoiceGenerationService:
             "Serena"    : "pMsXgVXv3BLzUgSXRplE",
             "Thomas"    : "GBv7mTt0atIp3Br8iCZE",
         }
-
-voice_generation_service = VoiceGenerationService()
-voice_generation_service.convert_text_to_speech(62, "I am the danger", "Liam")
-    

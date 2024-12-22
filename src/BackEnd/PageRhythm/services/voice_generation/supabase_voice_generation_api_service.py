@@ -27,7 +27,7 @@ class SupabaseVoiceGenerationAPIService:
     def add_voice_generation_record(self, record_JSON: dict) -> Optional[TextToSpeechGeneration]:
         if "id" in record_JSON:
             try:
-                response = self.client.table("TextToSpeechGenerationRecord").insert(record_JSON).execute()
+                response = self.client.table("TextToSpeechGeneration").insert(record_JSON).execute()
                 if response.data:
                     return TextToSpeechGeneration.deserialize_JSON(response.data[0])
                 return None
@@ -38,7 +38,7 @@ class SupabaseVoiceGenerationAPIService:
         else:
             while True:
                 try:
-                    response = self.client.table("TextToSpeechGenerationRecord").insert(record_JSON).execute()
+                    response = self.client.table("TextToSpeechGeneration").insert(record_JSON).execute()
                     if response.data:
                         return TextToSpeechGeneration.deserialize_JSON(response.data[0])
                     return None

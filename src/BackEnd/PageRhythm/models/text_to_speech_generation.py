@@ -57,20 +57,20 @@ class TextToSpeechGeneration(BaseEntity):
         return {
             "id":               self.id,
             "account_id":       self.account_id,
-            "generation_time":  self.generation_time,
+            "generation_time":  self.generation_time.strftime("%Y-%m-%dT%H:%M:%S") if self.generation_time else None,
             "text_content":     self.text_content,
-            "speech_content":   base64.b64encode(self.speech_content).decode('utf-8')
+            "speech_content":   base64.b64encode(self.speech_content).decode("utf-8")
         }
     
     def from_serializable_JSON(self, dictionary: dict):
         self.set_id(dictionary["id"])
         self.set_account_id(dictionary["account_id"])
-        self.set_generation_time(dictionary["generation_time"])
+        self.set_generation_time(datetime.datetime.strptime(dictionary["generation_time"], "%Y-%m-%dT%H:%M:%S") if dictionary["generation_time"] else None)
         self.set_text_content(dictionary["text_content"])
         self.set_speech_content(base64.b64decode(dictionary["speech_content"]))
 
     @staticmethod
-    def from_serializable_JSON(dictionary: dict) -> 'TextToSpeechGeneration':
+    def deserialize_JSON(dictionary: dict) -> "TextToSpeechGeneration":
         text_to_speech_generation = TextToSpeechGeneration(0, 0, None, "", b"")
         text_to_speech_generation.from_serializable_JSON(dictionary)
         return text_to_speech_generation
