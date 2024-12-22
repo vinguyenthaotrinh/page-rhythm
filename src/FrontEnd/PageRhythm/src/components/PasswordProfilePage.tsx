@@ -18,13 +18,12 @@ export default function PasswordProfilePage() {
     const [showCurrentPassword, setShowCurrentPassword]             =   useState(false);
     const [showNewPassword, setShowNewPassword]                     =   useState(false);
     const [showConfirmedNewPassword, setShowConfirmedNewPassword]   =   useState(false);
-    const [error, setError]                                         =   useState("");  // Add error state
+    const [error, setError]                                         =   useState("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         setPasswords((previous) => {
             const updatedPasswords = { ...previous, [name]: value };
-            console.log(updatedPasswords); // Log updated value here
             return updatedPasswords;
         });
         setHasUnsavedChanges(true);

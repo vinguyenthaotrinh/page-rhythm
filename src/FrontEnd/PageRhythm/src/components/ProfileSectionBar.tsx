@@ -35,36 +35,38 @@ export default function ProfileSectionBar({ currentOption }: ProfileSectionBarPr
     };
 
     return (
-        <div className="profile-page-profile-section-bar">
+        <div 
+            className  =    "profile-page-profile-section-bar"
+        >
             <button 
-                className={`profile-page-profile-section-button ${getButtonClass("general")}`} 
-                onClick={() => handleSectionClick("/profile-page/general")}
-                onMouseEnter={() => setHoveredOption("general")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`profile-page-profile-section-button ${getButtonClass("general")}`} 
+                onClick         =   {() => handleSectionClick("/profile-page/general")}
+                onMouseEnter    =   {() => setHoveredOption("general")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 General
             </button>
             <button 
-                className={`profile-page-profile-section-button ${getButtonClass("password")}`} 
-                onClick={() => handleSectionClick("/profile-page/password")}
-                onMouseEnter={() => setHoveredOption("password")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`profile-page-profile-section-button ${getButtonClass("password")}`} 
+                onClick         =   {() => handleSectionClick("/profile-page/password")}
+                onMouseEnter    =   {() => setHoveredOption("password")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Password
             </button>
             <button 
-                className={`profile-page-profile-section-button ${getButtonClass("statistics")}`} 
-                onClick={() => handleSectionClick("/profile-page/statistics",)}
-                onMouseEnter={() => setHoveredOption("statistics")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`profile-page-profile-section-button ${getButtonClass("statistics")}`} 
+                onClick         =   {() => handleSectionClick("/profile-page/statistics",)}
+                onMouseEnter    =   {() => setHoveredOption("statistics")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Statistics
             </button>
             <button 
                 className="profile-page-profile-section-button logout-button" 
                 onClick={handleLogout}
-                onMouseEnter={() => setHoveredOption("logout")}
-                onMouseLeave={() => setHoveredOption(null)}
+                onMouseEnter    =   {() => setHoveredOption("logout")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Logout
             </button>
