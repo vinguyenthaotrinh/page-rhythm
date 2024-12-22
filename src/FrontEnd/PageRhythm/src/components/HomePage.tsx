@@ -22,9 +22,9 @@ export default function HomePage() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const server = await Server.getInstance();  // Get the server instance
-                const randomBooks = await server.getAllPublicBooksInRandomOrder();  // Fetch random books
-                setBooks(randomBooks);  // Set the fetched books into the state
+                const server        = await Server.getInstance();
+                const randomBooks   = await server.getAllPublicBooksInRandomOrder();    // Fetch books in random order
+                setBooks(randomBooks);                                                  // Set the fetched books into the state
             } catch (error) {
                 console.error("Error fetching books:", error);
             }
@@ -76,7 +76,7 @@ export default function HomePage() {
     };
 
     const handleBookClick = (bookID: string) => {
-        navigate(`/book-details-page/${bookID}`);  // Redirect to the book details page
+        navigate(`/book-details-page/${bookID}`);
     };
 
     return (
@@ -84,20 +84,34 @@ export default function HomePage() {
             <NavigationBar />
             <div id="home-page-search-container">
                 <div className="home-page-input-container">
-                    <img src={IMAGES.SEARCH_ICON} alt="Search Icon" className="home-page-input-icon" />
+                    <img
+                        src         =   {IMAGES.SEARCH_ICON} 
+                        alt         =   "Search Icon" 
+                        className   =   "home-page-input-icon" 
+                    />
                     <input
-                        type="text"
-                        placeholder="Find Your Books"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        type        =   "text"
+                        placeholder =   "Find Your Books"
+                        value       =   {searchTerm}
+                        onChange    =   {(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <div className="home-page-select-container">
                     <img src={IMAGES.SLIDERS_ICON} alt="Genre Icon" className="home-page-select-icon" />
-                    <select value={selectedGenre} onChange={handleGenreChange}>
-                        <option value="All">All genres</option>
+                    <select 
+                        value       =   {selectedGenre} 
+                        onChange    =   {handleGenreChange}
+                    >
+                        <option value="All">
+                            All genres
+                        </option>
                         {genres.map((genre) => (
-                            <option key={genre} value={genre}>{genre}</option>
+                            <option 
+                                key     =   {genre} 
+                                value   =   {genre}
+                            >
+                                {genre}
+                            </option>
                         ))}
                     </select>
                 </div>
@@ -117,9 +131,9 @@ export default function HomePage() {
             <div className="home-page-book-list">
                 {books.map((book, index) => (
                     <div 
-                        className="home-page-book-list-item" 
-                        key={index}
-                        onClick={() => handleBookClick(book.book_id)}  // Redirect to book details page on click
+                        className   =   "home-page-book-list-item" 
+                        key         =   {index}
+                        onClick     =   {() => handleBookClick(book.book_id)}
                     >
                         <div className="home-page-book-title">
                             <div className="home-page-book-cover">

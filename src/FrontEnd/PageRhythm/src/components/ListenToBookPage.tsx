@@ -39,7 +39,7 @@ export default function ListenToBookPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();  // Get the server instance
+                const server = await Server.getInstance();
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
 
                 setBook(book);                              // Set the book details in state
@@ -111,20 +111,27 @@ export default function ListenToBookPage() {
             <NavigationBar />
             
             <div
-                id = "listen-to-book-page-top-region"
+                id  =   "listen-to-book-page-top-region"
             >
-                <div id="listen-to-book-page-back-button-container" onClick={handleBackClick}>
+                <div 
+                    id      =   "listen-to-book-page-back-button-container" 
+                    onClick =   {handleBackClick}
+                >
                     <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="listen-to-book-page-back-button-icon" />
                     <span>Back</span>
                 </div>
 
-                <button
-                    id = "book-details-page-read-button"
-                    className = "book-details-page-button"
-                    onClick = {handleReadThisBookButtonClick}
+                <div
+                    id  =   "listen-to-book-page-top-region-right-part"
                 >
-                    Read This Book
-                </button>
+                    <button
+                        id          =   "listen-to-book-page-read-button"
+                        className   =   "listen-to-book-page-button"
+                        onClick     =   {handleReadThisBookButtonClick}
+                    >
+                        Read This Book
+                    </button>
+                </div>
             </div>
 
             <div

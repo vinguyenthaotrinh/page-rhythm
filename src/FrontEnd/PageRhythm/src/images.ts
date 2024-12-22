@@ -24,6 +24,8 @@ import WHITE_PENCIL_ICON                                from "./assets/images/wh
 import PAUSE_BUTTON_ICON                                from "./assets/images/pause-button-icon.png";
 import DEFAULT_BOOK_COVER                               from "./assets/images/default-book-cover.png";
 import DEFAULT_PROFILE_PICTURE                          from "./assets/images/default-profile-picture.png";
+import HOVERED_PLAY_BUTTON_ICON                         from "./assets/images/hovered-play-button-icon.png";
+import HOVERED_PAUSE_BUTTON_ICON                        from "./assets/images/hovered-pause-button-icon.png";
 import LANDING_PAGE_BOTTOM_LEFT_CORNER                  from "./assets/images/landing-page-bottom-left-corner.png";
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER                 from "./assets/images/landing-page-bottom-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER      from "./assets/images/landing-page-login-section-top-right-corner.png";
@@ -31,35 +33,37 @@ import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER    from "./assets/images/la
 
 const IMAGES = {
     LOGO,
-    LANDING_PAGE_BOTTOM_LEFT_CORNER,
-    LANDING_PAGE_BOTTOM_RIGHT_CORNER,
-    LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER,
-    LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER,
+    ADD_ICON,
     USER_ICON,
     LOCK_ICON,
-    GOOGLE_ICON,
-    EYE_ON_ICON,
-    EYE_OFF_ICON,
     MAIL_ICON,
-    BLACK_PENCIL_ICON,
-    CALENDAR_ICON,
-    DEFAULT_PROFILE_PICTURE,
-    DEFAULT_BOOK_COVER,
-    SEARCH_ICON,
-    SLIDERS_ICON,
-    LEFT_ARROW_ICON,
-    FILLED_STAR_ICON,
-    EMPTY_STAR_ICON,
     LEFT_ICON,
     RIGHT_ICON,
-    ADD_ICON,
-    WHITE_TRASH_ICON,
-    RED_TRASH_ICON,
-    WHITE_PENCIL_ICON,
-    PLAY_BUTTON_ICON,
-    PAUSE_BUTTON_ICON,
-    EYE_CLOSED_ICON,
+    GOOGLE_ICON,
+    EYE_ON_ICON,
+    SEARCH_ICON,
+    SLIDERS_ICON,
+    EYE_OFF_ICON,
     EYE_OPEN_ICON,
+    CALENDAR_ICON,
+    RED_TRASH_ICON,
+    EYE_CLOSED_ICON,
+    EMPTY_STAR_ICON,
+    LEFT_ARROW_ICON,
+    PLAY_BUTTON_ICON,
+    FILLED_STAR_ICON,
+    WHITE_TRASH_ICON,
+    PAUSE_BUTTON_ICON,
+    BLACK_PENCIL_ICON,
+    WHITE_PENCIL_ICON,
+    DEFAULT_BOOK_COVER,
+    DEFAULT_PROFILE_PICTURE,
+    HOVERED_PLAY_BUTTON_ICON,
+    HOVERED_PAUSE_BUTTON_ICON,
+    LANDING_PAGE_BOTTOM_LEFT_CORNER,
+    LANDING_PAGE_BOTTOM_RIGHT_CORNER,
+    LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER,
+    LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) 
@@ -91,10 +95,10 @@ const IMAGES = {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onloadend = () => {
-                resolve(reader.result as string); // Resolve with the base64 string
+                resolve(reader.result as string);   // Resolve with the base64 string
             };
-            reader.onerror = reject; // Reject the promise if there's an error
-            reader.readAsDataURL(file); // Read the image file as a base64 string
+            reader.onerror = reject;                // Reject the promise if there's an error
+            reader.readAsDataURL(file);             // Read the image file as a base64 string
         });
     }
 };

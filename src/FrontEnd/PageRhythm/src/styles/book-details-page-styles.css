@@ -111,9 +111,10 @@
 }
 
 #book-details-page-read-button {
-    background-color: #265073;
     color: white;
+    background-color: #265073;
     transition: background-color 0.3s;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 #book-details-page-read-button:hover {
@@ -131,9 +132,8 @@
 }
 
 #book-details-page-listen-button:hover {
-    background-color: rgb(242, 242, 242);
-    color: #0f4ba3;
     border: 2px solid #0f4ba3;
+    color: #0f4ba3;
 }
 
 /* Star Rating */
@@ -158,8 +158,8 @@ strong {
     padding: 16px;
     border-radius: 8px;
     display: flex;
-    align-items: center; /* Align items vertically on the same line */
-    gap: 16px; /* Space between items */
+    align-items: center;    /* Align items vertically on the same line */
+    gap: 16px;              /* Space between items */
 }
 
 .review-section-content {

@@ -16,21 +16,21 @@
 /* Sidebar buttons without background */
 .profile-page-profile-section-button {
     padding: 15px;
-    background-color: transparent; /* No background */
-    color: black; /* Text color */
-    border: none; /* Remove border */
+    background-color: transparent;
+    color: black;
+    border: none;
     font-size: 16px;
     cursor: pointer;
     margin: 1px 20px;
     text-align: left;
     font-family: "Poppins-Regular", sans-serif;
     transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
-    position: relative; /* Required for pseudo-element */
+    position: relative;                                     /* Required for pseudo-element */
 }
 
 .profile-page-profile-section-button:hover {
     font-family: "Poppins-Bold", sans-serif;
-    color: #265073; /* Slightly darker text color on hover */
+    color: #265073;
 }
 
 .profile-page-profile-section-button:hover::after {

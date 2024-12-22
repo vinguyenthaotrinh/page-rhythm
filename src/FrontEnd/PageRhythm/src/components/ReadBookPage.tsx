@@ -73,7 +73,7 @@ export default function ReadBookPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();  // Get the server instance
+                const server = await Server.getInstance();
 
                 if (currentLeftPage === contentPages.length) {
                     await server.trackProgressOfReadingBook(parseInt(bookID), currentLeftPage, "finished");  // Update the progress of reading the book
@@ -119,9 +119,21 @@ export default function ReadBookPage() {
                 </div>
 
                 <button
-                    id          = "read-book-page-listen-button"
-                    className   = "read-book-page-button"
-                    onClick     = {handleListenButtonClick}
+                    id              =   "read-book-page-listen-button"
+                    className       =   "read-book-page-button"
+                    onClick         =   {handleListenButtonClick}
+                    onMouseEnter    =   {(e) => {
+                        const imgElement = e.currentTarget.querySelector("img");
+                        if (imgElement) {
+                            imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
+                        }
+                    }}
+                    onMouseLeave    =   {(e) => {
+                        const imgElement = e.currentTarget.querySelector("img");
+                        if (imgElement) {
+                            imgElement.src = IMAGES.PLAY_BUTTON_ICON;
+                        }
+                    }}
                 >   
                     <img
                         src = {IMAGES.PLAY_BUTTON_ICON}
@@ -164,8 +176,8 @@ export default function ReadBookPage() {
                         id = "read-book-page-navigation-section"
                     >
                         <button
-                            className = "read-book-page-navigation-button"
-                            onClick = {onLeftButtonClick}
+                            className   =   "read-book-page-navigation-button"
+                            onClick     =   {onLeftButtonClick}
                         >
                             <img src={IMAGES.LEFT_ICON} alt="Previous" className="read-book-page-navigation-icon" />
                         </button>
@@ -177,8 +189,8 @@ export default function ReadBookPage() {
                         </span>
 
                         <button
-                            className = "read-book-page-navigation-button"
-                            onClick = {onRightButtonClick}
+                            className   =   "read-book-page-navigation-button"
+                            onClick     =   {onRightButtonClick}
                         >
                             <img src={IMAGES.RIGHT_ICON} alt="Next" className="read-book-page-navigation-icon" />
                         </button>
