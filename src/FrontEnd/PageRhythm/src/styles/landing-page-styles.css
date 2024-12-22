@@ -7,15 +7,15 @@ html, body {
 }
 
 #landing-page {
-    background-color: #F6FFDE;
-    padding: 0;
     margin: 0;
-    font-family: 'Poppins-Regular', sans-serif;
-    height: 100vh;  /* Full viewport height */
+    padding: 0;
     width: 100vw;   /* Full viewport width */
+    height: 100vh;  /* Full viewport height */
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background-color: #F6FFDE;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 /* Logo section positioning */
@@ -34,23 +34,23 @@ html, body {
 }
 
 #landing-page-title {
-    font-size: 24px; /* Font size for the title */
-    font-weight: bold;
-    font-family: 'Poppins-Bold', sans-serif;
+    margin: 0;              /* Remove default margin */
     color: #333;
-    margin: 0; /* Remove default margin */
+    font-size: 24px;        /* Font size for the title */
+    font-weight: bold;
+    font-family: "Poppins-Bold", sans-serif;
 }
 
 #landing-page-login-section {
-    position: relative;
+    margin: auto;
     width: 800px;
     height: 420px;
-    background-color: #a4c0ed;
-    margin: auto;
-    margin-top: 128px;
     padding: 20px;
-    border-radius: 12px;
+    margin-top: 128px;
+    position: relative;
     text-align: center;
+    border-radius: 12px;
+    background-color: #a4c0ed;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -62,16 +62,16 @@ html, body {
 #landing-page-login-section-top-right-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(108%, -108%);
     width: 240px;
+    transform: translate(108%, -108%);
 }
 
 #landing-page-login-section-bottom-left-corner-image {
     top: 50%;
     left: 50%;
-    transform: translate(-184%, -9%);
     width:229px;
     margin-right: auto;
+    transform: translate(-184%, -9%);
 }
 
 #landing-page-welcome-description{
@@ -95,24 +95,24 @@ html, body {
 
 .landing-page-input-container input {
     width: 100%;
-    padding: 10px 10px 10px 60px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: white;
     color:#000000;
+    font-size: 16px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 10px 10px 10px 60px;
     font-family: Poppins-Regular;
 }
 
 .landing-page-input-icon {
-    position: absolute;
     top: 50%;
     left: 10px;
-    transform: translateY(-50%);
     width: 22px;
     height: auto;
     border: none;
+    position: absolute;
+    transform: translateY(-50%);
 }
 
 .landing-page-input-info::placeholder {
@@ -142,70 +142,70 @@ html, body {
 }
 
 .landing-page-front-left-image-container {
-    position: fixed;    /* Position the image relative to the viewport */
-    bottom: 0;          /* Align to the bottom of the viewport */
-    left: 0;            /* Align to the left of the viewport */
-    width: 20%;         /* Adjust width as needed */
-    z-index: 10;        /* Ensure it stays above other content if necessary */
-    transform: translate(0%, 4%); /* Position the image */
+    position: fixed;                /* Position the image relative to the viewport */
+    bottom: 0;                      /* Align to the bottom of the viewport */
+    left: 0;                        /* Align to the left of the viewport */
+    width: 20%;                     /* Adjust width as needed */
+    z-index: 10;                    /* Ensure it stays above other content if necessary */
+    transform: translate(0%, 4%);   /* Position the image */
 }
 
 .landing-page-left-overlay-image {
-    width: 100%;        /* Adjust width as needed */
-    height: auto;       /* Keep the aspect ratio intact */
+    width: 100%;                    /* Adjust width as needed */
+    height: auto;                   /* Keep the aspect ratio intact */
 }
 
 .landing-page-front-right-image-container {
-    position: fixed;    /* Fixes the image to the viewport */
-    bottom: 0;          /* Aligns it to the bottom of the viewport */
-    right: 0;           /* Aligns it to the right of the viewport */
-    width: auto;        /* Auto adjusts the width */
-    height: auto;       /* Maintains aspect ratio */
-    z-index: 10;        /* Ensures it stays on top of other elements */
+    position: fixed;                /* Fixes the image to the viewport */
+    bottom: 0;                      /* Aligns it to the bottom of the viewport */
+    right: 0;                       /* Aligns it to the right of the viewport */
+    width: auto;                    /* Auto adjusts the width */
+    height: auto;                   /* Maintains aspect ratio */
+    z-index: 10;                    /* Ensures it stays on top of other elements */
     transform: translate(60%, 0%);
 }
 
 .landing-page-right-overlay-image {
-    width: 40%;     /* Adjust this as needed for your design */
-    height: auto;   /* Maintain aspect ratio */
+    width: 40%;                     /* Adjust this as needed for your design */
+    height: auto;                   /* Maintain aspect ratio */
 }
 
 #landing-page-authentication-sections {
     display: flex;
-    flex-direction: column; /* Arrange children vertically */
-    align-items: center;    /* Center horizontally */
-    gap: 20px;              /* Add space between sections */
-    margin-top: 128px;      /* Adjust as needed */
+    flex-direction: column;         /* Arrange children vertically */
+    align-items: center;            /* Center horizontally */
+    gap: 20px;                      /* Add space between sections */
+    margin-top: 128px;              /* Adjust as needed */
     transform: translate(0%, -12%);
 }
 
 #landing-page-signup-section {
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center;     /* Align the text and link vertically */
-    gap: 10px;               /* Space between "New User?" and "Sign Up" */
-    margin-top: 4px;        /* Adjust vertical spacing from LoginSection */
+    justify-content: center;        /* Center the content horizontally */
+    align-items: center;            /* Align the text and link vertically */
+    gap: 10px;                      /* Space between "New User?" and "Sign Up" */
+    margin-top: 4px;                /* Adjust vertical spacing from LoginSection */
     font-size: 16px;
 }
 
 #landing-page-signup-title {
-    font-size: 16px;          /* Match the text size with "Sign Up" */
-    font-weight: normal;      /* Ensure consistency with the link */
-    font-family: 'Poppins-Regular', sans-serif;
+    font-size: 16px;                /* Match the text size with "Sign Up" */
+    font-weight: normal;            /* Ensure consistency with the link */
+    font-family: "Poppins-Regular", sans-serif;
     color: #333;
-    margin: 0;                /* Remove default margin */
+    margin: 0;                      /* Remove default margin */
 }
 
 #landing-page-signup-link {
     font-size: 16px;
     font-family: "Poppins-Regular", sans-serif;
     color: #265073;           
-    text-decoration: none;      /* Remove underline */
+    text-decoration: none;          /* Remove underline */
     cursor: pointer;
 }
 
 #landing-page-signup-link:hover {
-    text-decoration: underline; /* Add underline on hover for clarity */
+    text-decoration: underline;     /* Add underline on hover for clarity */
 }
 
 #landing-page-forgot-password-link {
@@ -214,7 +214,7 @@ html, body {
 }
 
 #landing-page-forgot-password-link:hover {
-    text-decoration: underline; /* Add underline on hover for clarity */
+    text-decoration: underline;     /* Add underline on hover for clarity */
 }
 
 #landing-page-request-password-reset-link-container {
@@ -223,7 +223,7 @@ html, body {
 
 .landing-page-error-message {
     color: red;
+    padding: 12px;
     font-size: 16px;
     font-family: "Poppins-Regular", sans-serif;
-    padding: 12px;
 }

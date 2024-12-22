@@ -352,7 +352,7 @@ export default function VoicesMyLibraryPage() {
 
     const handleEditClick = (record: any) => {
         setSelectedRecord(record);
-        setShowEditOverlay(true);  // Show the edit overlay
+        setShowEditOverlay(true);           // Show the edit overlay
     };
 
     const handleEditRecord = async (updatedRecord: any) => {

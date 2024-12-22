@@ -14,11 +14,11 @@ html, body {
 }
 
 #read-book-page-top-region {
-    background-color: transparent; /* Light blue background */
+    margin-bottom: 16px;
+    background-color: #F6FFDE;
     margin-left: 64px;
     margin-right: 64px;
     padding-top: 16px;
-    padding-bottom: 16px;
     display: flex;
     justify-content: space-between;  /* Space between left and right buttons */
     align-items: center;
@@ -95,7 +95,7 @@ html, body {
 }
 
 .read-book-page-navigation-icon {
-    width: 24px; /* Icon size */
+    width: 24px;
     height: 24px;
     cursor: pointer;
 }

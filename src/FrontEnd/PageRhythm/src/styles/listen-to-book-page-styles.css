@@ -23,8 +23,8 @@ html, body {
     border-radius: 8px;
     margin-right: 64px;
     align-items: center;
-    padding-bottom: 16px;
-    background-color: transparent;      /* Light blue background */
+    margin-bottom: 16px;
+    background-color: #F6FFDE;
     justify-content: space-between;     /* Space between left and right buttons */
 }
 
@@ -153,4 +153,15 @@ html, body {
     width: 32px;
     height: 32px;
     cursor: pointer;
+}
+
+#listen-to-book-page-read-button {
+    color: white;
+    background-color: #265073;
+    transition: background-color 0.3s;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+#listen-to-book-page-read-button:hover {
+    background-color: #0f4ba3;
 }

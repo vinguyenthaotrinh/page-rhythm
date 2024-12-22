@@ -111,9 +111,10 @@
 }
 
 #book-details-page-read-button {
-    background-color: #265073;
     color: white;
+    background-color: #265073;
     transition: background-color 0.3s;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 #book-details-page-read-button:hover {
