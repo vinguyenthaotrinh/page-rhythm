@@ -17,7 +17,9 @@ def get_all_sample_voices():
     if account is None:
         return jsonify({"message": "Account does not exist"}), 404
     
-    return jsonify({"message": "The implementation of the route has not been finished yet"}), 500
+    voice_generation_service = VoiceGenerationService()
+
+    return jsonify(voice_generation_service.get_all_voice_sample_names(account_id=account_id)), 200
 
 @voice_generation_blueprint.route("/text-to-speech/", methods=["POST"])
 @jwt_required()

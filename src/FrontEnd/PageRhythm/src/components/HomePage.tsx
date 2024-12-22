@@ -122,7 +122,9 @@ export default function HomePage() {
                 <div 
                     className="home-page-book-list-header"
                     id = "home-page-book-list-header-title"
-                >Title</div>
+                >
+                    Title
+                </div>
                 <div className="home-page-book-list-header">Rating</div>
                 <div className="home-page-book-list-header">Genre</div>
                 <div className="home-page-book-list-header">Release Date</div>
@@ -138,8 +140,8 @@ export default function HomePage() {
                         <div className="home-page-book-title">
                             <div className="home-page-book-cover">
                                 <img 
-                                    src={IMAGES.decodeBookCoverImage(book.image)} 
-                                    alt={book.title} 
+                                    src =   {IMAGES.decodeBookCoverImage(book.image)} 
+                                    alt =   {book.title} 
                                 />
                             </div>
                             <div className="home-page-book-info">

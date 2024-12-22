@@ -12,6 +12,7 @@ export default function ListenToBookPage() {
     const [currentPage, setCurrentPage]         = useState(1);
     const [contentPages, setContentPages]       = useState<string[]>([]);
     const [voice, setVoice]                     = useState("en-US-Wavenet-D");
+    const [voices, setVoices]                   = useState<any[]>([]);
     const navigate                              = useNavigate();
     const pageCapacity                          = 1600;
     const maximumLineLength                     = 80;
@@ -58,8 +59,21 @@ export default function ListenToBookPage() {
             setLoading(false);
         };
 
-        if (bookID) 
+        const fetchVoices = async () => {
+            try {
+                const server = await Server.getInstance();
+                const voices = await server.getAllUsableSampleVoices();
+                setVoices(voices);
+                setVoice(voices[0].voice_name);
+            } catch (error) {
+                console.error("Error fetching voices:", error);
+            }
+        }
+
+        if (bookID) {
             fetchBookDetails(); 
+            fetchVoices();
+        }
         
     }, [bookID]);
 
@@ -94,15 +108,13 @@ export default function ListenToBookPage() {
         return <div>Loading...</div>;
 
     const onLeftButtonClick = () => {
-        if (currentPage > 1) {
+        if (currentPage > 1) 
             setCurrentPage(currentPage - 1);
-        }
     };
 
     const onRightButtonClick = () => {
-        if (currentPage < contentPages.length) {
+        if (currentPage < contentPages.length) 
             setCurrentPage(currentPage + 1);
-        }
     };
 
     return (
@@ -137,9 +149,14 @@ export default function ListenToBookPage() {
                         value       =   {voice}
                         onChange    =   {(e) => setVoice(e.target.value)}
                     >
-                        <option value="en-US-Wavenet-D">English (US) Wavenet D</option>
-                        <option value="en-US-Wavenet-E">English (US) Wavenet E</option>
-                        <option value="en-US-Wavenet-F">English (US) Wavenet F</option>
+                        {voices.map((voice) => (
+                            <option 
+                                key     =   {voice.voice_name} 
+                                value   =   {voice.voice_id}
+                            >
+                                {voice.voice_name}
+                            </option>
+                        ))}
                     </select>
 
                     <button
@@ -187,35 +204,36 @@ export default function ListenToBookPage() {
                             className="audio-controls-top-row"
                         >
                             <button
-                                className="audio-control-button rewind-button"
-                                onClick={() => console.log('Rewind pressed')}
+                                className       =   "audio-control-button previous-button"
+                                onClick         =   {() => console.log("Previous pressed")}
                             >
                                 <img 
-                                    src={IMAGES.PLAY_BUTTON_ICON}
-                                    alt="Rewind" 
-                                    className="audio-control-icon" 
+                                    src         =   {IMAGES.AUDIO_PREVIOUS_ICON}
+                                    alt         =   "Previous"
+                                    className   =   "audio-control-icon-previous" 
                                 />
                             </button>
 
                             <button
-                                className="audio-control-button play-pause-button"
-                                onClick={() => console.log('Play/Pause pressed')}
+                                className       =   "audio-control-button play-pause-button"
+                                onClick         =   {() => console.log("Play/Pause pressed")}
+                                
                             >
                                 <img 
-                                    src={IMAGES.PLAY_BUTTON_ICON}
-                                    alt="Play/Pause" 
-                                    className="audio-control-icon" 
+                                    src         =   {IMAGES.AUDIO_PLAY_ICON}
+                                    alt         =   "Play/Pause" 
+                                    className   =   "audio-control-icon-play-pause" 
                                 />
                             </button>
 
                             <button
-                                className="audio-control-button fast-forward-button"
-                                onClick={() => console.log('Fast Forward pressed')}
+                                className       =   "audio-control-button next-button"
+                                onClick         =   {() => console.log("Next pressed")}
                             >
                                 <img 
-                                    src={IMAGES.PLAY_BUTTON_ICON} 
-                                    alt="Fast Forward" 
-                                    className="audio-control-icon" 
+                                    src         =   {IMAGES.AUDIO_NEXT_ICON} 
+                                    alt         =   "Next"
+                                    className   =   "audio-control-icon-next"
                                 />
                             </button>
                         </div>

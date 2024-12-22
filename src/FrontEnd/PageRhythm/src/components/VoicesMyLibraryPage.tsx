@@ -218,21 +218,21 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
                 </p>
 
                 <input
-                    type="text"
-                    placeholder="File Name"
-                    value={fileName}
-                    onChange={(e) => setFileName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "File Name"
+                    value       =   {fileName}
+                    onChange    =   {(e) => setFileName(e.target.value)}
                 />
 
                 <textarea
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder =   "Description"
+                    value       =   {description}
+                    onChange    =   {(e) => setDescription(e.target.value)}
                 />
 
                 <div className="add-overlay-buttons">
-                    <button onClick={handleEditClick}>Save Changes</button>
-                    <button onClick={() => setShowEditOverlay(false)}>Close</button>
+                    <button onClick =   {handleEditClick}>Save Changes</button>
+                    <button onClick =   {() => setShowEditOverlay(false)}>Close</button>
                 </div>
             </div>
         </div>
@@ -457,8 +457,8 @@ export default function VoicesMyLibraryPage() {
                                 records.length === 0 ? <NoVoiceText /> : (
                                     records.map((record, index) => (
                                         <div 
-                                            key={record.sample_audio_file_id} 
-                                            className="record-item"
+                                            key         =   {record.sample_audio_file_id} 
+                                            className   =   "record-item"
                                         >
                                             <div className="record-header">
                                                 <span className="sample-audio-file-name">{record.file_name}</span>
@@ -482,12 +482,12 @@ export default function VoicesMyLibraryPage() {
                                                     />
             
                                                     <input
-                                                        type="range"
-                                                        min="0"
-                                                        max="100"
-                                                        value={(audioTimes[index] / audioRefs.current[index]?.duration) * 100 || 0}
-                                                        onChange={(event) => handleSeek(event, index)}
-                                                        className="audio-slider"
+                                                        type        =   "range"
+                                                        min         =   "0"
+                                                        max         =   "100"
+                                                        value       =   {(audioTimes[index] / audioRefs.current[index]?.duration) * 100 || 0}
+                                                        onChange    =   {(event) => handleSeek(event, index)}
+                                                        className   =   "audio-slider"
                                                     />
             
                                                     <div className="slider-container">

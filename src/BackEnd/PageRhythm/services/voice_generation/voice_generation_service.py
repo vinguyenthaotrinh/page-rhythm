@@ -4,7 +4,9 @@ import datetime
 import elevenlabs
 from typing import Optional
 from dotenv import load_dotenv
-from models.text_to_speech_generation import TextToSpeechGeneration 
+from collections import Counter
+from models.text_to_speech_generation import TextToSpeechGeneration
+from services.sample_audio_files.sample_audio_files_service import SampleAudioFilesService
 from services.voice_generation.supabase_voice_generation_api_service import SupabaseVoiceGenerationAPIService
 
 class VoiceGenerationService:
@@ -119,3 +121,50 @@ class VoiceGenerationService:
             "Serena"    : "pMsXgVXv3BLzUgSXRplE",
             "Thomas"    : "GBv7mTt0atIp3Br8iCZE",
         }
+    
+    def get_all_voice_sample_names(self, account_id: int) -> list[dict]:
+        sample_audio_files_service = SampleAudioFilesService()
+     
+        result = []
+
+        for key, value in self.get_all_default_voice_sample_names().items():
+            result.append({
+                "voice_name"    :   key,
+                "voice_id"      :   f"default-{value}"
+            })
+
+        for sample_audio_file in sample_audio_files_service.get_uploaded_sample_audio_files(account_id):
+            result.append({
+                "voice_name"    :   sample_audio_file.get_file_name(),
+                "voice_id"      :   f"uploaded-{sample_audio_file.get_sample_audio_file_id()}"
+            })
+
+        return result
+    
+    @staticmethod
+    def calculate_similarity_score(text1: str, text2: str) -> int:
+    
+        result = 0
+
+        f1 = Counter(text1)
+        f2 = Counter(text2)
+
+        for key in f1.keys():
+            result += min(f1[key], f2[key])
+    
+        return result
+
+    @staticmethod
+    def find_most_similar_default_voice_sample_name(voice_name: str) -> str:
+        default_voice_sample_names = VoiceGenerationService.get_all_default_voice_sample_names()
+        keys = list(default_voice_sample_names.keys())
+        maximum_similarity_score = -1
+        result = keys[0]
+
+        for key in keys:
+            similarity_score = VoiceGenerationService.calculate_similarity_score(key, voice_name)
+            if similarity_score > maximum_similarity_score:
+                maximum_similarity_score = similarity_score
+                result = key
+
+        return result

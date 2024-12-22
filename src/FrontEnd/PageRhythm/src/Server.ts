@@ -1156,9 +1156,32 @@ export default class Server {
 
             const progress = await response.json(); // The response is expected to be a JSON object representing the reading progress
 
-            return progress.data; // Return the reading progress object
+            return progress.data;
         } catch (error) {
             this.logAndThrowError("Error fetching reading progress:", error);
+        }
+    }
+
+    public async getAllUsableSampleVoices(): Promise<any[]> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/voice_generation/sample_voice/all`;
+
+        try {
+            const response = await fetch(url, {
+                method:     "GET",
+                headers:    this.getSimpleHeadersWithSessionToken()
+            });
+
+            if (!response.ok) 
+                throw new Error(`Failed to fetch sample voices. Status: ${response.status}`);
+
+            const voices = await response.json(); // The response is expected to be a JSON array of sample voices
+
+            return voices;
+        } catch (error) {
+            this.logAndThrowError("Error fetching sample voices:", error);
         }
     }
 }
