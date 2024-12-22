@@ -295,3 +295,10 @@
     font-weight: bold;
     text-align: center;
 }
+
+.voices-my-library-page-add-overlay-error-message {
+    color: #FF0000;
+    font-size: 14px;
+    margin-top: 10px;
+    font-family: "Poppins-Regular", sans-serif;
+}

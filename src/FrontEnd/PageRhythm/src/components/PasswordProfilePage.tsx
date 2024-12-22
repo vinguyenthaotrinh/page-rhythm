@@ -9,18 +9,16 @@ import { Link, useNavigate } from "react-router-dom";
 export default function PasswordProfilePage() {
 
     const [passwords, setPasswords] = useState({
-        currentPassword: "",
-        newPassword: "",
-        confirmedNewPassword: ""
+        currentPassword:        "",
+        newPassword:            "",
+        confirmedNewPassword:   ""
     });
 
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showConfirmedNewPassword, setShowConfirmedNewPassword] = useState(false);
-
-    const [error, setError] = useState("");  // Add error state
+    const [hasUnsavedChanges, setHasUnsavedChanges]                 =   useState(false);
+    const [showCurrentPassword, setShowCurrentPassword]             =   useState(false);
+    const [showNewPassword, setShowNewPassword]                     =   useState(false);
+    const [showConfirmedNewPassword, setShowConfirmedNewPassword]   =   useState(false);
+    const [error, setError]                                         =   useState("");  // Add error state
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -38,9 +36,9 @@ export default function PasswordProfilePage() {
             await server.changePassword(passwords);
             setHasUnsavedChanges(false);
             setPasswords({
-                currentPassword: "",
-                newPassword: "",
-                confirmedNewPassword: ""
+                currentPassword:        "",
+                newPassword:            "",
+                confirmedNewPassword:   ""
             });
             setError(""); // Clear error after successful save
         } catch (error) {
@@ -92,38 +90,46 @@ export default function PasswordProfilePage() {
                             <label className="password-profile-page-input-label">
                                 Enter your new password:
                                 <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
+                                    <img 
+                                        src         =   {IMAGES.LOCK_ICON} 
+                                        alt         =   "Lock Icon" 
+                                        className   =   "password-profile-page-input-icon" 
+                                    />
                                     <input
-                                        type={showNewPassword ? "text" : "password"}
-                                        name="newPassword"
-                                        value={passwords.newPassword}
-                                        onChange={handleInputChange}
-                                        className="password-profile-page-profile-input"
+                                        type        =   {showNewPassword ? "text" : "password"}
+                                        name        =   "newPassword"
+                                        value       =   {passwords.newPassword}
+                                        onChange    =   {handleInputChange}
+                                        className   =   "password-profile-page-profile-input"
                                     />
                                     <img
-                                        src={showNewPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
-                                        alt="Toggle Visibility"
-                                        className="password-profile-page-eye-icon"
-                                        onClick={() => togglePasswordVisibility("newPassword")}
+                                        src         =   {showNewPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
+                                        alt         =   "Toggle Visibility"
+                                        className   =   "password-profile-page-eye-icon"
+                                        onClick     =   {() => togglePasswordVisibility("newPassword")}
                                     />
                                 </div>
                             </label>
                             <label className="password-profile-page-input-label">
                                 Confirm your new password:
                                 <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
+                                    <img 
+                                        src         =   {IMAGES.LOCK_ICON} 
+                                        alt         =   "Lock Icon" 
+                                        className   =   "password-profile-page-input-icon" 
+                                    />
                                     <input
-                                        type={showConfirmedNewPassword ? "text" : "password"}
-                                        name="confirmedNewPassword"
-                                        value={passwords.confirmedNewPassword}
-                                        onChange={handleInputChange}
-                                        className="password-profile-page-profile-input"
+                                        type        =   {showConfirmedNewPassword ? "text" : "password"}
+                                        name        =   "confirmedNewPassword"
+                                        value       =   {passwords.confirmedNewPassword}
+                                        onChange    =   {handleInputChange}
+                                        className   =   "password-profile-page-profile-input"
                                     />
                                     <img
-                                        src={showConfirmedNewPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
-                                        alt="Toggle Visibility"
-                                        className="password-profile-page-eye-icon"
-                                        onClick={() => togglePasswordVisibility("confirmedNewPassword")}
+                                        src         =   {showConfirmedNewPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
+                                        alt         =   "Toggle Visibility"
+                                        className   =   "password-profile-page-eye-icon"
+                                        onClick     =   {() => togglePasswordVisibility("confirmedNewPassword")}
                                     />
                                 </div>
                             </label>
@@ -133,10 +139,10 @@ export default function PasswordProfilePage() {
 
                             <div className="password-profile-page-profile-buttons">
                                 <button
-                                    type="button"
-                                    onClick={handleSave}
-                                    className={`password-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
-                                    disabled={!hasUnsavedChanges}
+                                    type        =   "button"
+                                    onClick     =   {handleSave}
+                                    className   =   {`password-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
+                                    disabled    =   {!hasUnsavedChanges}
                                 >
                                     Save
                                 </button>
