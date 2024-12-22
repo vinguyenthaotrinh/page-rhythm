@@ -8,17 +8,17 @@ import { Link, useNavigate } from "react-router-dom";
 import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
 interface VisibilityConfirmationBoxProps {
-    showVisibilityConfirmation:     boolean;            // Whether to show the visibility confirmation box
-    message?:                       string;             // Confirmation message
-    onConfirm:                      () => void;         // Function to call when confirmed
-    onCancel:                       () => void;         // Function to call when canceled
+    showVisibilityConfirmation:     boolean;            
+    message?:                       string;             
+    onConfirm:                      () => void;        
+    onCancel:                       () => void;        
 }
 
 const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
     showVisibilityConfirmation,
     message,
-    onConfirm,
-    onCancel,
+    onConfirm                       =   () => {},
+    onCancel                        =   () => {},
 }) => {
 
     if (!showVisibilityConfirmation)

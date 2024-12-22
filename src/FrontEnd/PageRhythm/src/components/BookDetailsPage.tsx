@@ -94,7 +94,7 @@ export default function BookDetailsPage() {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate(-1); // Navigate back to the previous page
+        navigate(-1);
     };
     
     useEffect(() => {
@@ -122,9 +122,9 @@ export default function BookDetailsPage() {
                 }
 
                 const server = await Server.getInstance();
-                const rating = await server.getBookRating(bookID); // Fetch user rating
+                const rating = await server.getBookRating(bookID);  // Fetch user rating
                 if (rating) {
-                    setUserRating(rating.rating); // Set the user rating in state
+                    setUserRating(rating.rating);                   // Set the user rating in state
                     console.log("User rating fetched successfully.", rating);
                 }
             } catch (error) {
@@ -140,8 +140,8 @@ export default function BookDetailsPage() {
                 }
 
                 const server = await Server.getInstance();
-                const commentsData = await server.retrieveAllComments(bookID); // Fetch comments for the book
-                setComments(commentsData); // Update the state with the fetched comments
+                const commentsData = await server.retrieveAllComments(bookID);  // Fetch comments for the book
+                setComments(commentsData);                                      // Update the state with the fetched comments
                 console.log("Comments fetched successfully.", commentsData);
             } catch (error) {
                 console.error("Error fetching comments:", error);
@@ -204,17 +204,17 @@ export default function BookDetailsPage() {
     };
 
     const handleWriteCommentButtonClick = () => {
-        //navigate(`/comment-page/${bookID}/null`); // Navigate to the comment page
+        //navigate(`/comment-page/${bookID}/null`);
         setRepliedCommentID(null);
         setShowCommentOverlay(true);
     };
 
     const handleReadThisBookButtonClick = () => {
-        navigate(`/read-book-page/${bookID}`); // Navigate to the read book page
+        navigate(`/read-book-page/${bookID}`);
     };
 
     const handleListenToBookButtonClick = () => {
-        navigate(`/listen-to-book-page/${bookID}`); // Navigate to the listen to book page
+        navigate(`/listen-to-book-page/${bookID}`);
     };
 
     const handleCommentSubmit = async () => {
@@ -251,8 +251,8 @@ export default function BookDetailsPage() {
             const updatedComments = await server.retrieveAllComments(bookID);
             setComments(updatedComments);
 
-            setShowCommentOverlay(false); // Close the comment overlay after submission
-            setComment(""); // Clear the comment input    
+            setShowCommentOverlay(false);   // Close the comment overlay after submission
+            setComment("");                 // Clear the comment input    
         } catch (error) {
             console.error("Error submitting comment:", error);
         }
@@ -313,33 +313,43 @@ export default function BookDetailsPage() {
                             <h2>{book.title}</h2>
                             <div className="book-details-page-buttons">
                                 <button
-                                    id = "book-details-page-read-button"
-                                    className = "book-details-page-button"
-                                    onClick = {handleReadThisBookButtonClick}
+                                    id          = "book-details-page-read-button"
+                                    className   = "book-details-page-button"
+                                    onClick     = {handleReadThisBookButtonClick}
                                 >
                                     Read This Book
                                 </button>
                                 <button
-                                    id          = "book-details-page-listen-button"
-                                    className   = "book-details-page-button"
-                                    onClick     = {handleListenToBookButtonClick}
+                                    id              =   "book-details-page-listen-button"
+                                    className       =   "book-details-page-button"
+                                    onClick         =   {handleListenToBookButtonClick}
+                                    onMouseEnter    =   {(e) => {
+                                        const imgElement = e.currentTarget.querySelector("img");
+                                        if (imgElement) {
+                                            imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
+                                        }
+                                    }}
+                                    onMouseLeave    =   {(e) => {
+                                        const imgElement = e.currentTarget.querySelector("img");
+                                        if (imgElement) {
+                                            imgElement.src = IMAGES.PLAY_BUTTON_ICON;
+                                        }
+                                    }}
                                 >   
                                     <img
-                                        src = {IMAGES.PLAY_BUTTON_ICON}
-                                        alt = "Listen"
-                                        className = "read-book-page-button-icon"
+                                        src         =   {IMAGES.PLAY_BUTTON_ICON}
+                                        alt         =   "Listen"
+                                        className   =   "read-book-page-button-icon"
                                     />
                                     Listen To Audio Book
                                 </button>
                             </div>
                         </div>
 
-                        {/* Author Name */}
                         <div className="book-details-row">
                             <strong>Author:</strong> {book.author}
                         </div>
 
-                        {/* Rating */}
                         {
                             book && book.book_rating && (
                                 <div className="book-details-row">
@@ -352,17 +362,14 @@ export default function BookDetailsPage() {
                             )
                         }
 
-                        {/* Release Date */}
                         <div className="book-details-row">
                             <strong>Release Date:</strong> {new Date(book.released_date).toLocaleDateString()}
                         </div>
 
-                        {/* Genre */}
                         <div className="book-details-row">
                             <strong>Genre:</strong> {book.genre}
                         </div>
 
-                        {/* Summary */}
                         <div className="book-details-row">
                             <strong>Summary:</strong> {book.summary}
                         </div>

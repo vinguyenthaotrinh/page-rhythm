@@ -14,7 +14,7 @@ export default function CommentPage() {
     const [comment, setComment] = useState<string>(""); // Stores user input for the comment
 
     const handleBackClick = () => {
-        navigate(-1); // Navigate back to the previous page
+        navigate(-1);
     };
 
     const handleCommentSubmit = async () => {

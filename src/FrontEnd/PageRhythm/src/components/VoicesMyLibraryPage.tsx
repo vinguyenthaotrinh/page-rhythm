@@ -79,28 +79,28 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                 </p>
 
                 <input
-                    type="text"
-                    placeholder="File Name"
-                    value={fileName}
-                    onChange={(e) => setFileName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "File Name"
+                    value       =   {fileName}
+                    onChange    =   {(e) => setFileName(e.target.value)}
                 />
 
                 <textarea
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder =   "Description"
+                    value       =   {description}
+                    onChange    =   {(e) => setDescription(e.target.value)}
                 />
 
-                <div className="file-input-container">
+                <div className  =   "file-input-container">
                     <label htmlFor="file-input" className="file-input-label">
                         Upload File
                     </label>
                     <input
-                        type="file"
-                        id="file-input"
-                        onChange={handleFileSelect}
-                        accept=".m4a, .mp3, .wav"
-                        className="file-input-button"
+                        type        =   "file"
+                        id          =   "file-input"
+                        onChange    =   {handleFileSelect}
+                        accept      =   ".m4a, .mp3, .wav"
+                        className   =   "file-input-button"
                     />
 
                     {selectedFile && (
@@ -207,7 +207,7 @@ export default function VoicesMyLibraryPage() {
     const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
     const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
     const [playingIndex, setPlayingIndex]                           = useState<number | null>(null);                    // Track currently playing audio
-    const [audioTimes, setAudioTimes]                               = useState<Record<number, number>>({});  // Track current time for each audio                                 // Track current time of audio
+    const [audioTimes, setAudioTimes]                               = useState<Record<number, number>>({});             // Track current time for each audio
     const audioRefs                                                 = useRef<Record<number, HTMLAudioElement>>({});     // Refs for each audio file
     const [selectedFile, setSelectedFile]                           = useState<File | null>(null);
     const [fileName, setFileName]                                   = useState("");
@@ -216,7 +216,7 @@ export default function VoicesMyLibraryPage() {
     const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);
     const [selectedRecord, setSelectedRecord]                       = useState<any | null>(null);
     const [showEditOverlay, setShowEditOverlay]                     = useState(false);
-    const [loading, setLoading]                                     = useState(true);                   // Loading state
+    const [loading, setLoading]                                     = useState(true);
     
     const handleSampleAudioFileUpload = async () => {
         if (selectedFile && fileName) {
@@ -455,8 +455,28 @@ export default function VoicesMyLibraryPage() {
                                                     </div>
                                                     
                                                     <button
-                                                        className="play-pause-button"
-                                                        onClick={() => handlePlayPause(index)}
+                                                        className       =   "play-pause-button"
+                                                        onClick         =   {() => handlePlayPause(index)}
+                                                        onMouseEnter    =   {(e) => {
+                                                            const imgElement = e.currentTarget.querySelector("img");
+                                                            if (imgElement) {
+                                                                if (playingIndex === index) {
+                                                                    imgElement.src = IMAGES.HOVERED_PAUSE_BUTTON_ICON;
+                                                                } else {
+                                                                    imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
+                                                                }
+                                                            }
+                                                        }}
+                                                        onMouseLeave    =   {(e) => {
+                                                            const imgElement = e.currentTarget.querySelector("img");
+                                                            if (imgElement) {
+                                                                if (playingIndex === index) {
+                                                                    imgElement.src = IMAGES.PAUSE_BUTTON_ICON;
+                                                                } else {
+                                                                    imgElement.src = IMAGES.PLAY_BUTTON_ICON;
+                                                                }
+                                                            }
+                                                        }}
                                                     >
                                                         <img
                                                             src={playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}

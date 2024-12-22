@@ -44,47 +44,27 @@ html, body {
     margin-right: 8px;                  /* Space between the icon and the text */
 }
 
-#listen-to-book-page-listen-button {
-    gap: 8px;
-    display: flex;
-    cursor: pointer;
-    color: #265073;
-    padding: 10px 20px;                 /* Adjust padding for button size */
-    align-items: center;
-    border-radius: 12px;
-    background-color: white;    
-    border: 2px solid #265073;
-    font-family: "Poppins-Regular", sans-serif;
-    transition: background-color color border 0.3s ease-in-out;
-}
-
-#listen-to-book-page-listen-button:hover {
-    background-color: rgb(242, 242, 242);
-    color: #1A3E5C;
-    border: 2px solid #1A3E5C;
-}
-
 #listen-to-book-page-content-region {
-    background-color: #4D4D4D;   /* Light grey background */
-    flex-grow: 1;                   /* Allow it to grow and take remaining space */
-    margin-bottom: 16px;            /* Space between the content and the bottom */
-    margin-left: 64px;
+    background-color: #4D4D4D;      /* Light grey background */
+    flex-direction: column;             /* Stack children vertically */
+    margin-bottom: 16px;                /* Space between the content and the bottom */
     margin-right: 64px;
-    margin-top: 64px;               /* Space between the content and the top */
+    margin-left: 64px;
+    margin-top: 64px;                   /* Space between the content and the top */
     display: flex;
-    flex-direction: column;         /* Stack children vertically */
+    flex-grow: 1;                       /* Allow it to grow and take remaining space */
 }
 
 #listen-to-book-page-content-header {
-    position: relative;             /* This makes the parent container a reference point for absolute positioning */
-    padding: 10px 20px;
     background-color: transparent;
-    display: flex;
-    justify-content: center;        /* Center the navigation */
+    justify-content: center;            /* Center the navigation */
     align-items: center;
+    position: relative;                 /* This makes the parent container a reference point for absolute positioning */
+    padding: 10px 20px;
     color: white;
+    display: flex;
     width: 100%;
-    z-index: 1;                     /* Ensures this section is above others */
+    z-index: 1;                         /* Ensures this section is above others */
 }
 
 #listen-to-book-page-navigation-section {
@@ -124,12 +104,12 @@ html, body {
 }
 
 #listen-to-book-page-book-details-section {
+    top: 0;                 /* Align it to the top of the parent */    
     gap: 12px;              /* Space between the cover image and text */
     left: 64px;             /* 12px from the left boundary of the parent */
     display: flex;
-    align-items: center;    /* Vertically align content */
     position: absolute;     /* Position it absolutely within the parent */
-    top: 0;                 /* Align it to the top of the parent */    
+    align-items: center;    /* Vertically align content */
 }
 
 #listen-to-book-page-book-details {
@@ -170,7 +150,7 @@ html, body {
 }
 
 .listen-to-book-page-button-icon {
-    width: 32px; /* Icon size */
+    width: 32px;
     height: 32px;
     cursor: pointer;
 }

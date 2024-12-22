@@ -10,13 +10,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: #f6ffde;
-    position: fixed; /* Makes the navbar fixed at the top */
-    top: 0;          /* Positions it at the top of the viewport */
-    left: 0;         /* Ensures it spans from the left */
-    width: 100%;     /* Takes the full horizontal width */
-    z-index: 1000;   /* Ensures it appears above other elements */
+    position: fixed;                            /* Makes the navbar fixed at the top */
+    top: 0;                                     /* Positions it at the top of the viewport */
+    left: 0;                                    /* Ensures it spans from the left */
+    width: 100%;                                /* Takes the full horizontal width */
+    z-index: 1000;                              /* Ensures it appears above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for distinction */
-    padding: 8px 20px; /* Adds padding for spacing */
+    padding: 8px 20px;                          /* Adds padding for spacing */
 }
 
 .navigation-bar-left {
@@ -58,8 +58,8 @@ nav {
 
 nav ul {
     display: flex;
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
+    margin: 0;      /* Remove default margins */
+    padding: 0;     /* Remove default padding */
 }
 
 nav ul li {
@@ -74,9 +74,9 @@ nav ul li a {
     margin: 0 0.5rem;
     border: 2px solid transparent;
     border-radius: 0.5rem;
-    font-weight: normal; /* Ensure the width matches the non-bold version */
-    width: 100px; /* Fixed width */
-    text-align: center; /* Center the text */
+    font-weight: normal;                                                                /* Ensure the width matches the non-bold version */
+    width: 100px;                                                                       /* Fixed width */
+    text-align: center;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
