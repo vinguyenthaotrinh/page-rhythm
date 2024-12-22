@@ -63,9 +63,17 @@ CREATE TABLE "Comment" (
 CREATE TABLE "BannedAccount" (
   "banned_account_id"         bigserial PRIMARY KEY NOT NULL,
   "banning_account_id"        bigserial NOT NULL,
-  "ban_type"                  varchar(50),
+  "ban_type"                  text,
   "start_time"                timestamp,
   "end_time"                  timestamp
+);
+
+CREATE TABLE "TextToSpeechGeneration" (
+  "id"                        bigserial PRIMARY KEY,
+  "account_id"                bigserial NOT NULL,
+  "book_id"                   bigserial NOT NULL,
+  "generation_time"           timestamp,
+  "character_count"           int       NOT NULL
 );
 
 ALTER TABLE "Book" ADD FOREIGN KEY ("owner_id") REFERENCES "Account" ("account_id");
@@ -89,3 +97,7 @@ ALTER TABLE "Comment" ADD FOREIGN KEY ("replied_comment_id") REFERENCES "Comment
 ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banned_account_id") REFERENCES "Account" ("account_id");
 
 ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banning_account_id") REFERENCES "Account" ("account_id");
+
+ALTER TABLE "TextToSpeechGeneration" ADD FOREIGN KEY ("account_id") REFERENCES "Account" ("account_id");
+
+ALTER TABLE "TextToSpeechGeneration" ADD FOREIGN KEY ("book_id") REFERENCES "Book" ("book_id");
