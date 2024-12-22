@@ -63,29 +63,39 @@ CREATE TABLE "Comment" (
 CREATE TABLE "BannedAccount" (
   "banned_account_id"         bigserial PRIMARY KEY NOT NULL,
   "banning_account_id"        bigserial NOT NULL,
-  "ban_type"                  varchar(50),
+  "ban_type"                  text,
   "start_time"                timestamp,
   "end_time"                  timestamp
 );
 
-ALTER TABLE "Book" ADD FOREIGN KEY ("owner_id") REFERENCES "Account" ("account_id");
+CREATE TABLE "TextToSpeechGeneration" (
+  "id"                        bigserial PRIMARY KEY,
+  "account_id"                bigserial NOT NULL,
+  "generation_time"           timestamp,
+  "text_content"              text,
+  "speech_content"            text
+);
 
-ALTER TABLE "BookRating" ADD FOREIGN KEY ("user_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "Book" ADD FOREIGN KEY ("owner_id")                     REFERENCES "Account" ("account_id");
 
-ALTER TABLE "BookRating" ADD FOREIGN KEY ("book_id") REFERENCES "Book" ("book_id");
+ALTER TABLE "BookRating" ADD FOREIGN KEY ("user_id")                REFERENCES "Account" ("account_id");
 
-ALTER TABLE "TrackedProgress" ADD FOREIGN KEY ("user_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "BookRating" ADD FOREIGN KEY ("book_id")                REFERENCES "Book" ("book_id");
 
-ALTER TABLE "TrackedProgress" ADD FOREIGN KEY ("book_id") REFERENCES "Book" ("book_id");
+ALTER TABLE "TrackedProgress" ADD FOREIGN KEY ("user_id")           REFERENCES "Account" ("account_id");
 
-ALTER TABLE "SampleAudioFile" ADD FOREIGN KEY ("owner_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "TrackedProgress" ADD FOREIGN KEY ("book_id")           REFERENCES "Book" ("book_id");
 
-ALTER TABLE "Comment" ADD FOREIGN KEY ("book_id") REFERENCES "Book" ("book_id");
+ALTER TABLE "SampleAudioFile" ADD FOREIGN KEY ("owner_id")          REFERENCES "Account" ("account_id");
 
-ALTER TABLE "Comment" ADD FOREIGN KEY ("comment_author_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "Comment" ADD FOREIGN KEY ("book_id")                   REFERENCES "Book" ("book_id");
 
-ALTER TABLE "Comment" ADD FOREIGN KEY ("replied_comment_id") REFERENCES "Comment" ("comment_id");
+ALTER TABLE "Comment" ADD FOREIGN KEY ("comment_author_id")         REFERENCES "Account" ("account_id");
 
-ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banned_account_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "Comment" ADD FOREIGN KEY ("replied_comment_id")        REFERENCES "Comment" ("comment_id");
 
-ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banning_account_id") REFERENCES "Account" ("account_id");
+ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banned_account_id")   REFERENCES "Account" ("account_id");
+
+ALTER TABLE "BannedAccount" ADD FOREIGN KEY ("banning_account_id")  REFERENCES "Account" ("account_id");
+
+ALTER TABLE "TextToSpeechGeneration" ADD FOREIGN KEY ("account_id") REFERENCES "Account" ("account_id");

@@ -216,8 +216,8 @@ export default class Server {
         const sessionToken = this.getSessionToken();
 
         return {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${sessionToken}`, // Authorization header with JWT token
+            "Content-Type":     "application/json",
+            "Authorization":    `Bearer ${sessionToken}`, // Authorization header with JWT token
         };
     }
 
@@ -757,7 +757,6 @@ export default class Server {
             }
     
             const result = await response.json(); // Parse the response body as JSON
-            console.log("Fetched uploaded sample audio files:", result);
 
             const finalResult = result.map((file: any) => ({
                 ...file,
@@ -765,8 +764,6 @@ export default class Server {
                     ? `data:audio/${file.file_extension};base64,${file.content}`
                     : null,
             }));
-
-            console.log(finalResult);
     
             return finalResult; // Return the list of uploaded sample audio files
     
@@ -795,9 +792,9 @@ export default class Server {
             const base64Content = await fileToBase64(record.content);
 
             const payload = {
-                file_name: record.file_name,
-                description: record.description,
-                content: base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
+                file_name:      record.file_name,
+                description:    record.description,
+                content:        base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
                 file_extension: record.content.type.split("/")[1], // Extract the file extension
             };
     
@@ -869,7 +866,7 @@ export default class Server {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body), // Send JSON data
+                body:       JSON.stringify(body),
             });
     
             if (!response.ok) {
@@ -894,7 +891,7 @@ export default class Server {
         try {
             const response = await fetch(url, {
                 method:     "PATCH",
-                headers:    this.getSimpleHeadersWithSessionToken(), // Use method to get headers with session token
+                headers:    this.getSimpleHeadersWithSessionToken(),
             });
     
             if (!response.ok) {

@@ -14,14 +14,18 @@ function LogoSectionOfNavigationBar() {
 
     return (
         <div
-            className="navigation-bar-left"
-            role="button"
-            tabIndex={0}
-            onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            style={{ cursor: "pointer" }}
+            className   =   "navigation-bar-left"
+            role        =   "button"
+            tabIndex    =   {0}
+            onClick     =   {handleLogoClick}
+            onKeyDown   =   {(e) => e.key === "Enter" && handleLogoClick()}
+            style       =   {{ cursor: "pointer" }}
         >
-            <img src={IMAGES.LOGO} alt="PageRhythm Logo" className="navigation-bar-logo" />
+            <img 
+                src         =   {IMAGES.LOGO} 
+                alt         =   "PageRhythm Logo" 
+                className   =   "navigation-bar-logo" 
+            />
             <h1 className="navigation-bar-title">PageRhythm</h1>
         </div>
     );
@@ -36,21 +40,21 @@ function ProfilePictureSectionOfNavigationBar({
 }) {
     return (
         <img
-            src={profilePicture}
-            alt="User Avatar"
-            className="navigation-bar-avatar"
-            role="button"
-            tabIndex={0}
-            onClick={onProfileClick}
-            style={{ cursor: "pointer" }}
+            src         =   {profilePicture}
+            alt         =   "User Avatar"
+            className   =   "navigation-bar-avatar"
+            role        =   "button"
+            tabIndex    =   {0}
+            onClick     =   {onProfileClick}
+            style       =   {{ cursor: "pointer" }}
         />
     );
 }
 
 export default function NavigationBar() {
-    const [accountType, setAccountType] = useState("user");
-    const [profilePicture, setProfilePicture] = useState(IMAGES.DEFAULT_PROFILE_PICTURE);
-    const navigate = useNavigate();
+    const [accountType, setAccountType]         =   useState("user");
+    const [profilePicture, setProfilePicture]   =   useState(IMAGES.DEFAULT_PROFILE_PICTURE);
+    const navigate                              =   useNavigate();
 
     const handleProfilePictureClick = () => {
         navigate("/profile-page");
@@ -98,8 +102,8 @@ export default function NavigationBar() {
                     </ul>
 
                     <ProfilePictureSectionOfNavigationBar
-                        profilePicture={profilePicture}
-                        onProfileClick={handleProfilePictureClick}
+                        profilePicture  =   {profilePicture}
+                        onProfileClick  =   {handleProfilePictureClick}
                     />
                 </div>
             </nav>

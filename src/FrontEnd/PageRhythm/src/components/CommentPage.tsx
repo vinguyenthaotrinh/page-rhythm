@@ -9,9 +9,9 @@ export default function CommentPage() {
 
     const { bookID }            = useParams<{ bookID: string }>();
     const {repliedCommentID}    = useParams<{ repliedCommentID: string }>();
-
-    const navigate = useNavigate();
-    const [comment, setComment] = useState<string>(""); // Stores user input for the comment
+    const [comment, setComment] = useState<string>("");
+    const navigate              = useNavigate();
+    
 
     const handleBackClick = () => {
         navigate(-1);
@@ -62,21 +62,25 @@ export default function CommentPage() {
                 id = "comment-page-back-button-region"
             >
                 <div id="comment-page-back-button-container" onClick={handleBackClick}>
-                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="comment-page-back-button-icon" />
+                    <img 
+                        src         =   {IMAGES.LEFT_ARROW_ICON} 
+                        alt         =   "Back" 
+                        className   =   "comment-page-back-button-icon" 
+                    />
                     <span>Back</span>
                 </div>
             </div>
             <div id="comment-page-main-section">
                 <h3>Write your comment here</h3>
                 <textarea
-                    id="comment-textarea"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder="Enter your comment..."
+                    id          =   "comment-textarea"
+                    value       =   {comment}
+                    onChange    =   {(e) => setComment(e.target.value)}
+                    placeholder =   "Enter your comment..."
                 />
                 <button
-                    id="comment-submit-button"
-                    onClick={handleCommentSubmit}
+                    id      =   "comment-submit-button"
+                    onClick =   {handleCommentSubmit}
                 >
                     Submit
                 </button>

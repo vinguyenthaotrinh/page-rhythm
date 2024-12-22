@@ -7,8 +7,8 @@ interface MyLibrarySectionBarProps {
 }
 
 export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionBarProps) {
-    const [hoveredOption, setHoveredOption] = useState<string | null>(null);
-    const navigate = useNavigate();
+    const [hoveredOption, setHoveredOption] =   useState<string | null>(null);
+    const navigate                          =   useNavigate();
 
     const handleSectionClick = (path: string) => {
         navigate(path);
@@ -28,18 +28,18 @@ export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionB
     return (
         <div className="my-library-page-my-library-section-bar">
             <button 
-                className={`my-library-page-my-library-section-button ${getButtonClass("books")}`} 
-                onClick={() => handleSectionClick("/my-library-page/books")}
-                onMouseEnter={() => setHoveredOption("books")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`my-library-page-my-library-section-button ${getButtonClass("books")}`} 
+                onClick         =   {() => handleSectionClick("/my-library-page/books")}
+                onMouseEnter    =   {() => setHoveredOption("books")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Books
             </button>
             <button 
-                className={`my-library-page-my-library-section-button ${getButtonClass("voices")}`} 
-                onClick={() => handleSectionClick("/my-library-page/voices")}
-                onMouseEnter={() => setHoveredOption("voices")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`my-library-page-my-library-section-button ${getButtonClass("voices")}`} 
+                onClick         =   {() => handleSectionClick("/my-library-page/voices")}
+                onMouseEnter    =   {() => setHoveredOption("voices")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Voices
             </button>

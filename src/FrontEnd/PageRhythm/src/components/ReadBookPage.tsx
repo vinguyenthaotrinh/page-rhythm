@@ -111,10 +111,16 @@ export default function ReadBookPage() {
             <NavigationBar />
             
             <div
-                id = "read-book-page-top-region"
+                id  =   "read-book-page-top-region"
             >
-                <div id="read-book-page-back-button-container" onClick={handleBackClick}>
-                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="read-book-page-back-button-icon" />
+                <div 
+                    id      =   "read-book-page-back-button-container" 
+                    onClick =   {handleBackClick}
+                >
+                    <img 
+                        src         =   {IMAGES.LEFT_ARROW_ICON} 
+                        alt         =   "Back" 
+                        className   =   "read-book-page-back-button-icon" />
                     <span>Back</span>
                 </div>
 
@@ -124,21 +130,19 @@ export default function ReadBookPage() {
                     onClick         =   {handleListenButtonClick}
                     onMouseEnter    =   {(e) => {
                         const imgElement = e.currentTarget.querySelector("img");
-                        if (imgElement) {
+                        if (imgElement) 
                             imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
-                        }
                     }}
                     onMouseLeave    =   {(e) => {
                         const imgElement = e.currentTarget.querySelector("img");
-                        if (imgElement) {
+                        if (imgElement) 
                             imgElement.src = IMAGES.PLAY_BUTTON_ICON;
-                        }
                     }}
                 >   
                     <img
-                        src = {IMAGES.PLAY_BUTTON_ICON}
-                        alt = "Listen"
-                        className = "read-book-page-button-icon"
+                        src         =   {IMAGES.PLAY_BUTTON_ICON}
+                        alt         =   "Listen"
+                        className   =   "read-book-page-button-icon"
                     />
                     Listen To Audio Book
                 </button>

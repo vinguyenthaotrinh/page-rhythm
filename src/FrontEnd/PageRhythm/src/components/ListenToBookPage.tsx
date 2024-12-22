@@ -198,7 +198,10 @@ export default function ListenToBookPage() {
                 </div>
 
                 <div id="listen-to-book-page-content-body">
-                    <div id="listen-to-book-page-current-content-page" className="listen-to-book-page-content-page">
+                    <div 
+                        id          =   "listen-to-book-page-current-content-page" 
+                        className   =   "listen-to-book-page-content-page"
+                    >
                         {contentPages[currentPage - 1] &&
                         contentPages[currentPage - 1].split("\n").map((line, index) => (
                             <React.Fragment key={index}>

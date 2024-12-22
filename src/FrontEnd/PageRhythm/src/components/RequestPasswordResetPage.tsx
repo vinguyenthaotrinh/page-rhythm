@@ -54,14 +54,14 @@ function RequestPasswordResetSection() {
     return (
         <div id="request-password-reset-page-main-section">
             <img 
-                src={IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
-                className="request-password-reset-page-overlay-image" 
-                id="request-password-reset-page-login-section-top-right-corner-image" 
+                src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
+                className   =   "request-password-reset-page-overlay-image" 
+                id          =   "request-password-reset-page-login-section-top-right-corner-image" 
             />
             <img 
-                src={IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
-                className="request-password-reset-page-overlay-image" 
-                id="request-password-reset-page-login-section-bottom-left-corner-image" 
+                src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
+                className   =   "request-password-reset-page-overlay-image" 
+                id          =   "request-password-reset-page-login-section-bottom-left-corner-image" 
             />
       
             <br /><br />
@@ -75,18 +75,27 @@ function RequestPasswordResetSection() {
 
             <form onSubmit={handleLogin}>
                 <div className="request-password-reset-page-input-container">
-                    <img src={IMAGES.MAIL_ICON} className="request-password-reset-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.MAIL_ICON} 
+                        className   =   "request-password-reset-page-input-icon" 
+                    />
                     <input 
-                        type="email" 
-                        placeholder="Enter your registered email"      
-                        className="request-password-reset-page-input-info" 
+                        type        =   "email" 
+                        placeholder =   "Enter your registered email"      
+                        className   =   "request-password-reset-page-input-info" 
                         required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}  // Update email state
+                        value       =   {email}
+                        onChange    =   {(e) => setEmail(e.target.value)}  // Update email state
                     />
                 </div>
                 
-                <button type="submit" id="request-password-reset-page-submit-button" disabled = {loadingLoginRequest}>Send password reset email</button>
+                <button 
+                    type        =   "submit" 
+                    id          =   "request-password-reset-page-submit-button" 
+                    disabled    =   {loadingLoginRequest}
+                >
+                    Send password reset email
+                </button>
 
             </form>
         </div>
@@ -111,12 +120,26 @@ export default function RequestPasswordResetPage() {
                 <LoginSection />
             </div>
 
-            <div className="request-password-reset-page-front-left-image-container" id="request-password-reset-page-left-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="request-password-reset-page-left-overlay-image" alt="Left corner image" />
+            <div 
+                className       =   "request-password-reset-page-front-left-image-container" 
+                id              =   "request-password-reset-page-left-corner-image"
+            >
+                <img 
+                    src         =   {IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} 
+                    className   =   "request-password-reset-page-left-overlay-image" 
+                    alt         =   "Left corner image" 
+                />
             </div>
 
-            <div className="request-password-reset-page-front-right-image-container" id="request-password-reset-page-right-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="request-password-reset-page-right-overlay-image" alt="Right corner image"/>
+            <div 
+                className       =   "request-password-reset-page-front-right-image-container" 
+                id              =   "request-password-reset-page-right-corner-image"
+            >
+                <img 
+                    src         =   {IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} 
+                    className   =   "request-password-reset-page-right-overlay-image" 
+                    alt         =   "Right corner image"
+                />
             </div>
 
         </div>

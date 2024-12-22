@@ -106,109 +106,133 @@ function SignupSection() {
 
             <form onSubmit={handleSignup}>
                 <div className="register-page-input-container">
-                    <img src={IMAGES.USER_ICON} className="register-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.USER_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
                     <input 
-                        type="text" 
-                        placeholder="Enter your full name"      
-                        className="register-page-input-info" 
+                        type        =   "text" 
+                        placeholder =   "Enter your full name"      
+                        className   =   "register-page-input-info" 
                         required
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}  // Update full name state
+                        value       =   {fullName}
+                        onChange    =   {(e) => setFullName(e.target.value)}
                     />
                 </div>
                 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.MAIL_ICON} className="register-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.MAIL_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
                     <input 
-                        type="email" 
-                        placeholder="Enter your email"      
-                        className="register-page-input-info" 
+                        type        =   "email" 
+                        placeholder =   "Enter your email"      
+                        className   =   "register-page-input-info" 
                         required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}  // Update email state
+                        value       =   {email}
+                        onChange    =   {(e) => setEmail(e.target.value)}
                     />
                 </div>
 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.LOCK_ICON} className="register-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.LOCK_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
                     <input 
-                        id="register-page-first-password-input" 
-                        type={isFirstPasswordVisible ? "text" : "password"}  // Toggle password visibility
-                        placeholder="Create password" 
-                        className="register-page-input-info" 
+                        id          =   "register-page-first-password-input" 
+                        type        =   {isFirstPasswordVisible ? "text" : "password"}
+                        placeholder =   "Create password" 
+                        className   =   "register-page-input-info" 
                         required
-                        value={firstPassword}
-                        onChange={(e) => setFirstPassword(e.target.value)}                       // Update password state
+                        value       =   {firstPassword}
+                        onChange    =   {(e) => setFirstPassword(e.target.value)}
                     />
                     <img 
-                        src={isFirstPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
-                        className="register-page-eye-icon" 
-                        alt="Eye Icon" 
-                        onClick={toggleFirstPasswordVisibility}                                  // Call the toggle function on click
+                        src         =   {isFirstPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
+                        className   =   "register-page-eye-icon" 
+                        alt         =   "Eye Icon" 
+                        onClick     =   {toggleFirstPasswordVisibility}
                     />
                 </div>
 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.LOCK_ICON} className="register-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.LOCK_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
                     <input 
-                        id="register-page-second-password-input" 
-                        type={isFirstPasswordVisible ? "text" : "password"}  // Toggle password visibility
-                        placeholder="Confirm password" 
-                        className="register-page-input-info" 
+                        id          =   "register-page-second-password-input" 
+                        type        =   {isFirstPasswordVisible ? "text" : "password"}
+                        placeholder =   "Confirm password" 
+                        className   =   "register-page-input-info" 
                         required
-                        value={secondPassword}
-                        onChange={(e) => setSecondPassword(e.target.value)}                       // Update password state
+                        value       =   {secondPassword}
+                        onChange    =   {(e) => setSecondPassword(e.target.value)}
                     />
                     <img 
-                        src={isSecondPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}  // Change icon based on visibility
-                        className="register-page-eye-icon" 
-                        alt="Eye Icon" 
-                        onClick={toggleSecondPasswordVisibility}                                  // Call the toggle function on click
+                        src         =   {isSecondPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}    
+                        className   =   "register-page-eye-icon" 
+                        alt         =   "Eye Icon" 
+                        onClick     =   {toggleSecondPasswordVisibility}    
                     />
                 </div>
 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.CALENDAR_ICON} className="register-page-input-icon" />
+                    <img 
+                        src         =   {IMAGES.CALENDAR_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
                     <input 
-                        type="date" 
-                        placeholder="Enter your date of birth (mm/dd/yyyy)"      
-                        className="register-page-input-info" 
+                        type        =   "date" 
+                        placeholder =   "Enter your date of birth (mm/dd/yyyy)"      
+                        className   =   "register-page-input-info" 
                         required
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}  // Update date of birth state
+                        value       =   {dateOfBirth}
+                        onChange    =   {(e) => setDateOfBirth(e.target.value)}  // Update date of birth state
                     />
                 </div>
 
                 <div className="register-page-input-container">
-                    <img src={IMAGES.BLACK_PENCIL_ICON} id="register-page-pencil-icon" />
+                    <img 
+                        src             =   {IMAGES.BLACK_PENCIL_ICON} 
+                        id              =   "register-page-pencil-icon" 
+                    />
                     <textarea
-                        placeholder="Write your bio here"    
-                        className="register-page-input-info" 
+                        placeholder     =   "Write your bio here"    
+                        className       =   "register-page-input-info" 
                         required
-                        value={bio}
-                        onChange={(e) => setBio(e.target.value)}  // Update bio state
-                        rows = {8}
+                        value           =   {bio}
+                        onChange        =   {(e) => setBio(e.target.value)}  // Update bio state
+                        rows            =   {8}
                     />
                 </div>
 
                 <div 
-                    className="last-register-page-input-container"
-                    id = "register-page-terms-container"
+                    className           =   "last-register-page-input-container"
+                    id                  =   "register-page-terms-container"
                 >
                     <label htmlFor="agree-terms" className="register-page-terms-label">
                         <input 
-                            type="checkbox" 
-                            id="register-page-agree-terms"
-                            name="agree-terms" 
+                            type        =   "checkbox" 
+                            id          =   "register-page-agree-terms"
+                            name        =   "agree-terms" 
                             required 
-                            checked={agreeWithTerms} 
-                            onChange={(e) => setAgreeWithTerms(e.target.checked)} // Update agree state
+                            checked     =   {agreeWithTerms} 
+                            onChange    =   {(e) => setAgreeWithTerms(e.target.checked)} // Update agree state
                         />
                         I agree with the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>
                     </label>
                 </div>
                 
-                <button type="submit" id="register-page-signup-button" disabled = {loadingSignupRequest}>Sign up</button>
+                <button 
+                    type        =   "submit" 
+                    id          =   "register-page-signup-button" 
+                    disabled    =   {loadingSignupRequest}
+                >
+                    Sign up
+                </button>
 
             </form>
         </div>

@@ -64,7 +64,49 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
     handleFileSelect,
     handleSampleAudioFileUpload,
 }) => {
-    if (!showAddOverlay) return null;
+    const [errorMessage, setErrorMessage]               =   useState<string | null>(null);
+    const [isAddButtonDisabled, setIsAddButtonDisabled] =   useState(false);
+
+    useEffect(() => {
+        const validateAudioDuration = async () => {
+            if (selectedFile) {
+                const audio = new Audio(URL.createObjectURL(selectedFile));
+
+                const timeout = setTimeout(() => {
+                    if (Number.isNaN(audio.duration) || audio.duration === 0) {
+                        setErrorMessage("The audio file is invalid.");
+                        setIsAddButtonDisabled(true);
+                    }
+                }, 12000);
+
+                audio.onloadedmetadata = () => {
+                    clearTimeout(timeout);
+
+                    if (audio.duration > 60) {
+                        setErrorMessage("The audio file is longer than 60 seconds.");
+                        setIsAddButtonDisabled(true);
+                    } else {
+                        setErrorMessage(null);
+                        setIsAddButtonDisabled(false);
+                    }
+                };
+
+                audio.onerror = () => {
+                    clearTimeout(timeout);
+                    setErrorMessage("The audio file is invalid.");
+                    setIsAddButtonDisabled(true);
+                };
+            } else {
+                setErrorMessage(null);
+                setIsAddButtonDisabled(false);
+            }
+        };
+
+        validateAudioDuration();
+    }, [selectedFile]);
+
+    if (!showAddOverlay) 
+        return null;
 
     return (
         <div className="add-overlay">
@@ -110,9 +152,23 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                     )}
                 </div>
 
+                {errorMessage && (
+                    <div 
+                        className   =   "voices-my-library-page-add-overlay-error-message" 
+                        style       =   {{ color: "red" }}
+                    >
+                        {errorMessage}
+                    </div>
+                )}
+
                 <div className="add-overlay-buttons">
-                    <button onClick={handleSampleAudioFileUpload}>Upload File</button>
-                    <button onClick={() => setShowAddOverlay(false)}>Close</button>
+                    <button 
+                        onClick     =   {handleSampleAudioFileUpload}
+                        disabled    =   {isAddButtonDisabled}
+                    >     
+                        Add
+                    </button>
+                    <button onClick =   {() => setShowAddOverlay(false)}>   Close   </button>
                 </div>
             </div>
         </div>
@@ -272,7 +328,6 @@ export default function VoicesMyLibraryPage() {
                 setLoading(true);
                 const server = await Server.getInstance();
                 const fetchedRecords = await server.getUserUploadedSampleAudioFiles();
-                console.log("Fetched records:", fetchedRecords);
                 setRecords(fetchedRecords);
             } catch (error) {
                 console.error("Error fetching uploaded audio files:", error);

@@ -6,9 +6,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedGenre, setSelectedGenre] = useState("All");
-    const [genres, setGenres] = useState<string[]>([
+    const [searchTerm, setSearchTerm]       =   useState("");
+    const [selectedGenre, setSelectedGenre] =   useState("All");
+    const [genres, setGenres]               =   useState<string[]>([
         "Science Fiction",
         "Fantasy",
         "Non-Fiction",
@@ -16,8 +16,8 @@ export default function HomePage() {
         "Romance",
         "Horror"
     ]);
-    const [books, setBooks] = useState<any[]>([]);
-    const navigate = useNavigate();
+    const [books, setBooks]                 =   useState<any[]>([]);
+    const navigate                          =   useNavigate();
 
     useEffect(() => {
         const fetchBooks = async () => {

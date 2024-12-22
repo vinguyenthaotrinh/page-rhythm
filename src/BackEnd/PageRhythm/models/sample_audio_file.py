@@ -5,13 +5,13 @@ import base64
 class SampleAudioFile(BaseEntity):
 
     def __init__(self, 
-                 sample_audio_file_id: int,
-                 file_name: str,
-                 description: str,
-                 owner_id: int,
-                 content: bytes,
-                 upload_time: datetime,
-                 file_extension: str):
+                 sample_audio_file_id:  int,
+                 file_name:             str,
+                 description:           str,
+                 owner_id:              int,
+                 content:               bytes,
+                 upload_time:           datetime,
+                 file_extension:        str):
         super().__init__()
         self.sample_audio_file_id   = sample_audio_file_id
         self.file_name              = file_name

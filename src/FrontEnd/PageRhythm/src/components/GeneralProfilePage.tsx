@@ -18,10 +18,10 @@ function LoadingText() {
 
 export default function GeneralProfilePage() {
     const [originalProfile, setOriginalProfile] = useState({
-        fullName: "",
-        email: "",
-        bio: "",
-        birthday: "",
+        fullName:   "",
+        email:      "",
+        bio:        "",
+        birthday:   "",
     });
 
     const [loading, setLoading]                     = useState(true);
@@ -35,16 +35,16 @@ export default function GeneralProfilePage() {
             const profile = await server.getProfile(); // Fetch profile from server
             console.log(profile);
             setOriginalProfile({
-                fullName: profile.data.full_name || "",
-                email: profile.data.email || "",
-                bio: profile.data.bio || "",
-                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
+                fullName:   profile.data.full_name || "",
+                email:      profile.data.email || "",
+                bio:        profile.data.bio || "",
+                birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
             setProfile({
-                fullName: profile.data.full_name || "",
-                email: profile.data.email || "",
-                bio: profile.data.bio || "",
-                birthday: profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
+                fullName:   profile.data.full_name || "",
+                email:      profile.data.email || "",
+                bio:        profile.data.bio || "",
+                birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
             setLoading(false);
         } catch (error) {
@@ -97,39 +97,51 @@ export default function GeneralProfilePage() {
                                     <label className="general-profile-page-input-label">
                                         Full Name:
                                         <div className="general-profile-page-input-container">
-                                            <img src={IMAGES.USER_ICON} alt="Full Name Icon" className="general-profile-page-input-icon" />
+                                            <img 
+                                                src         =   {IMAGES.USER_ICON} 
+                                                alt         =   "Full Name Icon" 
+                                                className   =   "general-profile-page-input-icon" 
+                                            />
                                             <input
-                                                type="text"
-                                                name="fullName"
-                                                value={profile.fullName}
-                                                onChange={handleInputChange}
-                                                className="general-profile-page-profile-input"
+                                                type        =   "text"
+                                                name        =   "fullName"
+                                                value       =   {profile.fullName}
+                                                onChange    =   {handleInputChange}
+                                                className   =   "general-profile-page-profile-input"
                                             />
                                         </div>
                                     </label>
                                     <label className="general-profile-page-input-label">
                                         Email:
                                         <div className="general-profile-page-input-container">
-                                            <img src={IMAGES.MAIL_ICON} alt="Email Icon" className="general-profile-page-input-icon" />
+                                            <img 
+                                                src         =   {IMAGES.MAIL_ICON} 
+                                                alt         =   "Email Icon" 
+                                                className   =   "general-profile-page-input-icon" 
+                                            />
                                             <input
-                                                type="email"
-                                                name="email"
-                                                value={profile.email}
-                                                onChange={handleInputChange}
-                                                className="general-profile-page-profile-input"
+                                                type        =   "email"
+                                                name        =   "email"
+                                                value       =   {profile.email}
+                                                onChange    =   {handleInputChange}
+                                                className   =   "general-profile-page-profile-input"
                                             />
                                         </div>
                                     </label>
                                     <label className="general-profile-page-input-label">
                                         Birthday (DD/MM/YYYY):
                                         <div className="general-profile-page-input-container">
-                                            <img src={IMAGES.CALENDAR_ICON} alt="Birthday Icon" className="general-profile-page-input-icon" />
+                                            <img 
+                                                src         =   {IMAGES.CALENDAR_ICON} 
+                                                alt         =   "Birthday Icon" 
+                                                className   =   "general-profile-page-input-icon" 
+                                            />
                                             <input
-                                                type="date"
-                                                name="birthday"
-                                                value={profile.birthday}
-                                                onChange={handleInputChange}
-                                                className="general-profile-page-profile-input"
+                                                type        =   "date"
+                                                name        =   "birthday"
+                                                value       =   {profile.birthday}
+                                                onChange    =   {handleInputChange}
+                                                className   =   "general-profile-page-profile-input"
                                             />
                                         </div>
                                     </label>
@@ -137,30 +149,34 @@ export default function GeneralProfilePage() {
                                         Bio:
                                         <div className="general-profile-page-input-container">
                                             <img 
-                                                src={IMAGES.BLACK_PENCIL_ICON} 
-                                                alt="Bio Icon" 
-                                                className="general-profile-page-input-icon" 
-                                                id = "general-profile-page-bio-icon"
+                                                src         =   {IMAGES.BLACK_PENCIL_ICON} 
+                                                alt         =   "Bio Icon" 
+                                                className   =   "general-profile-page-input-icon" 
+                                                id          =   "general-profile-page-bio-icon"
                                             />
                                             <textarea
-                                                name="bio"
-                                                value={profile.bio}
-                                                onChange={handleInputChange}
-                                                className="general-profile-page-profile-textarea"
-                                                rows={8}
+                                                name        =   "bio"
+                                                value       =   {profile.bio}
+                                                onChange    =   {handleInputChange}
+                                                className   =   "general-profile-page-profile-textarea"
+                                                rows        =   {8}
                                             />
                                         </div>
                                     </label>
                                     <div className="general-profile-page-profile-buttons">
                                         <button
-                                            type="button"
-                                            onClick={handleSave}
-                                            className={`general-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
-                                            disabled={!hasUnsavedChanges}
+                                            type        =   "button"
+                                            onClick     =   {handleSave}
+                                            className   =   {`general-profile-page-profile-save-button ${hasUnsavedChanges ? "active" : ""}`}
+                                            disabled    =   {!hasUnsavedChanges}
                                         >
                                             Save
                                         </button>
-                                        <button type="button" onClick={handleReset} className="general-profile-page-profile-reset-button">
+                                        <button 
+                                            type        =   "button" 
+                                            onClick     =   {handleReset} 
+                                            className   =   "general-profile-page-profile-reset-button"
+                                        >
                                             Reset
                                         </button>
                                     </div>
