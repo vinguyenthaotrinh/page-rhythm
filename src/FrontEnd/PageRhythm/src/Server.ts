@@ -757,7 +757,6 @@ export default class Server {
             }
     
             const result = await response.json(); // Parse the response body as JSON
-            console.log("Fetched uploaded sample audio files:", result);
 
             const finalResult = result.map((file: any) => ({
                 ...file,
@@ -765,8 +764,6 @@ export default class Server {
                     ? `data:audio/${file.file_extension};base64,${file.content}`
                     : null,
             }));
-
-            console.log(finalResult);
     
             return finalResult; // Return the list of uploaded sample audio files
     

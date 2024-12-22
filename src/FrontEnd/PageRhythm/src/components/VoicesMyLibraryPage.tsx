@@ -71,12 +71,17 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
         const validateAudioDuration = async () => {
             if (selectedFile) {
                 const audio = new Audio(URL.createObjectURL(selectedFile));
-            
-                console.log(audio);
-                console.log(selectedFile);
-                console.log("Audio duration:", audio.duration);
+
+                const timeout = setTimeout(() => {
+                    if (Number.isNaN(audio.duration) || audio.duration === 0) {
+                        setErrorMessage("The audio file is invalid.");
+                        setIsAddButtonDisabled(true);
+                    }
+                }, 12000);
 
                 audio.onloadedmetadata = () => {
+                    clearTimeout(timeout);
+
                     if (audio.duration > 60) {
                         setErrorMessage("The audio file is longer than 60 seconds.");
                         setIsAddButtonDisabled(true);
@@ -84,6 +89,12 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                         setErrorMessage(null);
                         setIsAddButtonDisabled(false);
                     }
+                };
+
+                audio.onerror = () => {
+                    clearTimeout(timeout);
+                    setErrorMessage("The audio file is invalid.");
+                    setIsAddButtonDisabled(true);
                 };
             } else {
                 setErrorMessage(null);
