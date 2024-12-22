@@ -68,11 +68,11 @@ class BannedAccount(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "banned_account_id": self.banned_account_id,
-            "banning_account_id": self.banning_account_id,
-            "ban_type": self.ban_type.value,
-            "start_time": self.start_time.strftime("%Y-%m-%dT%H:%M:%S"),
-            "end_time": self.end_time.strftime("%Y-%m-%dT%H:%M:%S") if self.end_time else None
+            "banned_account_id":    self.banned_account_id,
+            "banning_account_id":   self.banning_account_id,
+            "ban_type":             self.ban_type.value,
+            "start_time":           self.start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "end_time":             self.end_time.strftime("%Y-%m-%dT%H:%M:%S") if self.end_time else None
         }
     
     def from_serializable_JSON(self, dictionary: dict):

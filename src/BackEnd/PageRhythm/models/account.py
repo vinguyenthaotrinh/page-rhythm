@@ -23,17 +23,17 @@ class Account(BaseEntity):
                  account_type: AccountType,
                  profile_picture: Optional[bytes]):
         super().__init__()
-        self.account_id = account_id
-        self.email = email
-        self.full_name = full_name
-        self.first_name = first_name
-        self.last_name = last_name
-        self.birthday = birthday
-        self.bio = bio
-        self.salt = salt
-        self.hashed_password = hashed_password
-        self.account_type = account_type
-        self.profile_picture = profile_picture
+        self.account_id         = account_id
+        self.email              = email
+        self.full_name          = full_name
+        self.first_name         = first_name
+        self.last_name          = last_name
+        self.birthday           = birthday
+        self.bio                = bio
+        self.salt               = salt
+        self.hashed_password    = hashed_password
+        self.account_type       = account_type
+        self.profile_picture    = profile_picture
 
     def __str__(self) -> str:
         return f"Account(account_id={self.account_id}, email={self.email}, full_name={self.full_name}, first_name={self.first_name}, last_name={self.last_name}, birthday={self.birthday}, bio={self.bio}, salt={self.salt}, hashed_password={self.hashed_password}, account_type={self.account_type}, profile_picture={self.profile_picture})"
@@ -121,47 +121,47 @@ class Account(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "account_id": self.account_id,
-            "email": self.email,
-            "full_name": self.full_name,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "birthday": self.get_serializable_date(self.birthday),
-            "bio": self.bio,
-            "salt": self.salt,
-            "hashed_password": self.hashed_password,
-            "account_type": self.account_type.value,
-            "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
+            "account_id":       self.account_id,
+            "email":            self.email,
+            "full_name":        self.full_name,
+            "first_name":       self.first_name,
+            "last_name":        self.last_name,
+            "birthday":         self.get_serializable_date(self.birthday),
+            "bio":              self.bio,
+            "salt":             self.salt,
+            "hashed_password":  self.hashed_password,
+            "account_type":     self.account_type.value,
+            "profile_picture":  base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
     
     def get_serializable_profile(self) -> dict:
         return {
-            "email": self.email,
-            "full_name": self.full_name,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
+            "email":            self.email,
+            "full_name":        self.full_name,
+            "first_name":       self.first_name,
+            "last_name":        self.last_name,
             "birthday": {
-                "year": self.birthday.year,
-                "month": self.birthday.month,
-                "day": self.birthday.day
+                "year":         self.birthday.year,
+                "month":        self.birthday.month,
+                "day":          self.birthday.day
             },
-            "bio": self.bio,
-            "account_type": self.account_type.value,
-            "profile_picture": base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
+            "bio":              self.bio,
+            "account_type":     self.account_type.value,
+            "profile_picture":  base64.b64encode(self.profile_picture).decode('utf-8') if self.profile_picture else None
         }
     
     def from_serializable_JSON(self, dictionary: dict):
-        self.account_id = dictionary["account_id"]
-        self.email = dictionary["email"]
-        self.full_name = dictionary["full_name"]
-        self.first_name = dictionary["first_name"]
-        self.last_name = dictionary["last_name"]
-        self.birthday = self.deserialize_date(dictionary["birthday"])
-        self.bio = dictionary["bio"]
-        self.salt = dictionary["salt"]
-        self.hashed_password = dictionary["hashed_password"]
-        self.account_type = AccountType(dictionary["account_type"])
-        self.profile_picture = base64.b64decode(dictionary["profile_picture"]) if dictionary["profile_picture"] else None
+        self.account_id         = dictionary["account_id"]
+        self.email              = dictionary["email"]
+        self.full_name          = dictionary["full_name"]
+        self.first_name         = dictionary["first_name"]
+        self.last_name          = dictionary["last_name"]
+        self.birthday           = self.deserialize_date(dictionary["birthday"])
+        self.bio                = dictionary["bio"]
+        self.salt               = dictionary["salt"]
+        self.hashed_password    = dictionary["hashed_password"]
+        self.account_type       = AccountType(dictionary["account_type"])
+        self.profile_picture    = base64.b64decode(dictionary["profile_picture"]) if dictionary["profile_picture"] else None
 
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "Account":

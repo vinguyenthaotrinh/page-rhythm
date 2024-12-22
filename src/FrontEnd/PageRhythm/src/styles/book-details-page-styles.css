@@ -35,9 +35,9 @@
 }
 
 .book-details-page-back-button-icon {
-    width: 24px;        /* Adjust the icon size as needed */
-    height: 24px;       /* Adjust the icon size as needed */
-    margin-right: 8px;  /* Space between the icon and the text */
+    width: 24px;                    /* Adjust the icon size as needed */
+    height: 24px;                   /* Adjust the icon size as needed */
+    margin-right: 8px;              /* Space between the icon and the text */
 }
 
 #book-details-page-main-section {
@@ -65,6 +65,7 @@
 #book-details-page-cover img {
     width: 80%;
     height: auto;
+    min-width: 280px;
     border-radius: 8px;
 }
 
@@ -84,9 +85,9 @@
 
 /* Styling for individual rows */
 .book-details-row {
-    display: flex;                  /* Use flexbox to align label and value on the same line */
-    justify-content: flex-start;    /* Align to the left */
-    gap: 8px;                       /* Space between the label and value */
+    display: flex;                      /* Use flexbox to align label and value on the same line */
+    justify-content: flex-start;        /* Align to the left */
+    gap: 8px;                           /* Space between the label and value */
     margin-bottom: 12px;
 }
 
@@ -225,8 +226,8 @@ strong {
 .profile-picture {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .comment-header-right {
@@ -259,11 +260,11 @@ strong {
 
 .book-details-page-reply-button {
     background-color: transparent;
-    color: #265073;
     transition: color 0.3s;
-    border: none;
     padding: 5px 10px;
+    color: #265073;
     cursor: pointer;
+    border: none;
 }
 
 .book-details-page-reply-button:hover {
@@ -273,8 +274,8 @@ strong {
 
 /* Replies indentation */
 .replies {
-    margin-left: 20px;
     margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 16px;
     border-left: 2px solid #ddd;
-    padding-left: 15px;
 }
