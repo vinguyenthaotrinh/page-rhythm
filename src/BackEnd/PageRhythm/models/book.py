@@ -17,17 +17,17 @@ class Book(BaseEntity):
                  image: Optional[str] = None,
                  hidden: bool = False):
         super().__init__()
-        self.book_id = book_id
-        self.title = title
-        self.author = author
-        self.summary = summary
-        self.content = content
-        self.genre = genre
-        self.owner_id = owner_id
-        self.released_date = released_date 
-        self.book_rating = book_rating  
-        self.image = image 
-        self.hidden = hidden
+        self.book_id        = book_id
+        self.title          = title
+        self.author         = author
+        self.summary        = summary
+        self.content        = content
+        self.genre          = genre
+        self.owner_id       = owner_id
+        self.released_date  = released_date 
+        self.book_rating    = book_rating  
+        self.image          = image 
+        self.hidden         = hidden
 
     def __str__(self) -> str:
         return (f"Book(book_id={self.book_id}, title={self.title}, author={self.author}, "
@@ -107,17 +107,17 @@ class Book(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "book_id": self.book_id,
-            "title": self.title,
-            "author": self.author,
-            "summary": self.summary,
-            "content": self.content,
-            "genre": self.genre,
-            "owner_id": self.owner_id,
-            "released_date": self.released_date,
-            "book_rating": self.book_rating,
-            "image": self.image,
-            "hidden": self.hidden
+            "book_id":          self.book_id,
+            "title":            self.title,
+            "author":           self.author,
+            "summary":          self.summary,
+            "content":          self.content,
+            "genre":            self.genre,
+            "owner_id":         self.owner_id,
+            "released_date":    self.released_date,
+            "book_rating":      self.book_rating,
+            "image":            self.image,
+            "hidden":           self.hidden
         }
     
     def from_serializable_JSON(self, dictionary: dict):
