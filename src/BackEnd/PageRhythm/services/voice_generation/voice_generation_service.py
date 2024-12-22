@@ -14,6 +14,8 @@ class VoiceGenerationService:
 
         self.total_character_limit_for_text_to_speech_generation = int(os.environ.get("TOTAL_CHARACTER_LIMIT_FOR_TEXT_TO_SPEECH_GENERATION"))
         
+        elevenlabs.set_api_key(os.environ.get("ELEVENLABS_TEXT_TO_SPEECH_API_KEYS"))
+
         self.supabase = SupabaseVoiceGenerationAPIService()
 
     def check_text_to_speech_generation_possible(self, text_content: str) -> bool:
@@ -102,5 +104,5 @@ class VoiceGenerationService:
         }
 
 voice_generation_service = VoiceGenerationService()
-voice_generation_service.convert_text_to_speech(62, "I am the danger", "en-US-Wavenet-D")
+voice_generation_service.convert_text_to_speech(62, "I am the danger", "Liam")
     
