@@ -11,11 +11,10 @@ user_account_management_blueprint = Blueprint("user_account_management", __name_
 @user_account_management_blueprint.route("/ban/permanently", methods=["POST"])
 @jwt_required()
 def ban_user_permanently():
-    account_service = AccountService()
-    current_identity = json.loads(get_jwt_identity())
-    account_id = current_identity["account_id"]
-
-    account = account_service.get_account_by_id(account_id)
+    account_service     = AccountService()
+    current_identity    = json.loads(get_jwt_identity())
+    account_id          = current_identity["account_id"]
+    account             = account_service.get_account_by_id(account_id)
 
     if account is None:
         return jsonify({"message": "Account does not exist"}), 404

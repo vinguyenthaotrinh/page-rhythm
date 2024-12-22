@@ -165,13 +165,17 @@ export default function BooksAdminPage() {
                             (
                                 <div id="books-admin-page-books-grid">
                                     {books.map((book, index) => (
-                                        <div key={index} className="books-admin-page-book-item">
-                                            <div className="book-item-left-column">
+                                        <div 
+                                            key         =   {index} 
+                                            className   =   "books-admin-page-book-item">
+                                            <div 
+                                                className   =   "book-item-left-column"
+                                            >
                                                 <img
-                                                    src={IMAGES.decodeBookCoverImage(book.image)}
-                                                    alt={book.title}
-                                                    onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
-                                                    className="book-item-cover"
+                                                    src         =   {IMAGES.decodeBookCoverImage(book.image)}
+                                                    alt         =   {book.title}
+                                                    onClick     =   {() => navigate(`/book-details-page/${book.book_id}`)}
+                                                    className   =   "book-item-cover"
                                                 />
                                             </div>
                                             <div className="book-item-right-column">
@@ -182,35 +186,35 @@ export default function BooksAdminPage() {
                                                 </p>
                                                 <div className="book-item-buttons">
                                                     <button
-                                                        className="book-item-visibility-button"
-                                                        onClick={() => handleVisibilityClick(book)}
+                                                        className   =   "book-item-visibility-button"
+                                                        onClick     =   {() => handleVisibilityClick(book)}
                                                     >
                                                         {book.hidden ? "Unhide" : "Hide"}
                                                         <img
-                                                            src={
+                                                            src         =   {
                                                                 book.hidden
                                                                     ? IMAGES.EYE_OPEN_ICON
                                                                     : IMAGES.EYE_CLOSED_ICON
                                                             }
-                                                            alt="Visibility Icon"
-                                                            className="book-item-button-icon"
+                                                            alt         =   "Visibility Icon"
+                                                            className   =   "book-item-button-icon"
                                                         />
                                                     </button>
                                                     <button
-                                                        className="book-item-delete-button"
-                                                        onClick={() => handleDeleteClick(book)}
+                                                        className           =   "book-item-delete-button"
+                                                        onClick             =   {() => handleDeleteClick(book)}
                                                     >
                                                         Delete
                                                         <div className="book-item-button-icon">
                                                             <img
-                                                                src={IMAGES.RED_TRASH_ICON}
-                                                                alt="Delete Icon"
-                                                                className="icon-normal"
+                                                                src         =   {IMAGES.RED_TRASH_ICON}
+                                                                alt         =   "Delete Icon"
+                                                                className   =   "icon-normal"
                                                             />
                                                             <img
-                                                                src={IMAGES.WHITE_TRASH_ICON}
-                                                                alt="Delete Hover Icon"
-                                                                className="icon-hover"
+                                                                src         =   {IMAGES.WHITE_TRASH_ICON}
+                                                                alt         =   "Delete Hover Icon"
+                                                                className   =   "icon-hover"
                                                             />
                                                         </div>
                                                     </button>

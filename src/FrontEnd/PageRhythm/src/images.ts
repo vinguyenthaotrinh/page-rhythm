@@ -30,6 +30,14 @@ import LANDING_PAGE_BOTTOM_LEFT_CORNER                  from "./assets/images/la
 import LANDING_PAGE_BOTTOM_RIGHT_CORNER                 from "./assets/images/landing-page-bottom-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER      from "./assets/images/landing-page-login-section-top-right-corner.png";
 import LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER    from "./assets/images/landing-page-login-section-bottom-left-corner.png";
+import AUDIO_PLAY_ICON                                  from "./assets/images/audio-play-icon.png";
+import AUDIO_PAUSE_ICON                                 from "./assets/images/audio-pause-icon.png";
+import AUDIO_NEXT_ICON                                  from "./assets/images/audio-next-icon.png";
+import AUDIO_PREVIOUS_ICON                              from "./assets/images/audio-previous-icon.png";
+import HOVERED_AUDIO_PLAY_ICON                          from "./assets/images/hovered-audio-play-icon.png";
+import HOVERED_AUDIO_PAUSE_ICON                         from "./assets/images/hovered-audio-pause-icon.png";
+import HOVERED_AUDIO_NEXT_ICON                          from "./assets/images/hovered-audio-next-icon.png";
+import HOVERED_AUDIO_PREVIOUS_ICON                      from "./assets/images/hovered-audio-previous-icon.png";
 
 const IMAGES = {
     LOGO,
@@ -64,6 +72,14 @@ const IMAGES = {
     LANDING_PAGE_BOTTOM_RIGHT_CORNER,
     LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER,
     LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER,
+    AUDIO_PLAY_ICON,
+    AUDIO_PAUSE_ICON,
+    AUDIO_NEXT_ICON,
+    AUDIO_PREVIOUS_ICON,
+    HOVERED_AUDIO_PLAY_ICON,
+    HOVERED_AUDIO_PAUSE_ICON,
+    HOVERED_AUDIO_NEXT_ICON,
+    HOVERED_AUDIO_PREVIOUS_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) 

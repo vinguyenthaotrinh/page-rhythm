@@ -190,7 +190,7 @@ function SignupSection() {
                         className   =   "register-page-input-info" 
                         required
                         value       =   {dateOfBirth}
-                        onChange    =   {(e) => setDateOfBirth(e.target.value)}  // Update date of birth state
+                        onChange    =   {(e) => setDateOfBirth(e.target.value)}
                     />
                 </div>
 
@@ -204,7 +204,7 @@ function SignupSection() {
                         className       =   "register-page-input-info" 
                         required
                         value           =   {bio}
-                        onChange        =   {(e) => setBio(e.target.value)}  // Update bio state
+                        onChange        =   {(e) => setBio(e.target.value)}
                         rows            =   {8}
                     />
                 </div>

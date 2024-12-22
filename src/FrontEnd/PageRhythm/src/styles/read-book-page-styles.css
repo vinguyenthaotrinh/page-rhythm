@@ -14,18 +14,18 @@ html, body {
 }
 
 #read-book-page-top-region {
-    margin-bottom: 16px;
-    background-color: #F6FFDE;
-    margin-left: 64px;
-    margin-right: 64px;
-    padding-top: 16px;
-    display: flex;
     justify-content: space-between;  /* Space between left and right buttons */
+    background-color: #F6FFDE;
     align-items: center;
-    gap: 12px;
+    margin-bottom: 16px;
+    margin-right: 64px;
+    margin-left: 64px;
+    padding-top: 16px;
     position: sticky;
+    display: flex;
+    z-index: 2024;
+    gap: 12px;
     top: 72px;
-    border-radius: 8px;
 }
 
 #read-book-page-back-button-container {

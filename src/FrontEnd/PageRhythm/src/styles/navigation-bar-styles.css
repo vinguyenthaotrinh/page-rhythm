@@ -14,7 +14,7 @@ nav {
     top: 0;                                     /* Positions it at the top of the viewport */
     left: 0;                                    /* Ensures it spans from the left */
     width: 100%;                                /* Takes the full horizontal width */
-    z-index: 1000;                              /* Ensures it appears above other elements */
+    z-index: 31082003;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for distinction */
     padding: 8px 20px;                          /* Adds padding for spacing */
 }

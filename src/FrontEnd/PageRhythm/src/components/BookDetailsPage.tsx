@@ -288,10 +288,17 @@ export default function BookDetailsPage() {
         >
             <NavigationBar />
             <div
-                id = "book-details-page-back-button-region"
+                id  =   "book-details-page-back-button-region"
             >
-                <div id="book-details-page-back-button-container" onClick={handleBackClick}>
-                    <img src={IMAGES.LEFT_ARROW_ICON} alt="Back" className="book-details-page-back-button-icon" />
+                <div 
+                    id      =   "book-details-page-back-button-container" 
+                    onClick =   {handleBackClick}
+                >
+                    <img 
+                        src         =   {IMAGES.LEFT_ARROW_ICON} 
+                        alt         =   "Back" 
+                        className   =   "book-details-page-back-button-icon" 
+                    />
                     <span>Back</span>
                 </div>
             </div>
@@ -303,7 +310,10 @@ export default function BookDetailsPage() {
                 >
                     {/* Left Column (Book Cover) */}
                     <div id="book-details-page-cover">
-                        <img src={IMAGES.decodeBookCoverImage(book.image)} alt="Book Cover" />
+                        <img 
+                            src =   {IMAGES.decodeBookCoverImage(book.image)} 
+                            alt =   "Book Cover" 
+                        />
                     </div>
 
                     {/* Right Column (Book Information) */}
@@ -325,15 +335,13 @@ export default function BookDetailsPage() {
                                     onClick         =   {handleListenToBookButtonClick}
                                     onMouseEnter    =   {(e) => {
                                         const imgElement = e.currentTarget.querySelector("img");
-                                        if (imgElement) {
+                                        if (imgElement) 
                                             imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
-                                        }
                                     }}
                                     onMouseLeave    =   {(e) => {
                                         const imgElement = e.currentTarget.querySelector("img");
-                                        if (imgElement) {
+                                        if (imgElement) 
                                             imgElement.src = IMAGES.PLAY_BUTTON_ICON;
-                                        }
                                     }}
                                 >   
                                     <img
@@ -355,8 +363,10 @@ export default function BookDetailsPage() {
                                 <div className="book-details-row">
                                     <strong>Rating:</strong>
                                     <div className="star-rating">
-                                    {getStarRating(book.book_rating)}
-                                    <span>{book.book_rating}</span>
+                                        {getStarRating(book.book_rating)}
+                                        <span>
+                                            {book.book_rating}
+                                        </span>
                                     </div>
                                 </div>
                             )
@@ -380,18 +390,22 @@ export default function BookDetailsPage() {
             <div id="book-details-page-review-section">
                 <strong>Rating & Comments:</strong>
                 <div className="review-section-content">
+                    
                     <button 
-                        className="write-comment-button"
-                        onClick={handleWriteCommentButtonClick}
-                    >Write a comment</button>
+                        className   =   "write-comment-button"
+                        onClick     =   {handleWriteCommentButtonClick}
+                    >
+                        Write a comment
+                    </button>
+                    
                     <div className="star-rating">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <img
-                                key={star}
-                                src={star <= (userRating || 0) ? IMAGES.FILLED_STAR_ICON : IMAGES.EMPTY_STAR_ICON}
-                                alt={`${star} Star`}
-                                className="star-icon"
-                                onClick={() => handleRating(star)} // Handle click to set rating
+                                key         =   {star}
+                                src         =   {star <= (userRating || 0) ? IMAGES.FILLED_STAR_ICON : IMAGES.EMPTY_STAR_ICON}
+                                alt         =   {`${star} Star`}
+                                className   =   "star-icon"
+                                onClick     =   {() => handleRating(star)} // Handle click to set rating
                             />
                         ))}
                     </div>                
