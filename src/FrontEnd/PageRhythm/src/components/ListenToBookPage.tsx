@@ -11,6 +11,7 @@ export default function ListenToBookPage() {
     const [book, setBook]                       = useState<any>(null);
     const [currentPage, setCurrentPage]         = useState(1);
     const [contentPages, setContentPages]       = useState<string[]>([]);
+    const [voice, setVoice]                     = useState("en-US-Wavenet-D");
     const navigate                              = useNavigate();
     const pageCapacity                          = 1600;
     const maximumLineLength                     = 80;
@@ -124,6 +125,17 @@ export default function ListenToBookPage() {
                 <div
                     id  =   "listen-to-book-page-top-region-right-part"
                 >
+                    <label className="listen-to-book-page-voice-header-text">Voice:</label>
+                    <select
+                        id          =   "listen-to-book-page-voice-select"
+                        value       =   {voice}
+                        onChange    =   {(e) => setVoice(e.target.value)}
+                    >
+                        <option value="en-US-Wavenet-D">English (US) Wavenet D</option>
+                        <option value="en-US-Wavenet-E">English (US) Wavenet E</option>
+                        <option value="en-US-Wavenet-F">English (US) Wavenet F</option>
+                    </select>
+
                     <button
                         id          =   "listen-to-book-page-read-button"
                         className   =   "listen-to-book-page-button"

@@ -13,13 +13,13 @@ class SampleAudioFile(BaseEntity):
                  upload_time: datetime,
                  file_extension: str):
         super().__init__()
-        self.sample_audio_file_id = sample_audio_file_id
-        self.file_name = file_name
-        self.description = description
-        self.owner_id = owner_id
-        self.content = content
-        self.upload_time = upload_time
-        self.file_extension = file_extension
+        self.sample_audio_file_id   = sample_audio_file_id
+        self.file_name              = file_name
+        self.description            = description
+        self.owner_id               = owner_id
+        self.content                = content
+        self.upload_time            = upload_time
+        self.file_extension         = file_extension
 
     def __str__(self) -> str:  
         return f"SampleAudioFile(sample_audio_file_id={self.sample_audio_file_id}, file_name={self.file_name}, description={self.description}, owner_id={self.owner_id}, content={self.content}, upload_time={self.upload_time}, file_extension={self.file_extension})"
@@ -72,12 +72,12 @@ class SampleAudioFile(BaseEntity):
     def to_serializable_JSON(self) -> dict:
         return {
             "sample_audio_file_id": self.sample_audio_file_id,
-            "file_name": self.file_name,
-            "description": self.description,
-            "owner_id": self.owner_id,
-            "content": base64.b64encode(self.content).decode("utf-8") if self.content else None,
-            "upload_time": self.upload_time.strftime("%Y-%m-%dT%H:%M:%S"),
-            "file_extension": self.file_extension
+            "file_name":            self.file_name,
+            "description":          self.description,
+            "owner_id":             self.owner_id,
+            "content":              base64.b64encode(self.content).decode("utf-8") if self.content else None,
+            "upload_time":          self.upload_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "file_extension":       self.file_extension
         }
     
     def from_serializable_JSON(self, dictionary: dict):

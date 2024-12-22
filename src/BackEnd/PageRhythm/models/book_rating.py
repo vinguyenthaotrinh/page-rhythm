@@ -8,10 +8,10 @@ class BookRating(BaseEntity):
                  user_id: int = None,
                  date: str = None):
         super().__init__()
-        self.user_id = user_id
-        self.book_id = book_id
-        self.rating = rating
-        self.date = date
+        self.user_id    = user_id
+        self.book_id    = book_id
+        self.rating     = rating
+        self.date       = date
 
     def __str__(self) -> str:
         return f"BookRating(user_id={self.user_id}, book_id={self.book_id}, rating={self.rating}, date={self.date})"
@@ -48,10 +48,10 @@ class BookRating(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "user_id": self.user_id,
-            "book_id": self.book_id,
-            "rating": self.rating,
-            "date": self.date
+            "user_id":  self.user_id,
+            "book_id":  self.book_id,
+            "rating":   self.rating,
+            "date":     self.date
         }
     
     def from_serializable_JSON(self, dictionary: dict):
@@ -63,8 +63,8 @@ class BookRating(BaseEntity):
     @staticmethod
     def deserialize_JSON(dictionary: dict) -> "BookRating":
         return BookRating(
-            user_id=dictionary["user_id"],
-            book_id=dictionary["book_id"],
-            rating=dictionary["rating"],
-            date=dictionary["date"]
+            user_id =   dictionary["user_id"],
+            book_id =   dictionary["book_id"],
+            rating  =   dictionary["rating"],
+            date    =   dictionary["date"]
         )

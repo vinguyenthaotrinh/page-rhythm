@@ -13,12 +13,12 @@ class Comment(BaseEntity):
                  replied_comment_id: Optional[int],
                  create_time: datetime):
         super().__init__()
-        self.comment_id = comment_id
-        self.book_id = book_id
-        self.comment_author_id = comment_author_id
-        self.content = content
+        self.comment_id         = comment_id
+        self.book_id            = book_id
+        self.comment_author_id  = comment_author_id
+        self.content            = content
         self.replied_comment_id = replied_comment_id
-        self.create_time = create_time
+        self.create_time        = create_time
 
     def __str__(self) -> str:
         return f"Comment(comment_id={self.comment_id}, book_id={self.book_id}, comment_author_id={self.comment_author_id}, content={self.content}, replied_comment_id={self.replied_comment_id}, create_time={self.create_time})"
@@ -64,12 +64,12 @@ class Comment(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "comment_id": self.comment_id,
-            "book_id": self.book_id,
-            "comment_author_id": self.comment_author_id,
-            "content": self.content,
-            "replied_comment_id": self.replied_comment_id,
-            "create_time": self.create_time.isoformat()
+            "comment_id":           self.comment_id,
+            "book_id":              self.book_id,
+            "comment_author_id":    self.comment_author_id,
+            "content":              self.content,
+            "replied_comment_id":   self.replied_comment_id,
+            "create_time":          self.create_time.isoformat()
         }
     
     def from_serializable_JSON(self, dictionary: dict):
@@ -99,13 +99,13 @@ class DisplayedComment(BaseEntity):
                  replied_comment_id: Optional[int],
                  create_time: datetime):
         super().__init__()
-        self.comment_id = comment_id
-        self.book_id = book_id
-        self.comment_author_id = comment_author_id
-        self.content = content
-        self.replied_comment_id = replied_comment_id
-        self.create_time = create_time
-        self.comment_author_full_name = comment_author_full_name
+        self.comment_id                     = comment_id
+        self.book_id                        = book_id
+        self.comment_author_id              = comment_author_id
+        self.content                        = content
+        self.replied_comment_id             = replied_comment_id
+        self.create_time                    = create_time
+        self.comment_author_full_name       = comment_author_full_name
         self.comment_author_profile_picture = comment_author_profile_picture
 
     def __str__(self) -> str:
@@ -152,14 +152,14 @@ class DisplayedComment(BaseEntity):
 
     def to_serializable_JSON(self) -> dict:
         return {
-            "comment_id": self.comment_id,
-            "book_id": self.book_id,
-            "comment_author_id": self.comment_author_id,
-            "content": self.content,
-            "replied_comment_id": self.replied_comment_id,
-            "create_time": self.create_time.isoformat(),
-            "comment_author_full_name": self.comment_author_full_name,
-            "comment_author_profile_picture": base64.b64encode(self.comment_author_profile_picture).decode() if self.comment_author_profile_picture else None
+            "comment_id":                       self.comment_id,
+            "book_id":                          self.book_id,
+            "comment_author_id":                self.comment_author_id,
+            "content":                          self.content,
+            "replied_comment_id":               self.replied_comment_id,
+            "create_time":                      self.create_time.isoformat(),
+            "comment_author_full_name":         self.comment_author_full_name,
+            "comment_author_profile_picture":   base64.b64encode(self.comment_author_profile_picture).decode() if self.comment_author_profile_picture else None
         }
     
     def from_serializable_JSON(self, dictionary: dict):

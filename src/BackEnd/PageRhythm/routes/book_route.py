@@ -60,8 +60,10 @@ def create_book():
 @book_blueprint.route("/<string:book_id>", methods=["GET"])
 def get_book_information(book_id):
     book = book_service.get_book_information(book_id)
+
     if book:
         return jsonify(book.to_serializable_JSON()), 200
+    
     return jsonify({"message": "Book not found"}), 404
 
 @book_blueprint.route("/genres", methods=["GET"])
@@ -121,12 +123,12 @@ def update_book(book_id):
                 return jsonify({"message": "Failed to read the image file."}), 400
 
     updated_data = {key: value for key, value in {
-        "title": title,
-        "author": author,
-        "summary": summary,
-        "genre": genre,
-        "content": content,
-        "image": image
+        "title":    title,
+        "author":   author,
+        "summary":  summary,
+        "genre":    genre,
+        "content":  content,
+        "image":    image
     }.items() if value is not None}
 
     result = book_service.update_book(book_id, updated_data)

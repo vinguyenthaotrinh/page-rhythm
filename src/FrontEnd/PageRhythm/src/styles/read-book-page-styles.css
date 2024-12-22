@@ -30,12 +30,12 @@ html, body {
 
 #read-book-page-back-button-container {
     display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
     font-size: 16px;
-    font-family: "Poppins-Regular", sans-serif;
+    cursor: pointer;
     margin-left: 24px;
+    position: relative;
+    align-items: center;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 .read-book-page-back-button-icon {
@@ -51,7 +51,7 @@ html, body {
     cursor: pointer;
     color: #265073;
     padding: 10px 20px;     /* Adjust padding for button size */
-    border-radius: 12px;    /* Optional: Rounded corners */
+    border-radius: 12px;
     background-color: white;    
     border: 2px solid #265073;
     font-family: "Poppins-Regular", sans-serif;
