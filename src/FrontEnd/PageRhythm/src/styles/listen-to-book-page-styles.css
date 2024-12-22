@@ -82,9 +82,9 @@ html, body {
 
 #listen-to-book-page-audio-controls-section {
     display: flex;
-    padding: 0 20px;
-    align-items: center;
-    justify-content: space-between;     /* Space between the navigation buttons and page number */
+    flex-direction: column;          /* Stack children vertically */
+    align-items: center;             /* Center align items horizontally */
+    gap: 10px;                       /* Add spacing between rows */
 }
 
 #listen-to-book-page-book-details-section {
@@ -203,4 +203,37 @@ html, body {
 #listen-to-book-page-voice-select:hover {
     color: #0f4ba3;
     border: 2px solid #0f4ba3;
+}
+
+.audio-controls-top-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.audio-control-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.audio-control-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.audio-controls-bottom-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-progress-slider {
+    width: 80%;
+    height: 5px;
+    background: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
 }

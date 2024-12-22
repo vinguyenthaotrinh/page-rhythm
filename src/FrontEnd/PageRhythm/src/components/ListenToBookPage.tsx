@@ -181,13 +181,57 @@ export default function ListenToBookPage() {
                     </div>
 
                     <div
-                        id = "listen-to-book-page-audio-controls-section"
+                        id="listen-to-book-page-audio-controls-section"
                     >
-                        There should be two "rows"
-                            the top row contains a play/pause button
-                                the left side of the button should be a rewind button
-                                the right side of the button should be a fast forward button
-                            the bottom row contains a slider to adjust the current time of the audio
+                        <div
+                            className="audio-controls-top-row"
+                        >
+                            <button
+                                className="audio-control-button rewind-button"
+                                onClick={() => console.log('Rewind pressed')}
+                            >
+                                <img 
+                                    src={IMAGES.PLAY_BUTTON_ICON}
+                                    alt="Rewind" 
+                                    className="audio-control-icon" 
+                                />
+                            </button>
+
+                            <button
+                                className="audio-control-button play-pause-button"
+                                onClick={() => console.log('Play/Pause pressed')}
+                            >
+                                <img 
+                                    src={IMAGES.PLAY_BUTTON_ICON}
+                                    alt="Play/Pause" 
+                                    className="audio-control-icon" 
+                                />
+                            </button>
+
+                            <button
+                                className="audio-control-button fast-forward-button"
+                                onClick={() => console.log('Fast Forward pressed')}
+                            >
+                                <img 
+                                    src={IMAGES.PLAY_BUTTON_ICON} 
+                                    alt="Fast Forward" 
+                                    className="audio-control-icon" 
+                                />
+                            </button>
+                        </div>
+
+                        <div
+                            className="audio-controls-bottom-row"
+                        >
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value="50"
+                                className="audio-progress-slider"
+                                onChange={(e) => console.log('Slider value:', e.target.value)}
+                            />
+                        </div>
                     </div>
 
                     <div
