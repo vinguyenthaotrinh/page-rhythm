@@ -2,10 +2,11 @@ import IMAGES from "../images";
 import Server from "../Server";
 import NavigationBar from "./NavigationBar";
 import "../styles/listen-to-book-page-styles.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ListenToBookPage() {
+    const [isPlaying, setIsPlaying]             = useState(false);
     const [generatedAudio, setGeneratedAudio]   = useState<any>(null);
     const [bookLoading, setBookLoading]         = useState(true);
     const [voiceLoading, setVoiceLoading]       = useState(true);
@@ -16,6 +17,8 @@ export default function ListenToBookPage() {
     const [voice, setVoice]                     = useState<string>("");
     const [voices, setVoices]                   = useState<any[]>([]);
     const navigate                              = useNavigate();
+    const audioRef                              = useRef<HTMLAudioElement | null>(null);
+    const [audioTime, setAudioTime]             = useState(0); 
     const pageCapacity                          = 1600;
     const maximumLineLength                     = 80;
     
@@ -43,8 +46,8 @@ export default function ListenToBookPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();
-                const book = await server.getBook(bookID);  // Fetch the book details using bookID
+                const server    = await Server.getInstance();
+                const book      = await server.getBook(bookID);
 
                 setBook(book);
 
@@ -136,6 +139,37 @@ export default function ListenToBookPage() {
     const onRightButtonClick = () => {
         if (currentPage < contentPages.length) 
             setCurrentPage(currentPage + 1);
+    };
+
+    const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+        
+        if (audioRef.current === null)
+            return;
+
+        const audio = audioRef.current;
+            
+        if (audio && audio.duration) {
+            const seekTime = (event.target.valueAsNumber / 100) * audio.duration;
+            audio.currentTime = seekTime;
+    
+            setAudioTime(seekTime);
+        }
+    };
+
+    const handlePlayPause = () => {
+
+        if (audioRef.current === null)
+            return;
+
+        const audio = audioRef.current;
+
+        if (audio.paused) {
+            audio.play();
+            setIsPlaying(true);
+        } else {
+            audio.pause();
+            setIsPlaying(false);
+        }
     };
 
     return (
@@ -240,7 +274,21 @@ export default function ListenToBookPage() {
                             ) : (
                                 <>
                                     <audio
+                                        ref             =   {audioRef}
                                         src             =   {generatedAudio.audioData}
+
+                                        onTimeUpdate    =   {() => {
+                                            if (audioRef.current) {
+                                                setAudioTime(audioRef.current.currentTime); // Access currentTime of the audio element
+                                            }
+                                        }
+                                        }
+
+                                        onEnded        =   {() => {
+                                            setIsPlaying(false)
+                                            console.log("Audio ended");
+                                        }
+                                        }
                                     />
 
                                     <div
@@ -248,7 +296,8 @@ export default function ListenToBookPage() {
                                     >
                                         <button
                                             className       =   "audio-control-button previous-button"
-                                            onClick         =   {() => console.log("Previous pressed")}
+                                            
+                                            
                                         >
                                             <img 
                                                 src         =   {IMAGES.AUDIO_PREVIOUS_ICON}
@@ -259,12 +308,32 @@ export default function ListenToBookPage() {
 
                                         <button
                                             className       =   "audio-control-button play-pause-button"
-                                            onClick         =   {() => console.log("Play/Pause pressed")}
-                                            
+
+                                            onClick         =   {handlePlayPause}
+
+                                            onMouseEnter    =   {(e)    => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) {
+                                                    if (isPlaying)
+                                                        imgElement.src = IMAGES.HOVERED_AUDIO_PAUSE_ICON;
+                                                    else 
+                                                        imgElement.src = IMAGES.HOVERED_AUDIO_PLAY_ICON;
+                                                }
+                                            }}
+
+                                            onMouseLeave    =   {(e) => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) {
+                                                    if (isPlaying)
+                                                        imgElement.src = IMAGES.AUDIO_PAUSE_ICON;
+                                                    else 
+                                                        imgElement.src = IMAGES.AUDIO_PLAY_ICON;
+                                                }
+                                            }}
                                         >
                                             <img 
-                                                src         =   {IMAGES.AUDIO_PLAY_ICON}
-                                                alt         =   "Play/Pause" 
+                                                src         =   {isPlaying ? IMAGES.AUDIO_PAUSE_ICON : IMAGES.AUDIO_PLAY_ICON}
+                                                alt         =   {isPlaying ? "Pause" : "Play"}
                                                 className   =   "audio-control-icon-play-pause" 
                                             />
                                         </button>
@@ -288,9 +357,9 @@ export default function ListenToBookPage() {
                                             type        =   "range"
                                             min         =   "0"
                                             max         =   "100"
-                                            value       =   "50"
+                                            value       =   {audioRef.current?.duration ? (audioTime / audioRef.current.duration) * 100 : 0} 
                                             className   =   "audio-progress-slider"
-                                            onChange    =   {(e) => console.log("Slider value:", e.target.value)}
+                                            onChange    =   {(event) => handleSeek(event)}
                                         />
                                     </div>
                                 </>
