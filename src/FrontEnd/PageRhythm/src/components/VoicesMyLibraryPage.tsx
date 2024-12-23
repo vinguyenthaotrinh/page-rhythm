@@ -278,9 +278,9 @@ export default function VoicesMyLibraryPage() {
         if (selectedFile && fileName) {
             
             const record = {
-                file_name: fileName,
-                description: description,
-                content: selectedFile
+                file_name:      fileName,
+                description:    description,
+                content:        selectedFile
             };
 
             try {
@@ -318,7 +318,7 @@ export default function VoicesMyLibraryPage() {
                 console.error("Error reading the file:", error);
             };
 
-            reader.readAsDataURL(file); // Read the file as a data URL
+            reader.readAsDataURL(file);
         }
     };
 
@@ -326,8 +326,8 @@ export default function VoicesMyLibraryPage() {
         const fetchRecords = async () => {
             try {
                 setLoading(true);
-                const server = await Server.getInstance();
-                const fetchedRecords = await server.getUserUploadedSampleAudioFiles();
+                const server            = await Server.getInstance();
+                const fetchedRecords    = await server.getUserUploadedSampleAudioFiles();
                 setRecords(fetchedRecords);
             } catch (error) {
                 console.error("Error fetching uploaded audio files:", error);
@@ -437,14 +437,14 @@ export default function VoicesMyLibraryPage() {
                 <MyLibrarySectionBar currentOption="voices" />
                 <div id="voices-my-library-page-content">
                     <button
-                        id="voices-my-library-page-add-book-button"
-                        onClick={handleAddClick}
+                        id      =   "voices-my-library-page-add-book-button"
+                        onClick =   {handleAddClick}
                     >
                         Add
                         <img
-                            src={IMAGES.ADD_ICON}
-                            alt="Add Icon"
-                            className="voices-my-library-page-add-icon"
+                            src         =   {IMAGES.ADD_ICON}
+                            alt         =   "Add Icon"
+                            className   =   "voices-my-library-page-add-icon"
                         />
                     </button>
 
@@ -461,24 +461,32 @@ export default function VoicesMyLibraryPage() {
                                             className   =   "record-item"
                                         >
                                             <div className="record-header">
-                                                <span className="sample-audio-file-name">{record.file_name}</span>
+                                                <span 
+                                                    className   =   "sample-audio-file-name"
+                                                >
+                                                    {record.file_name}
+                                                </span>
                                             </div>
             
-                                            <div className="record-body">
+                                            <div 
+                                                className   =   "record-body"
+                                            >
                                                 {/* Left Column */}
-                                                <div className="record-left-column">
+                                                <div 
+                                                    className   =   "record-left-column"
+                                                >
                                                     <audio
-                                                        ref={(el) => (audioRefs.current[index] = el!)}
-                                                        src={
+                                                        ref             =   {(el) => (audioRefs.current[index] = el!)}
+                                                        src             =   {
                                                             record.content
                                                         }
-                                                        onTimeUpdate={() =>
+                                                        onTimeUpdate    =   {() =>
                                                             setAudioTimes((prev) => ({
                                                                 ...prev,
                                                                 [index]: audioRefs.current[index].currentTime,
                                                             }))
                                                         }
-                                                        onEnded={() => setPlayingIndex(null)}
+                                                        onEnded         =   {() => setPlayingIndex(null)}
                                                     />
             
                                                     <input
@@ -515,28 +523,26 @@ export default function VoicesMyLibraryPage() {
                                                         onMouseEnter    =   {(e) => {
                                                             const imgElement = e.currentTarget.querySelector("img");
                                                             if (imgElement) {
-                                                                if (playingIndex === index) {
+                                                                if (playingIndex === index) 
                                                                     imgElement.src = IMAGES.HOVERED_PAUSE_BUTTON_ICON;
-                                                                } else {
+                                                                else 
                                                                     imgElement.src = IMAGES.HOVERED_PLAY_BUTTON_ICON;
-                                                                }
                                                             }
                                                         }}
                                                         onMouseLeave    =   {(e) => {
                                                             const imgElement = e.currentTarget.querySelector("img");
                                                             if (imgElement) {
-                                                                if (playingIndex === index) {
+                                                                if (playingIndex === index) 
                                                                     imgElement.src = IMAGES.PAUSE_BUTTON_ICON;
-                                                                } else {
+                                                                else 
                                                                     imgElement.src = IMAGES.PLAY_BUTTON_ICON;
-                                                                }
                                                             }
                                                         }}
                                                     >
                                                         <img
-                                                            src={playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}
-                                                            alt={playingIndex === index ? "Pause Icon" : "Play Icon"}
-                                                            className="play-pause-icon"
+                                                            src         =   {playingIndex === index ? IMAGES.PAUSE_BUTTON_ICON : IMAGES.PLAY_BUTTON_ICON}
+                                                            alt         =   {playingIndex === index ? "Pause Icon" : "Play Icon"}
+                                                            className   =   "play-pause-icon"
                                                         />
                                                     </button>
                                                 </div>
@@ -544,20 +550,20 @@ export default function VoicesMyLibraryPage() {
                                                 {/* Right Column */}
                                                 <div className="record-right-column">
                                                     <button
-                                                        className="record-item-edit-button"
-                                                        onClick={() => handleEditClick(record)}
+                                                        className       =   "record-item-edit-button"
+                                                        onClick         =   {() => handleEditClick(record)}
                                                     >
                                                         Edit
                                                         <img
-                                                            src={IMAGES.WHITE_PENCIL_ICON}
-                                                            alt="Edit Icon"
-                                                            className="record-item-button-icon"
+                                                            src         =   {IMAGES.WHITE_PENCIL_ICON}
+                                                            alt         =   "Edit Icon"
+                                                            className   =   "record-item-button-icon"
                                                         />
                                                     </button>
             
                                                     <button
-                                                        className="record-item-delete-button"
-                                                        onClick={() => handleDeleteClick(record)}
+                                                        className       =   "record-item-delete-button"
+                                                        onClick         =   {() => handleDeleteClick(record)}
                                                     >
                                                         Delete
                                                         <div className="record-item-button-icon">

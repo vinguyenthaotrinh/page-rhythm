@@ -1209,7 +1209,9 @@ export default class Server {
                 throw new Error(errorData.message || "Failed to convert text to speech.");
             }
 
-            const result = await response.json(); // The response is expected to be a JSON object with the audio file URL
+            const result = await response.json();
+
+            result.audioData = `data:audio/${result.file_extension};base64,${result.speech_content}`;
 
             return result;
         } catch (error) {

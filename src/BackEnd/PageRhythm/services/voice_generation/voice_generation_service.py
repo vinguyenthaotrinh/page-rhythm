@@ -76,7 +76,11 @@ class VoiceGenerationService:
         if result is None:
             return None
         
-        return result.to_serializable_JSON()
+        result = result.to_serializable_JSON()
+
+        result["file_extension"] = "mp3"
+        
+        return result
     
     @staticmethod
     def get_all_default_voice_sample_names() -> dict[str, str]:

@@ -52,7 +52,7 @@ html, body {
     margin-left: 64px;
     margin-top: 64px;                   /* Space between the content and the top */
     display: flex;
-    flex-grow: 1;                       /* Allow it to grow and take remaining space */
+    flex-grow: 1;  
 }
 
 #listen-to-book-page-content-header {
@@ -60,18 +60,18 @@ html, body {
     justify-content: center;            /* Center the navigation */
     align-items: center;
     position: relative;                 /* This makes the parent container a reference point for absolute positioning */
-    padding: 10px 20px;
+    padding: 10px 0px;
+    min-height: 48px;
     color: white;
     display: flex;
     width: 100%;
     z-index: 1;
-    min-height: 48px;
 }
 
 #listen-to-book-page-book-details-section {
     top: 50%;                           /* Vertically center the navigation section */
     gap: 12px;                          /* Space between the cover image and text */
-    left: 128px;                         /* 12px from the left boundary of the parent */
+    left: 200px;
     display: flex;
     position: absolute;                 /* Position it absolutely within the parent */
     align-items: center;                /* Vertically align content */
@@ -91,8 +91,10 @@ html, body {
 
 #listen-to-book-page-audio-controls-section {
     display: flex;
-    flex-direction: column;          /* Stack children vertically */
     align-items: center;             /* Center align items horizontally */
+    flex-direction: column;          /* Stack children vertically */
+    width: 100%;
+    max-width: 600px;
 }
 
 .listen-to-book-page-navigation-icon {
@@ -125,8 +127,8 @@ html, body {
 }
 
 #listen-to-book-page-book-details {
-    font-family: "Poppins-Regular", sans-serif;
     font-size: 12px;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 #listen-to-book-page-book-title {
@@ -143,9 +145,8 @@ html, body {
     color: black;           /* Black text color */
     width: 40%;                 /* 25% width of the parent */
     height: 100%;               /* Take the full height of the parent */
-    padding: 16px;             
+    padding: 16px;
     box-sizing: border-box;     /* Ensure padding doesn't affect the width */
-    margin: 0 20px;             /* Space between the pages */
 }
   
 #listen-to-book-page-content-body {
@@ -155,10 +156,6 @@ html, body {
     justify-content: center;    /* Center the two pages horizontally */
     align-items: flex-start;    /* Align the pages at the top */
     height: calc(100% - 64px);  /* The remaining height of the parent */
-}
-
-.listen-to-book-page-content-page:hover {
-    box-shadow: 0 0 0 2px inset #265073;
 }
 
 .listen-to-book-page-button-icon {
@@ -207,9 +204,9 @@ html, body {
 
 .audio-controls-top-row {
     display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 4px;
+    align-items: center;
+    justify-content: center;
 }
 
 .audio-control-button {
@@ -232,8 +229,9 @@ html, body {
 
 .audio-controls-bottom-row {
     display: flex;
-    justify-content: center;
+    width: 100%;
     align-items: center;
+    justify-content: center;
 }
 
 .audio-progress-slider {

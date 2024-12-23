@@ -6,13 +6,14 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ListenToBookPage() {
+    const [generatedAudio, setGeneratedAudio]   = useState<any>(null);
     const [bookLoading, setBookLoading]         = useState(true);
     const [voiceLoading, setVoiceLoading]       = useState(true);
     const { bookID }                            = useParams<{ bookID: string }>();
     const [book, setBook]                       = useState<any>(null);
     const [currentPage, setCurrentPage]         = useState(1);
     const [contentPages, setContentPages]       = useState<string[]>([]);
-    const [voice, setVoice]                     = useState<string>("Arnold");
+    const [voice, setVoice]                     = useState<string>("");
     const [voices, setVoices]                   = useState<any[]>([]);
     const navigate                              = useNavigate();
     const pageCapacity                          = 1600;
@@ -113,9 +114,9 @@ export default function ListenToBookPage() {
                 return;
 
             try {
-                const server = await Server.getInstance();
-                const response = await server.convertTextToSpeech(contentPages[currentPage - 1], voice);
-                console.log("Audio file generated:", response);
+                const server    = await Server.getInstance();
+                const response  = await server.convertTextToSpeech(contentPages[currentPage - 1], voice);
+                setGeneratedAudio(response);
             } catch (error) {
                 console.error("Error generating audio file:", error);
             }
@@ -229,58 +230,74 @@ export default function ListenToBookPage() {
                     </div>
 
                     <div
-                        id="listen-to-book-page-audio-controls-section"
+                        id  =   "listen-to-book-page-audio-controls-section"
                     >
-                        <div
-                            className="audio-controls-top-row"
-                        >
-                            <button
-                                className       =   "audio-control-button previous-button"
-                                onClick         =   {() => console.log("Previous pressed")}
-                            >
-                                <img 
-                                    src         =   {IMAGES.AUDIO_PREVIOUS_ICON}
-                                    alt         =   "Previous"
-                                    className   =   "audio-control-icon-previous" 
-                                />
-                            </button>
+                        {
+                            generatedAudio === null ? (
+                                <p>
+                                    Loading...
+                                </p>
+                            ) : (
+                                <>
+                                    <audio
+                                        src             =   {generatedAudio.audioData}
+                                    />
 
-                            <button
-                                className       =   "audio-control-button play-pause-button"
-                                onClick         =   {() => console.log("Play/Pause pressed")}
+                                    <div
+                                        className="audio-controls-top-row"
+                                    >
+                                        <button
+                                            className       =   "audio-control-button previous-button"
+                                            onClick         =   {() => console.log("Previous pressed")}
+                                        >
+                                            <img 
+                                                src         =   {IMAGES.AUDIO_PREVIOUS_ICON}
+                                                alt         =   "Previous"
+                                                className   =   "audio-control-icon-previous" 
+                                            />
+                                        </button>
+
+                                        <button
+                                            className       =   "audio-control-button play-pause-button"
+                                            onClick         =   {() => console.log("Play/Pause pressed")}
+                                            
+                                        >
+                                            <img 
+                                                src         =   {IMAGES.AUDIO_PLAY_ICON}
+                                                alt         =   "Play/Pause" 
+                                                className   =   "audio-control-icon-play-pause" 
+                                            />
+                                        </button>
+
+                                        <button
+                                            className       =   "audio-control-button next-button"
+                                            onClick         =   {() => console.log("Next pressed")}
+                                        >
+                                            <img 
+                                                src         =   {IMAGES.AUDIO_NEXT_ICON} 
+                                                alt         =   "Next"
+                                                className   =   "audio-control-icon-next"
+                                            />
+                                        </button>
+                                    </div>
+
+                                    <div
+                                        className="audio-controls-bottom-row"
+                                    >
+                                        <input
+                                            type        =   "range"
+                                            min         =   "0"
+                                            max         =   "100"
+                                            value       =   "50"
+                                            className   =   "audio-progress-slider"
+                                            onChange    =   {(e) => console.log("Slider value:", e.target.value)}
+                                        />
+                                    </div>
+                                </>
+                            )
                                 
-                            >
-                                <img 
-                                    src         =   {IMAGES.AUDIO_PLAY_ICON}
-                                    alt         =   "Play/Pause" 
-                                    className   =   "audio-control-icon-play-pause" 
-                                />
-                            </button>
+                        }
 
-                            <button
-                                className       =   "audio-control-button next-button"
-                                onClick         =   {() => console.log("Next pressed")}
-                            >
-                                <img 
-                                    src         =   {IMAGES.AUDIO_NEXT_ICON} 
-                                    alt         =   "Next"
-                                    className   =   "audio-control-icon-next"
-                                />
-                            </button>
-                        </div>
-
-                        <div
-                            className="audio-controls-bottom-row"
-                        >
-                            <input
-                                type="range"
-                                min="0"
-                                max="100"
-                                value="50"
-                                className="audio-progress-slider"
-                                onChange={(e) => console.log('Slider value:', e.target.value)}
-                            />
-                        </div>
                     </div>
 
                     <div
@@ -314,7 +331,10 @@ export default function ListenToBookPage() {
                     </div>
                 </div>
 
-                <div id="listen-to-book-page-content-body">
+                <div 
+                    id  =   "listen-to-book-page-content-body"
+                >
+
                     <div 
                         id          =   "listen-to-book-page-current-content-page" 
                         className   =   "listen-to-book-page-content-page"
