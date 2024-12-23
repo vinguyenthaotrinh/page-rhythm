@@ -480,12 +480,14 @@ export default function VoicesMyLibraryPage() {
                                                         src             =   {
                                                             record.content
                                                         }
+
                                                         onTimeUpdate    =   {() =>
                                                             setAudioTimes((prev) => ({
                                                                 ...prev,
                                                                 [index]: audioRefs.current[index].currentTime,
                                                             }))
                                                         }
+
                                                         onEnded         =   {() => setPlayingIndex(null)}
                                                     />
             
@@ -519,8 +521,8 @@ export default function VoicesMyLibraryPage() {
                                                     
                                                     <button
                                                         className       =   "play-pause-button"
-                                                        onClick         =   {() => handlePlayPause(index)}
-                                                        onMouseEnter    =   {(e) => {
+                                                        onClick         =   {()     => handlePlayPause(index)}
+                                                        onMouseEnter    =   {(e)    => {
                                                             const imgElement = e.currentTarget.querySelector("img");
                                                             if (imgElement) {
                                                                 if (playingIndex === index) 
