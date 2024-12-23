@@ -6,12 +6,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ListenToBookPage() {
-    const [loading, setLoading]                 = useState(true);
+    const [bookLoading, setBookLoading]         = useState(true);
+    const [voiceLoading, setVoiceLoading]       = useState(true);
     const { bookID }                            = useParams<{ bookID: string }>();
     const [book, setBook]                       = useState<any>(null);
     const [currentPage, setCurrentPage]         = useState(1);
     const [contentPages, setContentPages]       = useState<string[]>([]);
-    const [voice, setVoice]                     = useState("en-US-Wavenet-D");
+    const [voice, setVoice]                     = useState<string>("Arnold");
     const [voices, setVoices]                   = useState<any[]>([]);
     const navigate                              = useNavigate();
     const pageCapacity                          = 1600;
@@ -34,7 +35,7 @@ export default function ListenToBookPage() {
 
     useEffect(() => {
         const fetchBookDetails = async () => {
-            setLoading(true);
+            setBookLoading(true);
             try {
                 if (!bookID) {
                     console.error("Book ID is not available.");
@@ -56,40 +57,31 @@ export default function ListenToBookPage() {
             } catch (error) {
                 console.error("Error fetching book details:", error);
             }
-            setLoading(false);
+            setBookLoading(false);
         };
 
         const fetchVoices = async () => {
+            setVoiceLoading(true);
             try {
                 const server = await Server.getInstance();
                 const voices = await server.getAllUsableSampleVoices();
                 setVoices(voices);
-                setVoice(voices[0].voice_name);
+                setVoice(voices[0].voice_id);
             } catch (error) {
                 console.error("Error fetching voices:", error);
             }
-        }
-
-        const generateAudioFile = async () => {
-            try {
-                const server = await Server.getInstance();
-                const response = await server.convertTextToSpeech(contentPages[currentPage - 1], voice);
-                console.log("Audio file generated:", response);
-            } catch (error) {
-                console.error("Error generating audio file:", error);
-            }
+            setVoiceLoading(false);
         }
 
         if (bookID) {
             fetchBookDetails(); 
             fetchVoices();
-            generateAudioFile();
         }
         
     }, [bookID]);
 
     useEffect(() => {
-        if (loading) 
+        if (bookLoading) 
             return;
         
         const updateProgress = async () => {
@@ -113,7 +105,24 @@ export default function ListenToBookPage() {
 
         updateProgress(); 
 
-    }, [currentPage, loading]);
+    }, [currentPage, bookLoading]);
+
+    useEffect(() => {
+        const generateAudioFile = async () => {
+            if (!voice || !contentPages[currentPage - 1] || voiceLoading) 
+                return;
+
+            try {
+                const server = await Server.getInstance();
+                const response = await server.convertTextToSpeech(contentPages[currentPage - 1], voice);
+                console.log("Audio file generated:", response);
+            } catch (error) {
+                console.error("Error generating audio file:", error);
+            }
+        };
+    
+        generateAudioFile();
+    }, [voice, currentPage, contentPages]);
 
     if (!book) 
         return <div>Loading...</div>;
@@ -160,14 +169,21 @@ export default function ListenToBookPage() {
                         value       =   {voice}
                         onChange    =   {(e) => setVoice(e.target.value)}
                     >
-                        {voices.map((voice) => (
-                            <option 
-                                key     =   {voice.voice_name} 
-                                value   =   {voice.voice_id}
-                            >
-                                {voice.voice_name}
-                            </option>
-                        ))}
+                        {
+                        voiceLoading ? (
+                            <option>Loading...</option>
+                        ) :
+                        (
+                            voices.map((voice) => (
+                                <option 
+                                    key     =   {voice.voice_name} 
+                                    value   =   {voice.voice_id}
+                                >
+                                    {voice.voice_name}
+                                </option>
+                            ))
+                        )
+                        }
                     </select>
 
                     <button
@@ -201,10 +217,14 @@ export default function ListenToBookPage() {
                         >
                             <h1
                                 id = "listen-to-book-page-book-title"
-                            >{book.title}</h1>
+                            >
+                                {book.title}
+                            </h1>
                             <h2
                                 id = "listen-to-book-page-book-author"
-                            >{book.author}</h2>
+                            >
+                                {book.author}
+                            </h2>
                         </div>
                     </div>
 
