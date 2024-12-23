@@ -56,8 +56,8 @@ def track_progress():
 @statistics_blueprint.route("/tracked_progress/all", methods=["GET"])
 @jwt_required()
 def get_all_tracked_progress():
-    current_identity = json.loads(get_jwt_identity())
-    user_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    user_id             = current_identity["account_id"]
 
     statistics_service = StatisticsService()
 
@@ -71,8 +71,8 @@ def get_all_tracked_progress():
 @statistics_blueprint.route("/tracked_progress/delete", methods=["POST"])
 @jwt_required()
 def delete_tracked_progress():
-    current_identity = json.loads(get_jwt_identity())
-    user_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    user_id             = current_identity["account_id"]
 
     data = request.get_json()
 

@@ -76,7 +76,11 @@ class VoiceGenerationService:
         if result is None:
             return None
         
-        return result.to_serializable_JSON()
+        result = result.to_serializable_JSON()
+
+        result["file_extension"] = "mp3"
+        
+        return result
     
     @staticmethod
     def get_all_default_voice_sample_names() -> dict[str, str]:
@@ -130,13 +134,14 @@ class VoiceGenerationService:
         for key, value in self.get_all_default_voice_sample_names().items():
             result.append({
                 "voice_name"    :   key,
-                "voice_id"      :   f"default-{value}"
+                "voice_id"      :   f"default-{value}-{key}"
             })
 
         for sample_audio_file in sample_audio_files_service.get_uploaded_sample_audio_files(account_id):
+            name = sample_audio_file.get_file_name()
             result.append({
-                "voice_name"    :   sample_audio_file.get_file_name(),
-                "voice_id"      :   f"uploaded-{sample_audio_file.get_sample_audio_file_id()}"
+                "voice_name"    :   name,
+                "voice_id"      :   f"uploaded-{sample_audio_file.get_sample_audio_file_id()}-{name}"
             })
 
         return result
@@ -159,7 +164,8 @@ class VoiceGenerationService:
         default_voice_sample_names = VoiceGenerationService.get_all_default_voice_sample_names()
         keys = list(default_voice_sample_names.keys())
         maximum_similarity_score = -1
-        result = keys[0]
+        random.shuffle(keys)
+        result = str()
 
         for key in keys:
             similarity_score = VoiceGenerationService.calculate_similarity_score(key, voice_name)

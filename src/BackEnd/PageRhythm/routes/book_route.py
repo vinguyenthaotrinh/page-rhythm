@@ -14,14 +14,14 @@ book_service = BookService()
 @book_blueprint.route("/create", methods=["POST"])
 @jwt_required()
 def create_book():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
 
-    data = request.form
-    title = data.get("title")
-    author = data.get("author")
+    data    = request.form
+    title   = data.get("title")
+    author  = data.get("author")
     summary = data.get("summary")
-    genre = data.get("genre")
+    genre   = data.get("genre")
     
     content_file = request.files.get("content")
     if not content_file or content_file.filename == "":
@@ -39,16 +39,16 @@ def create_book():
         image_data = None
 
     book_data = {
-        "title": title,
-        "author": author,
-        "summary": summary,
-        "genre": genre,
-        "owner_id": owner_id,
-        "content": content,
-        "image": image_data,
-        "book_rating": 0.0,
-        "released_date": datetime.datetime.today().strftime("%Y-%m-%d"),
-        "hidden": False
+        "title":            title,
+        "author":           author,
+        "summary":          summary,
+        "genre":            genre,
+        "owner_id":         owner_id,
+        "content":          content,
+        "image":            image_data,
+        "book_rating":      0.0,
+        "released_date":    datetime.datetime.today().strftime("%Y-%m-%d"),
+        "hidden":           False
     }
 
     book_id = book_service.create_book(book_data)
@@ -83,26 +83,26 @@ def search_book():
 @book_blueprint.route("/mylib", methods=["GET"])
 @jwt_required()
 def get_my_lib():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
-    books = book_service.get_book_by_owner(owner_id)
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
+    books               = book_service.get_book_by_owner(owner_id)
     return jsonify([book.to_serializable_JSON() for book in books]), 200
 
 # 5. Update book information
 @book_blueprint.route("/<string:book_id>", methods=["PATCH"])
 @jwt_required()
 def update_book(book_id):
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
     
     if not book_service.check_ownership(book_id, owner_id):
         return jsonify({"message": "You do not have permission to update this book."}), 403
 
-    data = request.form
-    title = data.get("title")
-    author = data.get("author")
+    data    = request.form
+    title   = data.get("title")
+    author  = data.get("author")
     summary = data.get("summary")
-    genre = data.get("genre")
+    genre   = data.get("genre")
 
     content = None
     if "content" in request.files:
@@ -141,9 +141,9 @@ def update_book(book_id):
 @book_blueprint.route("/<string:book_id>", methods=["DELETE"])
 @jwt_required()
 def delete_book(book_id):
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]  
-    account = AccountService().get_account_by_id(owner_id)
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]  
+    account             = AccountService().get_account_by_id(owner_id)
     
     if (not book_service.check_ownership(book_id, owner_id)) and (account.account_type != AccountType.ADMIN):
         return jsonify({"message": "You do not have permission to delete this book"}), 403
@@ -158,9 +158,9 @@ def delete_book(book_id):
 @book_blueprint.route("/all/random", methods=["GET"])
 @jwt_required()
 def get_all_books_in_random_order():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]  
-    account = AccountService().get_account_by_id(owner_id)
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]  
+    account             = AccountService().get_account_by_id(owner_id)
 
     if account.account_type != AccountType.ADMIN:
         return jsonify({"message": "You do not have permission to view all books"}), 403
@@ -180,10 +180,10 @@ def get_all_book_pages(book_id, page_capacity, maximum_line_length):
 @book_blueprint.route("/visibility/toggle/<string:book_id>", methods=["PATCH"])
 @jwt_required()
 def toggle_book_visibility(book_id):
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
-    account_service = AccountService()
-    account = account_service.get_account_by_id(owner_id)
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
+    account_service     = AccountService()
+    account             = account_service.get_account_by_id(owner_id)
 
     if account.account_type != AccountType.ADMIN:
         return jsonify({"message": "You do not have permission to update book visibility"}), 403

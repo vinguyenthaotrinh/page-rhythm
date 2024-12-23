@@ -10,14 +10,14 @@ sample_audio_file_blueprint = Blueprint("sample_audio_file", __name__)
 @sample_audio_file_blueprint.route("/upload", methods=["POST"])
 @jwt_required()
 def upload_sample_audio_file():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
-    data = request.get_json()
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
+    data                = request.get_json()
 
-    file_name = data.get("file_name")
-    description = data.get("description")
-    content = data.get("content")
-    file_extension = data.get("file_extension")
+    file_name           = data.get("file_name")
+    description         = data.get("description")
+    content             = data.get("content")
+    file_extension      = data.get("file_extension")
 
     sample_audio_files_service = SampleAudioFilesService()
 
@@ -28,7 +28,6 @@ def upload_sample_audio_file():
 
     try:
 
-        # Add new sample audio file and get its ID
         sample_audio_file = sample_audio_files_service.add_new_sample_audio_file(
             file_name, description, owner_id, content, file_extension
         )
@@ -45,9 +44,9 @@ def upload_sample_audio_file():
 @sample_audio_file_blueprint.route("/delete", methods=["POST"])
 @jwt_required()
 def delete_sample_audio_file():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
-    data = request.get_json()
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
+    data                = request.get_json()
 
     sample_audio_file_id = data.get("sample_audio_file_id")
 
@@ -63,13 +62,13 @@ def delete_sample_audio_file():
 @sample_audio_file_blueprint.route("/update/meta_information", methods=["POST"])
 @jwt_required()
 def update_sample_audio_file_meta_information():
-    current_identity = json.loads(get_jwt_identity())
-    owner_id = current_identity["account_id"]
-    data = request.get_json()
+    current_identity    = json.loads(get_jwt_identity())
+    owner_id            = current_identity["account_id"]
+    data                = request.get_json()
 
-    sample_audio_file_id = data.get("sample_audio_file_id")
-    file_name = data.get("file_name")
-    description = data.get("description")
+    sample_audio_file_id    = data.get("sample_audio_file_id")
+    file_name               = data.get("file_name")
+    description             = data.get("description")
 
     sample_audio_files_service = SampleAudioFilesService()
 
