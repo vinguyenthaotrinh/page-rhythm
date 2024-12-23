@@ -183,7 +183,7 @@ export default class Server {
     
             const books = await response.json();  // The response is expected to be a JSON array of books
     
-            return books;  // Return the shuffled list of books
+            return books;
         } catch (error) {
             this.logAndThrowError("Error fetching books:", error);
         }
@@ -206,7 +206,7 @@ export default class Server {
     
             const books = await response.json();  // The response is expected to be a JSON array of books
     
-            return books;  // Return the shuffled list of books
+            return books;
         } catch (error) {
             this.logAndThrowError("Error fetching books:", error);
         }
@@ -1182,6 +1182,38 @@ export default class Server {
             return voices;
         } catch (error) {
             this.logAndThrowError("Error fetching sample voices:", error);
+        }
+    }
+
+    public async convertTextToSpeech(textContent: string, voiceID: string): Promise<string> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/voice_generation/text_to_speech`;
+
+        const body = {
+            text_content: textContent,
+            voice_id: voiceID,
+        };
+
+        try {
+            const response = await fetch(url, {
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error converting text to speech:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to convert text to speech.");
+            }
+
+            const result = await response.json(); // The response is expected to be a JSON object with the audio file URL
+
+            return result;
+        } catch (error) {
+            this.logAndThrowError("Error during text-to-speech conversion:", error);
         }
     }
 }

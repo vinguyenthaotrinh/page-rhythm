@@ -27,27 +27,27 @@ def register():
         return jsonify({"message": "Invalid email format"}), 400
 
     if AuthenticationService().register_account(
-        email = data["email"],
-        full_name = data["full_name"],
-        first_name = data["first_name"],
-        last_name = data["last_name"],
-        birthday = date(data["birthday"]["year"], data["birthday"]["month"], data["birthday"]["day"]),
-        bio = data["bio"],
-        password = data["password"],
-        account_type = data["account_type"],
+        email           = data["email"],
+        full_name       = data["full_name"],
+        first_name      = data["first_name"],
+        last_name       = data["last_name"],
+        birthday        = date(data["birthday"]["year"], data["birthday"]["month"], data["birthday"]["day"]),
+        bio             = data["bio"],
+        password        = data["password"],
+        account_type    = data["account_type"],
         profile_picture = profile_picutre
     ):
-        account = AccountService().get_account_by_email(data["email"])
-        access_token = create_access_token_with_account_id(account.account_id)
+        account         = AccountService().get_account_by_email(data["email"])
+        access_token    = create_access_token_with_account_id(account.account_id)
         return jsonify({"access_token": access_token}), 200
     
     return jsonify({"message": "Invalid registered information"}), 401
 
 @authentication_blueprint.route("/login", methods=["POST"])
 def login():
-    data = request.get_json()
-    account_service = AccountService()
-    authentication_service = AuthenticationService()
+    data                            = request.get_json()
+    account_service                 = AccountService()
+    authentication_service          = AuthenticationService()
     user_account_management_service = UserAccountManagementService()
 
     account = account_service.get_account_by_email(data["email"])

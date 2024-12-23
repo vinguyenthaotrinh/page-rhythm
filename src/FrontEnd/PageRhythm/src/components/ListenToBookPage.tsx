@@ -44,7 +44,7 @@ export default function ListenToBookPage() {
                 const server = await Server.getInstance();
                 const book = await server.getBook(bookID);  // Fetch the book details using bookID
 
-                setBook(book);                              // Set the book details in state
+                setBook(book);
 
                 const pages = await server.getContentPages(parseInt(bookID), pageCapacity, maximumLineLength);  // Fetch the content pages
                 setContentPages(pages);                     // Set the content pages in state
@@ -70,9 +70,20 @@ export default function ListenToBookPage() {
             }
         }
 
+        const generateAudioFile = async () => {
+            try {
+                const server = await Server.getInstance();
+                const response = await server.convertTextToSpeech(contentPages[currentPage - 1], voice);
+                console.log("Audio file generated:", response);
+            } catch (error) {
+                console.error("Error generating audio file:", error);
+            }
+        }
+
         if (bookID) {
             fetchBookDetails(); 
             fetchVoices();
+            generateAudioFile();
         }
         
     }, [bookID]);
