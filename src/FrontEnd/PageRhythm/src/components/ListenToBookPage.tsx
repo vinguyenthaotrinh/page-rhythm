@@ -6,21 +6,21 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ListenToBookPage() {
-    const [isPlaying, setIsPlaying]             = useState(false);
-    const [generatedAudio, setGeneratedAudio]   = useState<any>(null);
-    const [bookLoading, setBookLoading]         = useState(true);
-    const [voiceLoading, setVoiceLoading]       = useState(true);
-    const { bookID }                            = useParams<{ bookID: string }>();
-    const [book, setBook]                       = useState<any>(null);
-    const [currentPage, setCurrentPage]         = useState(1);
-    const [contentPages, setContentPages]       = useState<string[]>([]);
-    const [voice, setVoice]                     = useState<string>("");
-    const [voices, setVoices]                   = useState<any[]>([]);
-    const navigate                              = useNavigate();
-    const audioRef                              = useRef<HTMLAudioElement | null>(null);
-    const [audioTime, setAudioTime]             = useState(0); 
-    const pageCapacity                          = 1600;
-    const maximumLineLength                     = 80;
+    const [isPlaying, setIsPlaying]             =   useState(false);
+    const [generatedAudio, setGeneratedAudio]   =   useState<any>(null);
+    const [bookLoading, setBookLoading]         =   useState(true);
+    const [voiceLoading, setVoiceLoading]       =   useState(true);
+    const { bookID }                            =   useParams<{ bookID: string }>();
+    const [book, setBook]                       =   useState<any>(null);
+    const [currentPage, setCurrentPage]         =   useState(1);
+    const [contentPages, setContentPages]       =   useState<string[]>([]);
+    const [voice, setVoice]                     =   useState<string>("");
+    const [voices, setVoices]                   =   useState<any[]>([]);
+    const navigate                              =   useNavigate();
+    const audioRef                              =   useRef<HTMLAudioElement | null>(null);
+    const [audioTime, setAudioTime]             =   useState(0); 
+    const pageCapacity                          =   1600;
+    const maximumLineLength                     =   80;
     
     const handleBackClick = () => {
         navigate(-1);
@@ -115,6 +115,8 @@ export default function ListenToBookPage() {
         const generateAudioFile = async () => {
             if (!voice || !contentPages[currentPage - 1] || voiceLoading) 
                 return;
+
+            setGeneratedAudio(null);
 
             try {
                 const server    = await Server.getInstance();
@@ -303,10 +305,9 @@ export default function ListenToBookPage() {
                                         src             =   {generatedAudio.audioData}
 
                                         onTimeUpdate    =   {() => {
-                                            if (audioRef.current) {
+                                            if (audioRef.current) 
                                                 setAudioTime(audioRef.current.currentTime); // Access currentTime of the audio element
                                             }
-                                        }
                                         }
 
                                         onEnded        =   {() => {
@@ -403,6 +404,10 @@ export default function ListenToBookPage() {
                                     <div
                                         className="audio-controls-bottom-row"
                                     >
+                                        <span className="audio-time-left">
+                                            00:00
+                                        </span>
+
                                         <input
                                             type        =   "range"
                                             min         =   "0"
@@ -411,6 +416,10 @@ export default function ListenToBookPage() {
                                             className   =   "audio-progress-slider"
                                             onChange    =   {(event) => handleSeek(event)}
                                         />
+
+                                        <span className="audio-time-right">
+                                            00:00
+                                        </span>
                                     </div>
                                 </>
                             )

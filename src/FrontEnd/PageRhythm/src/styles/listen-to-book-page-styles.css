@@ -228,8 +228,9 @@ html, body {
 }
 
 .audio-controls-bottom-row {
-    display: flex;
+    gap: 12px;
     width: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
 }

@@ -502,12 +502,20 @@ export default function VoicesMyLibraryPage() {
             
                                                     <div className="slider-container">
                                                         <div className="time-labels">
-                                                            <span className="start-time">00:00</span>
-                                                            <span className="current-time">
+                                                            <span 
+                                                                className   =   "start-time"
+                                                            >
+                                                                00:00
+                                                            </span>
+                                                            
+                                                            <span 
+                                                                className   =   "current-time"
+                                                            >
                                                                 {isNaN(audioTimes[index]) || audioTimes[index] === null
                                                                 ? "00:00"  // Fallback in case of invalid value
                                                                 : new Date(audioTimes[index] * 1000).toISOString().substring(14, 19)}
                                                             </span>
+                                                            
                                                             <span className="end-time">
                                                                 {audioRefs.current[index]?.duration
                                                                     ? new Date(audioRefs.current[index].duration * 1000)
