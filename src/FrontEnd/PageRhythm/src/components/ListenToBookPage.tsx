@@ -172,6 +172,31 @@ export default function ListenToBookPage() {
         }
     };
 
+    const handleNext = () => {
+        if (audioRef.current) {
+            const newTime = audioRef.current.currentTime + 5;  // Move forward by 5 seconds
+            if (newTime < audioRef.current.duration) {
+                audioRef.current.currentTime = newTime;
+            } else {
+                audioRef.current.currentTime = audioRef.current.duration;  // Set to the max duration if beyond
+            }
+            setAudioTime(audioRef.current.currentTime);  // Update state
+        }
+    };
+    
+    // Handle the "Previous" button click to move backward a small amount of time (e.g., 5 seconds)
+    const handlePrevious = () => {
+        if (audioRef.current) {
+            const newTime = audioRef.current.currentTime - 5;  // Move backward by 5 seconds
+            if (newTime > 0) {
+                audioRef.current.currentTime = newTime;
+            } else {
+                audioRef.current.currentTime = 0;  // Set to the start if before 0
+            }
+            setAudioTime(audioRef.current.currentTime);  // Update state
+        }
+    };
+
     return (
         <div
             id = "listen-to-book-page"
@@ -297,7 +322,19 @@ export default function ListenToBookPage() {
                                         <button
                                             className       =   "audio-control-button previous-button"
                                             
-                                            
+                                            onMouseEnter    =   {(e)    => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) 
+                                                    imgElement.src = IMAGES.HOVERED_AUDIO_PREVIOUS_ICON;
+                                            }}
+
+                                            onMouseLeave    =   {(e) => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) 
+                                                    imgElement.src = IMAGES.AUDIO_PREVIOUS_ICON;
+                                            }}
+
+                                            onClick         =   {handlePrevious}
                                         >
                                             <img 
                                                 src         =   {IMAGES.AUDIO_PREVIOUS_ICON}
@@ -340,7 +377,20 @@ export default function ListenToBookPage() {
 
                                         <button
                                             className       =   "audio-control-button next-button"
-                                            onClick         =   {() => console.log("Next pressed")}
+                                        
+                                            onMouseEnter    =   {(e)    => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) 
+                                                    imgElement.src = IMAGES.HOVERED_AUDIO_NEXT_ICON;
+                                            }}
+
+                                            onMouseLeave    =   {(e) => {
+                                                const imgElement = e.currentTarget.querySelector("img");
+                                                if (imgElement) 
+                                                    imgElement.src = IMAGES.AUDIO_NEXT_ICON;
+                                            }}
+
+                                            onClick         =   {handleNext}
                                         >
                                             <img 
                                                 src         =   {IMAGES.AUDIO_NEXT_ICON} 
