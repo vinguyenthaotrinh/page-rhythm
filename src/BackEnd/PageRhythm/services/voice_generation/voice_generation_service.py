@@ -52,7 +52,7 @@ class VoiceGenerationService:
             with open(temporary_file_name, "rb") as file:
                 content = file.read()
 
-            os.remove(temporary_file_name)
+            #os.remove(temporary_file_name)
 
         else:
 

@@ -405,7 +405,10 @@ export default function ListenToBookPage() {
                                         className="audio-controls-bottom-row"
                                     >
                                         <span className="audio-time-left">
-                                            00:00
+                                            {isNaN(audioTime) || audioTime === null
+                                                ? "00:00"  
+                                                : new Date(audioTime * 1000).toISOString().substring(14, 19)
+                                            }
                                         </span>
 
                                         <input
@@ -418,7 +421,11 @@ export default function ListenToBookPage() {
                                         />
 
                                         <span className="audio-time-right">
-                                            00:00
+                                        {audioRef.current?.duration && audioTime !== null
+                                            ? new Date((audioRef.current.duration - audioTime) * 1000)
+                                                .toISOString()
+                                                .substring(14, 19)
+                                            : "00:00"}
                                         </span>
                                     </div>
                                 </>
