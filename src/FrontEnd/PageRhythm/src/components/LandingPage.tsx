@@ -211,14 +211,21 @@ function SignupSection() {
 export default function LandingPage() {
 
     return (
-        <div id="landing-page">
+        <div 
+            id  =   "landing-page"
+        >
             <LogoSection />
-            <div id="landing-page-authentication-sections">
+            <div 
+                id  =   "landing-page-authentication-sections"
+            >
                 <LoginSection />
                 <SignupSection />
             </div>
 
-            <div className="landing-page-front-left-image-container" id="landing-page-left-corner-image">
+            <div 
+                className   =   "landing-page-front-left-image-container" 
+                id          =   "landing-page-left-corner-image"
+            >
                 <img 
                     src         =   {IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} 
                     className   =   "landing-page-left-overlay-image" 

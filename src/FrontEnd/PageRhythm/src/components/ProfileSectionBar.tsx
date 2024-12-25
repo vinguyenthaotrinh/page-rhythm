@@ -9,7 +9,7 @@ interface ProfileSectionBarProps {
 
 export default function ProfileSectionBar({ currentOption }: ProfileSectionBarProps) {
     const [hoveredOption, setHoveredOption] = useState<string | null>(null);
-    const navigate = useNavigate();
+    const navigate                          = useNavigate();
 
     const handleSectionClick = (path: string) => {
         navigate(path);

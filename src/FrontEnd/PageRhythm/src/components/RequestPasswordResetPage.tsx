@@ -27,10 +27,10 @@ function LogoSection() {
 }
 
 function RequestPasswordResetSection() {
-    const [email, setEmail] = useState("");
+    const [email, setEmail]                             = useState("");
     const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+    const [error, setError]                             = useState("");
+    const navigate                                      = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
@@ -39,7 +39,7 @@ function RequestPasswordResetSection() {
         setError("");                       // Clear any previous error
 
         try {
-            setLoadingLoginRequest(true);   // Start loading
+            setLoadingLoginRequest(true);
         
             const server = await Server.getInstance();
             //TO BE CONTINUED
