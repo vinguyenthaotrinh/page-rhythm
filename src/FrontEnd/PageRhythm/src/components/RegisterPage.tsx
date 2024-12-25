@@ -27,18 +27,18 @@ function LogoSection() {
 }
 
 function SignupSection() {
-    const [bio, setBio] = useState("");
-    const [email, setEmail] = useState("");
-    const [firstPassword, setFirstPassword] = useState("");
-    const [secondPassword, setSecondPassword] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [dateOfBirth, setDateOfBirth] = useState("");
-    const [isFirstPasswordVisible, setIsFirstPasswordVisible] = useState(false);
-    const [isSecondPasswordVisible, setIsSecondPasswordVisible] = useState(false);
-    const [loadingSignupRequest, setLoadingSignupRequest] = useState(false);
-    const [error, setError] = useState("");
-    const [agreeWithTerms, setAgreeWithTerms] = useState(false);
-    const navigate = useNavigate();
+    const [bio, setBio]                                         =   useState("");
+    const [email, setEmail]                                     =   useState("");
+    const [firstPassword, setFirstPassword]                     =   useState("");
+    const [secondPassword, setSecondPassword]                   =   useState("");
+    const [fullName, setFullName]                               =   useState("");
+    const [dateOfBirth, setDateOfBirth]                         =   useState("");
+    const [isFirstPasswordVisible, setIsFirstPasswordVisible]   =   useState(false);
+    const [isSecondPasswordVisible, setIsSecondPasswordVisible] =   useState(false);
+    const [loadingSignupRequest, setLoadingSignupRequest]       =   useState(false);
+    const [error, setError]                                     =   useState("");
+    const [agreeWithTerms, setAgreeWithTerms]                   =   useState(false);
+    const navigate                                              =   useNavigate();
 
     const toggleFirstPasswordVisibility = () => {
         setIsFirstPasswordVisible(previousState => !previousState);
@@ -85,27 +85,39 @@ function SignupSection() {
     return (
         <div id="register-page-signup-section">
             <img 
-                src={IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
-                className="register-page-overlay-image" 
-                id="register-page-signup-section-top-right-corner-image" 
+                src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
+                className   =   "register-page-overlay-image" 
+                id          =   "register-page-signup-section-top-right-corner-image" 
             />
             <img 
-                src={IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
-                className="register-page-overlay-image" 
-                id="register-page-signup-section-bottom-left-corner-image" 
+                src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_BOTTOM_LEFT_CORNER} 
+                className   =   "register-page-overlay-image" 
+                id          =   "register-page-signup-section-bottom-left-corner-image" 
             />
       
             <br /><br />
             
             <div id="register-page-signup-title">
-                <h1 id="register-page-welcome-text">Welcome to PageRhythm</h1>
-                <div id="register-page-welcome-description"> Sign up to continue </div>
+                <h1     
+                    id      =   "register-page-welcome-text"
+                >
+                    Welcome to PageRhythm
+                </h1>
+                <div    
+                    id      =   "register-page-welcome-description"
+                > 
+                    Sign up to continue 
+                </div>
             </div>
 
             <br />
 
-            <form onSubmit={handleSignup}>
-                <div className="register-page-input-container">
+            <form 
+                onSubmit            =   {handleSignup}
+            >
+                <div 
+                    className       =   "register-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.USER_ICON} 
                         className   =   "register-page-input-icon" 
@@ -120,7 +132,9 @@ function SignupSection() {
                     />
                 </div>
                 
-                <div className="register-page-input-container">
+                <div 
+                    className       =   "register-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.MAIL_ICON} 
                         className   =   "register-page-input-icon" 
@@ -164,7 +178,7 @@ function SignupSection() {
                     />
                     <input 
                         id          =   "register-page-second-password-input" 
-                        type        =   {isFirstPasswordVisible ? "text" : "password"}
+                        type        =   {isSecondPasswordVisible ? "text" : "password"}
                         placeholder =   "Confirm password" 
                         className   =   "register-page-input-info" 
                         required
@@ -213,16 +227,27 @@ function SignupSection() {
                     className           =   "last-register-page-input-container"
                     id                  =   "register-page-terms-container"
                 >
-                    <label htmlFor="agree-terms" className="register-page-terms-label">
+                    <label 
+                        htmlFor         =   "agree-terms" 
+                        className       =   "register-page-terms-label"
+                    >
                         <input 
                             type        =   "checkbox" 
                             id          =   "register-page-agree-terms"
                             name        =   "agree-terms" 
                             required 
                             checked     =   {agreeWithTerms} 
-                            onChange    =   {(e) => setAgreeWithTerms(e.target.checked)} // Update agree state
+                            onChange    =   {(e) => setAgreeWithTerms(e.target.checked)}
                         />
-                        I agree with the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>
+                        
+                        I agree with the 
+                        
+                        <a 
+                            href        =   "/terms-and-conditions" 
+                            target      =   "_blank"
+                        >
+                            Terms and Conditions
+                        </a>
                     </label>
                 </div>
                 
@@ -242,8 +267,17 @@ function SignupSection() {
 function LoginSection() {
     return (
         <div id="register-page-login-section">
-            <h1 id="register-page-login-title">Have an account?</h1>
-            <Link to="/landing-page" id="register-page-login-button">Login</Link>
+            <h1 
+                id  =   "register-page-login-title"
+            >
+                Have an account?
+            </h1>
+            <Link 
+                to  =   "/landing-page" 
+                id  =   "register-page-login-button"
+            >
+                Login
+            </Link>
         </div>
     );
 }
@@ -258,12 +292,26 @@ export default function RegisterPage() {
                 <LoginSection />
             </div>
 
-            <div className="register-page-front-left-image-container" id="register-page-left-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} className="register-page-left-overlay-image" alt="Left corner image" />
+            <div 
+                className       =   "register-page-front-left-image-container" 
+                id              =   "register-page-left-corner-image"
+            >
+                <img 
+                    src         =   {IMAGES.LANDING_PAGE_BOTTOM_LEFT_CORNER} 
+                    className   =   "register-page-left-overlay-image" 
+                    alt         =   "Left corner image" 
+                />
             </div>
 
-            <div className="register-page-front-right-image-container" id="register-page-right-corner-image">
-                <img src={IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} className="register-page-right-overlay-image" alt="Right corner image"/>
+            <div 
+                className       =   "register-page-front-right-image-container" 
+                id              =   "register-page-right-corner-image"
+            >
+                <img 
+                    src         =   {IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} 
+                    className   =   "register-page-right-overlay-image" 
+                    alt         =   "Right corner image"
+                />
             </div>
 
         </div>
