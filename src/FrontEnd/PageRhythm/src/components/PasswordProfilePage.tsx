@@ -69,26 +69,36 @@ export default function PasswordProfilePage() {
                         <form className="password-profile-page-profile-form">
                             <label className="password-profile-page-input-label">
                                 Enter your current password:
-                                <div className="password-profile-page-input-container">
-                                    <img src={IMAGES.LOCK_ICON} alt="Lock Icon" className="password-profile-page-input-icon" />
+                                <div 
+                                    className       =   "password-profile-page-input-container"
+                                >
+                                    <img 
+                                        src         =   {IMAGES.LOCK_ICON} 
+                                        alt         =   "Lock Icon" 
+                                        className   =   "password-profile-page-input-icon" 
+                                    />
                                     <input
-                                        type={showCurrentPassword ? "text" : "password"}
-                                        name="currentPassword"
-                                        value={passwords.currentPassword}
-                                        onChange={handleInputChange}
-                                        className="password-profile-page-profile-input"
+                                        type        =   {showCurrentPassword ? "text" : "password"}
+                                        name        =   "currentPassword"
+                                        value       =   {passwords.currentPassword}
+                                        onChange    =   {handleInputChange}
+                                        className   =   "password-profile-page-profile-input"
                                     />
                                     <img
-                                        src={showCurrentPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
-                                        alt="Toggle Visibility"
-                                        className="password-profile-page-eye-icon"
-                                        onClick={() => togglePasswordVisibility("currentPassword")}
+                                        src         =   {showCurrentPassword ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
+                                        alt         =   "Toggle Visibility"
+                                        className   =   "password-profile-page-eye-icon"
+                                        onClick     =   {() => togglePasswordVisibility("currentPassword")}
                                     />
                                 </div>
                             </label>
-                            <label className="password-profile-page-input-label">
+                            <label 
+                                className           =   "password-profile-page-input-label"
+                            >
                                 Enter your new password:
-                                <div className="password-profile-page-input-container">
+                                <div    
+                                    className       =   "password-profile-page-input-container"
+                                >
                                     <img 
                                         src         =   {IMAGES.LOCK_ICON} 
                                         alt         =   "Lock Icon" 

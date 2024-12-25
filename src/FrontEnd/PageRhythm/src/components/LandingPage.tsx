@@ -25,18 +25,22 @@ function LogoSection() {
                 src =   {IMAGES.LOGO} 
                 alt =   "Logo" 
             />
-            <h1 id="register-page-title">PageRhythm</h1>
+            <h1 
+                id  =   "register-page-title"
+            >
+                PageRhythm
+            </h1>
         </div>
     );
 }
 
 function LoginSection() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+    const [email, setEmail]                             =   useState("");
+    const [password, setPassword]                       =   useState("");
+    const [isPasswordVisible, setIsPasswordVisible]     =   useState(false);
+    const [loadingLoginRequest, setLoadingLoginRequest] =   useState(false);
+    const [error, setError]                             =   useState("");
+    const navigate                                      =   useNavigate();
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prevState => !prevState);
@@ -45,14 +49,14 @@ function LoginSection() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
 
-        setLoadingLoginRequest(true);       // Set loading state to true
+        setLoadingLoginRequest(true);
         setError("");                       // Clear any previous error
 
         try {
-            setLoadingLoginRequest(true);   // Start loading
+            setLoadingLoginRequest(true);
         
-            const server = await Server.getInstance();
-            const response = await server.login(email, password);
+            const server    = await Server.getInstance();
+            const response  = await server.login(email, password);
         
             if (response.ok) {
                 console.log("Login successful");
@@ -85,15 +89,29 @@ function LoginSection() {
       
             <br /><br />
             
-            <div id="landing-page-login-title">
-                <h1 id="landing-page-welcome-text">Welcome Back</h1>
-                <div id="landing-page-welcome-description"> Login to continue </div>
+            <div 
+                id  =   "landing-page-login-title"
+            >
+                <h1 
+                    id  =   "landing-page-welcome-text"
+                >
+                    Welcome Back
+                </h1>
+                <div 
+                    id  =   "landing-page-welcome-description"
+                > 
+                    Login to continue 
+                </div>
             </div>
 
             <br />
 
-            <form onSubmit={handleLogin}>
-                <div className="landing-page-input-container">
+            <form 
+                onSubmit    =   {handleLogin}
+            >
+                <div 
+                    className   =   "landing-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.MAIL_ICON} 
                         className   =   "landing-page-input-icon" 
@@ -108,14 +126,16 @@ function LoginSection() {
                     />
                 </div>
 
-                <div className="landing-page-input-container">
+                <div 
+                    className   =   "landing-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.LOCK_ICON} 
                         className   =   "landing-page-input-icon" 
                     />
                     <input 
                         id          =   "password-input" 
-                        type        =   {isPasswordVisible ? "text" : "password"}  // Toggle password visibility
+                        type        =   {isPasswordVisible ? "text" : "password"}
                         placeholder =   "Enter your password" 
                         className   =   "landing-page-input-info" 
                         required
@@ -126,17 +146,30 @@ function LoginSection() {
                         src         =   {isPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
                         id          =   "landing-page-eye-icon" 
                         alt         =   "Eye Icon" 
-                        onClick     =   {togglePasswordVisibility}                                  // Call the toggle function on click
+                        onClick     =   {togglePasswordVisibility}
                     />
                 </div>
 
                 {/* Display error message if it's not null or empty */}
                 {error && <div className="landing-page-error-message">{error}</div>}
 
-                <button type="submit" id="landing-page-login-button" disabled = {loadingLoginRequest}>Login</button>
+                <button 
+                    type        =   "submit" 
+                    id          =   "landing-page-login-button" 
+                    disabled    =   {loadingLoginRequest}
+                >
+                    Login
+                </button>
 
-                <div id = "landing-page-request-password-reset-link-container">
-                    <Link to="/request-password-reset-page" id="landing-page-forgot-password-link">Forgot Password?</Link>
+                <div 
+                    id  =   "landing-page-request-password-reset-link-container"
+                >
+                    <Link 
+                        to  =   "/request-password-reset-page" 
+                        id  =   "landing-page-forgot-password-link"
+                    >
+                        Forgot Password?
+                    </Link>
                 </div>
             
                 {
@@ -157,9 +190,20 @@ function LoginSection() {
 
 function SignupSection() {
     return (
-        <div id="landing-page-signup-section">
-            <h1 id="landing-page-signup-title">New User?</h1>
-            <Link to="/register-page" id="landing-page-signup-link">Sign Up</Link>
+        <div
+            id  =   "landing-page-signup-section"
+        >
+            <h1 
+                id  =   "landing-page-signup-title"
+            >
+                New User?
+            </h1>
+            <Link 
+                to  =   "/register-page" 
+                id  =   "landing-page-signup-link"
+            >
+                Sign Up
+            </Link>
         </div>
     );
 }

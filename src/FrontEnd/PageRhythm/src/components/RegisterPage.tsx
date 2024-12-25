@@ -13,14 +13,18 @@ function LogoSection() {
 
     return (
         <div 
-            id="register-page-logo-section"
-            role="button"
-            tabIndex={0}
-            onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            style={{ cursor: "pointer" }}
+            id          =   "register-page-logo-section"
+            role        =   "button"
+            tabIndex    =   {0}
+            onClick     =   {handleLogoClick}
+            onKeyDown   =   {(e) => e.key === "Enter" && handleLogoClick()}
+            style       =   {{ cursor: "pointer" }}
         >
-            <img id="register-page-logo" src={IMAGES.LOGO} alt="Logo" />
+            <img 
+                id      =   "register-page-logo" 
+                src     =   {IMAGES.LOGO} 
+                alt     =   "Logo" 
+            />
             <h1 id="register-page-title">PageRhythm</h1>
         </div>
     );
@@ -51,7 +55,7 @@ function SignupSection() {
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();                     // Prevent form default submission behavior
 
-        setLoadingSignupRequest(true);          // Set loading state to true
+        setLoadingSignupRequest(true);
         setError("");                           // Clear any previous error
 
         if (firstPassword !== secondPassword) {
@@ -60,7 +64,7 @@ function SignupSection() {
         }
 
         try {
-            setLoadingSignupRequest(true);   // Start loading
+            setLoadingSignupRequest(true);
         
             const server = await Server.getInstance();
 
@@ -78,7 +82,7 @@ function SignupSection() {
             setError("An error occurred. Please try again.");   // Handle network or other errors
             console.error("Signup error:", err);
         } finally {
-            setLoadingSignupRequest(false);                      // Stop loading when the request is done
+            setLoadingSignupRequest(false);
         }
     };
 
@@ -171,7 +175,9 @@ function SignupSection() {
                     />
                 </div>
 
-                <div className="register-page-input-container">
+                <div 
+                    className       =   "register-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.LOCK_ICON} 
                         className   =   "register-page-input-icon" 
@@ -208,7 +214,9 @@ function SignupSection() {
                     />
                 </div>
 
-                <div className="register-page-input-container">
+                <div 
+                    className           =   "register-page-input-container"
+                >
                     <img 
                         src             =   {IMAGES.BLACK_PENCIL_ICON} 
                         id              =   "register-page-pencil-icon" 
@@ -250,6 +258,8 @@ function SignupSection() {
                         </a>
                     </label>
                 </div>
+
+                {error && <div className="landing-page-error-message">{error}</div>}
                 
                 <button 
                     type        =   "submit" 
