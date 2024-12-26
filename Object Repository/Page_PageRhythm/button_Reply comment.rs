@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_Reply comment</name>
+   <tag></tag>
+   <elementGuidId>6601b83a-2f2d-41f1-87ec-43d643b07396</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='book-details-page-comments-section']/div/div/button</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>button.book-details-page-reply-button</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>div >> internal:has-text=/^Js12/17/2024, 11:35:22 AMnice bookReply comment$/ >> internal:role=button</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>dec120f7-2944-43b2-9e1e-b7d426bf4d1f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>book-details-page-reply-button</value>
+      <webElementGuid>01c0623d-576e-478f-b0cf-449f5189bcdb</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Reply comment</value>
+      <webElementGuid>e2fd61d9-de88-4fbb-a271-6037fe03db44</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;book-details-page-comments-section&quot;)/div[@class=&quot;comments-section&quot;]/div[@class=&quot;comment&quot;]/button[@class=&quot;book-details-page-reply-button&quot;]</value>
+      <webElementGuid>56d8c968-fb31-48e6-a3fb-01745b59930c</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='book-details-page-comments-section']/div/div/button</value>
+      <webElementGuid>f109347d-0952-4c7c-b32c-585f90dbec21</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='nice book'])[1]/following::button[1]</value>
+      <webElementGuid>c496d246-ddca-41c5-9dac-65ecdc343f83</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Js'])[1]/following::button[1]</value>
+      <webElementGuid>35062d5f-9ad7-44c3-ba2a-3216574660e5</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Nguyễn Văn Bảy'])[1]/preceding::button[1]</value>
+      <webElementGuid>5ce986a6-2a48-4e5c-b532-0ac93674f137</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='f'])[1]/preceding::button[1]</value>
+      <webElementGuid>c536e8b7-35e2-4ec7-b085-8f2f09cc63a2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Reply comment']/parent::*</value>
+      <webElementGuid>0a095a17-457d-4f1e-bce4-001c9003f492</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[4]/div/div/button</value>
+      <webElementGuid>6f5c3e55-d425-4c1a-838d-f23a2c67adf4</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//button[(text() = 'Reply comment' or . = 'Reply comment')]</value>
+      <webElementGuid>aad8a855-eaed-4c33-a3cc-049203aff325</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

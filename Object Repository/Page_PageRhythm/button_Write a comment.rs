@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_Write a comment</name>
+   <tag></tag>
+   <elementGuidId>1cdbdf1d-0d30-4138-a07a-f2a82b74bbc2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='book-details-page-review-section']/div/button</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>button.write-comment-button</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>internal:role=button[name=&quot;Write a comment&quot;i]</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>af8649e7-1f29-4892-b896-673d9cf7e1a0</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>write-comment-button</value>
+      <webElementGuid>ff79d54d-7bc5-4bc1-b384-b8fb519db4e6</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Write a comment</value>
+      <webElementGuid>9a5fef53-04d1-484c-bba1-d79045c44b99</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;book-details-page-review-section&quot;)/div[@class=&quot;review-section-content&quot;]/button[@class=&quot;write-comment-button&quot;]</value>
+      <webElementGuid>2f82a038-606c-4d76-8dbd-931e01a105d5</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='book-details-page-review-section']/div/button</value>
+      <webElementGuid>b6271031-b936-4625-adbb-093b6fbc18b9</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Rating &amp; Comments:'])[1]/following::button[1]</value>
+      <webElementGuid>70e68392-72fd-42f8-a451-f51a3eea75a3</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Summary:'])[1]/following::button[1]</value>
+      <webElementGuid>edde951e-2a34-4d47-a61a-5da3f5b1a3f3</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Js'])[1]/preceding::button[1]</value>
+      <webElementGuid>a38119df-2315-4f20-8cd6-d6ff2c7f6426</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='nice book'])[1]/preceding::button[1]</value>
+      <webElementGuid>41cdfd5e-d6c9-40f9-9e8f-66fb9b9984aa</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Write a comment']/parent::*</value>
+      <webElementGuid>824bcdb1-fcf0-4b98-a387-e3dfb8101455</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[3]/div/button</value>
+      <webElementGuid>ae7bb381-6fc4-41a5-966a-1a2230da083d</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//button[(text() = 'Write a comment' or . = 'Write a comment')]</value>
+      <webElementGuid>08792e25-b3ae-4eaf-9e3c-144d8eafee65</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
