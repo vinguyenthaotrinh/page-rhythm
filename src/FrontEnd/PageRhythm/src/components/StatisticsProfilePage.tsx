@@ -128,12 +128,12 @@ function NoBookText() {
 
 export default function StatisticsProfilePage() {
     const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
-    const [loading, setLoading]                                         = useState(true);                   // Loading state
+    const [loading, setLoading]                                         = useState(true);
     const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);
     const [selectedBook, setSelectedBook]                               = useState<any | null>(null);       // Selected book for update status
     const [showUpdateStatusOverlay, setShowUpdateStatusOverlay]         = useState(false);                  // Update status overlay visibility
-    const navigate                                                      = useNavigate();                    // Navigation hook
+    const navigate                                                      = useNavigate();
 
     const handleUpdateStatusClick = (book: any) => {
         setSelectedBook(book);
@@ -248,42 +248,52 @@ export default function StatisticsProfilePage() {
                                         <div className="statistics-book-item-right-column">
                                             <p className="statistics-book-item-title">{book.title}</p>
                                             <p className="statistics-book-item-author">Author: {book.author}</p>
-                                            <p className="statistics-book-item-release-date">
+                                            <p 
+                                                className   =   "statistics-book-item-release-date"
+                                            >
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
-                                            <p className="statistics-book-item-most-recent-update">
+                                            <p 
+                                                className   =   "statistics-book-item-most-recent-update"
+                                            >
                                                 Most Recent Update: {formatMostRecentUpdateDate(book.progress.most_recent_update_date)}
                                             </p>
-                                            <p className="statistics-book-item-progress-status">
+                                            <p 
+                                                className   =   "statistics-book-item-progress-status"
+                                            >
                                                 Status: {formatProgressStatus(book.progress.status, book.progress.page_number)}
                                             </p>
-                                            <div className="statistics-book-item-buttons">
+                                            <div 
+                                                className   =   "statistics-book-item-buttons"
+                                            >
                                                 <button 
-                                                    className="statistics-book-item-edit-button"
-                                                    onClick={() => handleUpdateStatusClick(book)}
+                                                    className       =   "statistics-book-item-edit-button"
+                                                    onClick         =   {() => handleUpdateStatusClick(book)}
                                                 >
                                                     Update Status
                                                     <img
-                                                        src={IMAGES.WHITE_PENCIL_ICON}
-                                                        alt="Edit Icon"
-                                                        className="statistics-book-item-button-icon"
+                                                        src         =   {IMAGES.WHITE_PENCIL_ICON}
+                                                        alt         =   "Edit Icon"
+                                                        className   =   "statistics-book-item-button-icon"
                                                     />
                                                 </button>
                                                 <button
-                                                    className="statistics-book-item-delete-button"
-                                                    onClick={() => handleDeleteClick(book)}
+                                                    className   =   "statistics-book-item-delete-button"
+                                                    onClick     =   {() => handleDeleteClick(book)}
                                                 >
                                                     Delete
-                                                    <div className="statistics-book-item-button-icon">
+                                                    <div 
+                                                        className       =   "statistics-book-item-button-icon"
+                                                    >
                                                         <img
-                                                            src={IMAGES.RED_TRASH_ICON}
-                                                            alt="Delete Icon"
-                                                            className="icon-normal"
+                                                            src         =   {IMAGES.RED_TRASH_ICON}
+                                                            alt         =   "Delete Icon"
+                                                            className   =   "icon-normal"
                                                         />
                                                         <img
-                                                            src={IMAGES.WHITE_TRASH_ICON}
-                                                            alt="Delete Hover Icon"
-                                                            className="icon-hover"
+                                                            src         =   {IMAGES.WHITE_TRASH_ICON}
+                                                            alt         =   "Delete Hover Icon"
+                                                            className   =   "icon-hover"
                                                         />
                                                     </div>
                                                 </button>

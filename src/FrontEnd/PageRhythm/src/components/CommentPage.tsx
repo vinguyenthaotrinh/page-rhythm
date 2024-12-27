@@ -7,10 +7,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function CommentPage() {
 
-    const { bookID }            = useParams<{ bookID: string }>();
-    const {repliedCommentID}    = useParams<{ repliedCommentID: string }>();
-    const [comment, setComment] = useState<string>("");
-    const navigate              = useNavigate();
+    const { bookID }            =   useParams<{ bookID: string }>();
+    const {repliedCommentID}    =   useParams<{ repliedCommentID: string }>();
+    const [comment, setComment] =   useState<string>("");
+    const navigate              =   useNavigate();
     
 
     const handleBackClick = () => {

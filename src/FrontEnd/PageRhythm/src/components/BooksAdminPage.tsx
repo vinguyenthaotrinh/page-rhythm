@@ -25,10 +25,20 @@ const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
         return null;
 
     return (
-        <div className="books-admin-page-visibility-confirmation-overlay">
-            <div className="books-admin-page-visibility-confirmation-box">
-                <h1 id="books-admin-page-visibility-confirmation-title">Confirm Action</h1>
-                <p>{message}</p>
+        <div 
+            className   =   "books-admin-page-visibility-confirmation-overlay"
+        >
+            <div 
+                className   =   "books-admin-page-visibility-confirmation-box"
+            >
+                <h1 
+                    id  =   "books-admin-page-visibility-confirmation-title"
+                >
+                    Confirm Action
+                </h1>
+                <p>
+                    {message}
+                </p>
                 <div 
                     className   =   "books-admin-page-visibility-confirmation-buttons"
                 >
@@ -154,18 +164,34 @@ export default function BooksAdminPage() {
     };
 
     return (
-        <div id="books-admin-page">
+        <div 
+            id  =   "books-admin-page"
+        >
             <NavigationBar />
 
-            <div id="books-admin-page-container">
-                <AdminSectionBar currentOption="books" />
-                <div id="books-admin-page-content">
-                    <h1 id = "general-profile-page-title">Admin</h1>
+            <div 
+                id  =   "books-admin-page-container"
+            >
+                <AdminSectionBar 
+                    currentOption   =   "books" 
+                />
+                <div 
+                    id      =   "books-admin-page-content"
+                >
+                    <h1 
+                        id  = "general-profile-page-title"
+                    >
+                        Admin
+                    </h1>
                     {/* Scrollable section for books */}
-                    <div id="books-admin-page-books-list-container">
+                    <div 
+                        id="books-admin-page-books-list-container"
+                    >
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
                             (
-                                <div id="books-admin-page-books-grid">
+                                <div 
+                                    id  =   "books-admin-page-books-grid"
+                                >
                                     {books.map((book, index) => (
                                         <div 
                                             key         =   {index} 
@@ -180,13 +206,27 @@ export default function BooksAdminPage() {
                                                     className   =   "book-item-cover"
                                                 />
                                             </div>
-                                            <div className="book-item-right-column">
-                                                <p className="book-item-title">{book.title}</p>
-                                                <p className="book-item-author">Author: {book.author}</p>
-                                                <p className="book-item-release-date">
+                                            <div 
+                                                className   =   "book-item-right-column"
+                                            >
+                                                <p 
+                                                    className   =   "book-item-title"
+                                                >
+                                                    {book.title}
+                                                </p>
+                                                <p 
+                                                    className   =   "book-item-author"
+                                                >
+                                                    Author: {book.author}
+                                                </p>
+                                                <p 
+                                                    className   =   "book-item-release-date"
+                                                >
                                                     Release Date: {book.released_date || "Unknown"}
                                                 </p>
-                                                <div className="book-item-buttons">
+                                                <div 
+                                                    className   =   "book-item-buttons"
+                                                >
                                                     <button
                                                         className   =   "book-item-visibility-button"
                                                         onClick     =   {() => handleVisibilityClick(book)}
@@ -207,7 +247,9 @@ export default function BooksAdminPage() {
                                                         onClick             =   {() => handleDeleteClick(book)}
                                                     >
                                                         Delete
-                                                        <div className="book-item-button-icon">
+                                                        <div 
+                                                            className   =   "book-item-button-icon"
+                                                        >
                                                             <img
                                                                 src         =   {IMAGES.RED_TRASH_ICON}
                                                                 alt         =   "Delete Icon"

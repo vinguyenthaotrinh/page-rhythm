@@ -431,11 +431,19 @@ export default function VoicesMyLibraryPage() {
     };
 
     return (
-        <div id="voices-my-library-page">
+        <div 
+            id  =   "voices-my-library-page"
+        >
             <NavigationBar />
-            <div id="voices-my-library-page-container">
-                <MyLibrarySectionBar currentOption="voices" />
-                <div id="voices-my-library-page-content">
+            <div 
+                id  =   "voices-my-library-page-container"
+            >
+                <MyLibrarySectionBar 
+                    currentOption   =   "voices" 
+                />
+                <div 
+                    id  =   "voices-my-library-page-content"
+                >
                     <button
                         id      =   "voices-my-library-page-add-book-button"
                         onClick =   {handleAddClick}
@@ -448,7 +456,11 @@ export default function VoicesMyLibraryPage() {
                         />
                     </button>
 
-                    <h1 id = "books-my-library-page-title">My Library</h1>
+                    <h1 
+                        id  =   "books-my-library-page-title"
+                    >
+                        My Library
+                    </h1>
 
                     {/* Scrollable section for records */}
                     <div 
@@ -578,16 +590,18 @@ export default function VoicesMyLibraryPage() {
                                                         onClick         =   {() => handleDeleteClick(record)}
                                                     >
                                                         Delete
-                                                        <div className="record-item-button-icon">
+                                                        <div 
+                                                            className   =   "record-item-button-icon"
+                                                        >
                                                             <img
-                                                                src={IMAGES.RED_TRASH_ICON}
-                                                                alt="Delete Icon"
-                                                                className="icon-normal"
+                                                                src         =   {IMAGES.RED_TRASH_ICON}
+                                                                alt         =   "Delete Icon"
+                                                                className   =   "icon-normal"
                                                             />
                                                             <img
-                                                                src={IMAGES.WHITE_TRASH_ICON}
-                                                                alt="Delete Hover Icon"
-                                                                className="icon-hover"
+                                                                src         =   {IMAGES.WHITE_TRASH_ICON}
+                                                                alt         =   "Delete Hover Icon"
+                                                                className   =   "icon-hover"
                                                             />
                                                         </div>
                                                     </button>

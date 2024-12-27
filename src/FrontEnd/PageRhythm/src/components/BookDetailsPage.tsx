@@ -361,15 +361,23 @@ export default function BookDetailsPage() {
                     </div>
 
                     {/* Right Column (Book Information) */}
-                    <div id="book-details-page-introduction">
+                    <div 
+                        id  =   "book-details-page-introduction"
+                    >
                         {/* Book Title and Buttons */}
-                        <div className="book-details-page-title-row">
-                            <h2>{book.title}</h2>
-                            <div className="book-details-page-buttons">
+                        <div 
+                            className   =   "book-details-page-title-row"
+                        >
+                            <h2>
+                                {book.title}
+                            </h2>
+                            <div 
+                                className   =   "book-details-page-buttons"
+                            >
                                 <button
-                                    id          = "book-details-page-read-button"
-                                    className   = "book-details-page-button"
-                                    onClick     = {handleReadThisBookButtonClick}
+                                    id          =   "book-details-page-read-button"
+                                    className   =   "book-details-page-button"
+                                    onClick     =   {handleReadThisBookButtonClick}
                                 >
                                     Read This Book
                                 </button>
@@ -404,9 +412,15 @@ export default function BookDetailsPage() {
 
                         {
                             book && book.book_rating && (
-                                <div className="book-details-row">
-                                    <strong>Rating:</strong>
-                                    <div className="star-rating">
+                                <div 
+                                    className   =   "book-details-row"
+                                >
+                                    <strong>
+                                        Rating:
+                                    </strong>
+                                    <div 
+                                        className   =   "star-rating"
+                                    >
                                         {getStarRating(book.book_rating)}
                                         <span>
                                             {book.book_rating}
@@ -416,16 +430,25 @@ export default function BookDetailsPage() {
                             )
                         }
 
-                        <div className="book-details-row">
+                        <div 
+                            className   =   "book-details-row"
+                        >
                             <strong>Release Date:</strong> {new Date(book.released_date).toLocaleDateString()}
                         </div>
 
-                        <div className="book-details-row">
+                        <div 
+                            className   =   "book-details-row"
+                        >
                             <strong>Genre:</strong> {book.genre}
                         </div>
 
-                        <div className="book-details-row">
-                            <strong>Summary:</strong> {book.summary}
+                        <div 
+                            className   =   "book-details-row"
+                        >
+                            <strong>
+                                Summary:
+                            </strong> 
+                            {book.summary}
                         </div>
                     </div>
                 </div>

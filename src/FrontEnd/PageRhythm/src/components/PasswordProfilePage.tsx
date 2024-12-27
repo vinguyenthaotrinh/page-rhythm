@@ -162,7 +162,9 @@ export default function PasswordProfilePage() {
                             {/* Show error message if it's not null or empty */}
                             {error && <div className="password-profile-page-error-message">{error}</div>}
 
-                            <div className="password-profile-page-profile-buttons">
+                            <div 
+                                className   =   "password-profile-page-profile-buttons"
+                            >
                                 <button
                                     type        =   "button"
                                     onClick     =   {handleSave}

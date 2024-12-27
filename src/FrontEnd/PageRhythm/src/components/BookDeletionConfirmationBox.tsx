@@ -9,8 +9,8 @@ interface BookDeletionConfirmationBoxProps {
 }
 
 const BookDeletionConfirmationBox: React.FC<BookDeletionConfirmationBoxProps> = ({
-    title = "Delete your book",
-    message = "Are you sure you want to delete this book?",
+    title                       =   "Delete your book",
+    message                     =   "Are you sure you want to delete this book?",
     showDeletionConfirmation,
     onConfirm,
     onCancel,

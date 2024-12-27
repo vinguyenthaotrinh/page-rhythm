@@ -63,8 +63,8 @@ export default function ProfileSectionBar({ currentOption }: ProfileSectionBarPr
                 Statistics
             </button>
             <button 
-                className="profile-page-profile-section-button logout-button" 
-                onClick={handleLogout}
+                className       =   "profile-page-profile-section-button logout-button" 
+                onClick         =   {handleLogout}
                 onMouseEnter    =   {() => setHoveredOption("logout")}
                 onMouseLeave    =   {() => setHoveredOption(null)}
             >

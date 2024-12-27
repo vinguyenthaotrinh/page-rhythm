@@ -133,7 +133,9 @@ export default function GeneralProfilePage() {
                                         className   =   "general-profile-page-input-label"
                                     >
                                         Email:
-                                        <div className="general-profile-page-input-container">
+                                        <div 
+                                            className   =   "general-profile-page-input-container"
+                                        >
                                             <img 
                                                 src         =   {IMAGES.MAIL_ICON} 
                                                 alt         =   "Email Icon" 
@@ -189,7 +191,9 @@ export default function GeneralProfilePage() {
                                             />
                                         </div>
                                     </label>
-                                    <div className="general-profile-page-profile-buttons">
+                                    <div 
+                                        className   =   "general-profile-page-profile-buttons"
+                                    >
                                         <button
                                             type        =   "button"
                                             onClick     =   {handleSave}

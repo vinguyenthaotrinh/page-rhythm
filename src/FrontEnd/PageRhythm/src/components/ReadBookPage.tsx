@@ -121,7 +121,9 @@ export default function ReadBookPage() {
                         src         =   {IMAGES.LEFT_ARROW_ICON} 
                         alt         =   "Back" 
                         className   =   "read-book-page-back-button-icon" />
-                    <span>Back</span>
+                    <span>
+                        Back
+                    </span>
                 </div>
 
                 <button
@@ -149,14 +151,14 @@ export default function ReadBookPage() {
             </div>
 
             <div
-                id = "read-book-page-content-region"
+                id  =   "read-book-page-content-region"
             >
                 <div
-                    id = "read-book-page-content-header"
+                    id  =   "read-book-page-content-header"
                 >
 
                     <div
-                        id = "read-book-page-book-details-section"
+                        id  =   "read-book-page-book-details-section"
                     >
                         <img
                             src     = {decodeBookCover(book.image)}
@@ -169,10 +171,14 @@ export default function ReadBookPage() {
                         >
                             <h1
                                 id = "read-book-page-book-title"
-                            >{book.title}</h1>
+                            >
+                                {book.title}
+                            </h1>
                             <h2
                                 id = "read-book-page-book-author"
-                            >{book.author}</h2>
+                            >
+                                {book.author}
+                            </h2>
                         </div>
                     </div>
 
@@ -196,31 +202,44 @@ export default function ReadBookPage() {
                             className   =   "read-book-page-navigation-button"
                             onClick     =   {onRightButtonClick}
                         >
-                            <img src={IMAGES.RIGHT_ICON} alt="Next" className="read-book-page-navigation-icon" />
+                            <img 
+                                src         =   {IMAGES.RIGHT_ICON} 
+                                alt         =   "Next" 
+                                className   =   "read-book-page-navigation-icon" 
+                            />
                         </button>
                     </div>
                 </div>
 
-                <div id="read-book-page-content-body">
-                    <div id="read-book-page-left-content-page" className="read-book-page-content-page">
+                <div 
+                    id  =   "read-book-page-content-body"
+                >
+                    <div 
+                        id          =   "read-book-page-left-content-page" 
+                        className   =   "read-book-page-content-page"
+                    >
                         {/* Check if the left page content is defined before rendering */}
-                        {contentPages[currentLeftPage - 1] &&
-                        contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
+                        {contentPages[currentLeftPage - 1] && contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
                             <React.Fragment key={index}>
-                            {line}
-                            <br />
+                                {line}
+                                <br />
                             </React.Fragment>
                         ))}
                     </div>
 
                     {/* Conditionally hide the right page if it's the last page */}
                     {currentLeftPage < contentPages.length && contentPages[currentLeftPage] && (
-                        <div id="read-book-page-right-content-page" className="read-book-page-content-page">
+                        <div 
+                            id          =   "read-book-page-right-content-page" 
+                            className   =   "read-book-page-content-page"
+                        >
                         {/* Check if the right page content is defined before rendering */}
                         {contentPages[currentLeftPage].split("\n").map((line, index) => (
-                            <React.Fragment key={index}>
-                            {line}
-                            <br />
+                            <React.Fragment 
+                                key =   {index}
+                            >
+                                {line}
+                                <br />
                             </React.Fragment>
                         ))}
                         </div>

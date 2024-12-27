@@ -26,7 +26,11 @@ function LogoSectionOfNavigationBar() {
                 alt         =   "PageRhythm Logo" 
                 className   =   "navigation-bar-logo" 
             />
-            <h1 className="navigation-bar-title">PageRhythm</h1>
+            <h1 
+                className   =   "navigation-bar-title"
+            >
+                PageRhythm
+            </h1>
         </div>
     );
 }

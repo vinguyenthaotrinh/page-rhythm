@@ -203,10 +203,10 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                 </p>
 
                 <input
-                    type="text"
-                    placeholder="Book Name"
-                    value={bookName}
-                    onChange={(e) => setBookName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Book Name"
+                    value       =   {bookName}
+                    onChange    =   {(e) => setBookName(e.target.value)}
                 />
 
                 <input
@@ -228,9 +228,9 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                     onChange={(e) => setGenre(e.target.value)}
                 />
                 <textarea
-                    placeholder="Summary"
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
+                    placeholder =   "Summary"
+                    value       =   {summary}
+                    onChange    =   {(e) => setSummary(e.target.value)}
                 />
 
                 <div className="file-input-container">
@@ -238,11 +238,11 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                         Upload Cover Image (optional)
                     </label>
                     <input
-                        type="file"
-                        id="cover-image-input"
-                        onChange={(e) => setSelectedCoverImage(e.target.files?.[0] || null)}
-                        accept="image/*"
-                        className="file-input-button"
+                        type        =   "file"
+                        id          =   "cover-image-input"
+                        onChange    =   {(e) => setSelectedCoverImage(e.target.files?.[0] || null)}
+                        accept      =   "image/*"
+                        className   =   "file-input-button"
                     />
 
                     {selectedCoverImage && (
@@ -253,8 +253,16 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                 </div>
 
                 <div className="add-overlay-buttons">
-                    <button onClick={handleBookEdit}>Save Changes</button>
-                    <button onClick={() => setShowEditOverlay(false)}>Close</button>
+                    <button 
+                        onClick =   {handleBookEdit}
+                    >
+                        Save Changes
+                    </button>
+                    <button 
+                        onClick =   {() => setShowEditOverlay(false)}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -282,8 +290,8 @@ function NoBookText() {
 }
 
 export default function BooksMyLibraryPage() {
-    const [books, setBooks]                                         = useState<any[]>([]);              // Books data state
-    const [loading, setLoading]                                     = useState(true);                   // Loading state
+    const [books, setBooks]                                         = useState<any[]>([]);
+    const [loading, setLoading]                                     = useState(true);
     const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                           = useState<any | null>(null);       // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay]                       = useState(false);                  // State for Add Overlay
@@ -430,18 +438,20 @@ export default function BooksMyLibraryPage() {
                 <MyLibrarySectionBar currentOption="books" />
                 <div id="books-my-library-page-content">
                     <button
-                        id="books-my-library-page-add-book-button"
-                        onClick={handleAddClick}
+                        id      =   "books-my-library-page-add-book-button"
+                        onClick =   {handleAddClick}
                     >
                         Add
                         <img
-                            src={IMAGES.ADD_ICON}
-                            alt="Add Icon"
-                            className="books-my-library-page-add-icon"
+                            src         =   {IMAGES.ADD_ICON}
+                            alt         =   "Add Icon"
+                            className   =   "books-my-library-page-add-icon"
                         />
                     </button>
 
-                    <h1 id = "books-my-library-page-title">My Library</h1>
+                    <h1 id = "books-my-library-page-title">
+                        My Library
+                    </h1>
 
                     {/* Scrollable section for books */}
                     <div id="books-my-library-page-books-list-container">

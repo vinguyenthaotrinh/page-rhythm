@@ -66,9 +66,9 @@ function SignupSection() {
         try {
             setLoadingSignupRequest(true);
         
-            const server = await Server.getInstance();
+            const server    = await Server.getInstance();
 
-            const response = await server.signup(fullName, email, firstPassword, dateOfBirth, bio);
+            const response  = await server.signup(fullName, email, firstPassword, dateOfBirth, bio);
 
             if (response.ok) {
                 console.log("Signup successful");
@@ -230,7 +230,7 @@ function SignupSection() {
                         rows            =   {8}
                     />
                 </div>
-
+                {/*
                 <div 
                     className           =   "last-register-page-input-container"
                     id                  =   "register-page-terms-container"
@@ -258,7 +258,7 @@ function SignupSection() {
                         </a>
                     </label>
                 </div>
-
+                */}
                 {error && <div className="landing-page-error-message">{error}</div>}
                 
                 <button 
