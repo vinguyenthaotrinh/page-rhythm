@@ -29,16 +29,18 @@ const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
             <div className="books-admin-page-visibility-confirmation-box">
                 <h1 id="books-admin-page-visibility-confirmation-title">Confirm Action</h1>
                 <p>{message}</p>
-                <div className="books-admin-page-visibility-confirmation-buttons">
+                <div 
+                    className   =   "books-admin-page-visibility-confirmation-buttons"
+                >
                     <button
-                        className="books-admin-page-visibility-confirmation-button confirm"
-                        onClick={onConfirm}
+                        className   =   "books-admin-page-visibility-confirmation-button confirm"
+                        onClick     =   {onConfirm}
                     >
                         Yes
                     </button>
                     <button
-                        className="books-admin-page-visibility-confirmation-button cancel"
-                        onClick={onCancel}
+                        className   =   "books-admin-page-visibility-confirmation-button cancel"
+                        onClick     =   {onCancel}
                     >
                         No
                     </button>
@@ -70,8 +72,8 @@ function NoBookText() {
 
 export default function BooksAdminPage() {
     const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
-    const [loading, setLoading]                                         = useState(true);                   // Loading state
-    const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
+    const [loading, setLoading]                                         = useState(true);
+    const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);    
     const [showVisibilityConfirmation, setShowVisibilityConfirmation]   = useState(false);
     const [visibilityMessage, setVisibilityMessage]                     = useState("");

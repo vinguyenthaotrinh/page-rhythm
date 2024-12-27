@@ -23,21 +23,32 @@ const WriteCommentOverlay: React.FC<WriteCommentOverlayProps> = ({
         return null;
 
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
-                <h1 id="add-overlay-title">Write your comment here</h1>
-                <p>Please enter your comment</p>
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className   =   "add-overlay-content"
+            >
+                <h1 
+                    id  =   "add-overlay-title"
+                >
+                    Write your comment here
+                </h1>
+                <p>
+                    Please enter your comment
+                </p>
 
                 <textarea
-                    id="comment-textarea"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder="Enter your comment..."
+                    id          =   "comment-textarea"
+                    value       =   {comment}
+                    onChange    =   {(e) => setComment(e.target.value)}
+                    placeholder =   "Enter your comment..."
                 />
 
                 <button
-                    id="comment-submit-button"
-                    onClick={handleCommentSubmit}
+                    className       =   {`book-details-page-comment-submit-button ${comment.trim() ? "enabled" : "disabled"}`} // Change the button style based on the comment input
+                    onClick         =   {handleCommentSubmit}
+                    disabled        =   {!comment.trim()} // Disable the button if the comment is empty
                 >
                     Submit
                 </button>
@@ -49,7 +60,7 @@ const WriteCommentOverlay: React.FC<WriteCommentOverlayProps> = ({
 export default function BookDetailsPage() {
     const { bookID }                                    = useParams<{ bookID: string }>();
     const [book, setBook]                               = useState<any>(null);
-    const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false);         // Show the comment overlay
+    const [showCommentOverlay, setShowCommentOverlay]   = useState<boolean>(false);
     const [repliedCommentID, setRepliedCommentID]       = useState<string | null>(null);    // Comment ID for replies
     const [comment, setComment]                         = useState<string>("");             // Stores user input for the comment
     const [userRating, setUserRating]                   = useState<number | null>(null);    // User-selected rating
@@ -170,20 +181,51 @@ export default function BookDetailsPage() {
         const replies = allComments.filter((reply: any) => reply.replied_comment_id === comment.comment_id);
     
         return (
-            <div key={comment.comment_id} className="comment">
-                <div className="comment-header">
+            <div 
+                key         =   {comment.comment_id} 
+                className   =   "comment"
+            >
+                <div 
+                    className   =   "comment-header"
+                >
                     <div className="comment-header-left">
-                        <img src={IMAGES.DEFAULT_PROFILE_PICTURE} alt="Profile" className="profile-picture" />
+                        <img 
+                            src         =   {IMAGES.DEFAULT_PROFILE_PICTURE} 
+                            alt         =   "Profile" 
+                            className   =   "profile-picture" 
+                        />
                     </div>
-                    <div className="comment-header-right">
-                        <div className="comment-author">
-                            <span className="author-username">{comment.comment_author_full_name}</span>
-                            <span className="comment-date">{new Date(comment.create_time).toLocaleString()}</span>
+                    <div 
+                        className   =   "comment-header-right"
+                    >
+                        <div 
+                            className   =   "comment-author"
+                        >
+                            <span 
+                                className   =   "author-username"
+                            >
+                                {comment.comment_author_full_name}
+                            </span>
+                            <span 
+                                className   =   "comment-date"
+                            >
+                                {new Date(comment.create_time).toLocaleString()}
+                            </span>
                         </div>
-                        <div className="comment-content">{comment.content}</div>
+                        <div 
+                            className   =   "comment-content"
+                        >
+                            {comment.content}
+                        </div>
                     </div>
                 </div>
-                <button className="book-details-page-reply-button" onClick={() => handleReplyClick(comment.comment_id)}>Reply comment</button>
+                
+                <button 
+                    className   =   "book-details-page-reply-button"
+                    onClick     =   {() => handleReplyClick(comment.comment_id)}
+                >
+                    Reply comment
+                </button>
     
                 {/* Recursively render replies */}
                 {replies.length > 0 && (
@@ -284,7 +326,7 @@ export default function BookDetailsPage() {
 
     return (
         <div
-            id = "book-details-page"
+            id  =   "book-details-page"
         >
             <NavigationBar />
             <div
@@ -309,10 +351,12 @@ export default function BookDetailsPage() {
                     id = "book-details-page-information-section"
                 >
                     {/* Left Column (Book Cover) */}
-                    <div id="book-details-page-cover">
+                    <div 
+                        id  =   "book-details-page-cover"
+                    >
                         <img 
-                            src =   {IMAGES.decodeBookCoverImage(book.image)} 
-                            alt =   "Book Cover" 
+                            src     =   {IMAGES.decodeBookCoverImage(book.image)} 
+                            alt     =   "Book Cover" 
                         />
                     </div>
 

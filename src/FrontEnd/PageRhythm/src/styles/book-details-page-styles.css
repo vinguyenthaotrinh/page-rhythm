@@ -279,3 +279,29 @@ strong {
     padding-left: 16px;
     border-left: 2px solid #ddd;
 }
+
+.book-details-page-comment-submit-button.enabled {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 12px 24px;
+    background-color: #265073; 
+    transition: background-color 0.3s ease;
+    font-family: "Poppins-Bold", sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-details-page-comment-submit-button.disabled {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 12px 24px;
+    background-color: grey; 
+    transition: background-color 0.3s ease;
+    font-family: "Poppins-Bold", sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}

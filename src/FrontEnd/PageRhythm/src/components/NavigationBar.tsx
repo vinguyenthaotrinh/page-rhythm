@@ -63,8 +63,8 @@ export default function NavigationBar() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const server = await Server.getInstance();
-                const profile = await server.getProfile();
+                const server    = await Server.getInstance();
+                const profile   = await server.getProfile();
 
                 if (profile) {
                     if (profile.data.account_type) 
@@ -84,18 +84,32 @@ export default function NavigationBar() {
         <>
             <nav>
                 <LogoSectionOfNavigationBar />
-                <div className="navigation-bar-right">
+                <div 
+                    className   =   "navigation-bar-right"
+                >
                     <ul>
                         <li>
-                            <NavLink to="/home-page">Home</NavLink>
+                            <NavLink 
+                                to  =   "/home-page"
+                            >
+                                Home
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/my-library-page">My Library</NavLink>
+                            <NavLink 
+                                to  =   "/my-library-page"
+                            >
+                                My Library
+                            </NavLink>
                         </li>
                         {
                             (accountType === "admin") && (
                                 <li>
-                                    <NavLink to="/admin-page">Admin</NavLink>
+                                    <NavLink 
+                                        to  =   "/admin-page"
+                                    >
+                                        Admin
+                                    </NavLink>
                                 </li>
                             )
                         }

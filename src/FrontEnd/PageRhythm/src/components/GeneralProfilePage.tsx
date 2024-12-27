@@ -87,9 +87,13 @@ export default function GeneralProfilePage() {
             <div className="general-profile-page-container">
                 <ProfileSectionBar currentOption="general" />
                 <div className="general-profile-page-profile-content">
-                    <h1 id = "general-profile-page-title">General Information</h1>
+                    <h1 
+                        id  = "general-profile-page-title"
+                    >
+                        General Information
+                    </h1>
                     <div
-                        id = "general-profile-page-profile-information-section"
+                        id  = "general-profile-page-profile-information-section"
                     >
                         {
                             loading ? <LoadingText /> : (

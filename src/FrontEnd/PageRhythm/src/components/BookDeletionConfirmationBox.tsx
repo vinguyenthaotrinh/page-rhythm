@@ -20,20 +20,32 @@ const BookDeletionConfirmationBox: React.FC<BookDeletionConfirmationBoxProps> = 
         return null;
 
     return (
-        <div className="books-my-library-page-deletion-confirmation-overlay">
-            <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 className="books-my-library-page-deletion-confirmation-title">{title}</h1>
-                <p>{message}</p>
-                <div className="books-my-library-page-deletion-confirmation-buttons">
+        <div 
+            className   =   "books-my-library-page-deletion-confirmation-overlay"
+        >
+            <div 
+                className   =   "books-my-library-page-deletion-confirmation-box"
+            >
+                <h1 
+                    className   =   "books-my-library-page-deletion-confirmation-title"
+                >
+                    {title}
+                </h1>
+                <p>
+                    {message}
+                </p>
+                <div 
+                    className   =   "books-my-library-page-deletion-confirmation-buttons"
+                >
                     <button
-                        className="books-my-library-page-deletion-confirmation-button confirm"
-                        onClick={onConfirm}
+                        className   =   "books-my-library-page-deletion-confirmation-button confirm"
+                        onClick     =   {onConfirm}
                     >
                         Yes
                     </button>
                     <button
-                        className="books-my-library-page-deletion-confirmation-button cancel"
-                        onClick={onCancel}
+                        className   =   "books-my-library-page-deletion-confirmation-button cancel"
+                        onClick     =   {onCancel}
                     >
                         No
                     </button>

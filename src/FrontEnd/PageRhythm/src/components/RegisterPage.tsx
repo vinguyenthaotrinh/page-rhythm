@@ -276,7 +276,9 @@ function SignupSection() {
 
 function LoginSection() {
     return (
-        <div id="register-page-login-section">
+        <div 
+            id  =   "register-page-login-section"
+        >
             <h1 
                 id  =   "register-page-login-title"
             >
@@ -295,9 +297,13 @@ function LoginSection() {
 export default function RegisterPage() {
 
     return (
-        <div id="register-page">
+        <div 
+            id  =   "register-page"
+        >
             <LogoSection />
-            <div id="register-page-authentication-sections">
+            <div 
+                id  =   "register-page-authentication-sections"
+            >
                 <SignupSection />
                 <LoginSection />
             </div>

@@ -66,15 +66,29 @@ function RequestPasswordResetSection() {
       
             <br /><br />
             
-            <div id="request-password-reset-page-login-title">
-                <h1 id="request-password-reset-page-welcome-text">Forgot Your Password?</h1>
-                <div id="request-password-reset-page-welcome-description"> Don't worry </div>
+            <div 
+                id  =   "request-password-reset-page-login-title"
+            >
+                <h1 
+                    id  =   "request-password-reset-page-welcome-text"
+                >
+                    Forgot Your Password?
+                </h1>
+                <div 
+                    id  =   "request-password-reset-page-welcome-description"
+                > 
+                    Don't worry 
+                </div>
             </div>
 
             <br />
 
-            <form onSubmit={handleLogin}>
-                <div className="request-password-reset-page-input-container">
+            <form 
+                onSubmit    =   {handleLogin}
+            >
+                <div 
+                    className   =   "request-password-reset-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.MAIL_ICON} 
                         className   =   "request-password-reset-page-input-icon" 
@@ -104,8 +118,14 @@ function RequestPasswordResetSection() {
 
 function LoginSection() {
     return (
-        <div id="request-password-reset-page-login-section">
-            <Link to="/landing-page" id="request-password-reset-page-login-link">Back to Login</Link>
+        <div 
+            id  =   "request-password-reset-page-login-section">
+            <Link 
+                to  =   "/landing-page" 
+                id  =   "request-password-reset-page-login-link"
+            >
+                Back to Login
+            </Link>
         </div>
     );
 }
@@ -113,9 +133,13 @@ function LoginSection() {
 export default function RequestPasswordResetPage() {
 
     return (
-        <div id="landing-page">
+        <div 
+            id  =   "landing-page"
+        >
             <LogoSection />
-            <div id="request-password-reset-page-authentication-sections">
+            <div 
+                id  =   "request-password-reset-page-authentication-sections"
+            >
                 <RequestPasswordResetSection />
                 <LoginSection />
             </div>

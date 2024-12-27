@@ -26,7 +26,9 @@ export default function MyLibrarySectionBar({ currentOption }: MyLibrarySectionB
     };
 
     return (
-        <div className="my-library-page-my-library-section-bar">
+        <div 
+            className   =   "my-library-page-my-library-section-bar"
+        >
             <button 
                 className       =   {`my-library-page-my-library-section-button ${getButtonClass("books")}`} 
                 onClick         =   {() => handleSectionClick("/my-library-page/books")}

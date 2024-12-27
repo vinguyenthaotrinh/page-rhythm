@@ -62,7 +62,9 @@ export default function PasswordProfilePage() {
             <div className="password-profile-page-container">
                 <ProfileSectionBar currentOption="password" />
                 <div className="password-profile-page-profile-content">
-                    <h1 id = "password-profile-page-title">Change Your Password Here</h1>
+                    <h1 id = "password-profile-page-title">
+                        Change Your Password Here
+                    </h1>
                     <div
                         id = "password-profile-page-profile-information-section"
                     >

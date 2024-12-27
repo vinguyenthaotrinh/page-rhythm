@@ -23,20 +23,22 @@ export default function AdminSectionBar({ currentOption }: AdminSectionBarProps)
     };
 
     return (
-        <div className="admin-page-admin-section-bar">
+        <div 
+            className   =   "admin-page-admin-section-bar"
+        >
             <button 
-                className={`admin-page-admin-section-button ${getButtonClass("books")}`} 
-                onClick={() => handleSectionClick("/admin-page/books")}
-                onMouseEnter={() => setHoveredOption("books")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`admin-page-admin-section-button ${getButtonClass("books")}`} 
+                onClick         =   {() => handleSectionClick("/admin-page/books")}
+                onMouseEnter    =   {() => setHoveredOption("books")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Books
             </button>
             <button 
-                className={`admin-page-admin-section-button ${getButtonClass("accounts")}`} 
-                onClick={() => handleSectionClick("/admin-page/accounts")}
-                onMouseEnter={() => setHoveredOption("accounts")}
-                onMouseLeave={() => setHoveredOption(null)}
+                className       =   {`admin-page-admin-section-button ${getButtonClass("accounts")}`} 
+                onClick         =   {() => handleSectionClick("/admin-page/accounts")}
+                onMouseEnter    =   {() => setHoveredOption("accounts")}
+                onMouseLeave    =   {() => setHoveredOption(null)}
             >
                 Accounts
             </button>
