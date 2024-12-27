@@ -35,15 +35,15 @@ export default function GeneralProfilePage() {
             const profile = await server.getProfile(); // Fetch profile from server
             console.log(profile);
             setOriginalProfile({
-                fullName:   profile.data.full_name || "",
-                email:      profile.data.email || "",
-                bio:        profile.data.bio || "",
+                fullName:   profile.data.full_name  || "",
+                email:      profile.data.email      || "",
+                bio:        profile.data.bio        || "",
                 birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
             setProfile({
-                fullName:   profile.data.full_name || "",
-                email:      profile.data.email || "",
-                bio:        profile.data.bio || "",
+                fullName:   profile.data.full_name  || "",
+                email:      profile.data.email      || "",
+                bio:        profile.data.bio        || "",
                 birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
             });
             setLoading(false);
@@ -82,11 +82,19 @@ export default function GeneralProfilePage() {
     };
 
     return (
-        <div className="general-profile-page">
+        <div 
+            className   =   "general-profile-page"
+        >
             <NavigationBar />
-            <div className="general-profile-page-container">
-                <ProfileSectionBar currentOption="general" />
-                <div className="general-profile-page-profile-content">
+            <div 
+                className   =   "general-profile-page-container"
+            >
+                <ProfileSectionBar 
+                    currentOption   =   "general" 
+                />
+                <div 
+                    className   =   "general-profile-page-profile-content"
+                >
                     <h1 
                         id  = "general-profile-page-title"
                     >
@@ -97,10 +105,16 @@ export default function GeneralProfilePage() {
                     >
                         {
                             loading ? <LoadingText /> : (
-                                <form className="general-profile-page-profile-form">
-                                    <label className="general-profile-page-input-label">
+                                <form 
+                                    className   =   "general-profile-page-profile-form"
+                                >
+                                    <label 
+                                        className   =   "general-profile-page-input-label"
+                                    >
                                         Full Name:
-                                        <div className="general-profile-page-input-container">
+                                        <div 
+                                            className   =   "general-profile-page-input-container"
+                                        >
                                             <img 
                                                 src         =   {IMAGES.USER_ICON} 
                                                 alt         =   "Full Name Icon" 
@@ -115,7 +129,9 @@ export default function GeneralProfilePage() {
                                             />
                                         </div>
                                     </label>
-                                    <label className="general-profile-page-input-label">
+                                    <label 
+                                        className   =   "general-profile-page-input-label"
+                                    >
                                         Email:
                                         <div className="general-profile-page-input-container">
                                             <img 
@@ -132,9 +148,13 @@ export default function GeneralProfilePage() {
                                             />
                                         </div>
                                     </label>
-                                    <label className="general-profile-page-input-label">
+                                    <label 
+                                        className   =   "general-profile-page-input-label"
+                                    >
                                         Birthday (DD/MM/YYYY):
-                                        <div className="general-profile-page-input-container">
+                                        <div 
+                                            className   =   "general-profile-page-input-container"
+                                        >
                                             <img 
                                                 src         =   {IMAGES.CALENDAR_ICON} 
                                                 alt         =   "Birthday Icon" 
@@ -149,7 +169,9 @@ export default function GeneralProfilePage() {
                                             />
                                         </div>
                                     </label>
-                                    <label className="general-profile-page-input-label">
+                                    <label 
+                                        className   =   "general-profile-page-input-label"
+                                    >
                                         Bio:
                                         <div className="general-profile-page-input-container">
                                             <img 

@@ -451,7 +451,9 @@ export default function VoicesMyLibraryPage() {
                     <h1 id = "books-my-library-page-title">My Library</h1>
 
                     {/* Scrollable section for records */}
-                    <div id="voices-my-library-page-record-list-container">
+                    <div 
+                        id  =   "voices-my-library-page-record-list-container"
+                    >
                         {
                             loading ? (<LoadingText />) : (
                                 records.length === 0 ? <NoVoiceText /> : (

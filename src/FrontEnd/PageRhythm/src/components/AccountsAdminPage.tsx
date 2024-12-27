@@ -105,23 +105,43 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
     }, [status, fromDate, toDate, userAccount]);
 
     return (
-        <div className="accounts-admin-page-account-item">
+        <div 
+            className   =   "accounts-admin-page-account-item"
+        >
             {/* Row 1: Profile picture, full name, email */}
-            <div className="account-item-row">
+            <div 
+                className   =   "account-item-row"
+            >
                 <img 
-                    src={IMAGES.decodeProfilePicture(userAccount.profile_picture)}
-                    alt="Profile" 
-                    className="profile-picture-circle" 
+                    src         =   {IMAGES.decodeProfilePicture(userAccount.profile_picture)}
+                    alt         =   "Profile" 
+                    className   =   "profile-picture-circle" 
                 />
-                <div className="account-info">
-                    <p className="full-name">{userAccount.full_name}</p>
-                    <p className="email">{userAccount.email}</p>
+                <div 
+                    className   =   "account-info"
+                >
+                    <p 
+                        className   =   "full-name"
+                    >
+                        {userAccount.full_name}
+                    </p>
+                    <p 
+                        className   =   "email"
+                    >
+                        {userAccount.email}
+                    </p>
                 </div>
             </div>
 
             {/* Row 2: Status dropdown */}
-            <div className="account-item-row">
-                <label className="status-label">Status:</label>
+            <div 
+                className   =   "account-item-row"
+            >
+                <label 
+                    className   =   "status-label"
+                >
+                    Status:
+                </label>
                 <select 
                     value       =   {status} 
                     onChange    =   {(e) => setStatus(e.target.value)}
@@ -135,10 +155,10 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
 
             {/* Row 3: From date, to date, Save button */}
             <div 
-                className="account-item-row"
+                className   =   "account-item-row"
             >
                 <label
-                    className={`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}
+                    className   =   {`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 >
                     From:
                 </label>
@@ -150,20 +170,20 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                     className   =   {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 />
                 <label
-                    className={`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}
+                    className   =   {`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 >to:
                 </label>
                 <input 
-                    type="date" 
-                    value={toDate} 
-                    onChange={(e) => setToDate(e.target.value)}
-                    disabled={status !== "temporarily_banned"}
-                    className = {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
+                    type        =   "date" 
+                    value       =   {toDate} 
+                    onChange    =   {(e) => setToDate(e.target.value)}
+                    disabled    =   {status !== "temporarily_banned"}
+                    className   =   {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 />
                 <button 
-                    className="save-button" 
-                    onClick={handleSaveButtonClicked} 
-                    disabled={!isChanged}
+                    className   =   "save-button" 
+                    onClick     =   {handleSaveButtonClicked} 
+                    disabled    =   {!isChanged}
                 >
                     Save
                 </button>
@@ -174,15 +194,15 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
 
 export default function AccountsAdminPage() {
     const [userAccounts, setUserAccounts]                               = useState<any[]>([]);              // User accounts data state
-    const [loading, setLoading]                                         = useState(true);                   // Loading state
+    const [loading, setLoading]                                         = useState(true);
     const navigate                                                      = useNavigate();
 
     useEffect(() => {
         const fetchUserAccounts = async () => {
             try {
                 setLoading(true);
-                const server = await Server.getInstance();
-                const response = await server.getAllUserAccountsForManagementPurpose();
+                const server    = await Server.getInstance();
+                const response  = await server.getAllUserAccountsForManagementPurpose();
                 setUserAccounts(response);
             } catch (error) {
                 console.error("Error fetching user accounts:", error);
@@ -195,14 +215,28 @@ export default function AccountsAdminPage() {
     }, []);
 
     return (
-        <div id="accounts-admin-page">
+        <div 
+            id  =   "accounts-admin-page"
+        >
             <NavigationBar />
 
-            <div id="accounts-admin-page-container">
-                <AdminSectionBar currentOption="accounts" />
-                <div id="accounts-admin-page-content">
-                <h1 id = "general-profile-page-title">Admin</h1>
-                    <div id="accounts-admin-page-accounts-list-container">
+            <div 
+                id  =   "accounts-admin-page-container"
+            >
+                <AdminSectionBar 
+                    currentOption   =   "accounts" 
+                />
+                <div 
+                    id  =   "accounts-admin-page-content"
+                >
+                <h1 
+                    id  =   "general-profile-page-title"
+                >
+                    Admin
+                </h1>
+                    <div 
+                        id  =   "accounts-admin-page-accounts-list-container"
+                    >
                         {loading ? (<LoadingText />) : (userAccounts.length === 0 ? (<NoUserAccountText />) : 
                             (
                                 <div id="accounts-admin-page-accounts-grid">

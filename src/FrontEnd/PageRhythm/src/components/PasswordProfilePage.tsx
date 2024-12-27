@@ -57,19 +57,33 @@ export default function PasswordProfilePage() {
     };
 
     return (
-        <div className="password-profile-page">
+        <div 
+            className   =   "password-profile-page"
+        >
             <NavigationBar />
-            <div className="password-profile-page-container">
-                <ProfileSectionBar currentOption="password" />
-                <div className="password-profile-page-profile-content">
-                    <h1 id = "password-profile-page-title">
+            <div 
+                className   =   "password-profile-page-container"
+            >
+                <ProfileSectionBar 
+                    currentOption   =   "password" 
+                />
+                <div 
+                    className   =   "password-profile-page-profile-content"
+                >
+                    <h1 
+                        id  =   "password-profile-page-title"
+                    >
                         Change Your Password Here
                     </h1>
                     <div
-                        id = "password-profile-page-profile-information-section"
+                        id  =   "password-profile-page-profile-information-section"
                     >
-                        <form className="password-profile-page-profile-form">
-                            <label className="password-profile-page-input-label">
+                        <form 
+                            className   =   "password-profile-page-profile-form"
+                        >
+                            <label 
+                                className   =   "password-profile-page-input-label"
+                            >
                                 Enter your current password:
                                 <div 
                                     className       =   "password-profile-page-input-container"

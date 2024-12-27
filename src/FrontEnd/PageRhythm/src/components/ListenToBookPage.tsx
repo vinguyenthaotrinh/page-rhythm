@@ -52,7 +52,7 @@ export default function ListenToBookPage() {
                 setBook(book);
 
                 const pages = await server.getContentPages(parseInt(bookID), pageCapacity, maximumLineLength);  // Fetch the content pages
-                setContentPages(pages);                     // Set the content pages in state
+                setContentPages(pages);
 
                 const progress = await server.getTrackedReadingProgress(parseInt(bookID));  // Fetch the progress of reading the book
 
@@ -402,9 +402,11 @@ export default function ListenToBookPage() {
                                     </div>
 
                                     <div
-                                        className="audio-controls-bottom-row"
+                                        className   =   "audio-controls-bottom-row"
                                     >
-                                        <span className="audio-time-left">
+                                        <span 
+                                            className   =   "audio-time-left"
+                                        >
                                             {isNaN(audioTime) || audioTime === null
                                                 ? "00:00"  
                                                 : new Date(audioTime * 1000).toISOString().substring(14, 19)
