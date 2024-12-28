@@ -195,7 +195,7 @@ export default function ListenToBookPage() {
             } else {
                 audioRef.current.currentTime = 0;  // Set to the start if before 0
             }
-            setAudioTime(audioRef.current.currentTime);  // Update state
+            setAudioTime(audioRef.current.currentTime);
         }
     };
 
@@ -263,14 +263,14 @@ export default function ListenToBookPage() {
             </div>
 
             <div
-                id = "listen-to-book-page-content-region"
+                id  =   "listen-to-book-page-content-region"
             >
                 <div
-                    id = "listen-to-book-page-content-header"
+                    id  =   "listen-to-book-page-content-header"
                 >
 
                     <div
-                        id = "listen-to-book-page-book-details-section"
+                        id  =   "listen-to-book-page-book-details-section"
                     >
                         <img
                             src     =   {decodeBookCover(book.image)}

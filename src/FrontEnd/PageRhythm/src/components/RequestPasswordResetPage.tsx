@@ -47,7 +47,7 @@ function RequestPasswordResetSection() {
             setError('An error occurred. Please try again.'); // Handle network or other errors
             console.error('Login error:', err);
         } finally {
-            setLoadingLoginRequest(false); // Stop loading when the request is done
+            setLoadingLoginRequest(false);
         }
     };
 

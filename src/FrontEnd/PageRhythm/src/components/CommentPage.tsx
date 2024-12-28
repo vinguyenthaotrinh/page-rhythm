@@ -55,7 +55,7 @@ export default function CommentPage() {
 
     return (
         <div
-            id = "comment-page"
+            id  = "comment-page"
         >
             <NavigationBar />
             <div

@@ -9,11 +9,21 @@ create table
     bio             text null,
     salt            text not null,
     hashed_password text not null,
-    account_type    text null,
+    account_type    text not null default '"user"'::text,
     profile_picture text null,
 
     constraint Account_pkey primary key (account_id),
-    constraint Account_email_key unique (email)
+    constraint Account_email_key unique (email),
+    constraint account_type_check check (
+      (
+        account_type = any (
+          array[
+            'user'::text,
+            'admin'::text
+          ]
+        )
+      )
+    )
 
   ) tablespace pg_default;
 
@@ -21,12 +31,22 @@ create table
   public."BannedAccount" (
     banned_account_id     bigserial not null,
     banning_account_id    bigserial not null,
-    ban_type              text null,
+    ban_type              text not null default '"permanently_banned"'::text,
     start_time            timestamp without time zone null,
     end_time              timestamp without time zone null,
     constraint BannedAccount_pkey primary key (banned_account_id),
     constraint BannedAccount_banned_account_id_fkey foreign key (banned_account_id) references "Account" (account_id),
-    constraint BannedAccount_banning_account_id_fkey foreign key (banning_account_id) references "Account" (account_id)
+    constraint BannedAccount_banning_account_id_fkey foreign key (banning_account_id) references "Account" (account_id),
+    constraint ban_type_check check (
+      (
+        ban_type = any (
+          array[
+            'permanently_banned'::text,
+            'temporarily_banned'::text
+          ]
+        )
+      )
+    )
   ) tablespace pg_default;
 
   create table
@@ -62,12 +82,12 @@ create table
 
   create table
   public."Comment" (
-    comment_id bigserial not null,
-    book_id bigserial not null,
-    comment_author_id bigserial not null,
-    replied_comment_id bigserial not null,
-    content text null,
-    create_time timestamp with time zone null,
+    comment_id          bigserial not null,
+    book_id             bigserial not null,
+    comment_author_id   bigserial not null,
+    replied_comment_id  bigserial not null,
+    content             text null,
+    create_time         timestamp with time zone null,
     
     constraint Comment_pkey primary key (comment_id),
     constraint Comment_book_id_fkey foreign key (book_id) references "Book" (book_id),
@@ -77,34 +97,34 @@ create table
 
   create table
   public."SampleAudioFile" (
-    sample_audio_file_id bigserial not null,
-    file_name text null,
-    description text null,
-    owner_id bigserial not null,
-    upload_time timestamp without time zone null,
-    content text null,
-    file_extension text null,
+    sample_audio_file_id  bigserial not null,
+    file_name             text null,
+    description           text null,
+    owner_id              bigserial not null,
+    upload_time           timestamp without time zone null,
+    content               text null,
+    file_extension        text null,
     constraint SampleAudioFile_pkey primary key (sample_audio_file_id),
     constraint SampleAudioFile_owner_id_fkey foreign key (owner_id) references "Account" (account_id)
   ) tablespace pg_default;
 
   create table
   public."TextToSpeechGeneration" (
-    id bigserial not null,
-    account_id bigserial not null,
-    generation_time timestamp without time zone null,
-    text_content text not null,
-    speech_content text not null,
+    id                    bigserial not null,
+    account_id            bigserial not null,
+    generation_time       timestamp without time zone null,
+    text_content          text not null,
+    speech_content        text not null,
     constraint TextToSpeechGeneration_pkey primary key (id),
     constraint TextToSpeechGeneration_account_id_fkey foreign key (account_id) references "Account" (account_id)
   ) tablespace pg_default;
 
   create table
   public."TrackedProgress" (
-    user_id bigserial not null,
-    book_id bigserial not null,
-    page_number integer null,
-    status text not null default '"not_started"'::text,
+    user_id                 bigserial not null,
+    book_id                 bigserial not null,
+    page_number             integer null,
+    status                  text not null default '"not_started"'::text,
     most_recent_update_date timestamp with time zone null,
     constraint TrackedProgress_pkey primary key (user_id, book_id),
     constraint TrackedProgress_book_id_fkey foreign key (book_id) references "Book" (book_id),

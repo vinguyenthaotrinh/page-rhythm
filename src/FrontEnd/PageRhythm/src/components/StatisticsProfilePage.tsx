@@ -58,10 +58,14 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
         return null;
 
     return (
-        <div className="add-overlay">
-            <div className="statistics-profile-page-add-overlay-content">
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className   =   "statistics-profile-page-add-overlay-content"
+            >
                 <h1 
-                    className="add-overlay-title"
+                    className   =   "add-overlay-title"
                 >
                     Update your progress
                 </h1>
@@ -69,20 +73,40 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                     You can update the progress of reading the book here
                 </p>
 
-                <div className="statistics-profile-page-input-row-container">
-                    <label className="status-label">Status:</label>
+                <div 
+                    className   =   "statistics-profile-page-input-row-container"
+                >
+                    <label 
+                        className   =   "status-label"
+                    >
+                        Status:
+                    </label>
                     <select 
                         value       =   {status} 
                         onChange    =   {(e) => setStatus(e.target.value)}
                         className   =   "status-dropdown"
                     >
-                        <option value="not_started">    Not started </option>
-                        <option value="in_progress">    In progress </option>
-                        <option value="finished">       Finished    </option>
+                        <option 
+                            value   =   "not_started"
+                        >
+                            Not started
+                        </option>
+                        <option 
+                            value   =   "in_progress"
+                        >
+                            In progress
+                        </option>
+                        <option 
+                            value   =   "finished"
+                        >
+                            Finished
+                        </option>
                     </select>
                 </div>
 
-                <div className="statistics-profile-page-input-row-container">
+                <div 
+                    className   =   "statistics-profile-page-input-row-container"
+                >
                     <label 
                         className   =   {`status-label ${status !== "in_progress" ? "disabled" : ""}`}
                     >
@@ -98,7 +122,9 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                     />
                 </div>
 
-                <div className="add-overlay-buttons">
+                <div 
+                    className   =   "add-overlay-buttons"
+                >
                     <button 
                         onClick =   {handleUpdateStatus}
                     >
@@ -246,10 +272,16 @@ export default function StatisticsProfilePage() {
                 <div 
                     className   =   "statistics-profile-page-profile-content"
                 >
-                    <h1 id = "statistics-profile-page-title">Statistics</h1>
+                    <h1 
+                        id  =   "statistics-profile-page-title"
+                    >
+                        Statistics
+                    </h1>
 
                     {/* Scrollable section for books */}
-                    <div id="statistics-profile-page-books-list-container">
+                    <div 
+                        id  =   "statistics-profile-page-books-list-container"
+                    >
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
                             <div id="statistics-profile-page-books-grid">
                                 {books.map((book, index) => (
@@ -257,7 +289,9 @@ export default function StatisticsProfilePage() {
                                         key         =   {index} 
                                         className   =   "statistics-profile-page-book-item"
                                     >
-                                        <div className="statistics-book-item-left-column">
+                                        <div 
+                                            className   =   "statistics-book-item-left-column"
+                                        >
                                             <img
                                                 src         =   {IMAGES.decodeBookCoverImage(book.image)}
                                                 alt         =   {book.title}
@@ -265,9 +299,19 @@ export default function StatisticsProfilePage() {
                                                 className   =   "book-item-cover"
                                             />
                                         </div>
-                                        <div className="statistics-book-item-right-column">
-                                            <p className="statistics-book-item-title">{book.title}</p>
-                                            <p className="statistics-book-item-author">Author: {book.author}</p>
+                                        <div 
+                                            className   =   "statistics-book-item-right-column"
+                                        >
+                                            <p
+                                                className   =   "statistics-book-item-title"
+                                            >
+                                                {book.title}
+                                            </p>
+                                            <p
+                                                className   =   "statistics-book-item-author"
+                                            >
+                                                Author: {book.author}
+                                            </p>
                                             <p 
                                                 className   =   "statistics-book-item-release-date"
                                             >

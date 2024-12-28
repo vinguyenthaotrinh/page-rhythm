@@ -25,7 +25,11 @@ function LogoSection() {
                 src     =   {IMAGES.LOGO} 
                 alt     =   "Logo" 
             />
-            <h1 id="register-page-title">PageRhythm</h1>
+            <h1
+                id  =   "register-page-title"
+            >
+                PageRhythm
+            </h1>
         </div>
     );
 }
@@ -103,7 +107,9 @@ function SignupSection() {
       
             <br /><br />
             
-            <div id="register-page-signup-title">
+            <div
+                id  =   "register-page-signup-title"
+            >
                 <h1     
                     id      =   "register-page-welcome-text"
                 >
@@ -155,7 +161,9 @@ function SignupSection() {
                     />
                 </div>
 
-                <div className="register-page-input-container">
+                <div 
+                    className   =   "register-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.LOCK_ICON} 
                         className   =   "register-page-input-icon" 
@@ -201,7 +209,9 @@ function SignupSection() {
                     />
                 </div>
 
-                <div className="register-page-input-container">
+                <div 
+                    className   =   "register-page-input-container"
+                >
                     <img 
                         src         =   {IMAGES.CALENDAR_ICON} 
                         className   =   "register-page-input-icon" 

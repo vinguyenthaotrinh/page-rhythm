@@ -183,7 +183,7 @@ export default function ReadBookPage() {
                     </div>
 
                     <div
-                        id = "read-book-page-navigation-section"
+                        id  =   "read-book-page-navigation-section"
                     >
                         <button
                             className   =   "read-book-page-navigation-button"

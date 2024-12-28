@@ -136,38 +136,62 @@ export default function HomePage() {
                 </button>
             </div>
 
-            <div className="home-page-book-list-headers">
+            <div 
+                className   =   "home-page-book-list-headers"
+            >
                 <div 
                     className   =   "home-page-book-list-header"
                     id          =   "home-page-book-list-header-title"
                 >
                     Title
                 </div>
-                <div className="home-page-book-list-header">Rating</div>
-                <div className="home-page-book-list-header">Genre</div>
-                <div className="home-page-book-list-header">Release Date</div>
+                <div 
+                    className   =   "home-page-book-list-header"
+                >
+                    Rating
+                </div>
+                <div 
+                    className   =   "home-page-book-list-header"
+                >
+                    Genre
+                </div>
+                <div 
+                    className   =   "home-page-book-list-header"
+                >
+                    Release Date
+                </div>
             </div>
 
-            <div className="home-page-book-list">
+            <div 
+                className   =   "home-page-book-list"
+            >
                 {books.map((book, index) => (
                     <div 
                         className   =   "home-page-book-list-item" 
                         key         =   {index}
                         onClick     =   {() => handleBookClick(book.book_id)}
                     >
-                        <div className="home-page-book-title">
-                            <div className="home-page-book-cover">
+                        <div 
+                            className   =   "home-page-book-title"
+                        >
+                            <div 
+                                className   =   "home-page-book-cover"
+                            >
                                 <img 
                                     src =   {IMAGES.decodeBookCoverImage(book.image)} 
                                     alt =   {book.title} 
                                 />
                             </div>
-                            <div className="home-page-book-info">
+                            <div
+                                className="home-page-book-info"
+                            >
                                 <h3>{book.title || "Unknown"}</h3>
                                 <p>{book.author || "Unknown"}</p>
                             </div>
                         </div>
-                        <div className="home-page-book-rating">
+                        <div 
+                            className   =   "home-page-book-rating"
+                        >
                             {book.rating || 5}
                         </div> {/* Show "Unknown" if rating is null */}
                         <div className="home-page-book-genre">
