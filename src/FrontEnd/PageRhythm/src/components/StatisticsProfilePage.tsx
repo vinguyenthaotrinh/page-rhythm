@@ -283,7 +283,9 @@ export default function StatisticsProfilePage() {
                         id  =   "statistics-profile-page-books-list-container"
                     >
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
-                            <div id="statistics-profile-page-books-grid">
+                            <div 
+                                id  =   "statistics-profile-page-books-grid"
+                            >
                                 {books.map((book, index) => (
                                     <div 
                                         key         =   {index} 

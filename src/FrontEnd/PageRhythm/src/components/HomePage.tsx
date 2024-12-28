@@ -43,11 +43,11 @@ export default function HomePage() {
     useEffect(() => {
         const fetchGenres = async () => {
             try {
-                const server = await Server.getInstance();
-                const fetchedGenres = await server.getAllGenres();
+                const server            =   await Server.getInstance();
+                const fetchedGenres     =   await server.getAllGenres();
 
                 // Combine hardcoded genres and fetched genres, and remove duplicates
-                const combinedGenres = new Set([...genres, ...fetchedGenres]);
+                const combinedGenres    =   new Set([...genres, ...fetchedGenres]);
                 setGenres(Array.from(combinedGenres));
             } catch (error) {
                 console.error("Error fetching genres:", error);
@@ -178,26 +178,34 @@ export default function HomePage() {
                                 className   =   "home-page-book-cover"
                             >
                                 <img 
-                                    src =   {IMAGES.decodeBookCoverImage(book.image)} 
-                                    alt =   {book.title} 
+                                    src     =   {IMAGES.decodeBookCoverImage(book.image)} 
+                                    alt     =   {book.title} 
                                 />
                             </div>
                             <div
                                 className="home-page-book-info"
                             >
-                                <h3>{book.title || "Unknown"}</h3>
-                                <p>{book.author || "Unknown"}</p>
+                                <h3>
+                                    {book.title || "Unknown"}
+                                </h3>
+                                <p>
+                                    {book.author || "Unknown"}
+                                </p>
                             </div>
                         </div>
                         <div 
                             className   =   "home-page-book-rating"
                         >
                             {book.rating || 5}
-                        </div> {/* Show "Unknown" if rating is null */}
-                        <div className="home-page-book-genre">
+                        </div>
+                        <div 
+                            className   =   "home-page-book-genre"
+                        >
                             {book.genre || "Unknown"}
                         </div>
-                        <div className="home-page-book-release-date">
+                        <div 
+                            className   =   "home-page-book-release-date"
+                        >
                             {book.released_date || "Unknown"}
                         </div>
                     </div>

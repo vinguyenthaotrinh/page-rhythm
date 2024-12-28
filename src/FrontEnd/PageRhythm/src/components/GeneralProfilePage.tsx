@@ -175,7 +175,9 @@ export default function GeneralProfilePage() {
                                         className   =   "general-profile-page-input-label"
                                     >
                                         Bio:
-                                        <div className="general-profile-page-input-container">
+                                        <div 
+                                            className   =   "general-profile-page-input-container"
+                                        >
                                             <img 
                                                 src         =   {IMAGES.BLACK_PENCIL_ICON} 
                                                 alt         =   "Bio Icon" 

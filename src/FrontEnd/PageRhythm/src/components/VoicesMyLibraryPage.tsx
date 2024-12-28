@@ -138,7 +138,10 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                 />
 
                 <div className  =   "file-input-container">
-                    <label htmlFor="file-input" className="file-input-label">
+                    <label 
+                        htmlFor     =   "file-input" 
+                        className   =   "file-input-label"
+                    >
                         Upload File
                     </label>
                     <input
@@ -150,7 +153,9 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                     />
 
                     {selectedFile && (
-                        <div className="file-name-display">
+                        <div 
+                            className   =   "file-name-display"
+                        >
                             {selectedFile.name}
                         </div>
                     )}
@@ -210,10 +215,14 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
     if (!showEditOverlay) return null;
 
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className   =   "add-overlay-content"
+            >
                 <h1 
-                    className="add-overlay-title"
+                    className   =   "add-overlay-title"
                 >
                     Edit your sample audio file
                 </h1>
@@ -234,9 +243,19 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
                     onChange    =   {(e) => setDescription(e.target.value)}
                 />
 
-                <div className="add-overlay-buttons">
-                    <button onClick =   {handleEditClick}>Save Changes</button>
-                    <button onClick =   {() => setShowEditOverlay(false)}>Close</button>
+                <div 
+                    className   =   "add-overlay-buttons"
+                >
+                    <button 
+                        onClick =   {handleEditClick}
+                    >
+                        Save Changes
+                    </button>
+                    <button 
+                        onClick =   {() => setShowEditOverlay(false)}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -478,7 +497,9 @@ export default function VoicesMyLibraryPage() {
                                             key         =   {record.sample_audio_file_id} 
                                             className   =   "record-item"
                                         >
-                                            <div className="record-header">
+                                            <div 
+                                                className   =   "record-header"
+                                            >
                                                 <span 
                                                     className   =   "sample-audio-file-name"
                                                 >

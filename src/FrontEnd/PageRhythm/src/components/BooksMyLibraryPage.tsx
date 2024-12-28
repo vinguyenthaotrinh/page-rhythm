@@ -117,13 +117,17 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     />
 
                     {selectedFile && (
-                        <div className="file-name-display">
+                        <div 
+                            className   =   "file-name-display"
+                        >
                             {selectedFile.name}
                         </div>
                     )}
                 </div>
 
-                <div className="file-input-container">
+                <div 
+                    className   =   "file-input-container"
+                >
                     <label 
                         htmlFor     =   "cover-image-input" 
                         className   =   "file-input-label"
@@ -339,16 +343,16 @@ export default function BooksMyLibraryPage() {
     const [genre, setGenre]                                         = useState<string | null>("");      // Genre input
     const [summary, setSummary]                                     = useState("");                     // Summary input
     const [selectedCoverImage, setSelectedCoverImage]               = useState<File | null>(null);      // Track the cover image file
-    const [showEditOverlay, setShowEditOverlay]                     = useState(false);                  // State for Edit Overlay
-    const [selectedBook, setSelectedBook]                           = useState<any | null>(null);       // State for selected book
+    const [showEditOverlay, setShowEditOverlay]                     = useState(false);
+    const [selectedBook, setSelectedBook]                           = useState<any | null>(null);
     const navigate                                                  = useNavigate();
 
     useEffect(() => {
         const fetchBooks = async () => {
             try {
                 setLoading(true);
-                const server = await Server.getInstance();
-                const response = await server.getUserUploadedBooks();
+                const server    = await Server.getInstance();
+                const response  = await server.getUserUploadedBooks();
                 setBooks(response);
             } catch (error) {
                 console.error("Error fetching books:", error);
@@ -421,7 +425,7 @@ export default function BooksMyLibraryPage() {
             const reader = new FileReader();
             reader.onloadend = () => {
             };
-            reader.readAsDataURL(file); // Read the file as a data URL
+            reader.readAsDataURL(file);
         }
     };
 
@@ -499,52 +503,77 @@ export default function BooksMyLibraryPage() {
                     </h1>
 
                     {/* Scrollable section for books */}
-                    <div id="books-my-library-page-books-list-container">
+                    <div 
+                        id  =   "books-my-library-page-books-list-container"
+                    >
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
-                            <div id="books-my-library-page-books-grid">
+                            <div 
+                                id  =   "books-my-library-page-books-grid"
+                            >
                                 {books.map((book, index) => (
-                                    <div key={index} className="books-my-library-page-book-item">
-                                        <div className="book-item-left-column">
+                                    <div 
+                                        key         =   {index} 
+                                        className   =   "books-my-library-page-book-item"
+                                    >
+                                        <div 
+                                            className   =   "book-item-left-column"
+                                        >
                                             <img
-                                                src={IMAGES.decodeBookCoverImage(book.image)}
-                                                alt={book.title}
-                                                onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
-                                                className="book-item-cover"
+                                                src         =   {IMAGES.decodeBookCoverImage(book.image)}
+                                                alt         =   {book.title}
+                                                onClick     =   {() => navigate(`/book-details-page/${book.book_id}`)}
+                                                className   =   "book-item-cover"
                                             />
                                         </div>
-                                        <div className="book-item-right-column">
-                                            <p className="book-item-title">{book.title}</p>
-                                            <p className="book-item-author">Author: {book.author}</p>
-                                            <p className="book-item-release-date">
+                                        <div 
+                                            className   =   "book-item-right-column"
+                                        >
+                                            <p 
+                                                className   =   "book-item-title"
+                                            >
+                                                {book.title}
+                                            </p>
+                                            <p 
+                                                className   =   "book-item-author"
+                                            >
+                                                Author: {book.author}
+                                            </p>
+                                            <p 
+                                                className   =   "book-item-release-date"
+                                            >
                                                 Release Date: {book.released_date || "Unknown"}
                                             </p>
-                                            <div className="book-item-buttons">
+                                            <div 
+                                                className   =   "book-item-buttons"
+                                            >
                                                 <button 
-                                                    className="book-item-edit-button"
-                                                    onClick = {() => handleEditClick(book)}
+                                                    className       =   "book-item-edit-button"
+                                                    onClick         =   {() => handleEditClick(book)}
                                                 >
                                                     Edit
                                                     <img
-                                                        src={IMAGES.WHITE_PENCIL_ICON}
-                                                        alt="Edit Icon"
-                                                        className="book-item-button-icon"
+                                                        src         =   {IMAGES.WHITE_PENCIL_ICON}
+                                                        alt         =   "Edit Icon"
+                                                        className   =   "book-item-button-icon"
                                                     />
                                                 </button>
                                                 <button
-                                                    className="book-item-delete-button"
-                                                    onClick={() => handleDeleteClick(book)}
+                                                    className   =   "book-item-delete-button"
+                                                    onClick     =   {() => handleDeleteClick(book)}
                                                 >
                                                     Delete
-                                                    <div className="book-item-button-icon">
+                                                    <div 
+                                                        className   =   "book-item-button-icon"
+                                                    >
                                                         <img
-                                                            src={IMAGES.RED_TRASH_ICON}
-                                                            alt="Delete Icon"
-                                                            className="icon-normal"
+                                                            src         =   {IMAGES.RED_TRASH_ICON}
+                                                            alt         =   "Delete Icon"
+                                                            className   =   "icon-normal"
                                                         />
                                                         <img
-                                                            src={IMAGES.WHITE_TRASH_ICON}
-                                                            alt="Delete Hover Icon"
-                                                            className="icon-hover"
+                                                            src         =   {IMAGES.WHITE_TRASH_ICON}
+                                                            alt         =   "Delete Hover Icon"
+                                                            className   =   "icon-hover"
                                                         />
                                                     </div>
                                                 </button>
