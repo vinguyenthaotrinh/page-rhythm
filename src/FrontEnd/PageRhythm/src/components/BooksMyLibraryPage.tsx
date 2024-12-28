@@ -313,7 +313,7 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
 function LoadingText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id  =   "books-my-library-page-loading-text"
         >
             Loading...
         </p>
@@ -323,7 +323,7 @@ function LoadingText() {
 function NoBookText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id  =   "books-my-library-page-loading-text"
         >
             You currently have no books.
         </p>

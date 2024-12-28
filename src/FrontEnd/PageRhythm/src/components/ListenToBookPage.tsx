@@ -279,15 +279,15 @@ export default function ListenToBookPage() {
                             onClick =   {() => navigate(`/book-details-page/${bookID}`)}
                         />
                         <div
-                            id = "listen-to-book-page-book-details"
+                            id      =   "listen-to-book-page-book-details"
                         >
                             <h1
-                                id = "listen-to-book-page-book-title"
+                                id  =   "listen-to-book-page-book-title"
                             >
                                 {book.title}
                             </h1>
                             <h2
-                                id = "listen-to-book-page-book-author"
+                                id  =   "listen-to-book-page-book-author"
                             >
                                 {book.author}
                             </h2>
@@ -315,14 +315,14 @@ export default function ListenToBookPage() {
                                         }
 
                                         onEnded        =   {() => {
-                                            setIsPlaying(false)
-                                            console.log("Audio ended");
-                                        }
+                                                setIsPlaying(false)
+                                                console.log("Audio ended");
+                                            }
                                         }
                                     />
 
                                     <div
-                                        className="audio-controls-top-row"
+                                        className   =   "audio-controls-top-row"
                                     >
                                         <button
                                             className       =   "audio-control-button previous-button"

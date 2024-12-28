@@ -188,7 +188,9 @@ export default function BookDetailsPage() {
                 <div 
                     className   =   "comment-header"
                 >
-                    <div className="comment-header-left">
+                    <div 
+                        className   =   "comment-header-left"
+                    >
                         <img 
                             src         =   {IMAGES.DEFAULT_PROFILE_PICTURE} 
                             alt         =   "Profile" 
@@ -436,13 +438,19 @@ export default function BookDetailsPage() {
                         <div 
                             className   =   "book-details-row"
                         >
-                            <strong>Release Date:</strong> {new Date(book.released_date).toLocaleDateString()}
+                            <strong>
+                                Release Date:
+                            </strong> 
+                            {new Date(book.released_date).toLocaleDateString()}
                         </div>
 
                         <div 
                             className   =   "book-details-row"
                         >
-                            <strong>Genre:</strong> {book.genre}
+                            <strong>
+                                Genre:
+                            </strong> 
+                            {book.genre}
                         </div>
 
                         <div 
@@ -481,7 +489,7 @@ export default function BookDetailsPage() {
                                 src         =   {star <= (userRating || 0) ? IMAGES.FILLED_STAR_ICON : IMAGES.EMPTY_STAR_ICON}
                                 alt         =   {`${star} Star`}
                                 className   =   "star-icon"
-                                onClick     =   {() => handleRating(star)} // Handle click to set rating
+                                onClick     =   {() => handleRating(star)}
                             />
                         ))}
                     </div>                
