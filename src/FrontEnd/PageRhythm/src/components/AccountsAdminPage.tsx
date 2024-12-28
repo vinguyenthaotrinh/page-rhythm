@@ -87,8 +87,8 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             changed = true;
 
         if (status === "temporarily_banned" && userAccount.account_status === status) {
-            const oldFromDate = userAccount.ban_information.start_time.split("T")[0]; // Extract date only
-            const oldToDate = userAccount.ban_information.end_time.split("T")[0]; // Extract date only
+            const oldFromDate   = userAccount.ban_information.start_time.split("T")[0];     // Extract date only
+            const oldToDate     = userAccount.ban_information.end_time.split("T")[0];       // Extract date only
 
             if (areDatesValid(fromDate, toDate) && (fromDate !== oldFromDate || toDate !== oldToDate)) {
                 changed = true;
@@ -147,9 +147,21 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                     onChange    =   {(e) => setStatus(e.target.value)}
                     className   =   "status-dropdown"
                 >
-                    <option value="active">             Normal              </option>
-                    <option value="temporarily_banned"> Temporarily banned  </option>
-                    <option value="permanently_banned"> Permanently banned  </option>
+                    <option 
+                        value   =   "active"
+                    >
+                        Normal              
+                    </option>
+                    <option 
+                        value   =   "temporarily_banned"
+                    >
+                        Temporarily banned  
+                    </option>
+                    <option 
+                        value   =   "permanently_banned"
+                    >
+                        Permanently banned
+                    </option>
                 </select>
             </div>
 
@@ -193,7 +205,7 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
 }
 
 export default function AccountsAdminPage() {
-    const [userAccounts, setUserAccounts]                               = useState<any[]>([]);              // User accounts data state
+    const [userAccounts, setUserAccounts]                               = useState<any[]>([]);
     const [loading, setLoading]                                         = useState(true);
     const navigate                                                      = useNavigate();
 
@@ -239,11 +251,13 @@ export default function AccountsAdminPage() {
                     >
                         {loading ? (<LoadingText />) : (userAccounts.length === 0 ? (<NoUserAccountText />) : 
                             (
-                                <div id="accounts-admin-page-accounts-grid">
+                                <div 
+                                    id  =   "accounts-admin-page-accounts-grid"
+                                >
                                     {userAccounts.map((userAccount, index) => (
                                         <UserAccountItem 
-                                            key={index} 
-                                            userAccount={userAccount} 
+                                            key         =   {index} 
+                                            userAccount =   {userAccount} 
                                         />
                                     ))}
                                 </div>

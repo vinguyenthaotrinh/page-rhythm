@@ -53,9 +53,15 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
     if (!showAddOverlay) return null;
 
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
-                <h1 className="add-overlay-title">
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className   =   "add-overlay-content"
+            >
+                <h1 
+                    className   =   "add-overlay-title"
+                >
                     Upload your book here
                 </h1>
                 <p>
@@ -139,7 +145,9 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     )}
                 </div>
 
-                <div className="add-overlay-buttons">
+                <div 
+                    className   =   "add-overlay-buttons"
+                >
                     <button 
                         onClick =   {handleBookUpload}
                     >
@@ -214,7 +222,7 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                 className   =   "add-overlay-content"
             >
                 <h1 
-                    className="add-overlay-title"
+                    className   =   "add-overlay-title"
                 >
                     Edit Book Information
                 </h1>
@@ -271,13 +279,17 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                     />
 
                     {selectedCoverImage && (
-                        <div className="file-name-display">
+                        <div 
+                            className   =   "file-name-display"
+                        >
                             {selectedCoverImage.name}
                         </div>
                     )}
                 </div>
 
-                <div className="add-overlay-buttons">
+                <div 
+                    className   =   "add-overlay-buttons"
+                >
                     <button 
                         onClick =   {handleBookEdit}
                     >

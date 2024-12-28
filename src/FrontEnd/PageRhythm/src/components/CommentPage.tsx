@@ -73,7 +73,9 @@ export default function CommentPage() {
                     <span>Back</span>
                 </div>
             </div>
-            <div id="comment-page-main-section">
+            <div 
+                id  =   "comment-page-main-section"
+            >
                 <h3>
                     Write your comment here
                 </h3>

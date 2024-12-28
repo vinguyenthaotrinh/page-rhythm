@@ -404,8 +404,13 @@ export default function BookDetailsPage() {
                             </div>
                         </div>
 
-                        <div className="book-details-row">
-                            <strong>Author:</strong> {book.author}
+                        <div 
+                            className   =   "book-details-row"
+                        >
+                            <strong>
+                                Author:
+                            </strong> 
+                            {book.author}
                         </div>
 
                         {
@@ -452,9 +457,15 @@ export default function BookDetailsPage() {
                 </div>
             </div>
 
-            <div id="book-details-page-review-section">
-                <strong>Rating & Comments:</strong>
-                <div className="review-section-content">
+            <div 
+                id  =   "book-details-page-review-section"
+            >
+                <strong>
+                    Rating & Comments:
+                </strong>
+                <div 
+                    className="review-section-content"
+                >
                     
                     <button 
                         className   =   "write-comment-button"

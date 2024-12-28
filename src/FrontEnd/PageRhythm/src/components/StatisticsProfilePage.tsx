@@ -61,7 +61,8 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
         <div className="add-overlay">
             <div className="statistics-profile-page-add-overlay-content">
                 <h1 
-                    className="add-overlay-title">
+                    className="add-overlay-title"
+                >
                     Update your progress
                 </h1>
                 <p>
@@ -98,8 +99,16 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                 </div>
 
                 <div className="add-overlay-buttons">
-                    <button onClick={handleUpdateStatus}>Update</button>
-                    <button onClick={() => setShowUpdateStatusOverlay(false)}>Cancel</button>
+                    <button 
+                        onClick =   {handleUpdateStatus}
+                    >
+                        Update
+                    </button>
+                    <button 
+                        onClick =   {() => setShowUpdateStatusOverlay(false)}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -127,7 +136,7 @@ function NoBookText() {
 }
 
 export default function StatisticsProfilePage() {
-    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
+    const [books, setBooks]                                             = useState<any[]>([]);
     const [loading, setLoading]                                         = useState(true);
     const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);
@@ -159,7 +168,7 @@ export default function StatisticsProfilePage() {
     };
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);              // Set the selected book
+        setBookToDelete(book);
         setShowDeletionConfirmation(true);  // Show the confirmation box
     };
     
@@ -209,8 +218,8 @@ export default function StatisticsProfilePage() {
         const fetchBooks = async () => {
             try {
                 setLoading(true);
-                const server = await Server.getInstance();
-                const response = await server.getAllUserReadingProgress();
+                const server    =   await Server.getInstance();
+                const response  =   await server.getAllUserReadingProgress();
                 console.log(response);
                 setBooks(response);
             } catch (error) {
@@ -224,11 +233,19 @@ export default function StatisticsProfilePage() {
     }, []);
 
     return (
-        <div className="statistics-profile-page">
+        <div 
+            className   =   "statistics-profile-page"
+        >
             <NavigationBar />
-            <div className="statistics-profile-page-container">
-                <ProfileSectionBar currentOption="statistics" />
-                <div className="statistics-profile-page-profile-content">
+            <div 
+                className   =   "statistics-profile-page-container"
+            >
+                <ProfileSectionBar 
+                    currentOption   =   "statistics" 
+                />
+                <div 
+                    className   =   "statistics-profile-page-profile-content"
+                >
                     <h1 id = "statistics-profile-page-title">Statistics</h1>
 
                     {/* Scrollable section for books */}
@@ -236,13 +253,16 @@ export default function StatisticsProfilePage() {
                         {loading ? (<LoadingText />) : (books.length === 0 ? (<NoBookText />) :
                             <div id="statistics-profile-page-books-grid">
                                 {books.map((book, index) => (
-                                    <div key={index} className="statistics-profile-page-book-item">
+                                    <div 
+                                        key         =   {index} 
+                                        className   =   "statistics-profile-page-book-item"
+                                    >
                                         <div className="statistics-book-item-left-column">
                                             <img
-                                                src={IMAGES.decodeBookCoverImage(book.image)}
-                                                alt={book.title}
-                                                onClick = {() => navigate(`/book-details-page/${book.book_id}`)}
-                                                className="book-item-cover"
+                                                src         =   {IMAGES.decodeBookCoverImage(book.image)}
+                                                alt         =   {book.title}
+                                                onClick     =   {() => navigate(`/book-details-page/${book.book_id}`)}
+                                                className   =   "book-item-cover"
                                             />
                                         </div>
                                         <div className="statistics-book-item-right-column">

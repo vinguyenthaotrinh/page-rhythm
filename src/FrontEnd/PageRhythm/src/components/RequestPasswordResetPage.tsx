@@ -35,7 +35,7 @@ function RequestPasswordResetSection() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
 
-        setLoadingLoginRequest(true);       // Set loading state to true
+        setLoadingLoginRequest(true);
         setError("");                       // Clear any previous error
 
         try {
@@ -52,7 +52,9 @@ function RequestPasswordResetSection() {
     };
 
     return (
-        <div id="request-password-reset-page-main-section">
+        <div 
+            id  =   "request-password-reset-page-main-section"
+        >
             <img 
                 src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
                 className   =   "request-password-reset-page-overlay-image" 
@@ -99,7 +101,7 @@ function RequestPasswordResetSection() {
                         className   =   "request-password-reset-page-input-info" 
                         required
                         value       =   {email}
-                        onChange    =   {(e) => setEmail(e.target.value)}  // Update email state
+                        onChange    =   {(e) => setEmail(e.target.value)}
                     />
                 </div>
                 

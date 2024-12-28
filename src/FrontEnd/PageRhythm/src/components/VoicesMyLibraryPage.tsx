@@ -109,10 +109,14 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
         return null;
 
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className  =    "add-overlay-content"
+            >
                 <h1 
-                    className="add-overlay-title"
+                    className   =   "add-overlay-title"
                 >
                     Upload your sample audio file here
                 </h1>
@@ -242,7 +246,7 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
 function LoadingText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id  =   "books-my-library-page-loading-text"
         >
             Loading...
         </p>
@@ -252,7 +256,7 @@ function LoadingText() {
 function NoVoiceText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id  =   "books-my-library-page-loading-text"
         >
             You currently have no sample audio files.
         </p>
@@ -260,7 +264,7 @@ function NoVoiceText() {
 }
 
 export default function VoicesMyLibraryPage() {
-    const [showAddOverlay, setShowAddOverlay]                       = useState(false);                                  // State for Add Overlay
+    const [showAddOverlay, setShowAddOverlay]                       = useState(false);
     const [records, setRecords]                                     = useState<any[]>([]);                              // Records will be fetched
     const [playingIndex, setPlayingIndex]                           = useState<number | null>(null);                    // Track currently playing audio
     const [audioTimes, setAudioTimes]                               = useState<Record<number, number>>({});             // Track current time for each audio

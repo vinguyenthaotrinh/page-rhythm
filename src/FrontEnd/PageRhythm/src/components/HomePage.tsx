@@ -80,10 +80,16 @@ export default function HomePage() {
     };
 
     return (
-        <div id = "home-page">
+        <div 
+            id  =   "home-page"
+        >
             <NavigationBar />
-            <div id="home-page-search-container">
-                <div className="home-page-input-container">
+            <div 
+                id  =   "home-page-search-container"
+            >
+                <div 
+                    className   =   "home-page-input-container"
+                >
                     <img
                         src         =   {IMAGES.SEARCH_ICON} 
                         alt         =   "Search Icon" 
@@ -96,7 +102,9 @@ export default function HomePage() {
                         onChange    =   {(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
-                <div className="home-page-select-container">
+                <div 
+                    className   =   "home-page-select-container"
+                >
                     <img 
                         src         =   {IMAGES.SLIDERS_ICON} 
                         alt         =   "Genre Icon" 
@@ -106,7 +114,9 @@ export default function HomePage() {
                         value       =   {selectedGenre} 
                         onChange    =   {handleGenreChange}
                     >
-                        <option value="All">
+                        <option 
+                            value   =   "All"
+                        >
                             All genres
                         </option>
                         {genres.map((genre) => (
@@ -119,13 +129,17 @@ export default function HomePage() {
                         ))}
                     </select>
                 </div>
-                <button onClick={handleSearch}>Search</button>
+                <button 
+                    onClick =   {handleSearch}
+                >
+                    Search
+                </button>
             </div>
 
             <div className="home-page-book-list-headers">
                 <div 
-                    className="home-page-book-list-header"
-                    id = "home-page-book-list-header-title"
+                    className   =   "home-page-book-list-header"
+                    id          =   "home-page-book-list-header-title"
                 >
                     Title
                 </div>
@@ -149,8 +163,8 @@ export default function HomePage() {
                                 />
                             </div>
                             <div className="home-page-book-info">
-                                <h3>{book.title || "Unknown"}</h3> {/* Show "Unknown" if title is null */}
-                                <p>{book.author || "Unknown"}</p> {/* Show "Unknown" if author is null */}
+                                <h3>{book.title || "Unknown"}</h3>
+                                <p>{book.author || "Unknown"}</p>
                             </div>
                         </div>
                         <div className="home-page-book-rating">
@@ -158,10 +172,10 @@ export default function HomePage() {
                         </div> {/* Show "Unknown" if rating is null */}
                         <div className="home-page-book-genre">
                             {book.genre || "Unknown"}
-                        </div> {/* Show "Unknown" if genre is null */}
+                        </div>
                         <div className="home-page-book-release-date">
                             {book.released_date || "Unknown"}
-                        </div> {/* Show "Unknown" if releaseDate is null */}
+                        </div>
                     </div>
                 ))}
             </div>

@@ -63,7 +63,7 @@ const VisibilityConfirmationBox: React.FC<VisibilityConfirmationBoxProps> = ({
 function LoadingText() {
     return (
         <p
-            id = "books-admin-page-loading-text"
+            id  =   "books-admin-page-loading-text"
         >
             Loading...
         </p>
@@ -73,7 +73,7 @@ function LoadingText() {
 function NoBookText() {
     return (
         <p
-            id = "books-my-library-page-loading-text"
+            id  =   "books-my-library-page-loading-text"
         >
             There is no book to display.
         </p>
@@ -81,7 +81,7 @@ function NoBookText() {
 }
 
 export default function BooksAdminPage() {
-    const [books, setBooks]                                             = useState<any[]>([]);              // Books data state
+    const [books, setBooks]                                             = useState<any[]>([]);
     const [loading, setLoading]                                         = useState(true);
     const [showDeletionConfirmation, setShowDeletionConfirmation]       = useState(false);
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);    
@@ -108,7 +108,7 @@ export default function BooksAdminPage() {
     }, []);
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);              // Set the selected book
+        setBookToDelete(book);
         setShowDeletionConfirmation(true);  // Show the confirmation box
     };
 

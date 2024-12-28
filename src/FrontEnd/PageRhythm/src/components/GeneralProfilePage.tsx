@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 function LoadingText() {
     return (
         <p
-            id = "statistics-profile-page-loading-text"
+            id  =   "statistics-profile-page-loading-text"
         >
             Loading...
         </p>

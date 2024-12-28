@@ -182,7 +182,7 @@ export default function ListenToBookPage() {
             } else {
                 audioRef.current.currentTime = audioRef.current.duration;  // Set to the max duration if beyond
             }
-            setAudioTime(audioRef.current.currentTime);  // Update state
+            setAudioTime(audioRef.current.currentTime);
         }
     };
     
@@ -225,7 +225,11 @@ export default function ListenToBookPage() {
                 <div
                     id  =   "listen-to-book-page-top-region-right-part"
                 >
-                    <label className="listen-to-book-page-voice-header-text">Voice:</label>
+                    <label 
+                        className   =   "listen-to-book-page-voice-header-text"
+                    >
+                        Voice:
+                    </label>
                     <select
                         id          =   "listen-to-book-page-voice-select"
                         value       =   {voice}

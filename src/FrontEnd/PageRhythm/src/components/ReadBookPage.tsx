@@ -16,11 +16,11 @@ export default function ReadBookPage() {
     const maximumLineLength                     = 80;
     
     const handleBackClick = () => {
-        navigate(-1); // Navigate back to the previous page
+        navigate(-1);
     };
 
     const handleListenButtonClick = () => {
-        navigate(`/listen-to-book-page/${bookID}`); // Navigate to the ListenToBookPage component
+        navigate(`/listen-to-book-page/${bookID}`);
     };
 
     const decodeBookCover = (bookCover: string | null) => {
@@ -189,7 +189,11 @@ export default function ReadBookPage() {
                             className   =   "read-book-page-navigation-button"
                             onClick     =   {onLeftButtonClick}
                         >
-                            <img src={IMAGES.LEFT_ICON} alt="Previous" className="read-book-page-navigation-icon" />
+                            <img 
+                                src         =   {IMAGES.LEFT_ICON} 
+                                alt         =   "Previous" 
+                                className   =   "read-book-page-navigation-icon" 
+                            />
                         </button>
 
                         <span>

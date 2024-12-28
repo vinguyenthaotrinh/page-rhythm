@@ -78,16 +78,18 @@ function SignupSection() {
                 const errorData = await response.json();
                 setError(errorData.message || "Signup failed"); // Handle server errors (e.g., invalid credentials)
             }
-        } catch (err) {
+        } catch (e) {
             setError("An error occurred. Please try again.");   // Handle network or other errors
-            console.error("Signup error:", err);
+            console.error("Signup error:", e);
         } finally {
             setLoadingSignupRequest(false);
         }
     };
 
     return (
-        <div id="register-page-signup-section">
+        <div 
+            id  =   "register-page-signup-section"
+        >
             <img 
                 src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
                 className   =   "register-page-overlay-image" 
