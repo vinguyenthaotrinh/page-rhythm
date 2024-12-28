@@ -150,8 +150,8 @@ export default function BookDetailsPage() {
                     return;
                 }
 
-                const server = await Server.getInstance();
-                const commentsData = await server.retrieveAllComments(bookID);  // Fetch comments for the book
+                const server        = await Server.getInstance();
+                const commentsData  = await server.retrieveAllComments(bookID);  // Fetch comments for the book
                 setComments(commentsData);                                      // Update the state with the fetched comments
                 console.log("Comments fetched successfully.", commentsData);
             } catch (error) {
@@ -237,8 +237,6 @@ export default function BookDetailsPage() {
         );
     };
     
-
-    // Handle the reply button click (navigate to the comment page for that comment)
     const handleReplyClick = (repliedCommentID: number) => {
         //navigate(`/comment-page/${bookID}/${repliedCommentID}`);
         setRepliedCommentID(repliedCommentID.toString());

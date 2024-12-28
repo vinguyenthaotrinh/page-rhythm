@@ -59,9 +59,12 @@ export default function CommentPage() {
         >
             <NavigationBar />
             <div
-                id = "comment-page-back-button-region"
+                id  =   "comment-page-back-button-region"
             >
-                <div id="comment-page-back-button-container" onClick={handleBackClick}>
+                <div 
+                    id      =   "comment-page-back-button-container" 
+                    onClick =   {handleBackClick}
+                >
                     <img 
                         src         =   {IMAGES.LEFT_ARROW_ICON} 
                         alt         =   "Back" 
@@ -71,7 +74,9 @@ export default function CommentPage() {
                 </div>
             </div>
             <div id="comment-page-main-section">
-                <h3>Write your comment here</h3>
+                <h3>
+                    Write your comment here
+                </h3>
                 <textarea
                     id          =   "comment-textarea"
                     value       =   {comment}

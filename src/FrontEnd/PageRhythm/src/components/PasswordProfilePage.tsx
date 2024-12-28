@@ -47,13 +47,12 @@ export default function PasswordProfilePage() {
     };
 
     const togglePasswordVisibility = (field: string) => {
-        if (field === "currentPassword") {
+        if (field === "currentPassword")
             setShowCurrentPassword(!showCurrentPassword);
-        } else if (field === "newPassword") {
+        else if (field === "newPassword") 
             setShowNewPassword(!showNewPassword);
-        } else if (field === "confirmedNewPassword") {
+        else if (field === "confirmedNewPassword") 
             setShowConfirmedNewPassword(!showConfirmedNewPassword);
-        }
     };
 
     return (
@@ -135,7 +134,9 @@ export default function PasswordProfilePage() {
                                     />
                                 </div>
                             </label>
-                            <label className="password-profile-page-input-label">
+                            <label 
+                                className   =   "password-profile-page-input-label"
+                            >
                                 Confirm your new password:
                                 <div className="password-profile-page-input-container">
                                     <img 

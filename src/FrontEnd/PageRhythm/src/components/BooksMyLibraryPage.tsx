@@ -63,46 +63,51 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                 </p>
 
                 <input
-                    type="text"
-                    placeholder="Book Name"
-                    value={bookName}
-                    onChange={(e) => setBookName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Book Name"
+                    value       =   {bookName}
+                    onChange    =   {(e) => setBookName(e.target.value)}
                 />
 
                 <input
-                    type="text"
-                    placeholder="Author Name"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Author Name"
+                    value       =   {authorName}
+                    onChange    =   {(e) => setAuthorName(e.target.value)}
                 />
                 <input
-                    type="date"
-                    placeholder="Release Date"
-                    value={releaseDate || ""}
-                    onChange={(e) => setReleaseDate(e.target.value)}
+                    type        =   "date"
+                    placeholder =   "Release Date"
+                    value       =   {releaseDate || ""}
+                    onChange    =   {(e) => setReleaseDate(e.target.value)}
                 />
                 <input
-                    type="text"
-                    placeholder="Genre (optional)"
-                    value={genre || ""}
-                    onChange={(e) => setGenre(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Genre (optional)"
+                    value       =   {genre || ""}
+                    onChange    =   {(e) => setGenre(e.target.value)}
                 />
                 <textarea
-                    placeholder="Summary"
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
+                    placeholder =   "Summary"
+                    value       =   {summary}
+                    onChange    =   {(e) => setSummary(e.target.value)}
                 />
 
-                <div className="file-input-container">
-                    <label htmlFor="file-input" className="file-input-label">
+                <div 
+                    className   =   "file-input-container"
+                >
+                    <label 
+                        htmlFor     =   "file-input" 
+                        className   =   "file-input-label"
+                    >
                         Upload Content
                     </label>
                     <input
-                        type="file"
-                        id="file-input"
-                        onChange={handleFileSelect}
-                        accept=".txt"
-                        className="file-input-button"
+                        type        =   "file"
+                        id          =   "file-input"
+                        onChange    =   {handleFileSelect}
+                        accept      =   ".txt"
+                        className   =   "file-input-button"
                     />
 
                     {selectedFile && (
@@ -113,15 +118,18 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                 </div>
 
                 <div className="file-input-container">
-                    <label htmlFor="cover-image-input" className="file-input-label">
+                    <label 
+                        htmlFor     =   "cover-image-input" 
+                        className   =   "file-input-label"
+                    >
                         Upload Cover Image
                     </label>
                     <input
-                        type="file"
-                        id="cover-image-input"
-                        onChange={handleCoverImageSelect}
-                        accept="image/*"
-                        className="file-input-button"
+                        type        =   "file"
+                        id          =   "cover-image-input"
+                        onChange    =   {handleCoverImageSelect}
+                        accept      =   "image/*"
+                        className   =   "file-input-button"
                     />
 
                     {selectedCoverImage && (
@@ -132,8 +140,16 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                 </div>
 
                 <div className="add-overlay-buttons">
-                    <button onClick={handleBookUpload}>Upload Book</button>
-                    <button onClick={() => setShowAddOverlay(false)}>Close</button>
+                    <button 
+                        onClick =   {handleBookUpload}
+                    >
+                        Upload Book
+                    </button>
+                    <button 
+                        onClick =   {() => setShowAddOverlay(false)}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -160,7 +176,7 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
     const [releaseDate, setReleaseDate]                 = useState<string | null>(selectedBook?.release_date || "");
     const [genre, setGenre]                             = useState<string | null>(selectedBook?.genre || "");
     const [summary, setSummary]                         = useState(selectedBook?.summary || "");
-    const [selectedCoverImage, setSelectedCoverImage]   = useState<File | null>(null); // Add cover image upload if necessary
+    const [selectedCoverImage, setSelectedCoverImage]   = useState<File | null>(null);
 
     useEffect(() => {
         // Reset form values when selectedBook changes
@@ -191,8 +207,12 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
         return null;
 
     return (
-        <div className="add-overlay">
-            <div className="add-overlay-content">
+        <div 
+            className   =   "add-overlay"
+        >
+            <div 
+                className   =   "add-overlay-content"
+            >
                 <h1 
                     className="add-overlay-title"
                 >
@@ -210,22 +230,22 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                 />
 
                 <input
-                    type="text"
-                    placeholder="Author Name"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Author Name"
+                    value       =   {authorName}
+                    onChange    =   {(e) => setAuthorName(e.target.value)}
                 />
                 <input
-                    type="date"
-                    placeholder="Release Date"
-                    value={releaseDate || ""}
-                    onChange={(e) => setReleaseDate(e.target.value)}
+                    type        =   "date"
+                    placeholder =   "Release Date"
+                    value       =   {releaseDate || ""}
+                    onChange    =   {(e) => setReleaseDate(e.target.value)}
                 />
                 <input
-                    type="text"
-                    placeholder="Genre (optional)"
-                    value={genre || ""}
-                    onChange={(e) => setGenre(e.target.value)}
+                    type        =   "text"
+                    placeholder =   "Genre (optional)"
+                    value       =   {genre || ""}
+                    onChange    =   {(e) => setGenre(e.target.value)}
                 />
                 <textarea
                     placeholder =   "Summary"
@@ -233,8 +253,13 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
                     onChange    =   {(e) => setSummary(e.target.value)}
                 />
 
-                <div className="file-input-container">
-                    <label htmlFor="cover-image-input" className="file-input-label">
+                <div 
+                    className   =   "file-input-container"
+                >
+                    <label 
+                        htmlFor     =   "cover-image-input" 
+                        className   =   "file-input-label"
+                    >
                         Upload Cover Image (optional)
                     </label>
                     <input
@@ -294,7 +319,7 @@ export default function BooksMyLibraryPage() {
     const [loading, setLoading]                                     = useState(true);
     const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);                  // Confirmation box visibility
     const [bookToDelete, setBookToDelete]                           = useState<any | null>(null);       // Track the selected book for deletion
-    const [showAddOverlay, setShowAddOverlay]                       = useState(false);                  // State for Add Overlay
+    const [showAddOverlay, setShowAddOverlay]                       = useState(false);
     const [selectedFile, setSelectedFile]                           = useState<File | null>(null);      // Track the selected file for upload
     const [bookName, setBookName]                                   = useState("");                     // Book name input
     const [authorName, setAuthorName]                               = useState("");                     // Author name input
@@ -432,11 +457,19 @@ export default function BooksMyLibraryPage() {
     };
 
     return (
-        <div id="books-my-library-page">
+        <div 
+            id  =   "books-my-library-page"
+        >
             <NavigationBar />
-            <div id="books-my-library-page-container">
-                <MyLibrarySectionBar currentOption="books" />
-                <div id="books-my-library-page-content">
+            <div 
+                id  =   "books-my-library-page-container"
+            >
+                <MyLibrarySectionBar 
+                    currentOption   =   "books" 
+                />
+                <div 
+                    id  =   "books-my-library-page-content"
+                >
                     <button
                         id      =   "books-my-library-page-add-book-button"
                         onClick =   {handleAddClick}
