@@ -64,10 +64,10 @@ function LoginSection() {
                 navigate("/home-page");
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || "Login failed"); // Handle server errors (e.g., invalid credentials)
+                setError(errorData.message || "Login failed");
             }
         } catch (err) {
-            setError("An error occurred. Please try again."); // Handle network or other errors
+            setError("An error occurred. Please try again.");
             console.error("Login error:", err);
         } finally {
             setLoadingLoginRequest(false);
@@ -75,7 +75,9 @@ function LoginSection() {
     };
 
     return (
-        <div id="landing-page-login-section">
+        <div 
+            id  =   "landing-page-login-section"
+        >
             <img 
                 src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
                 className   =   "landing-page-overlay-image" 

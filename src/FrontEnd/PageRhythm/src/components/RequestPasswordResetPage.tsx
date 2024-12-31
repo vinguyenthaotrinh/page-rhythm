@@ -1,14 +1,14 @@
 import IMAGES from "../images";
 import Server from "../Server";
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/request-password-reset-page-styles.css";
 
 function LogoSection() {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate('/landing-page');
+        navigate("/landing-page");
     };
 
     return (
@@ -17,8 +17,8 @@ function LogoSection() {
             role="button"
             tabIndex={0}
             onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
-            style={{ cursor: 'pointer' }}
+            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
+            style={{ cursor: "pointer" }}
         >
             <img id="request-password-reset-page-logo" src={IMAGES.LOGO} alt="Logo" />
             <h1 id="request-password-reset-page-title">PageRhythm</h1>
@@ -44,8 +44,8 @@ function RequestPasswordResetSection() {
             const server = await Server.getInstance();
             //TO BE CONTINUED
         } catch (err) {
-            setError('An error occurred. Please try again.'); // Handle network or other errors
-            console.error('Login error:', err);
+            setError("An error occurred. Please try again.");
+            console.error("Login error:", err);
         } finally {
             setLoadingLoginRequest(false);
         }

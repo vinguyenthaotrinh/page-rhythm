@@ -177,7 +177,11 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                     >     
                         Add
                     </button>
-                    <button onClick =   {() => setShowAddOverlay(false)}>   Close   </button>
+                    <button 
+                        onClick     =   {() => setShowAddOverlay(false)}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -199,7 +203,7 @@ const EditSampleAudioFileOverlay: React.FC<EditSampleAudioFileOverlayProps> = ({
     setSelectedRecord,
     handleEditRecord,
 }) => {
-    const [fileName, setFileName] = useState(selectedRecord?.file_name || "");
+    const [fileName, setFileName]       = useState(selectedRecord?.file_name || "");
     const [description, setDescription] = useState(selectedRecord?.description || "");
 
     const handleEditClick = () => {
@@ -539,8 +543,12 @@ export default function VoicesMyLibraryPage() {
                                                         className   =   "audio-slider"
                                                     />
             
-                                                    <div className="slider-container">
-                                                        <div className="time-labels">
+                                                    <div 
+                                                        className   =   "slider-container"
+                                                    >
+                                                        <div 
+                                                            className   =   "time-labels"
+                                                        >
                                                             <span 
                                                                 className   =   "start-time"
                                                             >

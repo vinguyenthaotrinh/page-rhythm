@@ -39,7 +39,7 @@ export default function PasswordProfilePage() {
                 newPassword:            "",
                 confirmedNewPassword:   ""
             });
-            setError(""); // Clear error after successful save
+            setError("");
         } catch (error) {
             console.error("Error while saving profile", error);
             setError("An error occurred while saving the password. Please try again.");

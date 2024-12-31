@@ -3,7 +3,7 @@ import Server from "../Server";
 import "../styles/comment-page-styles.css";
 import NavigationBar from "./NavigationBar";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function CommentPage() {
 
