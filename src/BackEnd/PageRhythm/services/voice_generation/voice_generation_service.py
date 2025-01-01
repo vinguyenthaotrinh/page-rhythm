@@ -22,7 +22,7 @@ class VoiceGenerationService:
             api_key = keys[0]
         )
 
-        self.simulated = True
+        self.simulated = False
 
         self.supabase = SupabaseVoiceGenerationAPIService()
 
@@ -161,9 +161,9 @@ class VoiceGenerationService:
 
     @staticmethod
     def find_most_similar_default_voice_sample_name(voice_name: str) -> str:
-        default_voice_sample_names = VoiceGenerationService.get_all_default_voice_sample_names()
-        keys = list(default_voice_sample_names.keys())
-        maximum_similarity_score = -1
+        default_voice_sample_names  =   VoiceGenerationService.get_all_default_voice_sample_names()
+        keys                        =   list(default_voice_sample_names.keys())
+        maximum_similarity_score    =   -1
         random.shuffle(keys)
         result = str()
 
