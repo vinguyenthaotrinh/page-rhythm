@@ -13,15 +13,23 @@ function LogoSection() {
 
     return (
         <div 
-            id="request-password-reset-page-logo-section"
-            role="button"
-            tabIndex={0}
-            onClick={handleLogoClick}
-            onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            style={{ cursor: "pointer" }}
+            id          =   "request-password-reset-page-logo-section"
+            role        =   "button"
+            tabIndex    =   {0}
+            onClick     =   {handleLogoClick}
+            onKeyDown   =   {(e) => e.key === "Enter" && handleLogoClick()}
+            style       =   {{ cursor: "pointer" }}
         >
-            <img id="request-password-reset-page-logo" src={IMAGES.LOGO} alt="Logo" />
-            <h1 id="request-password-reset-page-title">PageRhythm</h1>
+            <img 
+                id  =   "request-password-reset-page-logo" 
+                src =   {IMAGES.LOGO} 
+                alt =   "Logo" 
+            />
+            <h1 
+                id  =   "request-password-reset-page-title"
+            >
+                PageRhythm
+            </h1>
         </div>
     );
 }
@@ -36,7 +44,7 @@ function RequestPasswordResetSection() {
         e.preventDefault();                 // Prevent form default submission behavior
 
         setLoadingLoginRequest(true);
-        setError("");                       // Clear any previous error
+        setError("");
 
         try {
             setLoadingLoginRequest(true);

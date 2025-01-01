@@ -50,7 +50,7 @@ function LoginSection() {
         e.preventDefault();                 // Prevent form default submission behavior
 
         setLoadingLoginRequest(true);
-        setError("");                       // Clear any previous error
+        setError("");
 
         try {
             setLoadingLoginRequest(true);
@@ -168,8 +168,7 @@ function LoginSection() {
                 >
                     Login
                 </button>
-                {
-                    /*
+                
                 <div 
                     id  =   "landing-page-request-password-reset-link-container"
                 >
@@ -180,8 +179,7 @@ function LoginSection() {
                         Forgot Password?
                     </Link>
                 </div>
-                    */
-            }   
+
                 {
                 /*
                 <div id="landing-page-google-login">

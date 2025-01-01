@@ -100,7 +100,9 @@ function TermsAndConditionsSection() {
                     </li>
 
                     <li>
-                        <h2 className="terms-and-conditions-section-title">
+                        <h2 
+                            className   =   "terms-and-conditions-section-title"
+                        >
                             Privacy and Data Protection
                         </h2>
                         <ul>

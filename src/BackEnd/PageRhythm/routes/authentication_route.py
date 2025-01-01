@@ -12,7 +12,7 @@ authentication_blueprint = Blueprint("authentication", __name__)
 
 def create_access_token_with_account_id(account_id: int):
     identity = json.dumps({"account_id": account_id})
-    return create_access_token(identity=identity)
+    return create_access_token(identity = identity)
 
 @authentication_blueprint.route("/register", methods=["POST"])
 def register():
@@ -67,11 +67,11 @@ def login():
 @authentication_blueprint.route("/change_password", methods=["PUT"])
 @jwt_required()
 def change_password():
-    data = request.get_json()
+    data                    =   request.get_json()
 
-    old_password = data["old_password"]
-    new_password = data["new_password"]
-    confirmed_new_password = data["confirmed_new_password"]
+    old_password            =   data["old_password"]
+    new_password            =   data["new_password"]
+    confirmed_new_password  =   data["confirmed_new_password"]
     
     authentication_service = AuthenticationService()
 
@@ -95,4 +95,14 @@ def change_password():
     authentication_service.change_password(account_id, new_password)
 
     return jsonify({"message": "Password changed successfully"}), 200
+
+@authentication_blueprint.route("/request_password_reset", methods=["POST"])
+def request_password_reset():
+    data    =   request.get_json()
+    email   =   data["email"]
+    account = AccountService().get_account_by_email(email)
     
+    if account is None:
+        return jsonify({"message": "There is no account with the given email"}), 400
+    
+    return jsonify({"message": "An email has been sent to your email address"}), 200

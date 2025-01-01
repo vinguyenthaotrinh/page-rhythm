@@ -8,7 +8,7 @@ export default class Server {
         if (Server.instance === null) {
             Server.instance = new Server();
             await Server.instance.initializeHost(
-                "https://page-rhythm-back-end.onrender.com", 
+                null,//"https://page-rhythm-back-end.onrender.com", 
                 "http://127.0.0.1:5000"
             );
         }
@@ -442,16 +442,14 @@ export default class Server {
     
         const url = `${this.host}/book_rating/create`; 
     
-        const body = {
-            book_id: bookID,
-            rating: rating,
-        };
-    
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body), // Send the rating data as the body
+                body:       JSON.stringify({
+                    book_id:    bookID,
+                    rating:     rating,
+                }),
             });
     
             if (response.ok) {
@@ -521,16 +519,14 @@ export default class Server {
     
         const url = `${this.host}/comment/create`;
     
-        const body = {
-            book_id: bookID,        // The book ID the comment is associated with
-            content: content,       // The content of the comment
-        };
-    
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body), // Send the comment data as the body
+                body:       JSON.stringify({
+                    book_id: bookID,
+                    content: content, 
+                }),
             });
     
             if (!response.ok) {
@@ -553,17 +549,15 @@ export default class Server {
     
         const url = `${this.host}/comment/reply`; 
     
-        const body = {
-            book_id: bookID,                        // The book ID associated with the reply
-            content: content,                       // The content of the reply
-            replied_comment_id: repliedCommentID,   // The ID of the comment being replied to
-        };
-    
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body), // Send the reply data as the body
+                body:       JSON.stringify({
+                    book_id:            bookID,
+                    content:            content,
+                    replied_comment_id: repliedCommentID,
+                }),
             });
     
             if (!response.ok) {
@@ -795,18 +789,16 @@ export default class Server {
         try {
             // Convert the file to base64
             const base64Content = await fileToBase64(record.content);
-
-            const payload = {
-                file_name:      record.file_name,
-                description:    record.description,
-                content:        base64Content.split(",")[1], // Extract the base64-encoded data without the prefix
-                file_extension: record.content.type.split("/")[1], // Extract the file extension
-            };
     
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(payload),
+                body:       JSON.stringify({
+                    file_name:      record.file_name,
+                    description:    record.description,
+                    content:        base64Content.split(",")[1],        // Extract the base64-encoded data without the prefix
+                    file_extension: record.content.type.split("/")[1],  // Extract the file extension
+                }),
             });
     
             // Check for errors
@@ -861,17 +853,15 @@ export default class Server {
     
         const url = `${this.host}/sample_audio_file/update/meta_information`;
     
-        const body = {
-            sample_audio_file_id:   record.sample_audio_file_id,
-            file_name:              record.file_name,
-            description:            record.description,
-        };
-    
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body),
+                body:       JSON.stringify({
+                    sample_audio_file_id:   record.sample_audio_file_id,
+                    file_name:              record.file_name,
+                    description:            record.description,
+                }),
             });
     
             if (!response.ok) {
@@ -964,15 +954,13 @@ export default class Server {
     
         const url = `${this.host}/user_account_management/ban/permanently`;
     
-        const body = {
-            banned_account_id,
-        };
-    
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body),
+                body:       JSON.stringify({
+                    banned_account_id,
+                }),
             });
     
             if (!response.ok) {
@@ -993,31 +981,29 @@ export default class Server {
 
         const url = `${this.host}/user_account_management/ban/temporarily/period`;
 
-        const body = {
-            banned_account_id,
-            start_time: {
-                day:    parseInt(from.split("-")[2], 10),
-                month:  parseInt(from.split("-")[1], 10),
-                year:   parseInt(from.split("-")[0], 10),
-                hour:   0,
-                minute: 0,
-                second: 0,
-            },
-            end_time: {
-                day:    parseInt(to.split("-")[2], 10),
-                month:  parseInt(to.split("-")[1], 10),
-                year:   parseInt(to.split("-")[0], 10),
-                hour:   23,
-                minute: 59,
-                second: 59,
-            },
-        };
-
         try {
             const response = await fetch(url, {
-                method: "POST",
-                headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body),
+                method:     "POST",
+                headers:    this.getSimpleHeadersWithSessionToken(),
+                body:       JSON.stringify({
+                    banned_account_id,
+                    start_time: {
+                        day:    parseInt(from.split("-")[2], 10),
+                        month:  parseInt(from.split("-")[1], 10),
+                        year:   parseInt(from.split("-")[0], 10),
+                        hour:   0,
+                        minute: 0,
+                        second: 0,
+                    },
+                    end_time: {
+                        day:    parseInt(to.split("-")[2], 10),
+                        month:  parseInt(to.split("-")[1], 10),
+                        year:   parseInt(to.split("-")[0], 10),
+                        hour:   23,
+                        minute: 59,
+                        second: 59,
+                    },
+                }),
             });
 
             if (!response.ok) {
@@ -1067,17 +1053,15 @@ export default class Server {
 
         const url = `${this.host}/statistics/track_progress`;
 
-        const body = {
-            book_id:        bookID,
-            page_number:    pageNumber,
-            status:         status,
-        };
-
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body),
+                body:       JSON.stringify({
+                    book_id:        bookID,
+                    page_number:    pageNumber,
+                    status:         status,
+                }),
             });
 
             if (!response.ok) {
@@ -1124,15 +1108,13 @@ export default class Server {
 
         const url = `${this.host}/statistics/tracked_progress/delete`;
 
-        const body = {
-            book_id: bookID,
-        };
-
         try {
             const response = await fetch(url, {
                 method: "POST",
                 headers: this.getSimpleHeadersWithSessionToken(),
-                body: JSON.stringify(body),
+                body: JSON.stringify({
+                    book_id: bookID,
+                }),
             });
 
             if (!response.ok) {
@@ -1199,16 +1181,14 @@ export default class Server {
 
         const url = `${this.host}/voice_generation/text_to_speech`;
 
-        const body = {
-            text_content: textContent,
-            voice_id: voiceID,
-        };
-
         try {
             const response = await fetch(url, {
                 method:     "POST",
                 headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       JSON.stringify(body),
+                body:       JSON.stringify({
+                    text_content:   textContent,
+                    voice_id:       voiceID,
+                }),
             });
 
             if (!response.ok) {
@@ -1226,4 +1206,36 @@ export default class Server {
             this.logAndThrowError("Error during text-to-speech conversion:", error);
         }
     }
+
+    public async requestPasswordReset(email: string): Promise<Response> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/authentication/request_password_reset`;
+
+        try {
+            const response = await fetch(url, {
+                method:     "POST",
+                headers:    {
+                    "Content-Type": "application/json",
+                },
+                body:       JSON.stringify({
+                    email: email,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error requesting password reset:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to request password reset.");
+            }
+
+            console.log("Password reset request successful.");
+
+            return response;
+        } catch (error) {
+            this.logAndThrowError("Error during password reset request:", error);
+        }
+    }
+
 }
