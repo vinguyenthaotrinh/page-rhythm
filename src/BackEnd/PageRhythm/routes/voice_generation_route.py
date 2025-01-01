@@ -31,8 +31,6 @@ def convert_text_to_speech():
     account_id          = current_identity["account_id"]
     account             = account_service.get_account_by_id(account_id)
 
-    print(request.json)
-
     if account is None:
         return jsonify({"message": "Account does not exist"}), 404
     
@@ -54,7 +52,7 @@ def convert_text_to_speech():
 
     sample_audio_files_service = SampleAudioFilesService()
 
-    if (origin == "uploaded") and sample_audio_files_service.check_ownership(int(id), account_id):
+    if (origin == "uploaded") and not sample_audio_files_service.check_ownership(int(id), account_id):
         return jsonify({"message": "You are not allowed to use this voice"}), 403
     
     result = None

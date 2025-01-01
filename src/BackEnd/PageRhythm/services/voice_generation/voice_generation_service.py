@@ -47,9 +47,11 @@ class VoiceGenerationService:
 
             temporary_file_name = f"{random.randint(0, 31082003)}.mp3"
 
-            elevenlabs.save(audio, f"services/voice_generation/{temporary_file_name}")
+            output_file_path = f"services/voice_generation/{temporary_file_name}"
 
-            with open(temporary_file_name, "rb") as file:
+            elevenlabs.save(audio, output_file_path)
+
+            with open(output_file_path, "rb") as file:
                 content = file.read()
 
             #os.remove(temporary_file_name)
@@ -88,7 +90,6 @@ class VoiceGenerationService:
             "Adam"      : "pNInz6obpgDQGcFmaJgB",
             "Antoni"    : "ErXwobaYiN019PkySvjV",
             "Arnold"    : "VR6AewLTigWG4xSOukaG",
-            "Bella"     : "EXAVITQu4vr4xnSDxMaL",
             "Callum"    : "N2lVS1w4EtoT3dr4eOWO",
             "Charlie"   : "IKne3meq5aSn9XLyUdCD",
             "Charlotte" : "XB0fDUnXU5powFXDhCwa",
