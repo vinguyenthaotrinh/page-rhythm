@@ -2,6 +2,7 @@ from services.authentication.supabase_authentication_api_service import Supabase
 from services.account.account_service import AccountService
 from models.account import Account, AccountType
 from itsdangerous import Serializer
+from flask_mail import Message
 from typing import Optional
 import datetime
 import bcrypt
@@ -12,6 +13,23 @@ class AuthenticationService:
     
     def __init__(self):
         self.supabase = SupabaseAuthenticationAPIService()
+
+    def send_password_reset_email(self, account_id: int):
+        #from app import mail
+
+        account = AccountService().get_account_by_id(account_id)
+        token = AuthenticationService.create_reset_password_token(account_id)
+        message = Message("Reset Password", 
+                        sender = "pagerhythm.noreply@gmail.com",
+                        recipients = [account.email])
+        #front_end_host = os.environ.get("FRONT_END_HOST")
+        front_end_host = None
+        message.body = f"""
+            To reset your password, please click the following link: {front_end_host}reset-password-page/{token}
+            If you did not request a password reset, please ignore this email.
+        """
+
+        #mail.send(message)
     
     @staticmethod
     def generate_salt() -> str:
@@ -79,8 +97,9 @@ class AuthenticationService:
     
     @staticmethod
     def create_reset_password_token(user_id: int, number_of_seconds_of_duration_of_expiration = 1800) -> str:
-        serializer = Serializer(os.environ.get("JWT_SECRET_KEY"), expires_in = number_of_seconds_of_duration_of_expiration)
-        return serializer.dumps({"user_id": user_id}).decode("utf-8")
+        #serializer = Serializer(os.environ.get("JWT_SECRET_KEY"), expires_in = number_of_seconds_of_duration_of_expiration)
+        serializer = Serializer(os.environ.get("JWT_SECRET_KEY"))
+        return serializer.dumps({"user_id": user_id})
     
     @staticmethod
     def get_account_ID_of_password_token(token: str) -> Optional[int]:

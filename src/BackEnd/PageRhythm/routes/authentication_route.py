@@ -106,6 +106,10 @@ def request_password_reset():
     if account is None:
         return jsonify({"message": "There is no account with the given email"}), 400
     
+    authentication_service = AuthenticationService()
+
+    authentication_service.send_password_reset_email(account.account_id)
+    
     return jsonify({"message": "An email has been sent to your email address"}), 200
 
 @authentication_blueprint.route("/reset_password/<string:token>", methods=["POST", "GET"])

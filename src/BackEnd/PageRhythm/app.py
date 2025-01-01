@@ -12,6 +12,7 @@ from flask_jwt_extended                     import JWTManager
 from datetime                               import timedelta
 from flask_cors                             import CORS
 from flask                                  import Flask
+from flask_mail                             import Mail
 import os
 
 app = Flask(__name__)
@@ -33,5 +34,13 @@ app.register_blueprint(user_account_management_blueprint,   url_prefix = "/user_
 
 jwt = JWTManager(app)
 
+#app.config["MAIL_SERVER"]   = "smtp.gmail.com"
+#app.config["MAIL_PORT"]     = 587
+#app.config["MAIL_USE_TLS"]  = True
+#app.config["MAIL_USERNAME"] = os.environ.get("SERVER_MAIL_USERNAME")
+#app.config["MAIL_PASSWORD"] = os.environ.get("SERVER_MAIL_PASSWORD")
+
+#mail = Mail(app)
+
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()

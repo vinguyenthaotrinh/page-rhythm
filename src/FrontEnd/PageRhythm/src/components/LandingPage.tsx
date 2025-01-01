@@ -168,7 +168,8 @@ function LoginSection() {
                 >
                     Login
                 </button>
-                
+                {
+                /*
                 <div 
                     id  =   "landing-page-request-password-reset-link-container"
                 >
@@ -179,7 +180,8 @@ function LoginSection() {
                         Forgot Password?
                     </Link>
                 </div>
-
+                */
+                }
                 {
                 /*
                 <div id="landing-page-google-login">
