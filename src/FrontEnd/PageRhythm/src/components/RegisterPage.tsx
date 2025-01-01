@@ -262,12 +262,12 @@ function SignupSection() {
                         
                         I agree with the 
                         
-                        <button
+                        <Link
                             id          =   "register-page-terms-and-conditions-link"
-                            onClick     =   {() => navigate("register-page/terms-and-conditions")}
+                            to          =   "terms-and-conditions"
                         >
                             Terms and Conditions
-                        </button>
+                        </Link>
                     </label>
                 </div>
                 
