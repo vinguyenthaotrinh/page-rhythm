@@ -1,5 +1,6 @@
 from services.book.supabase_book_api_service import SupabaseBookAPIService
 from services.book_rating.book_rating_service import BookRatingService
+from services.statistics.statistics_service import StatisticsService
 from typing import Optional
 import random
 import json
@@ -58,7 +59,11 @@ class BookService:
 
         book_rating_service = BookRatingService()
 
+        statistics_service = StatisticsService()
+
         book_rating_service.delete_all_ratings_for_book(book_id)
+
+        statistics_service.delete_all_statistics_for_book(book_id)
 
         return self.supabase.delete_book(book_id)
 

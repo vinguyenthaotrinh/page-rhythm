@@ -60,3 +60,12 @@ class SupabaseStatisticsAPIService:
             print(e)
             return False
         return False
+    
+    def delete_all_statistics_for_book(self, book_id: int) -> bool:
+        try:
+            response = self.client.table("TrackedProgress").delete().eq("book_id", book_id).execute()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        return False

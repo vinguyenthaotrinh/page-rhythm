@@ -1,6 +1,5 @@
 from services.statistics.supabase_statistics_api_service import SupabaseStatisticsAPIService
 from models.tracked_progress import TrackedProgress, ReadingStatus
-from services.book.book_service import BookService
 import matplotlib.pyplot as plt
 from typing import Optional
 import datetime
@@ -212,7 +211,10 @@ class StatisticsService:
         return buffer.getvalue()
     
     def get_all_tracked_progress_of_user(self, user_id: int) -> list[dict]:
+        from services.book.book_service import BookService
+
         book_service = BookService()
+
         result = []
         for tracked_progress in self.supabase.get_all_tracked_progress_of_user(user_id):
             book = book_service.get_book_information(tracked_progress.book_id).to_serializable_JSON()
@@ -222,3 +224,6 @@ class StatisticsService:
     
     def delete_tracked_progress(self, user_id: int, book_id: int) -> bool:
         return self.supabase.delete_tracked_progress(user_id, book_id)
+    
+    def delete_all_statistics_for_book(self, book_id: int) -> bool:
+        return self.supabase.delete_all_statistics_for_book(book_id)

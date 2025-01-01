@@ -86,6 +86,7 @@ class SupabaseBookAPIService:
             response = self.client.table("Book").update(book.to_serializable_JSON()).eq("book_id", book.get_book_id()).execute()
             return response.data
         except Exception as e:
+            print(e)
             return None
         return None
     
