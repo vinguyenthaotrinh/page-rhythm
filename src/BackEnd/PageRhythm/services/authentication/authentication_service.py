@@ -1,7 +1,7 @@
 from services.authentication.supabase_authentication_api_service import SupabaseAuthenticationAPIService
 from services.account.account_service import AccountService
-from itsdangerous import TimedJSONWebSignatureSerializer
 from models.account import Account, AccountType
+from itsdangerous import Serializer
 from typing import Optional
 import datetime
 import bcrypt
@@ -79,12 +79,12 @@ class AuthenticationService:
     
     @staticmethod
     def create_reset_password_token(user_id: int, number_of_seconds_of_duration_of_expiration = 1800) -> str:
-        serializer = TimedJSONWebSignatureSerializer(os.environ.get("JWT_SECRET_KEY"), expires_in = number_of_seconds_of_duration_of_expiration)
+        serializer = Serializer(os.environ.get("JWT_SECRET_KEY"), expires_in = number_of_seconds_of_duration_of_expiration)
         return serializer.dumps({"user_id": user_id}).decode("utf-8")
     
     @staticmethod
-    def verify_reset_password_token(token: str) -> Optional[int]:
-        serializer = TimedJSONWebSignatureSerializer(os.environ.get("JWT_SECRET_KEY"))
+    def get_account_ID_of_password_token(token: str) -> Optional[int]:
+        serializer = Serializer(os.environ.get("JWT_SECRET_KEY"))
         try:
             data = serializer.loads(token)
             user_id = data["user_id"]

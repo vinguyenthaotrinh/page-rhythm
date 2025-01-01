@@ -17,6 +17,7 @@ import PasswordProfilePage from "./components/PasswordProfilePage";
 import StatisticsProfilePage from "./components/StatisticsProfilePage";
 import RequestPasswordResetPage from "./components/RequestPasswordResetPage";
 import RegisterTermsAndConditionsPage from "./components/RegisterTermsAndConditionsPage";
+import SuccessfullyPasswordResetEmailPage from "./components/SuccessfullyPasswordResetEmailPage";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 export default function App() {
@@ -48,7 +49,9 @@ export default function App() {
       
         <Route path="/admin-page/books" element={<BooksAdminPage />} />
         <Route path="/admin-page/accounts" element={<AccountsAdminPage />} />
-        <Route path="/admin-page" element={<Navigate to="/admin-page/books" />} />    
+        <Route path="/admin-page" element={<Navigate to="/admin-page/books" />} />
+        
+        <Route path="/successfully-password-reset-email-page" element={<SuccessfullyPasswordResetEmailPage />} />
       </Routes>
     </Router>
   );

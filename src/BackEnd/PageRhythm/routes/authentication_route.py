@@ -100,8 +100,9 @@ def change_password():
 def request_password_reset():
     data    =   request.get_json()
     email   =   data["email"]
+
     account = AccountService().get_account_by_email(email)
-    
+
     if account is None:
         return jsonify({"message": "There is no account with the given email"}), 400
     

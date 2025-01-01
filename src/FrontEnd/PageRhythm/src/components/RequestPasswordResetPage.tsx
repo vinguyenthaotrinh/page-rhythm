@@ -35,10 +35,10 @@ function LogoSection() {
 }
 
 function RequestPasswordResetSection() {
-    const [email, setEmail]                             = useState("");
-    const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
-    const [error, setError]                             = useState("");
-    const navigate                                      = useNavigate();
+    const [email, setEmail]                             =   useState("");
+    const [loadingLoginRequest, setLoadingLoginRequest] =   useState(false);
+    const [error, setError]                             =   useState("");
+    const navigate                                      =   useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                 // Prevent form default submission behavior
@@ -49,11 +49,22 @@ function RequestPasswordResetSection() {
         try {
             setLoadingLoginRequest(true);
         
-            const server = await Server.getInstance();
-            //TO BE CONTINUED
-        } catch (err) {
-            setError("An error occurred. Please try again.");
-            console.error("Login error:", err);
+            const server    =   await Server.getInstance();
+            
+            const response  =   await server.requestPasswordReset(email);
+
+            if (response.status === 200) {
+                navigate("/successfully-password-reset-email-page");
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
+            }
+        } catch (e) {
+            if (e instanceof Error)
+                setError(e.message);
+            else {
+                setError("An unexpected error occurred. Please try again later.");
+                console.error(e);
+            }
         } finally {
             setLoadingLoginRequest(false);
         }
@@ -112,6 +123,14 @@ function RequestPasswordResetSection() {
                         onChange    =   {(e) => setEmail(e.target.value)}
                     />
                 </div>
+
+                {error && 
+                    <div 
+                        id  =   "request-password-reset-page-error-message"
+                    >
+                        {error}
+                    </div>
+                }
                 
                 <button 
                     type        =   "submit" 
