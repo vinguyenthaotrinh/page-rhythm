@@ -263,7 +263,7 @@ function SignupSection() {
                         I agree with the 
                         
                         <a 
-                            href        =   "/register-page/terms-and-conditions" 
+                            href        =   "/register/terms-and-conditions" 
                             target      =   "_blank"
                         >
                             Terms and Conditions

@@ -16,6 +16,7 @@ import VoicesMyLibraryPage from "./components/VoicesMyLibraryPage";
 import PasswordProfilePage from "./components/PasswordProfilePage";
 import StatisticsProfilePage from "./components/StatisticsProfilePage";
 import RequestPasswordResetPage from "./components/RequestPasswordResetPage";
+import RegisterTermsAndConditionsPage from "./components/RegisterTermsAndConditionsPage";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/home-page" element={<HomePage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
+        <Route path="/register-page/terms-and-conditions" element={<RegisterTermsAndConditionsPage />} />
         <Route path="/read-book-page/:bookID" element={<ReadBookPage />} />    
         <Route path="/book-details-page/:bookID" element={<BookDetailsPage />} />
     
