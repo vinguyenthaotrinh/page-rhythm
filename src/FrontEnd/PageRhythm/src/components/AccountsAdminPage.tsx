@@ -26,7 +26,7 @@ function NoUserAccountText() {
     );
 }
 
-function UserAccountItem({ userAccount }: { userAccount: any }) {
+function UserAccountItem({ userAccount, setUserAccounts }: { userAccount: any, setUserAccounts: any }) {
     const [status, setStatus]       =   useState(userAccount.account_status);
     const [fromDate, setFromDate]   =   useState("");
     const [toDate, setToDate]       =   useState("");
@@ -39,8 +39,8 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
     const areDatesValid = (from: string, to: string) => {
         if (!isValidDate(from) || !isValidDate(to)) 
             return false;
-        const fromParsed    = new Date(from);
-        const toParsed      = new Date(to);
+        const fromParsed    =   new Date(from);
+        const toParsed      =   new Date(to);
         return fromParsed < toParsed && toParsed > new Date();
     };
 
@@ -51,6 +51,15 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             try {
                 await server.banUserAccountPermanently(userAccount.account_id);
                 setIsChanged(false);
+                setUserAccounts((prevUserAccounts: any) => {
+                    const updatedUserAccounts = prevUserAccounts.map((prevUserAccount: any) => {
+                        if (prevUserAccount.account_id === userAccount.account_id) {
+                            return { ...prevUserAccount, account_status: "permanently_banned" };
+                        }
+                        return prevUserAccount;
+                    });
+                    return updatedUserAccounts;
+                });
             } catch (error) {
                 console.error("Error banning user account permanently:", error);
             }
@@ -59,6 +68,22 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
                 try {
                     await server.banUserAccountTemporarily(userAccount.account_id, fromDate, toDate);
                     setIsChanged(false);
+                    setUserAccounts((prevUserAccounts: any) => {
+                        const updatedUserAccounts = prevUserAccounts.map((prevUserAccount: any) => {
+                            if (prevUserAccount.account_id === userAccount.account_id) {
+                                return { 
+                                    ...prevUserAccount, 
+                                    account_status: "temporarily_banned",
+                                    ban_information: {
+                                        start_time: fromDate + "T00:00:00Z",
+                                        end_time: toDate + "T00:00:00Z"
+                                    }
+                                };
+                            }
+                            return prevUserAccount;
+                        });
+                        return updatedUserAccounts;
+                    });
                 } catch (error) {
                     console.error("Error banning user account temporarily:", error);
                 }
@@ -67,6 +92,19 @@ function UserAccountItem({ userAccount }: { userAccount: any }) {
             try {
                 await server.unbanUserAccount(userAccount.account_id);
                 setIsChanged(false);
+                setUserAccounts((prevUserAccounts: any) => {
+                    const updatedUserAccounts = prevUserAccounts.map((prevUserAccount: any) => {
+                        if (prevUserAccount.account_id === userAccount.account_id) {
+                            return { 
+                                ...prevUserAccount, 
+                                account_status: "active",
+                                ban_information: null
+                            };
+                        }
+                        return prevUserAccount;
+                    });
+                    return updatedUserAccounts;
+                });
             } catch (error) {
                 console.error("Error unbanning user account:", error);
             }
@@ -257,8 +295,9 @@ export default function AccountsAdminPage() {
                                 >
                                     {userAccounts.map((userAccount, index) => (
                                         <UserAccountItem 
-                                            key         =   {index} 
-                                            userAccount =   {userAccount} 
+                                            key             =   {index} 
+                                            userAccount     =   {userAccount}
+                                            setUserAccounts =   {setUserAccounts}
                                         />
                                     ))}
                                 </div>
