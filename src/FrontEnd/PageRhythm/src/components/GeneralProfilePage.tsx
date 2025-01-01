@@ -17,7 +17,7 @@ function LoadingText() {
 }
 
 export default function GeneralProfilePage() {
-    const [originalProfile, setOriginalProfile] = useState({
+    const [originalProfile, setOriginalProfile]     = useState({
         fullName:   "",
         email:      "",
         bio:        "",
@@ -31,21 +31,22 @@ export default function GeneralProfilePage() {
     const loadProfile = async () => {
         try {
             setLoading(true);
-            const server = await Server.getInstance();
-            const profile = await server.getProfile(); // Fetch profile from server
-            console.log(profile);
-            setOriginalProfile({
-                fullName:   profile.data.full_name  || "",
-                email:      profile.data.email      || "",
-                bio:        profile.data.bio        || "",
-                birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
-            });
-            setProfile({
-                fullName:   profile.data.full_name  || "",
-                email:      profile.data.email      || "",
-                bio:        profile.data.bio        || "",
-                birthday:   profile.data.birthday != null ? `${profile.data.birthday["year"]}-${profile.data.birthday["month"]}-${profile.data.birthday["day"]}` : "",
-            });
+            const server    = await Server.getInstance();
+            const profile   = await server.getProfile(); // Fetch profile from server
+            
+            const formattedProfile = {
+                fullName:   profile.data.full_name || "",
+                email:      profile.data.email || "",
+                bio:        profile.data.bio || "",
+                birthday:   profile.data.birthday 
+                            ? `${profile.data.birthday.year}-${profile.data.birthday.month}-${profile.data.birthday.day}`
+                            : "",
+            };
+
+            setOriginalProfile(formattedProfile);
+            
+            setProfile(formattedProfile);
+
             setLoading(false);
         } catch (error) {
             console.error("Error loading profile:", error);

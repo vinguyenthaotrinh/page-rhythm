@@ -161,10 +161,10 @@ export default function ReadBookPage() {
                         id  =   "read-book-page-book-details-section"
                     >
                         <img
-                            src     = {decodeBookCover(book.image)}
-                            alt     = {book.title}
-                            id      = "read-book-page-book-cover"
-                            onClick = {() => navigate(`/book-details-page/${bookID}`)}
+                            src     =   {decodeBookCover(book.image)}
+                            alt     =   {book.title}
+                            id      =   "read-book-page-book-cover"
+                            onClick =   {() => navigate(`/book-details-page/${bookID}`)}
                         />
                         <div
                             id = "read-book-page-book-details"
@@ -188,11 +188,12 @@ export default function ReadBookPage() {
                         <button
                             className   =   "read-book-page-navigation-button"
                             onClick     =   {onLeftButtonClick}
+                            disabled    =   {currentLeftPage <= 1}
                         >
                             <img 
-                                src         =   {IMAGES.LEFT_ICON} 
-                                alt         =   "Previous" 
-                                className   =   "read-book-page-navigation-icon" 
+                                src         =   {(currentLeftPage <= 1) ? IMAGES.DISABLED_LEFT_ICON : IMAGES.LEFT_ICON}
+                                alt         =   "Previous"
+                                className   =   "read-book-page-navigation-icon"
                             />
                         </button>
 
@@ -205,9 +206,10 @@ export default function ReadBookPage() {
                         <button
                             className   =   "read-book-page-navigation-button"
                             onClick     =   {onRightButtonClick}
+                            disabled    =   {currentLeftPage >= contentPages.length}
                         >
                             <img 
-                                src         =   {IMAGES.RIGHT_ICON} 
+                                src         =   {(currentLeftPage >= contentPages.length) ? IMAGES.DISABLED_RIGHT_ICON : IMAGES.RIGHT_ICON}
                                 alt         =   "Next" 
                                 className   =   "read-book-page-navigation-icon" 
                             />
@@ -224,7 +226,9 @@ export default function ReadBookPage() {
                     >
                         {/* Check if the left page content is defined before rendering */}
                         {contentPages[currentLeftPage - 1] && contentPages[currentLeftPage - 1].split("\n").map((line, index) => (
-                            <React.Fragment key={index}>
+                            <React.Fragment 
+                                key =   {index}
+                            >
                                 {line}
                                 <br />
                             </React.Fragment>

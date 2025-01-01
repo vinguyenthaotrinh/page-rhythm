@@ -153,7 +153,13 @@ function LoginSection() {
                 </div>
 
                 {/* Display error message if it's not null or empty */}
-                {error && <div className="landing-page-error-message">{error}</div>}
+                {error &&   
+                    <div 
+                        className   =   "landing-page-error-message"
+                    >
+                        {error}
+                    </div>
+                }
 
                 <button 
                     type        =   "submit" 
@@ -237,7 +243,10 @@ export default function LandingPage() {
                 />
             </div>
 
-            <div className="landing-page-front-right-image-container" id="landing-page-right-corner-image">
+            <div 
+                className   =   "landing-page-front-right-image-container" 
+                id          =   "landing-page-right-corner-image"
+            >
                 <img 
                     src         =   {IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} 
                     className   =   "landing-page-right-overlay-image" 

@@ -128,7 +128,7 @@ export default function BooksAdminPage() {
 
     const handleCancelDelete = () => {
         setBookToDelete(null);
-        setShowDeletionConfirmation(false); // Close the confirmation box
+        setShowDeletionConfirmation(false);
     };
 
     const handleVisibilityClick = (book: any) => {

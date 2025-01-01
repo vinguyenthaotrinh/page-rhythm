@@ -1056,7 +1056,7 @@ export default class Server {
         }
     }
 
-    public async trackProgressOfReadingBook(bookID: number, pageNumber: number | null, status: string): Promise<void> {
+    public async trackProgressOfReadingBook(bookID: number, pageNumber: number | null, status: string): Promise<Response> {
         if (!this.host) 
             throw new Error("Host is not initialized.");
 
@@ -1082,6 +1082,9 @@ export default class Server {
             }
 
             console.log("Reading progress tracked successfully.");
+
+            return response; // Return the response object
+
         } catch (error) {
             this.logAndThrowError("Error during tracking reading progress:", error);
         }

@@ -143,7 +143,9 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     />
 
                     {selectedCoverImage && (
-                        <div className="file-name-display">
+                        <div 
+                            className   =   "file-name-display"
+                        >
                             {selectedCoverImage.name}
                         </div>
                     )}
@@ -204,15 +206,15 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
     const handleBookEdit = () => {
         const updatedBook = {
             ...selectedBook,
-            title: bookName,
-            author: authorName,
-            release_date: releaseDate,
-            genre: genre,
-            summary: summary,
-            image: selectedCoverImage || selectedBook?.image,   // Keep old image if not updating
+            title:          bookName,
+            author:         authorName,
+            release_date:   releaseDate,
+            genre:          genre,
+            summary:        summary,
+            image:          selectedCoverImage || selectedBook?.image,      // Keep old image if not updating
         };
-        handleEditBook(updatedBook);                            // Pass the updated book data
-        setShowEditOverlay(false);                              // Close the overlay
+        handleEditBook(updatedBook);                                        // Pass the updated book data
+        setShowEditOverlay(false);
     };
 
     if (!showEditOverlay || !selectedBook) 
@@ -333,7 +335,7 @@ function NoBookText() {
 export default function BooksMyLibraryPage() {
     const [books, setBooks]                                         = useState<any[]>([]);
     const [loading, setLoading]                                     = useState(true);
-    const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);                  // Confirmation box visibility
+    const [showDeletionConfirmation, setShowDeletionConfirmation]   = useState(false);
     const [bookToDelete, setBookToDelete]                           = useState<any | null>(null);       // Track the selected book for deletion
     const [showAddOverlay, setShowAddOverlay]                       = useState(false);
     const [selectedFile, setSelectedFile]                           = useState<File | null>(null);      // Track the selected file for upload
@@ -365,7 +367,7 @@ export default function BooksMyLibraryPage() {
     }, []);
 
     const handleAddClick = () => {
-        setShowAddOverlay(true);  // Show the overlay
+        setShowAddOverlay(true);
     };
 
     const handleCoverImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -384,12 +386,12 @@ export default function BooksMyLibraryPage() {
         if (selectedFile && bookName && authorName) {
             
             const book = {
-                title: bookName,
-                author: authorName,
-                summary,
-                genre,
-                content: selectedFile,
-                image: selectedCoverImage || null, // Optional cover image
+                title:      bookName,
+                author:     authorName,
+                summary:    summary,
+                genre:      genre,
+                content:    selectedFile,
+                image:      selectedCoverImage || null, // Optional cover image
             };
 
             console.log("Uploading book with details:", book);
@@ -401,17 +403,17 @@ export default function BooksMyLibraryPage() {
             console.log("Book uploaded successfully!");
 
             const renderedBook = {
-                title: bookName,
-                author: authorName,
-                summary,
-                genre,
-                content: selectedFile,
-                image: selectedCoverImage ? await IMAGES.convertImageFileToBase64(selectedCoverImage) : null, // Convert cover image to base64
+                title:      bookName,
+                author:     authorName,
+                summary:    summary,
+                genre:      genre,
+                content:    selectedFile,
+                image:      selectedCoverImage ? await IMAGES.convertImageFileToBase64(selectedCoverImage) : null, // Convert cover image to base64
             }
 
             setBooks((previousBooks) => [...previousBooks, renderedBook]); // Add the new book to the list
             
-            setShowAddOverlay(false); // Close the overlay
+            setShowAddOverlay(false);
         } else {
             console.log("Please fill in all required fields.");
         }
@@ -430,8 +432,8 @@ export default function BooksMyLibraryPage() {
     };
 
     const handleDeleteClick = (book: any) => {
-        setBookToDelete(book);              // Set the selected book
-        setShowDeletionConfirmation(true);  // Show the confirmation box
+        setBookToDelete(book);
+        setShowDeletionConfirmation(true);
     };
 
     const handleConfirmDelete = async () => {
@@ -450,12 +452,12 @@ export default function BooksMyLibraryPage() {
 
     const handleCancelDelete = () => {
         setBookToDelete(null);
-        setShowDeletionConfirmation(false); // Close the confirmation box
+        setShowDeletionConfirmation(false);
     };
 
     const handleEditClick = (book: any) => {
         setSelectedBook(book);
-        setShowEditOverlay(true);  // Show the edit overlay
+        setShowEditOverlay(true);
     };
 
     const handleEditBook = async (updatedBook: any) => {
@@ -498,7 +500,9 @@ export default function BooksMyLibraryPage() {
                         />
                     </button>
 
-                    <h1 id = "books-my-library-page-title">
+                    <h1 
+                        id  =   "books-my-library-page-title"
+                    >
                         My Library
                     </h1>
 

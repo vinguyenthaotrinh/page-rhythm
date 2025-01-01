@@ -41,7 +41,7 @@ def track_progress():
     if page_number > number_of_pages:
         return jsonify({
             "status": "error",
-            "message": "Page number is greater than the total number of pages in the book"
+            "message": "The page number should not be greater than the total number of pages in the book"
         }), 400
 
     statistics_service = StatisticsService()

@@ -13,6 +13,8 @@ interface UpdateStatusOverlayProps {
     selectedBook:                   any | null;
     setSelectedBook:                (book: any | null) => void;
     handleUpdateStatusBook:         (book: any) => void;
+    errorMessage?:                  string | null;
+    setErrorMessage?:               (message: string | null) => void;
 }
 
 const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
@@ -21,8 +23,10 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
     selectedBook,
     setSelectedBook,
     handleUpdateStatusBook,
+    errorMessage                = null,
+    setErrorMessage             = () => {},
 }) => {
-    const [status, setStatus]                 = useState(selectedBook?.progress.status || "not_started");
+    const [status, setStatus]                 = useState(selectedBook?.progress.status      || "not_started");
     const [currentPage, setCurrentPage]       = useState(selectedBook?.progress.page_number || 0);
 
     useEffect(() => {
@@ -47,8 +51,8 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                 ...selectedBook,
                 progress: {
                     ...selectedBook.progress,
-                    status: status,
-                    page_number: currentPage,
+                    status:         status,
+                    page_number:    currentPage,
                 },
             });
         }
@@ -83,7 +87,12 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                     </label>
                     <select 
                         value       =   {status} 
-                        onChange    =   {(e) => setStatus(e.target.value)}
+                        onChange    =   {
+                                (e) =>  {
+                                    setStatus(e.target.value);
+                                    setErrorMessage(null);
+                                }
+                            }
                         className   =   "status-dropdown"
                     >
                         <option 
@@ -122,6 +131,14 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                     />
                 </div>
 
+                {errorMessage &&   
+                    <div 
+                        className   =   "landing-page-error-message"
+                    >
+                        {errorMessage}
+                    </div>
+                }
+
                 <div 
                     className   =   "add-overlay-buttons"
                 >
@@ -131,7 +148,12 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
                         Update
                     </button>
                     <button 
-                        onClick =   {() => setShowUpdateStatusOverlay(false)}
+                        onClick =   {
+                                ()  =>  {
+                                    setShowUpdateStatusOverlay(false);
+                                    setErrorMessage(null);
+                                }
+                        }
                     >
                         Cancel
                     </button>
@@ -144,7 +166,7 @@ const UpdateStatusOverlay: React.FC<UpdateStatusOverlayProps> = ({
 function LoadingText() {
     return (
         <p
-            id = "statistics-profile-page-loading-text"
+            id  =   "statistics-profile-page-loading-text"
         >
             Loading...
         </p>
@@ -154,7 +176,7 @@ function LoadingText() {
 function NoBookText() {
     return (
         <p
-            id = "statistics-profile-page-loading-text"
+            id  =   "statistics-profile-page-loading-text"
         >
             There is no book to display.
         </p>
@@ -168,6 +190,7 @@ export default function StatisticsProfilePage() {
     const [bookToDelete, setBookToDelete]                               = useState<any | null>(null);
     const [selectedBook, setSelectedBook]                               = useState<any | null>(null);       // Selected book for update status
     const [showUpdateStatusOverlay, setShowUpdateStatusOverlay]         = useState(false);                  // Update status overlay visibility
+    const [updateStatusError, setUpdateStatusError]                     = useState<string | null>(null);    // Error message for update status
     const navigate                                                      = useNavigate();
 
     const handleUpdateStatusClick = (book: any) => {
@@ -189,13 +212,19 @@ export default function StatisticsProfilePage() {
             setSelectedBook(null);
             setShowUpdateStatusOverlay(false);
         } catch (error) {
-            console.error("Error updating book:", error);
+            console.error("Error updating status of reading book:", error);
+
+            if (error instanceof Error) {
+                setUpdateStatusError(error.message);
+            } else {
+                setUpdateStatusError("An unexpected error occurred.");
+            }
         }
     };
 
     const handleDeleteClick = (book: any) => {
         setBookToDelete(book);
-        setShowDeletionConfirmation(true);  // Show the confirmation box
+        setShowDeletionConfirmation(true);
     };
     
     const handleConfirmDelete = async () => {
@@ -214,7 +243,7 @@ export default function StatisticsProfilePage() {
     
     const handleCancelDelete = () => {
         setBookToDelete(null);
-        setShowDeletionConfirmation(false); // Close the confirmation box
+        setShowDeletionConfirmation(false);
     };
 
     const formatProgressStatus = (status: string, currentPage: number): string => {
@@ -387,6 +416,8 @@ export default function StatisticsProfilePage() {
                 selectedBook                =   {selectedBook}
                 setSelectedBook             =   {setSelectedBook}
                 handleUpdateStatusBook      =   {handleUpdateStatusBook}
+                errorMessage                =   {updateStatusError}
+                setErrorMessage             =   {setUpdateStatusError}
             />
         </div>
     );

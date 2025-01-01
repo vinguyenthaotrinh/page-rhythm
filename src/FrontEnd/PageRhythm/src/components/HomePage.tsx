@@ -183,7 +183,7 @@ export default function HomePage() {
                                 />
                             </div>
                             <div
-                                className="home-page-book-info"
+                                className   =   "home-page-book-info"
                             >
                                 <h3>
                                     {book.title || "Unknown"}

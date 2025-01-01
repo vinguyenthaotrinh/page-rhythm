@@ -38,6 +38,8 @@ import HOVERED_AUDIO_PLAY_ICON                          from "./assets/images/ho
 import HOVERED_AUDIO_PAUSE_ICON                         from "./assets/images/hovered-audio-pause-icon.png";
 import HOVERED_AUDIO_NEXT_ICON                          from "./assets/images/hovered-audio-next-icon.png";
 import HOVERED_AUDIO_PREVIOUS_ICON                      from "./assets/images/hovered-audio-previous-icon.png";
+import DISABLED_LEFT_ICON                               from "./assets/images/disabled-left-icon.png";
+import DISABLED_RIGHT_ICON                              from "./assets/images/disabled-right-icon.png";
 
 const IMAGES = {
     LOGO,
@@ -80,6 +82,8 @@ const IMAGES = {
     HOVERED_AUDIO_PAUSE_ICON,
     HOVERED_AUDIO_NEXT_ICON,
     HOVERED_AUDIO_PREVIOUS_ICON,
+    DISABLED_LEFT_ICON,
+    DISABLED_RIGHT_ICON,
 
     decodeBookCoverImage: (bookCover: string | null) => {
         if (!bookCover) 

@@ -54,7 +54,7 @@ export default function ListenToBookPage() {
                 const pages = await server.getContentPages(parseInt(bookID), pageCapacity, maximumLineLength);  // Fetch the content pages
                 setContentPages(pages);
 
-                const progress = await server.getTrackedReadingProgress(parseInt(bookID));  // Fetch the progress of reading the book
+                const progress = await server.getTrackedReadingProgress(parseInt(bookID));
 
                 if (progress && progress.status === "in_progress") 
                     setCurrentPage(progress.page_number);
@@ -447,9 +447,10 @@ export default function ListenToBookPage() {
                         <button
                             className       =   "listen-to-book-page-navigation-button"
                             onClick         =   {onLeftButtonClick}
+                            disabled        =   {currentPage === 1}
                         >
                             <img 
-                                src         =   {IMAGES.LEFT_ICON} 
+                                src         =   {currentPage === 1 ? IMAGES.DISABLED_LEFT_ICON : IMAGES.LEFT_ICON}
                                 alt         =   "Previous" 
                                 className   =   "listen-to-book-page-navigation-icon" 
                             />
@@ -462,9 +463,10 @@ export default function ListenToBookPage() {
                         <button
                             className       =   "listen-to-book-page-navigation-button"
                             onClick         =   {onRightButtonClick}
+                            disabled        =   {currentPage === contentPages.length}
                         >
                             <img 
-                                src         =   {IMAGES.RIGHT_ICON} 
+                                src         =   {currentPage === contentPages.length ? IMAGES.DISABLED_RIGHT_ICON : IMAGES.RIGHT_ICON}
                                 alt         =   "Next" 
                                 className   =   "listen-to-book-page-navigation-icon" 
                             />
@@ -481,7 +483,9 @@ export default function ListenToBookPage() {
                         className   =   "listen-to-book-page-content-page"
                     >
                         {contentPages[currentPage - 1] && contentPages[currentPage - 1].split("\n").map((line, index) => (
-                            <React.Fragment key={index}>
+                            <React.Fragment 
+                                key =   {index}
+                            >
                                 {line}
                                 <br />
                             </React.Fragment>

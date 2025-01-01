@@ -5,39 +5,7 @@ import "../styles/voices-my-library-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import MyLibrarySectionBar from "./MyLibrarySectionBar";
 import React, { useState, useRef, useEffect } from "react";
-
-interface DeletionConfirmationBoxProps {
-    onConfirm: () => void;      // Function to call when confirmed
-    onCancel: () => void;       // Function to call when canceled
-}
-
-const DeletionConfirmationBox: React.FC<DeletionConfirmationBoxProps> = ({
-    onConfirm,
-    onCancel,
-}) => {
-    return (
-        <div className="books-my-library-page-deletion-confirmation-overlay">
-            <div className="books-my-library-page-deletion-confirmation-box">
-                <h1 id="books-my-library-page-deletion-confirmation-title">Delete your sample audio file</h1>
-                <p>Are you sure you want to delete this file?</p>
-                <div className="books-my-library-page-deletion-confirmation-buttons">
-                    <button
-                        className="books-my-library-page-deletion-confirmation-button confirm"
-                        onClick={onConfirm}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="books-my-library-page-deletion-confirmation-button cancel"
-                        onClick={onCancel}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
+import BookDeletionConfirmationBox from "./BookDeletionConfirmationBox";
 
 interface AddSampleAudioFileOverlayProps {
     showAddOverlay:                 boolean;
@@ -137,7 +105,9 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                     onChange    =   {(e) => setDescription(e.target.value)}
                 />
 
-                <div className  =   "file-input-container">
+                <div 
+                    className   =   "file-input-container"
+                >
                     <label 
                         htmlFor     =   "file-input" 
                         className   =   "file-input-label"
@@ -170,7 +140,9 @@ const AddSampleAudioFileOverlay: React.FC<AddSampleAudioFileOverlayProps> = ({
                     </div>
                 )}
 
-                <div className="add-overlay-buttons">
+                <div 
+                    className   =   "add-overlay-buttons"
+                >
                     <button 
                         onClick     =   {handleSampleAudioFileUpload}
                         disabled    =   {isAddButtonDisabled}
@@ -429,12 +401,12 @@ export default function VoicesMyLibraryPage() {
 
     const handleCancelDelete = () => {
         setRecordToDelete(null);
-        setShowDeletionConfirmation(false); // Close the confirmation box
+        setShowDeletionConfirmation(false);
     };
 
     const handleEditClick = (record: any) => {
         setSelectedRecord(record);
-        setShowEditOverlay(true);           // Show the edit overlay
+        setShowEditOverlay(true);
     };
 
     const handleEditRecord = async (updatedRecord: any) => {
@@ -649,12 +621,13 @@ export default function VoicesMyLibraryPage() {
                 </div>
             </div>
 
-            {showDeletionConfirmation && (
-                <DeletionConfirmationBox
-                    onConfirm   =   {handleConfirmDelete}
-                    onCancel    =   {handleCancelDelete}
-                />
-            )}
+            <BookDeletionConfirmationBox
+                title                       =   "Delete your sample audio file"
+                message                     =   "Are you sure you want to delete this file?"
+                showDeletionConfirmation    =   {showDeletionConfirmation}
+                onConfirm                   =   {handleConfirmDelete}
+                onCancel                    =   {handleCancelDelete}
+            />
 
             <AddSampleAudioFileOverlay
                 showAddOverlay              =   {showAddOverlay}

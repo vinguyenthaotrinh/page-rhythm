@@ -70,7 +70,9 @@ export default function CommentPage() {
                         alt         =   "Back" 
                         className   =   "comment-page-back-button-icon" 
                     />
-                    <span>Back</span>
+                    <span>
+                        Back
+                    </span>
                 </div>
             </div>
             <div 

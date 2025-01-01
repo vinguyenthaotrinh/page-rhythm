@@ -138,7 +138,9 @@ export default function PasswordProfilePage() {
                                 className   =   "password-profile-page-input-label"
                             >
                                 Confirm your new password:
-                                <div className="password-profile-page-input-container">
+                                <div 
+                                    className   =   "password-profile-page-input-container"
+                                >
                                     <img 
                                         src         =   {IMAGES.LOCK_ICON} 
                                         alt         =   "Lock Icon" 
@@ -161,7 +163,13 @@ export default function PasswordProfilePage() {
                             </label>
 
                             {/* Show error message if it's not null or empty */}
-                            {error && <div className="password-profile-page-error-message">{error}</div>}
+                            {error && 
+                                <div 
+                                    className   =   "password-profile-page-error-message"
+                                >
+                                    {error}
+                                </div>
+                            }
 
                             <div 
                                 className   =   "password-profile-page-profile-buttons"

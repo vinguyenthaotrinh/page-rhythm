@@ -93,8 +93,8 @@ export default function BookDetailsPage() {
                 }
                 
                 // Update the rating
-                setUserRating(rating); // Update the rating locally
-                await server.insertBookRating(bookID, rating); // Send the new rating to the server
+                setUserRating(rating);                          // Update the rating locally
+                await server.insertBookRating(bookID, rating);  // Send the new rating to the server
                 console.log(`Rating updated to ${rating}.`);
             }
         } catch (error) {
@@ -151,8 +151,8 @@ export default function BookDetailsPage() {
                 }
 
                 const server        = await Server.getInstance();
-                const commentsData  = await server.retrieveAllComments(bookID);  // Fetch comments for the book
-                setComments(commentsData);                                      // Update the state with the fetched comments
+                const commentsData  = await server.retrieveAllComments(bookID);     // Fetch comments for the book
+                setComments(commentsData);                                          // Update the state with the fetched comments
                 console.log("Comments fetched successfully.", commentsData);
             } catch (error) {
                 console.error("Error fetching comments:", error);
@@ -231,7 +231,9 @@ export default function BookDetailsPage() {
     
                 {/* Recursively render replies */}
                 {replies.length > 0 && (
-                    <div className="replies">
+                    <div 
+                        className   =   "replies"
+                    >
                         {replies.map((reply: any) => renderComment(reply, allComments))}
                     </div>
                 )}
@@ -305,7 +307,9 @@ export default function BookDetailsPage() {
         // Root comments are those that don't have a replied_comment_id
         const rootComments = comments.filter((comment: any) => !comment.replied_comment_id);
         return (
-            <div className="comments-section">
+            <div 
+                className   =   "comments-section"
+            >
                 {rootComments.map((comment: any) => renderComment(comment, comments))}
             </div>
         );
@@ -316,9 +320,23 @@ export default function BookDetailsPage() {
         let stars = [];
         for (let i = 0; i < 5; i++) {
             if (i < roundedRating) {
-                stars.push(<img key={i} src={IMAGES.FILLED_STAR_ICON} alt="Star" className="star-icon" />);
+                stars.push(
+                    <img 
+                        key         =   {i} 
+                        src         =   {IMAGES.FILLED_STAR_ICON} 
+                        alt         =   "Star" 
+                        className   =   "star-icon" 
+                    />
+                );
             } else {
-                stars.push(<img key={i} src={IMAGES.EMPTY_STAR_ICON} alt="Star" className="star-icon" />);
+                stars.push(
+                    <img 
+                        key         =   {i} 
+                        src         =   {IMAGES.EMPTY_STAR_ICON} 
+                        alt         =   "Star" 
+                        className   =   "star-icon" 
+                    />
+                );
             }
         }
         return stars;
@@ -341,7 +359,9 @@ export default function BookDetailsPage() {
                         alt         =   "Back" 
                         className   =   "book-details-page-back-button-icon" 
                     />
-                    <span>Back</span>
+                    <span>
+                        Back
+                    </span>
                 </div>
             </div>
             <div
