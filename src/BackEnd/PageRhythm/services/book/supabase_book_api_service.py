@@ -81,23 +81,23 @@ class SupabaseBookAPIService:
         return []
 
     # 5. Update book information
-    def update_book(self, book: Book) -> bool:
+    def update_book(self, book: Book) -> Optional[dict]:
         try:
             response = self.client.table("Book").update(book.to_serializable_JSON()).eq("book_id", book.get_book_id()).execute()
             return response.data
         except Exception as e:
-            return False
-        return False
+            return None
+        return None
     
     # 6. Delete a book
-    def delete_book(self, book_id: int) -> bool:
+    def delete_book(self, book_id: int) -> Optional[dict]:
         try:
             response = self.client.table("Book").delete().eq("book_id", book_id).execute()
             return response.data
         except Exception as e:
             print(e)
-            return False
-        return False
+            return None
+        return None
 
     def get_all_books(self) -> list[Book]:
         try:

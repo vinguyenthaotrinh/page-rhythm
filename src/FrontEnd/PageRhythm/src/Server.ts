@@ -640,6 +640,11 @@ export default class Server {
             });
     
             if (!response.ok) {
+            
+                const errorData = await response.json();
+
+                console.log("Error deleting book:", errorData.message || "Unknown error");
+            
                 console.error(
                     `Failed to delete book ${bookID}. HTTP status: ${response.status}, message: ${response.statusText}`
                 );

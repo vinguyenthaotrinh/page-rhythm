@@ -1,5 +1,6 @@
 from services.book.supabase_book_api_service import SupabaseBookAPIService
 from services.book_rating.book_rating_service import BookRatingService
+from typing import Optional
 import random
 import json
 
@@ -53,7 +54,7 @@ class BookService:
         return self.supabase.update_book(existing_book)
 
     # 6. Delete a book
-    def delete_book(self, book_id: int) -> bool:
+    def delete_book(self, book_id: int) -> Optional[dict]:
 
         book_rating_service = BookRatingService()
 
