@@ -390,6 +390,10 @@ export default function VoicesMyLibraryPage() {
                 
                 await server.deleteUploadedSampleAdudioFile(recordToDelete.sample_audio_file_id);
 
+                if (playingIndex === records.findIndex((record) => record.sample_audio_file_id === recordToDelete.sample_audio_file_id)) {
+                    setPlayingIndex(null);
+                }
+
                 setRecords(records.filter((record) => record.sample_audio_file_id !== recordToDelete.sample_audio_file_id));
                 setRecordToDelete(null);
                 setShowDeletionConfirmation(false);
