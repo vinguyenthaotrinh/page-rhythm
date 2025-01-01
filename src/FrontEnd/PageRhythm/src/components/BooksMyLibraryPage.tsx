@@ -64,6 +64,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                 >
                     Upload your book here
                 </h1>
+                
                 <p>
                     Please enter the book information
                 </p>
@@ -81,18 +82,21 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     value       =   {authorName}
                     onChange    =   {(e) => setAuthorName(e.target.value)}
                 />
+                
                 <input
                     type        =   "date"
                     placeholder =   "Release Date"
                     value       =   {releaseDate || ""}
                     onChange    =   {(e) => setReleaseDate(e.target.value)}
                 />
+                
                 <input
                     type        =   "text"
                     placeholder =   "Genre (optional)"
                     value       =   {genre || ""}
                     onChange    =   {(e) => setGenre(e.target.value)}
                 />
+
                 <textarea
                     placeholder =   "Summary"
                     value       =   {summary}
@@ -134,6 +138,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     >
                         Upload Cover Image
                     </label>
+
                     <input
                         type        =   "file"
                         id          =   "cover-image-input"
@@ -159,6 +164,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
                     >
                         Upload Book
                     </button>
+                    
                     <button 
                         onClick =   {() => setShowAddOverlay(false)}
                     >

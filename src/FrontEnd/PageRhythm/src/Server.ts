@@ -8,7 +8,7 @@ export default class Server {
         if (Server.instance === null) {
             Server.instance = new Server();
             await Server.instance.initializeHost(
-                "https://page-rhythm-back-end.onrender.com", 
+                null,//"https://page-rhythm-back-end.onrender.com", 
                 "http://127.0.0.1:5000"
             );
         }
@@ -658,24 +658,29 @@ export default class Server {
         const url = `${this.host}/book/create`; 
     
         const formData = new FormData();
+
         formData.append("title", book.title);
         formData.append("author", book.author);
         formData.append("summary", book.summary);
         formData.append("genre", book.genre);
         
         if (book.content instanceof File) 
-            formData.append("content", book.content); // Attach the book's content file
+            formData.append("content", book.content);
         else 
             throw new Error("Invalid content file. Ensure the content is a valid file.");
         
         if (book.image instanceof File) 
-            formData.append("image", book.image); 
-    
+            formData.append("image", book.image);
+
+        const sessionToken = this.getSessionToken();
+
         try {
             const response = await fetch(url, {
                 method:     "POST",
-                headers:    this.getSimpleHeadersWithSessionToken(),
-                body:       formData, // Use FormData as the request body
+                headers:    {
+                    "Authorization":    `Bearer ${sessionToken}`,
+                },
+                body:       formData,
             });
     
             if (!response.ok) {

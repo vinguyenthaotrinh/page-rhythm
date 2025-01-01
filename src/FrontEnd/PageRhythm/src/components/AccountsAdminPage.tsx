@@ -27,19 +27,20 @@ function NoUserAccountText() {
 }
 
 function UserAccountItem({ userAccount }: { userAccount: any }) {
-    const [status, setStatus]       = useState(userAccount.account_status);
-    const [fromDate, setFromDate]   = useState("");
-    const [toDate, setToDate]       = useState("");
-    const [isChanged, setIsChanged] = useState(false); 
+    const [status, setStatus]       =   useState(userAccount.account_status);
+    const [fromDate, setFromDate]   =   useState("");
+    const [toDate, setToDate]       =   useState("");
+    const [isChanged, setIsChanged] =   useState(false); 
 
     const isValidDate = (date: string) => {
         return date && !isNaN(Date.parse(date));
     };
 
     const areDatesValid = (from: string, to: string) => {
-        if (!isValidDate(from) || !isValidDate(to)) return false;
-        const fromParsed = new Date(from);
-        const toParsed = new Date(to);
+        if (!isValidDate(from) || !isValidDate(to)) 
+            return false;
+        const fromParsed    = new Date(from);
+        const toParsed      = new Date(to);
         return fromParsed < toParsed && toParsed > new Date();
     };
 

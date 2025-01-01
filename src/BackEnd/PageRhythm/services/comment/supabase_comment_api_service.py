@@ -94,3 +94,14 @@ class SupabaseCommentAPIService:
         except Exception as e:
             print(f"Error retrieving comments: {e}")
             return []
+        
+        return []
+        
+    def delete_all_comments_of_book(self, book_id: int) -> bool:
+        try:
+            response = self.client.table("Comment").delete().eq("book_id", book_id).execute()
+            return True
+        except Exception as e:
+            print(f"Error deleting comments: {e}")
+            return False
+        return False

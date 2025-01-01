@@ -17,13 +17,13 @@ def create_book():
     current_identity    = json.loads(get_jwt_identity())
     owner_id            = current_identity["account_id"]
 
-    data    = request.form
-    title   = data.get("title")
-    author  = data.get("author")
-    summary = data.get("summary")
-    genre   = data.get("genre")
-    
-    content_file = request.files.get("content")
+    data            =   request.form
+    title           =   data.get("title")
+    author          =   data.get("author")
+    summary         =   data.get("summary")
+    genre           =   data.get("genre")
+    content_file    =   request.files.get("content")
+
     if not content_file or content_file.filename == "":
         return jsonify({"message": "Content file is required"}), 400
 

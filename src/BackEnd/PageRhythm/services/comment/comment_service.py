@@ -41,3 +41,6 @@ class CommentService:
     
     def retrieve_all_comments(self, book_id: int) -> list[DisplayedComment]:
         return self.supabase.retrieve_all_comments(book_id)
+    
+    def delete_all_comments_of_book(self, book_id: int) -> bool:
+        return self.supabase.delete_all_comments_of_book(book_id)

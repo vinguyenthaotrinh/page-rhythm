@@ -1,6 +1,7 @@
 from services.book.supabase_book_api_service import SupabaseBookAPIService
 from services.book_rating.book_rating_service import BookRatingService
 from services.statistics.statistics_service import StatisticsService
+from services.comment.comment_service import CommentService
 from typing import Optional
 import random
 import json
@@ -57,13 +58,17 @@ class BookService:
     # 6. Delete a book
     def delete_book(self, book_id: int) -> Optional[dict]:
 
-        book_rating_service = BookRatingService()
+        book_rating_service     =   BookRatingService()
 
-        statistics_service = StatisticsService()
+        statistics_service      =   StatisticsService()
+
+        comment_service         =   CommentService()
 
         book_rating_service.delete_all_ratings_for_book(book_id)
 
         statistics_service.delete_all_statistics_for_book(book_id)
+
+        comment_service.delete_all_comments_of_book(book_id)
 
         return self.supabase.delete_book(book_id)
 
