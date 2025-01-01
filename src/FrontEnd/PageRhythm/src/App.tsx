@@ -14,6 +14,7 @@ import BooksMyLibraryPage from "./components/BooksMyLibraryPage";
 import GeneralProfilePage from "./components/GeneralProfilePage";
 import VoicesMyLibraryPage from "./components/VoicesMyLibraryPage";
 import PasswordProfilePage from "./components/PasswordProfilePage";
+import ResetPasswordPage from "./components/ResetPasswordPage";
 import StatisticsProfilePage from "./components/StatisticsProfilePage";
 import RequestPasswordResetPage from "./components/RequestPasswordResetPage";
 import RegisterTermsAndConditionsPage from "./components/RegisterTermsAndConditionsPage";
@@ -52,6 +53,7 @@ export default function App() {
         <Route path="/admin-page" element={<Navigate to="/admin-page/books" />} />
         
         <Route path="/successfully-password-reset-email-page" element={<SuccessfullyPasswordResetEmailPage />} />
+        <Route path="/reset-password-page/:resetPasswordToken" element={<ResetPasswordPage />} />
       </Routes>
     </Router>
   );

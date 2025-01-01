@@ -2,7 +2,7 @@ import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/successfully-password-reset-email-page-styles.css";
+import "../styles/request-password-reset-page-styles.css";
 
 function LogoSection() {
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ function LogoSection() {
     );
 }
 
-function AnnoucementSection() {
+function RequestPasswordResetSection() {
     const [email, setEmail]                             =   useState("");
     const [loadingLoginRequest, setLoadingLoginRequest] =   useState(false);
     const [error, setError]                             =   useState("");
@@ -88,19 +88,59 @@ function AnnoucementSection() {
             <br /><br />
             
             <div 
-                id  =   "successfully-password-reset-email-page-anouncement-content-container"
+                id  =   "request-password-reset-page-login-title"
             >
                 <h1 
                     id  =   "request-password-reset-page-welcome-text"
                 >
-                    Password Reset Email Sent
+                    Forgot Your Password?
                 </h1>
                 <div 
                     id  =   "request-password-reset-page-welcome-description"
                 > 
-                    An email has been sent to your email address. Please check your email to reset your password.
+                    Don't worry 
                 </div>
             </div>
+
+            <br />
+
+            <form 
+                onSubmit    =   {handleLogin}
+            >
+                <div 
+                    className   =   "request-password-reset-page-input-container"
+                >
+                    <img 
+                        src         =   {IMAGES.MAIL_ICON} 
+                        className   =   "request-password-reset-page-input-icon" 
+                    />
+                    <input 
+                        type        =   "email" 
+                        placeholder =   "Enter your registered email"      
+                        className   =   "request-password-reset-page-input-info" 
+                        required
+                        value       =   {email}
+                        onChange    =   {(e) => setEmail(e.target.value)}
+                    />
+                </div>
+
+                {error && 
+                    <div 
+                        id  =   "request-password-reset-page-error-message"
+                    >
+                        {error}
+                    </div>
+                }
+                
+                <button 
+                    type        =   "submit" 
+                    id          =   "request-password-reset-page-submit-button" 
+                    disabled    =   {loadingLoginRequest}
+                >
+                    Send password reset email
+                </button>
+
+            </form>
         </div>
     );
 }
@@ -108,44 +148,18 @@ function AnnoucementSection() {
 function LoginSection() {
     return (
         <div 
-            id  =   "register-page-login-section"
-        >
-            <h1 
-                id  =   "register-page-login-title"
-            >
-                Have an account?
-            </h1>
+            id  =   "request-password-reset-page-login-section">
             <Link 
                 to  =   "/landing-page" 
-                id  =   "register-page-login-link"
+                id  =   "request-password-reset-page-login-link"
             >
-                Login
+                Back to Login
             </Link>
         </div>
     );
 }
 
-function SignupSection() {
-    return (
-        <div
-            id  =   "landing-page-signup-section"
-        >
-            <h1 
-                id  =   "landing-page-signup-title"
-            >
-                New User?
-            </h1>
-            <Link 
-                to  =   "/register-page" 
-                id  =   "landing-page-signup-link"
-            >
-                Sign Up
-            </Link>
-        </div>
-    );
-}
-
-export default function SuccessfullyPasswordResetMailPage() {
+export default function ResetPasswordPage() {
 
     return (
         <div 
@@ -155,9 +169,8 @@ export default function SuccessfullyPasswordResetMailPage() {
             <div 
                 id  =   "request-password-reset-page-authentication-sections"
             >
-                <AnnoucementSection />
+                <RequestPasswordResetSection />
                 <LoginSection />
-                <SignupSection />
             </div>
 
             <div 

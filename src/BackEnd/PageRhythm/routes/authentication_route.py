@@ -107,3 +107,25 @@ def request_password_reset():
         return jsonify({"message": "There is no account with the given email"}), 400
     
     return jsonify({"message": "An email has been sent to your email address"}), 200
+
+@authentication_blueprint.route("/reset_password/<string:token>", methods=["POST", "GET"])
+def reset_password(token: str):
+    data = request.get_json()
+    new_password = data["new_password"]
+    confirmed_new_password = data["confirmed_new_password"]
+
+    if new_password != confirmed_new_password:
+        return jsonify({"message": "New passwords do not match"}), 400
+    
+    account_id = AuthenticationService.get_account_ID_of_password_token(token)
+
+    if account_id is None:
+        return jsonify({"message": "The token is invalid or has expired"}), 400
+    
+    authentication_service = AuthenticationService()
+    success = authentication_service.change_password(account_id, new_password)
+
+    if not success:
+        return jsonify({"message": "An error occurred while resetting the password"}), 500
+
+    return jsonify({"message": "Password reset successfully"}), 200

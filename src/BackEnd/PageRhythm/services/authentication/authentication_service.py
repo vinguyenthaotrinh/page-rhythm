@@ -50,8 +50,8 @@ class AuthenticationService:
         return self.supabase.register_account(account_JSON)
     
     def change_password(self,
-                        account_id: int,
-                        new_password: str) -> bool:
+                        account_id:     int,
+                        new_password:   str) -> bool:
         account = AccountService().get_account_by_id(account_id)
         hashed_new_password = AuthenticationService.generate_hashed_password(new_password, account.get_salt())
         return self.supabase.change_password(account_id, hashed_new_password)
