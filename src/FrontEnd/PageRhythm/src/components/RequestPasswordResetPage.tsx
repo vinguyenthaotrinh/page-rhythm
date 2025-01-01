@@ -35,19 +35,19 @@ function LogoSection() {
 }
 
 function RequestPasswordResetSection() {
-    const [email, setEmail]                             =   useState("");
-    const [loadingLoginRequest, setLoadingLoginRequest] =   useState(false);
-    const [error, setError]                             =   useState("");
-    const navigate                                      =   useNavigate();
+    const [email, setEmail]                                             =   useState("");
+    const [loadingPasswordResetRequest, setLoadingPasswordResetRequest] =   useState(false);
+    const [error, setError]                                             =   useState("");
+    const navigate                                                      =   useNavigate();
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();                 // Prevent form default submission behavior
+    const handlePasswordResetRequest = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-        setLoadingLoginRequest(true);
+        setLoadingPasswordResetRequest(true);
         setError("");
 
         try {
-            setLoadingLoginRequest(true);
+            setLoadingPasswordResetRequest(true);
         
             const server    =   await Server.getInstance();
             
@@ -66,7 +66,7 @@ function RequestPasswordResetSection() {
                 console.error(e);
             }
         } finally {
-            setLoadingLoginRequest(false);
+            setLoadingPasswordResetRequest(false);
         }
     };
 
@@ -105,7 +105,7 @@ function RequestPasswordResetSection() {
             <br />
 
             <form 
-                onSubmit    =   {handleLogin}
+                onSubmit    =   {handlePasswordResetRequest}
             >
                 <div 
                     className   =   "request-password-reset-page-input-container"
@@ -135,7 +135,7 @@ function RequestPasswordResetSection() {
                 <button 
                     type        =   "submit" 
                     id          =   "request-password-reset-page-submit-button" 
-                    disabled    =   {loadingLoginRequest}
+                    disabled    =   {loadingPasswordResetRequest}
                 >
                     Send password reset email
                 </button>
@@ -149,11 +149,12 @@ function LoginSection() {
     return (
         <div 
             id  =   "request-password-reset-page-login-section">
+            Back to
             <Link 
                 to  =   "/landing-page" 
                 id  =   "request-password-reset-page-login-link"
             >
-                Back to Login
+                Login
             </Link>
         </div>
     );

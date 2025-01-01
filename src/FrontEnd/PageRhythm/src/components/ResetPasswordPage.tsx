@@ -1,8 +1,8 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import "../styles/request-password-reset-page-styles.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function LogoSection() {
     const navigate = useNavigate();
@@ -34,14 +34,29 @@ function LogoSection() {
     );
 }
 
-function RequestPasswordResetSection() {
-    const [email, setEmail]                             =   useState("");
-    const [loadingLoginRequest, setLoadingLoginRequest] =   useState(false);
-    const [error, setError]                             =   useState("");
-    const navigate                                      =   useNavigate();
+interface ResetPasswordSectionProps {
+    token: string;
+}
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();                 // Prevent form default submission behavior
+const ResetPasswordSection: React.FC<ResetPasswordSectionProps> = ({ token }) => {
+    const [firstPassword, setFirstPassword]                         =   useState("");
+    const [secondPassword, setSecondPassword]                       =   useState("");
+    const [isFirstPasswordVisible, setIsFirstPasswordVisible]       =   useState(false);
+    const [isSecondPasswordVisible, setIsSecondPasswordVisible]     =   useState(false);
+    const [loadingLoginRequest, setLoadingLoginRequest]             =   useState(false);
+    const [error, setError]                                         =   useState("");
+    const navigate                                                  =   useNavigate();
+
+    const toggleFirstPasswordVisibility = () => {
+        setIsFirstPasswordVisible(previousState => !previousState);
+    };
+
+    const toggleSecondPasswordVisibility = () => {
+        setIsSecondPasswordVisible(previousState => !previousState);
+    };
+
+    const handlePasswordReset = async (e: React.FormEvent) => {
+        e.preventDefault();
 
         setLoadingLoginRequest(true);
         setError("");
@@ -51,10 +66,10 @@ function RequestPasswordResetSection() {
         
             const server    =   await Server.getInstance();
             
-            const response  =   await server.requestPasswordReset(email);
+            const response  =   await server.resetPassword(token, firstPassword, secondPassword);
 
             if (response.status === 200) {
-                navigate("/successfully-password-reset-email-page");
+                navigate("/landing-page");
             } else {
                 setError("An unexpected error occurred. Please try again later.");
             }
@@ -93,34 +108,65 @@ function RequestPasswordResetSection() {
                 <h1 
                     id  =   "request-password-reset-page-welcome-text"
                 >
-                    Forgot Your Password?
+                    Reset Password
                 </h1>
                 <div 
                     id  =   "request-password-reset-page-welcome-description"
                 > 
-                    Don't worry 
+                    Please enter your new password and confirm it to reset your password.
                 </div>
             </div>
 
             <br />
 
             <form 
-                onSubmit    =   {handleLogin}
+                onSubmit    =   {handlePasswordReset}
             >
                 <div 
-                    className   =   "request-password-reset-page-input-container"
+                    className   =   "register-page-input-container"
                 >
                     <img 
-                        src         =   {IMAGES.MAIL_ICON} 
-                        className   =   "request-password-reset-page-input-icon" 
+                        src         =   {IMAGES.LOCK_ICON} 
+                        className   =   "register-page-input-icon" 
                     />
                     <input 
-                        type        =   "email" 
-                        placeholder =   "Enter your registered email"      
-                        className   =   "request-password-reset-page-input-info" 
+                        id          =   "register-page-first-password-input" 
+                        type        =   {isFirstPasswordVisible ? "text" : "password"}
+                        placeholder =   "Create password" 
+                        className   =   "register-page-input-info" 
                         required
-                        value       =   {email}
-                        onChange    =   {(e) => setEmail(e.target.value)}
+                        value       =   {firstPassword}
+                        onChange    =   {(e) => setFirstPassword(e.target.value)}
+                    />
+                    <img 
+                        src         =   {isFirstPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
+                        className   =   "register-page-eye-icon" 
+                        alt         =   "Eye Icon" 
+                        onClick     =   {toggleFirstPasswordVisibility}
+                    />
+                </div>
+
+                <div 
+                    className       =   "register-page-input-container"
+                >
+                    <img 
+                        src         =   {IMAGES.LOCK_ICON} 
+                        className   =   "register-page-input-icon" 
+                    />
+                    <input 
+                        id          =   "register-page-second-password-input" 
+                        type        =   {isSecondPasswordVisible ? "text" : "password"}
+                        placeholder =   "Confirm password" 
+                        className   =   "register-page-input-info" 
+                        required
+                        value       =   {secondPassword}
+                        onChange    =   {(e) => setSecondPassword(e.target.value)}
+                    />
+                    <img 
+                        src         =   {isSecondPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}    
+                        className   =   "register-page-eye-icon" 
+                        alt         =   "Eye Icon" 
+                        onClick     =   {toggleSecondPasswordVisibility}    
                     />
                 </div>
 
@@ -137,7 +183,7 @@ function RequestPasswordResetSection() {
                     id          =   "request-password-reset-page-submit-button" 
                     disabled    =   {loadingLoginRequest}
                 >
-                    Send password reset email
+                    Reset Password
                 </button>
 
             </form>
@@ -149,17 +195,25 @@ function LoginSection() {
     return (
         <div 
             id  =   "request-password-reset-page-login-section">
+            Back to 
             <Link 
                 to  =   "/landing-page" 
                 id  =   "request-password-reset-page-login-link"
             >
-                Back to Login
+                Login
             </Link>
         </div>
     );
 }
 
 export default function ResetPasswordPage() {
+    const {resetPasswordToken} = useParams<{ resetPasswordToken: string }>();
+    const navigate = useNavigate();
+
+    if (!resetPasswordToken) {
+        navigate("/request-password-reset-page");
+        return null;
+    }
 
     return (
         <div 
@@ -169,7 +223,9 @@ export default function ResetPasswordPage() {
             <div 
                 id  =   "request-password-reset-page-authentication-sections"
             >
-                <RequestPasswordResetSection />
+                <ResetPasswordSection 
+                    token   =   {resetPasswordToken}
+                />
                 <LoginSection />
             </div>
 

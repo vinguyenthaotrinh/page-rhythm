@@ -1238,4 +1238,36 @@ export default class Server {
         }
     }
 
+    public async resetPassword(resetPasswordToken: string, newPassword: string, confirmedNewPassword: string): Promise<Response> {
+        if (!this.host) 
+            throw new Error("Host is not initialized.");
+
+        const url = `${this.host}/authentication/reset_password/${resetPasswordToken}`;
+
+        try {
+            const response = await fetch(url, {
+                method:     "POST",
+                headers:    {
+                    "Content-Type": "application/json",
+                },
+                body:       JSON.stringify({
+                    new_password:               newPassword,
+                    confirmed_new_password:     confirmedNewPassword,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error resetting password:", errorData.message || "Unknown error");
+                throw new Error(errorData.message || "Failed to reset password.");
+            }
+
+            console.log("Password reset successful.");
+
+            return response;
+        } catch (error) {
+            this.logAndThrowError("Error during password reset:", error);
+        }
+    }
+
 }

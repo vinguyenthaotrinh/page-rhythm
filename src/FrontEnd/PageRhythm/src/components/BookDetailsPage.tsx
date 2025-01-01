@@ -302,7 +302,6 @@ export default function BookDetailsPage() {
         }
     };
 
-    // Render the comment tree
     const renderCommentTree = () => {
         // Root comments are those that don't have a replied_comment_id
         const rootComments = comments.filter((comment: any) => !comment.replied_comment_id);
