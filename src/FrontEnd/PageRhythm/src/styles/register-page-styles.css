@@ -101,15 +101,15 @@ html, body {
 
 .register-page-input-container input {
     width: 100%;
-    padding: 10px 10px 10px 60px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: white;
     color:#000000;
-    font-family: Poppins-Regular;
+    font-size: 16px;
     margin-bottom: 8px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-family: Poppins-Regular;
+    padding: 10px 10px 10px 60px; 
 }
 
 .last-register-page-input-container {
@@ -223,7 +223,7 @@ html, body {
     align-items: center;    /* Center horizontally */
     gap: 20px;              /* Add space between sections */
     margin-top: 128px;      /* Adjust as needed */
-    transform: translate(0%, -12%);
+    transform: translate(0%, -8%);
 }
 
 #register-page-login-section {
@@ -243,11 +243,22 @@ html, body {
     margin: 0;                /* Remove default margin */
 }
 
+#register-page-terms-and-conditions-link {
+    font-size: 16px;
+    font-family: "Poppins-Regular", sans-serif;
+    color: #265073;
+    text-decoration: none;      /* Remove underline */
+    cursor: pointer;
+}
+
+#register-page-terms-and-conditions-link:hover {
+    text-decoration: underline; /* Add underline on hover for clarity */
+}
+
 #register-page-login-link {
     font-size: 16px;
-    font-weight: bold;          /* Emphasize the link */
-    font-family: "Poppins-Bold", sans-serif;
-    color: #265073;           /* Green for the link */
+    font-family: "Poppins-Regular", sans-serif;
+    color: #265073;
     text-decoration: none;      /* Remove underline */
     cursor: pointer;
 }

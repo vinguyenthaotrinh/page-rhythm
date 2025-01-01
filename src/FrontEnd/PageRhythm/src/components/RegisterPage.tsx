@@ -265,6 +265,7 @@ function SignupSection() {
                         <a 
                             href        =   "/register-page/terms-and-conditions" 
                             target      =   "_blank"
+                            id          =   "register-page-terms-and-conditions-link"
                         >
                             Terms and Conditions
                         </a>
@@ -304,7 +305,7 @@ function LoginSection() {
             </h1>
             <Link 
                 to  =   "/landing-page" 
-                id  =   "register-page-login-button"
+                id  =   "register-page-login-link"
             >
                 Login
             </Link>

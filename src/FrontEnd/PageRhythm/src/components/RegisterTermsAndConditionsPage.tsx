@@ -1,8 +1,9 @@
 import IMAGES from "../images";
 import Server from "../Server";
 import React, { useState } from "react";
-import "../styles/register-page-styles.css";
+import "../styles/register-terms-and-conditions-page-styles.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Sign } from "crypto";
 
 function LogoSection() {
     const navigate = useNavigate();
@@ -34,66 +35,13 @@ function LogoSection() {
     );
 }
 
-function SignupSection() {
-    const [bio, setBio]                                         =   useState("");
-    const [email, setEmail]                                     =   useState("");
-    const [firstPassword, setFirstPassword]                     =   useState("");
-    const [secondPassword, setSecondPassword]                   =   useState("");
-    const [fullName, setFullName]                               =   useState("");
-    const [dateOfBirth, setDateOfBirth]                         =   useState("");
-    const [isFirstPasswordVisible, setIsFirstPasswordVisible]   =   useState(false);
-    const [isSecondPasswordVisible, setIsSecondPasswordVisible] =   useState(false);
-    const [loadingSignupRequest, setLoadingSignupRequest]       =   useState(false);
-    const [error, setError]                                     =   useState("");
-    const [agreeWithTerms, setAgreeWithTerms]                   =   useState(false);
-    const navigate                                              =   useNavigate();
-
-    const toggleFirstPasswordVisibility = () => {
-        setIsFirstPasswordVisible(previousState => !previousState);
-    };
-
-    const toggleSecondPasswordVisibility = () => {
-        setIsSecondPasswordVisible(previousState => !previousState);
-    };
-
-    const handleSignup = async (e: React.FormEvent) => {
-        e.preventDefault();                     // Prevent form default submission behavior
-
-        setLoadingSignupRequest(true);
-        setError("");                           // Clear any previous error
-
-        if (firstPassword !== secondPassword) {
-            setError("Passwords do not match");
-            return;
-        }
-
-        try {
-            setLoadingSignupRequest(true);
-        
-            const server    = await Server.getInstance();
-
-            const response  = await server.signup(fullName, email, firstPassword, dateOfBirth, bio);
-
-            if (response.ok) {
-                console.log("Signup successful");
-        
-                navigate("/home-page");
-            } else {
-                const errorData = await response.json();
-                setError(errorData.message || "Signup failed");
-            }
-        } catch (e) {
-            setError("An error occurred. Please try again.");
-            console.error("Signup error:", e);
-        } finally {
-            setLoadingSignupRequest(false);
-        }
-    };
+function TermsAndConditionsSection() {
 
     return (
         <div 
-            id  =   "register-page-signup-section"
+            id  =   "register-terms-and-conditions-main-section"
         >
+            {/*
             <img 
                 src         =   {IMAGES.LANDING_PAGE_LOGIN_SECTION_TOP_RIGHT_CORNER}   
                 className   =   "register-page-overlay-image" 
@@ -104,6 +52,7 @@ function SignupSection() {
                 className   =   "register-page-overlay-image" 
                 id          =   "register-page-signup-section-bottom-left-corner-image" 
             />
+            */}
       
             <br /><br />
             
@@ -118,176 +67,114 @@ function SignupSection() {
                 <div    
                     id      =   "register-page-welcome-description"
                 > 
-                    Sign up to continue 
+                    Please read the terms and conditions before signing up
                 </div>
             </div>
 
             <br />
 
-            <form 
-                onSubmit            =   {handleSignup}
+            <div 
+                id  =   "terms-and-conditions-content"
             >
-                <div 
-                    className       =   "register-page-input-container"
-                >
-                    <img 
-                        src         =   {IMAGES.USER_ICON} 
-                        className   =   "register-page-input-icon" 
-                    />
-                    <input 
-                        type        =   "text" 
-                        placeholder =   "Enter your full name"      
-                        className   =   "register-page-input-info" 
-                        required
-                        value       =   {fullName}
-                        onChange    =   {(e) => setFullName(e.target.value)}
-                    />
-                </div>
-                
-                <div 
-                    className       =   "register-page-input-container"
-                >
-                    <img 
-                        src         =   {IMAGES.MAIL_ICON} 
-                        className   =   "register-page-input-icon" 
-                    />
-                    <input 
-                        type        =   "email" 
-                        placeholder =   "Enter your email"      
-                        className   =   "register-page-input-info" 
-                        required
-                        value       =   {email}
-                        onChange    =   {(e) => setEmail(e.target.value)}
-                    />
-                </div>
-
-                <div 
-                    className   =   "register-page-input-container"
-                >
-                    <img 
-                        src         =   {IMAGES.LOCK_ICON} 
-                        className   =   "register-page-input-icon" 
-                    />
-                    <input 
-                        id          =   "register-page-first-password-input" 
-                        type        =   {isFirstPasswordVisible ? "text" : "password"}
-                        placeholder =   "Create password" 
-                        className   =   "register-page-input-info" 
-                        required
-                        value       =   {firstPassword}
-                        onChange    =   {(e) => setFirstPassword(e.target.value)}
-                    />
-                    <img 
-                        src         =   {isFirstPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}
-                        className   =   "register-page-eye-icon" 
-                        alt         =   "Eye Icon" 
-                        onClick     =   {toggleFirstPasswordVisibility}
-                    />
-                </div>
-
-                <div 
-                    className       =   "register-page-input-container"
-                >
-                    <img 
-                        src         =   {IMAGES.LOCK_ICON} 
-                        className   =   "register-page-input-icon" 
-                    />
-                    <input 
-                        id          =   "register-page-second-password-input" 
-                        type        =   {isSecondPasswordVisible ? "text" : "password"}
-                        placeholder =   "Confirm password" 
-                        className   =   "register-page-input-info" 
-                        required
-                        value       =   {secondPassword}
-                        onChange    =   {(e) => setSecondPassword(e.target.value)}
-                    />
-                    <img 
-                        src         =   {isSecondPasswordVisible ? IMAGES.EYE_ON_ICON : IMAGES.EYE_OFF_ICON}    
-                        className   =   "register-page-eye-icon" 
-                        alt         =   "Eye Icon" 
-                        onClick     =   {toggleSecondPasswordVisibility}    
-                    />
-                </div>
-
-                <div 
-                    className   =   "register-page-input-container"
-                >
-                    <img 
-                        src         =   {IMAGES.CALENDAR_ICON} 
-                        className   =   "register-page-input-icon" 
-                    />
-                    <input 
-                        type        =   "date" 
-                        placeholder =   "Enter your date of birth (mm/dd/yyyy)"      
-                        className   =   "register-page-input-info" 
-                        required
-                        value       =   {dateOfBirth}
-                        onChange    =   {(e) => setDateOfBirth(e.target.value)}
-                    />
-                </div>
-
-                <div 
-                    className           =   "register-page-input-container"
-                >
-                    <img 
-                        src             =   {IMAGES.BLACK_PENCIL_ICON} 
-                        id              =   "register-page-pencil-icon" 
-                    />
-                    <textarea
-                        placeholder     =   "Write your bio here"    
-                        className       =   "register-page-input-info" 
-                        required
-                        value           =   {bio}
-                        onChange        =   {(e) => setBio(e.target.value)}
-                        rows            =   {8}
-                    />
-                </div>
-                
-                <div 
-                    className           =   "last-register-page-input-container"
-                    id                  =   "register-page-terms-container"
-                >
-                    <label 
-                        htmlFor         =   "agree-terms" 
-                        className       =   "register-page-terms-label"
-                    >
-                        <input 
-                            type        =   "checkbox" 
-                            id          =   "register-page-agree-terms"
-                            name        =   "agree-terms" 
-                            required 
-                            checked     =   {agreeWithTerms} 
-                            onChange    =   {(e) => setAgreeWithTerms(e.target.checked)}
-                        />
-                        
-                        I agree with the 
-                        
-                        <a 
-                            href        =   "/register/terms-and-conditions" 
-                            target      =   "_blank"
+                <ol>
+                    <li>
+                        <h2
+                            className   =   "terms-and-conditions-section-title"
                         >
-                            Terms and Conditions
-                        </a>
-                    </label>
-                </div>
-                
-                {error &&
-                    <div 
-                        className   =   "landing-page-error-message"
-                    >
-                        {error}
-                    </div>
-                }
-                
-                <button 
-                    type        =   "submit" 
-                    id          =   "register-page-signup-button" 
-                    disabled    =   {loadingSignupRequest}
-                >
-                    Sign up
-                </button>
+                            Account Creation and Management
+                        </h2>
+                        <ul>
+                            <li>
+                                Users must create an account to upload content, post comments, or access certain platform features.
+                            </li>
+                            <li>
+                                Users are responsible for maintaining the confidentiality of their login credentials.
+                            </li>
+                            <li>
+                            The platform reserves the right to suspend or terminate accounts for violations of terms or inactivity.
+                            </li>
+                            <li>
+                                The platform reserves the right to remove any book that violates the terms of service or infringes on intellectual property rights.
+                            </li>
+                        </ul>
+                    </li>
 
-            </form>
+                    <li>
+                        <h2 className="terms-and-conditions-section-title">
+                            Privacy and Data Protection
+                        </h2>
+                        <ul>
+                            <li>
+                                The platform collects personal information such as name, email address, and other details necessary for account creation and usage. Users are responsible for providing accurate and up-to-date information.
+                            </li>
+                            <li>
+                                Personal data collected by the platform will be used in accordance with applicable data protection laws and the platform's Privacy Policy, which is incorporated into these Terms and Conditions.
+                            </li>
+                            <li>
+                                Users agree to allow the platform to process and store their data as required to maintain and improve the platform’s services. The platform will not sell or share personal data with third parties, except as required by law or as specified in the Privacy Policy.
+                            </li>
+                            <li>
+                                The platform uses cookies and similar technologies to enhance user experience. By using the platform, users consent to the use of these technologies as described in the Privacy Policy.
+                            </li>
+                            <li>
+                                Users have the right to access, update, or request the deletion of their personal data in accordance with applicable laws. Requests can be submitted through the platform's contact channels.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2
+                            className   =   "terms-and-conditions-section-title"
+                        >
+                            Books
+                        </h2>
+                        <ul>
+                            <li>
+                                Users are allowed to upload books only if they have the legal right to share them.
+                            </li>
+                            <li>
+                                Uploaded books must be free of any copyrighted material unless the user has explicit permission to share it.
+                            </li>
+                            <li>
+                                Users must ensure that the content of the uploaded books is appropriate.
+                            </li>
+                            <li>
+                                The platform reserves the right to remove any book that violates the terms of service or infringes on intellectual property rights.
+                            </li>
+                            <li>
+                                User accounts may be suspended or terminated if they repeatedly violate the platform's policies.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2
+                            className   =   "terms-and-conditions-section-title"
+                        >
+                            Comments
+                        </h2>
+                        <ul>
+                            <li>
+                                Users are encouraged to leave thoughtful and respectful comments related to the content on the platform.
+                            </li>
+                            <li>
+                                Comments should not contain offensive language, hate speech, or discriminatory remarks.
+                            </li>
+                            <li>
+                                Any comments that violate the platform’s code of conduct may be removed, and users may face temporary or permanent bans.
+                            </li>
+                            <li>
+                                Users must not post comments that infringe on others’ intellectual property rights or include copyrighted material without permission.
+                            </li>
+                            <li>
+                                The platform reserves the right to moderate and remove comments that violate these terms at its discretion.
+                            </li>
+                            <li>
+                                By posting a comment, users grant the platform the right to use, modify, and display the comment as part of the content on the platform.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
         </div>
     );
 }
@@ -304,7 +191,7 @@ function LoginSection() {
             </h1>
             <Link 
                 to  =   "/landing-page" 
-                id  =   "register-page-login-button"
+                id  =   "register-page-login-link"
             >
                 Login
             </Link>
@@ -312,18 +199,39 @@ function LoginSection() {
     );
 }
 
-export default function RegisterPage() {
+function SignupSection() {
+    return (
+        <div
+            id  =   "landing-page-signup-section"
+        >
+            <h1 
+                id  =   "landing-page-signup-title"
+            >
+                New User?
+            </h1>
+            <Link 
+                to  =   "/register-page" 
+                id  =   "landing-page-signup-link"
+            >
+                Sign Up
+            </Link>
+        </div>
+    );
+}
+
+export default function RegisterTermsAndConditionsPage() {
 
     return (
         <div 
-            id  =   "register-page"
+            id  =   "register-terms-and-conditions-page"
         >
             <LogoSection />
             <div 
-                id  =   "register-page-authentication-sections"
+                id  =   "register-terms-and-conditions-page-sections"
             >
-                <SignupSection />
+                <TermsAndConditionsSection />
                 <LoginSection />
+                <SignupSection />
             </div>
 
             <div 
@@ -343,7 +251,7 @@ export default function RegisterPage() {
             >
                 <img 
                     src         =   {IMAGES.LANDING_PAGE_BOTTOM_RIGHT_CORNER} 
-                    className   =   "register-page-right-overlay-image" 
+                    className   =   "register-terms-and-condition-page-right-overlay-image" 
                     alt         =   "Right corner image"
                 />
             </div>
