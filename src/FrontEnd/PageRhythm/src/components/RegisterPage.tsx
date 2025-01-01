@@ -60,7 +60,7 @@ function SignupSection() {
         e.preventDefault();                     // Prevent form default submission behavior
 
         setLoadingSignupRequest(true);
-        setError("");                           // Clear any previous error
+        setError("");
 
         if (firstPassword !== secondPassword) {
             setError("Passwords do not match");
@@ -262,13 +262,12 @@ function SignupSection() {
                         
                         I agree with the 
                         
-                        <a 
-                            href        =   "/register-page/terms-and-conditions" 
-                            target      =   "_blank"
+                        <button
                             id          =   "register-page-terms-and-conditions-link"
+                            onClick     =   {() => navigate("register-page/terms-and-conditions")}
                         >
                             Terms and Conditions
-                        </a>
+                        </button>
                     </label>
                 </div>
                 

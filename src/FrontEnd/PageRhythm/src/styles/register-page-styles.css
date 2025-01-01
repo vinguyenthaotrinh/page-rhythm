@@ -244,11 +244,13 @@ html, body {
 }
 
 #register-page-terms-and-conditions-link {
-    font-size: 16px;
-    font-family: "Poppins-Regular", sans-serif;
-    color: #265073;
-    text-decoration: none;      /* Remove underline */
     cursor: pointer;
+    font-size: 16px;
+    color: #265073;
+    padding-left: 4px;
+    text-decoration: none;
+    background-color: transparent;
+    font-family: "Poppins-Regular", sans-serif;
 }
 
 #register-page-terms-and-conditions-link:hover {
