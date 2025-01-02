@@ -27,8 +27,8 @@ class BookService:
         return None
 
     # 3. Search for books
-    def search_book(self, title: str, genre: str = None) -> list:
-        books_data = self.supabase.search_book(title, genre)
+    def search_book(self, title: str, genre: Optional[str] = None) -> list:
+        books_data = self.supabase.search_public_book(title, genre)
         return [Book(**book) for book in books_data]
 
     def check_ownership(self, book_id: int, owner_id: int) -> bool:

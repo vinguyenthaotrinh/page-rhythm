@@ -30,9 +30,9 @@ class SupabaseBookAPIService:
         return None
 
     # 3. Search for books
-    def search_book(self, title: str, genre: Optional[str] = None) -> list:
+    def search_public_book(self, title: str, genre: Optional[str] = None) -> list:
         try:
-            query = self.client.table("Book").select("*").ilike("title", f"%{title}%")
+            query = self.client.table("Book").select("*").ilike("title", f"%{title}%").eq("hidden", False)
             if genre:
                 query = query.ilike("genre", genre)
             response = query.execute()
