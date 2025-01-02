@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_Whats a great book</name>
+   <tag></tag>
+   <elementGuidId>2e23ce0e-a1cb-4ba3-87d5-2608d8a2e6a0</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='book-details-page-comments-section']/div/div[7]/div/div[2]/div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>internal:text=&quot;What's a great book&quot;i >> nth=1</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>817eae42-452b-428d-815b-37a06926d1a3</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>comment-content</value>
+      <webElementGuid>468a8782-181f-4971-904c-0adef4f31870</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>What's a great book</value>
+      <webElementGuid>f03b37b7-b231-4207-8d12-ceedf3b25130</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;book-details-page-comments-section&quot;)/div[@class=&quot;comments-section&quot;]/div[@class=&quot;comment&quot;]/div[@class=&quot;comment-header&quot;]/div[@class=&quot;comment-header-right&quot;]/div[@class=&quot;comment-content&quot;]</value>
+      <webElementGuid>b8cfb95b-50b5-49d2-b77f-411b655bdaea</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='book-details-page-comments-section']/div/div[7]/div/div[2]/div[2]</value>
+      <webElementGuid>1976b8f2-3314-47ea-ae24-bc579f85c3fa</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Muoi-Van Nguyen'])[14]/following::div[1]</value>
+      <webElementGuid>795a4b40-1f30-4eb9-8a0d-71f7cf2537ea</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Reply comment'])[16]/following::div[6]</value>
+      <webElementGuid>094539bb-dbaf-4842-bca0-4f76ad9569eb</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Reply comment'])[17]/preceding::div[1]</value>
+      <webElementGuid>0415077e-245a-4920-ad59-a79a058cdb95</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[7]/div/div[2]/div[2]</value>
+      <webElementGuid>80e93073-3599-4bd3-8abe-64414450a97f</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = concat(&quot;What&quot; , &quot;'&quot; , &quot;s a great book&quot;) or . = concat(&quot;What&quot; , &quot;'&quot; , &quot;s a great book&quot;))]</value>
+      <webElementGuid>9e8a5d08-2e1f-4e12-89ad-6ba74e8da0d5</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

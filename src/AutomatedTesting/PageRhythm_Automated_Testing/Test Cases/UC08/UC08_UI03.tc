@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Create a new valid comment</description>
+   <name>UC08_UI03</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c7e3a7bc-19b4-4f17-a053-a1c41214f30b</testCaseGuid>
+</TestCaseEntity>

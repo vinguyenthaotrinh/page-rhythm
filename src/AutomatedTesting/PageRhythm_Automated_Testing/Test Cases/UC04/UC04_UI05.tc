@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Edit an uploaded book</description>
+   <name>UC04_UI05</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>d2b3838a-5dc3-4a73-9173-3ebe3dd056d6</testCaseGuid>
+</TestCaseEntity>

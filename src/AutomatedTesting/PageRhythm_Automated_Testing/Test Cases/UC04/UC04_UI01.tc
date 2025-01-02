@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Move to next page for the book of more than one page</description>
+   <name>UC04_UI01</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>5ef67ef7-767a-4dc7-a840-00b1d087c1ca</testCaseGuid>
+</TestCaseEntity>

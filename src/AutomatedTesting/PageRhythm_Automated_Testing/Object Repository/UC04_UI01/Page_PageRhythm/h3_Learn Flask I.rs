@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>h3_Learn Flask I</name>
+   <tag></tag>
+   <elementGuidId>61efebc6-98f9-4a72-b3d6-4bd4f4ecc633</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='home-page']/div[3]/div[8]/div/div[2]/h3</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>internal:role=heading[name=&quot;Learn Flask I&quot;s]</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>h3</value>
+      <webElementGuid>8e971bb9-5f6b-47b6-8ddb-b8c31e0bbb82</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Learn Flask I</value>
+      <webElementGuid>348f15ca-2a63-4516-9939-c673e85e5ec1</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;home-page&quot;)/div[@class=&quot;home-page-book-list&quot;]/div[@class=&quot;home-page-book-list-item&quot;]/div[@class=&quot;home-page-book-title&quot;]/div[@class=&quot;home-page-book-info&quot;]/h3[1]</value>
+      <webElementGuid>eb6d4059-1b69-4b44-9e74-7ed035f87b7a</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='home-page']/div[3]/div[8]/div/div[2]/h3</value>
+      <webElementGuid>817a0cb4-10dc-4a6e-bdae-52f0c1b3a4dd</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Programming'])[6]/following::h3[1]</value>
+      <webElementGuid>4cd46d2f-840d-48e6-814b-ad9314d2bd67</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Learn Flask VII'])[1]/following::h3[1]</value>
+      <webElementGuid>9a971080-7a76-434d-ae01-b841360fb829</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Programming'])[7]/preceding::h3[1]</value>
+      <webElementGuid>28016528-d4db-4b27-9097-e9ba8aa1b3bd</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Learn Flask I']/parent::*</value>
+      <webElementGuid>d0be3acb-326e-4c1f-8ef3-e8e874617da6</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[8]/div/div[2]/h3</value>
+      <webElementGuid>666145bd-2d86-40df-9a5d-a4b73ae73961</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//h3[(text() = 'Learn Flask I' or . = 'Learn Flask I')]</value>
+      <webElementGuid>043e010f-153c-4966-a830-e32c4c65fcdf</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
