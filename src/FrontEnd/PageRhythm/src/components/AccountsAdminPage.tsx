@@ -220,6 +220,7 @@ function UserAccountItem({ userAccount, setUserAccounts }: { userAccount: any, s
                     disabled    =   {status !== "temporarily_banned"}
                     className   =   {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 />
+
                 <label
                     className   =   {`user-account-item-third-row-text ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 >to:
@@ -231,6 +232,7 @@ function UserAccountItem({ userAccount, setUserAccounts }: { userAccount: any, s
                     disabled    =   {status !== "temporarily_banned"}
                     className   =   {`user-account-item-date-input ${status !== "temporarily_banned" ? "disabled" : ""}`}
                 />
+                
                 <button 
                     className   =   "save-button" 
                     onClick     =   {handleSaveButtonClicked} 

@@ -57,13 +57,21 @@ function SignupSection() {
     };
 
     const handleSignup = async (e: React.FormEvent) => {
-        e.preventDefault();                     // Prevent form default submission behavior
+        e.preventDefault();
 
         setLoadingSignupRequest(true);
         setError("");
 
+        const today = new Date().toISOString().split("T")[0];
+        if (dateOfBirth > today) {
+            setError("Date of birth cannot be later than today's date.");
+            setLoadingSignupRequest(false);
+            return;
+        }
+
         if (firstPassword !== secondPassword) {
             setError("Passwords do not match");
+            setLoadingSignupRequest(false);
             return;
         }
 

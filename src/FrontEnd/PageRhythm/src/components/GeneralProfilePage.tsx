@@ -27,17 +27,18 @@ export default function GeneralProfilePage() {
     const [loading, setLoading]                     = useState(true);
     const [profile, setProfile]                     = useState({ ...originalProfile });
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+    const [error, setError]                         = useState("");
 
     const loadProfile = async () => {
         try {
             setLoading(true);
-            const server    = await Server.getInstance();
-            const profile   = await server.getProfile(); // Fetch profile from server
+            const server    =   await Server.getInstance();
+            const profile   =   await server.getProfile(); // Fetch profile from server
             
             const formattedProfile = {
-                fullName:   profile.data.full_name || "",
-                email:      profile.data.email || "",
-                bio:        profile.data.bio || "",
+                fullName:   profile.data.full_name  || "",
+                email:      profile.data.email      || "",
+                bio:        profile.data.bio        || "",
                 birthday:   profile.data.birthday 
                             ? `${profile.data.birthday.year}-${profile.data.birthday.month}-${profile.data.birthday.day}`
                             : "",
@@ -67,6 +68,18 @@ export default function GeneralProfilePage() {
     };
 
     const handleSave = async () => {
+        const today = new Date().toISOString().split("T")[0];
+        if (profile.birthday > today) {
+            setError("Date of birth cannot be later than today's date.");
+            return;
+        }
+
+        const nameRegex = /[a-zA-Z]/;
+        if (!nameRegex.test(profile.fullName)) {
+            setError("The entered input for the fullname is invalid.");
+            return;
+        }
+
         try {
             const server = await Server.getInstance();
             await server.updateProfile(profile);
@@ -194,6 +207,14 @@ export default function GeneralProfilePage() {
                                             />
                                         </div>
                                     </label>
+
+                                    {error  &&  
+                                        <div
+                                            className   =   "landing-page-error-message"
+                                        >
+                                            {error}
+                                        </div>}
+
                                     <div 
                                         className   =   "general-profile-page-profile-buttons"
                                     >
